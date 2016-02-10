@@ -2,9 +2,9 @@
 
  title: Cleaner Code
  locale: en_US
- description: A blog about stuff.
+ description: A tips about clean R-code.
  logo: site-logo.png
- url: //rmhogervorst.github.io/so-simple-theme
+ url: //rmhogervorst.github.io/cleancode
 
 # Jekyll configuration
 
