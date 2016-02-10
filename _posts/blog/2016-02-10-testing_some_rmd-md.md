@@ -15,7 +15,7 @@ I wonder how the markdown works in here, is it the same as in rmarkdown or sligh
 
 ### github flavor
 
-```r
+``` r
 #this is github flavored markdown
 a<- function(a, b = 10) {
 	a*b
@@ -24,6 +24,7 @@ a<- function(a, b = 10) {
 ```
 
 ###rmarkdown flavour
+
 ```{r}
 #this is github flavored markdown
 a<- function(a, b = 10) {
