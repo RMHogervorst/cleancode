@@ -1,9 +1,9 @@
 # Site wide configuration
 
- title: Cleaner Code
+ title: Clean Code
  locale: en_US
- description: A tips about clean R-code.
- logo: site-logo.png
+ description: Tips about clean R-code and reproducable work
+ logo: site-logo-new.png
  url: //rmhogervorst.github.io/cleancode
 
 # Jekyll configuration
