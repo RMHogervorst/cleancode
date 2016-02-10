@@ -1,10 +1,10 @@
 # Site wide configuration
 
-title: Cleaner Code
-locale: en_US
-description: A blog about stuff
-logo: site-logo.png
-url: //rmhogervorst.github.io/so-simple-theme
+ title: Cleaner Code
+ locale: en_US
+ description: A blog about stuff.
+ logo: site-logo.png
+ url: //rmhogervorst.github.io/so-simple-theme
 
 # Jekyll configuration
 
