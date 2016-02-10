@@ -1,5 +1,12 @@
 # Authors
 
+roel_hogervorst:
+  name: Roel M. Hogervorst
+  web: #
+  email: hogervorst.rm@gmail.com
+  bio: "as finishing touch, god created the Dutch"
+  avatar: avatarRoel.png
+	
 billy_rick:
   name: Billy Rick
   web: http://thewhip.com
@@ -18,10 +25,12 @@ cornelius_fiddlebone:
   twitter: rhymeswithsackit
   google:
     plus: CorneliusFiddlebone
-	
-roel_hogervorst:
-	name: Roel M Hogervorst
-	web: #
-	email: hogervorst.rm@gmail.com
-	bio: "as finishing touch, god created the Dutch"
-	avatar: avatarRoel.png	
+
+cornelius_fiddlebone:
+  name: Cornelius Fiddlebone
+  email: cornelius@thewhip.com
+  bio: "I ordered what?"
+  avatar: bio-photo.jpg
+  twitter: rhymeswithsackit
+  google:
+    plus: CorneliusFiddlebone
