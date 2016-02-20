@@ -12,9 +12,6 @@ date: 2016-02-20
 share: true
 ---
 
-
-
-
 # Introduction
 This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine. 
 ![google search results]({{ site.github.url }}/images/google_search_spss_r.PNG)
@@ -24,6 +21,7 @@ Most of these hits start with the basics and slowly work your way up to more adv
 The goal of these three lessons is to show you how things work, to load a dataset from spss into R and to create a plot. Because plotting is one of the reasons people switch sides and join the R-community. 
 
 This page has {{ page.content | number_of_words }} words. 
+
 {% include read_time.html %}
 
 ### Table of contents
