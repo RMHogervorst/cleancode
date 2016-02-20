@@ -63,6 +63,21 @@
    ========================================================================== */
 
 figure {
+  /* very wide figure*/
+
+  &.full {
+    @include media($large) {
+      img {
+        width: 100%;
+        float: center;
+        margin-right: 1%;
+        margin-bottom: 1%;
+      }
+      figcaption {
+        clear: center;
+      }
+    }
+  }
 
   /* 2 images in a row. should be of equal height/width to maintain layout */
 
