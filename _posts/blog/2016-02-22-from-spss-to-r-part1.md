@@ -50,7 +50,7 @@ With
 You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
 
 
-<figure class="entry-feature-image">
+<figure>
 	<img src="{{ site.github.url }}/images/rstudio-script-console.PNG" >
 	<figcaption> script and console </figcaption>
 </figure>
