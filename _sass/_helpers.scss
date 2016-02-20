@@ -70,8 +70,9 @@ figure {
       img {
         width: 100%;
         float: center;
-        margin-right: 1%;
-        margin-bottom: 1%;
+        position:absolute;
+		left:0;
+		right:0;
       }
       figcaption {
         clear: center;
