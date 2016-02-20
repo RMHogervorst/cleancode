@@ -20,12 +20,12 @@
         <ul class="entry-tags">
           {% for tag in page.tags %}<li><a href="{{ site.url }}/tags/#{{ tag }}" title="Pages tagged {{ tag }}">{{ tag }}</a></li>{% endfor %}
         </ul>
-		{% include read_time.html %}
-        {% if page.link %}
+		{% if page.link %}
           <h1 class="entry-title"><a href="{{ page.link }}">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} <span class="link-arrow">&rarr;</span></a></h1>
         {% else %}
           <h1 class="entry-title">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}</h1>
         {% endif %}
+		{% include read_time.html %}
       </header>
       <footer class="entry-meta">
         {% if page.author %}
