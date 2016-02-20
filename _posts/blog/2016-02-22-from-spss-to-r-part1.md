@@ -34,20 +34,20 @@ You will need the latest version of R itself https://cran.rstudio.com/, and also
 You have installed Rstudio, congratulations!
 
 The main screen looks like this:
-![Rstudio main](images/rstudio-bare.png)
+![Rstudio main](images/rstudio-bare.PNG)
 
 With 
 
 <figure class="half">
-	<img src="/images/rstudio-packages-files-plots-history-environment.png" alt="image">
-	<img src="/images/rstudio-new-open.png" alt="image">
+	<img src="/images/rstudio-packages-files-plots-history-environment.PNG" alt="image">
+	<img src="/images/rstudio-new-open.PNG" alt="image">
 	<figcaption>many hidden options right and left</figcaption>
 </figure>
 
 ## working with R
 R is a statistical program, but is used for many things. You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
 
-![script and console](images/rstudio-script-console.png)
+![script and console](images/rstudio-script-console.PNG)
 
 To simplify your work, you can create functions or scripts to automate stuff. In R this can be taken further. Everyone can make packages that contain useful functions and their documentation. Installed packages can be activated by the code `library(name_of_package)` . When activated the functions from that package can be used in your scripts and in the console.
 
@@ -136,8 +136,7 @@ df$oh_yes_you_can<-g   # we assign g to this variable
 There are multiple packages that import spss files. Many people use the foreign package, but a new one is the haven package. 
 
 Install that package. 
-
->! Spoiler click on the packages tab, click install and type haven or use `install.packages("haven")` 
+ 
 
 - Once installed, activate the package.
 - read the documentation on read_sav with ?read_sav
