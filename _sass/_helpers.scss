@@ -69,9 +69,9 @@ figure {
     @include media($large) {
       img {
         width: 100%;
-        float: left;
-        margin-left: -50%;
-		margin-right: -50%;
+        float: center;
+        margin-left: -25%;
+		margin-right: -25%;
       }
       figcaption {
         clear: center;
