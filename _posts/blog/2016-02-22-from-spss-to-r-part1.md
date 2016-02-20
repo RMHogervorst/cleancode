@@ -34,7 +34,7 @@ You will need the latest version of R itself https://cran.rstudio.com/, and also
 You have installed Rstudio, congratulations!
 
 The main screen looks like this:
-![Rstudio main](images/rstudio-bare.PNG)
+![Rstudio main]({{ site.github.url }}/images/rstudio-bare.PNG)
 
 With 
 
