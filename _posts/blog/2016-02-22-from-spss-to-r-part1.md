@@ -12,7 +12,7 @@ date: 2016-02-20
 share: true
 ---
 
-# Introduction
+## Introduction
 This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine. 
 ![google search results]({{ site.github.url }}/images/google_search_spss_r.PNG)
 
@@ -22,7 +22,6 @@ The goal of these three lessons is to show you how things work, to load a datase
 
 This page has {{ page.content | number_of_words }} words. 
 
-{% include read_time.html %}
 
 ### Table of contents
 {:.no_toc}
@@ -144,11 +143,10 @@ g
 df$oh_yes_you_can<-g   # we assign g to this variable
 ```
 ## importing from SPSS.
+
 There are multiple packages that import spss files. Many people use the foreign package, but a new one is the haven package. 
 
-Install that package. 
- 
-
+- Install the haven package. 
 - Once installed, activate the package.
 - read the documentation on read_sav with ?read_sav
 
@@ -162,7 +160,7 @@ df2<-read_sav(file.choose()) # you could also specify your
 ```
 The end result is a data.frame with the name df2 which would be identical to df. 
 
-In the next we will manipulate dataframes, in lesson 3 we will make awesome graphics.
+In the next lesson we will manipulate dataframes, in lesson 3 we will make awesome graphics.
 
 ## Further Reading
 

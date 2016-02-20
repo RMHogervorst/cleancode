@@ -10,6 +10,8 @@ image:
   feature: from_spss_to_r.png
 date: 2016-02-10
 ---
+{% include read_time.html %}
+
 
 # data manipulation with dplyr
 dplyr is a package for manipulating dataframes. It works really well and has a thought out structure. I could copy other websites and create an example, but the following introduction is better than I could have made:
