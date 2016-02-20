@@ -1,0 +1,55 @@
+settings in jekyll
+
+---
+layout: post
+title: "From spss to R, part 1"
+author: roel_hogervorst
+modified:
+categories: blog
+excerpt: Just enough information about r and reading in .sav files
+tags: [beginner, ggplot2,spps-to-r]
+image: 
+  feature: from_spss_to_r.png
+date: 2016-02-20
+share: true
+---
+
+feature is banner aan bovenkant.
+share zorgt voor facebook, twitter en google plus shares.
+tags komen onder de banner te hangen. 
+
+voor longreads onder de Introduction
+
+* Content
+{:toc} 
+
+plaatjes
+![naam van plaatje]({{ site.github.url }}/images/PLAATJE.PNG)
+
+TWEE PLAATJES
+<figure class="half">
+	<img src="{{ site.github.url }}/images/rstudio-packages-files-plots-history-environment.PNG" alt="image">
+	<img src="{{ site.github.url }}/images/rstudio-new-open.PNG" alt="image">
+	<figcaption>many hidden options right and left</figcaption>
+</figure>
+
+of:
+
+
+
+R highlight 
+```r 
+CODE 
+```
+
+R highlight met line numbers
+{% highlight r linenos %}
+CODE
+{% endhighlight %}
+
+
+
+
+## Further Reading
+
+* [name of link](link)
