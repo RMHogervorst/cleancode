@@ -6,8 +6,8 @@ modified:
 categories: blog
 excerpt: Just enough information about r and reading in .sav
 tags: [beginner, ggplot2,spps-to-r]
-image:
-  feature:
+image: 
+  feature: from_spss_to_r.PNG
 date: 2016-02-20
 ---
 
@@ -47,7 +47,7 @@ With
 ## working with R
 R is a statistical program, but is used for many things. You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
 
-![script and console](/images/rstudio-script-console.PNG)
+![script and console]({{ site.github.url }}/images/rstudio-script-console.PNG)
 
 To simplify your work, you can create functions or scripts to automate stuff. In R this can be taken further. Everyone can make packages that contain useful functions and their documentation. Installed packages can be activated by the code `library(name_of_package)` . When activated the functions from that package can be used in your scripts and in the console.
 
