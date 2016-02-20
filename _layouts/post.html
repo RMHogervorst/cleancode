@@ -10,7 +10,7 @@
 <body id="post">
 
 {% include navigation.html %}
-{% include read_time.html %}
+
 
 <div id="main" role="main">
   <article class="hentry">
@@ -20,6 +20,7 @@
         <ul class="entry-tags">
           {% for tag in page.tags %}<li><a href="{{ site.url }}/tags/#{{ tag }}" title="Pages tagged {{ tag }}">{{ tag }}</a></li>{% endfor %}
         </ul>
+		{% include read_time.html %}
         {% if page.link %}
           <h1 class="entry-title"><a href="{{ page.link }}">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} <span class="link-arrow">&rarr;</span></a></h1>
         {% else %}
