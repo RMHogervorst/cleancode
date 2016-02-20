@@ -11,6 +11,7 @@ image:
 date: 2016-02-10
 ---
 
+
 plotting 
 
 layered grammar of graphics
@@ -18,4 +19,4 @@ layered grammar of graphics
 
 
 ## Further Reading
-[Datacamp: 5 hour video introduction to ggplot2](http://www.r-bloggers.com/the-easiest-way-to-learn-ggplot2/)
+^[Datacamp: 5 hour video introduction to ggplot2](http://www.r-bloggers.com/the-easiest-way-to-learn-ggplot2/)

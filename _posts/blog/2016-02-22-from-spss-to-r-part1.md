@@ -15,18 +15,11 @@ share: true
 ## Introduction
 This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine. 
 ![google search results]({{ site.github.url }}/images/google_search_spss_r.PNG)
-
 Most of these hits start with the basics and slowly work your way up to more advanced examples. I don't want to. So I will only show you a few basics, which I think you need. Any specifics can be found in a google search. really, it's very easy. 
 
 The goal of these three lessons is to show you how things work, to load a dataset from spss into R and to create a plot. Because plotting is one of the reasons people switch sides and join the R-community. 
 
-This page has {{ page.content | number_of_words }} words. 
-
-
-### Table of contents
-{:.no_toc}
-
-*Table of contents*
+* Content
 {:toc} 
 
 
@@ -37,7 +30,7 @@ Datamanipulation takes place in lesson 2 and in lesson 3 we will make beautiful 
 We will first install R and Rstudio. R is the program, and Rstudio is a very useful shell around R. Rstudio helps you organize your scripts and data and helps in codecompletion and a million other things. Furthermore, it looks a bit like spss. 
 
 ## installing the software
-You will need the latest version of R itself [](https://cran.rstudio.com/), and also download the latest version of Rstudio from [](https://www.rstudio.com/products/rstudio/download/) 
+You will need the latest version of R itself [R](https://cran.rstudio.com/), and also download the latest version of Rstudio from [Rstudio.com/download](https://www.rstudio.com/products/rstudio/download/) 
 
 ## Start Rstudio
 You have installed Rstudio, congratulations!
@@ -164,7 +157,7 @@ In the next lesson we will manipulate dataframes, in lesson 3 we will make aweso
 
 ## Further Reading
 
-- [introduction on r-bloggers.com](http://www.r-bloggers.com/migrating-from-spss-to-r-rstats/)
-- [all the r-bloggers post with spss](http://www.r-bloggers.com/?s=spss)
-- [spss code in R, rbloggers](http://www.r-bloggers.com/translate2r-easy-switch-from-spss-to-r-by-using-common-concepts-like-temporary-and-column-wise-missing-values/)
-- [spss to R, rbloggers](http://www.r-bloggers.com/translate2r-and-translatespss2r-implanting-spss-functionality-into-r/)
+^[introduction on r-bloggers.com](http://www.r-bloggers.com/migrating-from-spss-to-r-rstats/)
+^ [all the r-bloggers post with spss](http://www.r-bloggers.com/?s=spss)
+^ [spss code in R, rbloggers](http://www.r-bloggers.com/translate2r-easy-switch-from-spss-to-r-by-using-common-concepts-like-temporary-and-column-wise-missing-values/)
+^[spss to R, rbloggers](http://www.r-bloggers.com/translate2r-and-translatespss2r-implanting-spss-functionality-into-r/)
