@@ -34,20 +34,20 @@ You will need the latest version of R itself https://cran.rstudio.com/, and also
 You have installed Rstudio, congratulations!
 
 The main screen looks like this:
-![Rstudio main](images/rstudio-bare.PNG)
+![Rstudio main](cleancode/images/rstudio-bare.PNG)
 
 With 
 
 <figure class="half">
-	<img src="/images/rstudio-packages-files-plots-history-environment.PNG" alt="image">
-	<img src="/images/rstudio-new-open.PNG" alt="image">
+	<img src="cleancode/images/rstudio-packages-files-plots-history-environment.PNG" alt="image">
+	<img src="cleancode/images/rstudio-new-open.PNG" alt="image">
 	<figcaption>many hidden options right and left</figcaption>
 </figure>
 
 ## working with R
 R is a statistical program, but is used for many things. You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
 
-![script and console](images/rstudio-script-console.PNG)
+![script and console](cleancode/images/rstudio-script-console.PNG)
 
 To simplify your work, you can create functions or scripts to automate stuff. In R this can be taken further. Everyone can make packages that contain useful functions and their documentation. Installed packages can be activated by the code `library(name_of_package)` . When activated the functions from that package can be used in your scripts and in the console.
 
@@ -154,7 +154,8 @@ The end result is a data.frame with the name df2 which would be identical to df.
 In the next we will manipulate dataframes, in lesson 3 we will make awesome graphics.
 
 ## Further Reading
-[introduction on r-bloggers.com](http://www.r-bloggers.com/migrating-from-spss-to-r-rstats/)
-[all the r-bloggers post with spss](http://www.r-bloggers.com/?s=spss)
-[spss code in R, rbloggers](http://www.r-bloggers.com/translate2r-easy-switch-from-spss-to-r-by-using-common-concepts-like-temporary-and-column-wise-missing-values/)
-[spss to R, rbloggers](http://www.r-bloggers.com/translate2r-and-translatespss2r-implanting-spss-functionality-into-r/)
+
+- [introduction on r-bloggers.com](http://www.r-bloggers.com/migrating-from-spss-to-r-rstats/)
+- [all the r-bloggers post with spss](http://www.r-bloggers.com/?s=spss)
+- [spss code in R, rbloggers](http://www.r-bloggers.com/translate2r-easy-switch-from-spss-to-r-by-using-common-concepts-like-temporary-and-column-wise-missing-values/)
+- [spss to R, rbloggers](http://www.r-bloggers.com/translate2r-and-translatespss2r-implanting-spss-functionality-into-r/)
