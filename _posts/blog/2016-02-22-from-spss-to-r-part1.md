@@ -11,6 +11,14 @@ image:
 date: 2016-02-20
 share: true
 ---
+{{ page.content | number_of_words }}
+### Table of contents
+{:.no_toc}
+
+* Table of contents placeholder
+{:toc}
+
+
 
 # Introduction
 This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine. 
@@ -63,10 +71,11 @@ Tasks:
 # The following line installs the packages
 # install.packages(c("ggplot2", "dplyr", "haven"))
  
-this line is not code and should thus be commented out with the pound sign.
+this line is not code and should thus be commented out
 
 ggplot()
-# activate the package ggplot2 in the next line with the library command
+# activate the package ggplot2 in the 
+#next line with the library command
 
 # then try line 9 again. 
 {% endhighlight %}
@@ -81,7 +90,7 @@ ggplot()
 
 You found that the function ggplot() was activated after activating the ggplot2 package. You might have spotted that every line you execute is displayed in the console. That is where the R program really lives. Copy the next part to a new script:
 
-```r
+{% highlight r %}
 # quite helpful to describe what you want to
 # do with this script here. 
 library(ggplot2) # you already activated this package anyway
@@ -89,7 +98,8 @@ library(ggplot2) # you already activated this package anyway
 help("ggplot")
 # or
 ?ggplot
-```
+{% endhighlight %}
+
  The help file gives you a description of the function, usage and how the arguments work. And at the bottom are some examples for the functions use.
 
 # From SPSS to R
@@ -102,7 +112,7 @@ Dataframes look and feel just like spss file. for example:
 - copy and execute the first 2 lines below.
 - use the View command or click on the blue-grey table icon in the right of the screen. next to df. 
 
-```r
+``` r
 df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),
                  y = rnorm(30)) #this creates a dataframe with letters
 # and standard normal distributed values.  
@@ -113,7 +123,7 @@ df
 This opens a view you are familiar with in spss, however you cannot change values here.
 So data.frames are just like datafiles in spss. Internaly data frames are just lists with vectors of the same length. So what is a vector? Copy the following script and try to find out.
 
-```r
+``` r
 df$gp # also try to type this. 
 # after the dollarsign rstudio will suggest the columns of the dataframe
 df$y # will display all the values of the y column. 
@@ -142,7 +152,7 @@ Install that package.
 
 I will cheat a bit and let you create a .sav file and read it in afterwards, but please try it with other spss files.
 
-```r
+``` r
 write_sav(df, "~/df.sav") # this saves the file in your working dir (see console)
 # the following line reads the file (pick your .sav file) and assigns it to df2 
 df2<-read_sav(file.choose()) # you could also specify your 
