@@ -1,0 +1,16 @@
+advanced, startup
+
+beginner: easy stuff, many examples
+
+beginner:
+for, loops, apply, brackets, vectors, data structures, subsetting, functions, qplot, ggplot2, dplyr, spps-to-r
+
+intermediate: tools, building packages, testing, slides in markdown
+
+intermediate
+package, advanced ggplot2, environments, animation, test, workflow, reproducability, version control, git
+
+advanced:  S4 classes, extensions , shiny, 
+
+advanced:
+Object Oriented Programming, Non standard Evaluation, code performance, profiling, Rcpp, optimizing,

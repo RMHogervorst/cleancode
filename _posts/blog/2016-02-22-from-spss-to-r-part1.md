@@ -1,34 +1,34 @@
 ---
 layout: post
-title: "From spss to R part 1"
+title: "From spss to R, part 1"
 author: roel_hogervorst
 modified:
 categories: blog
-excerpt: Just enough information about r and reading in .sav
+excerpt: Just enough information about r and reading in .sav files
 tags: [beginner, ggplot2,spps-to-r]
 image: 
   feature: from_spss_to_r.png
 date: 2016-02-20
+share: true
 ---
 
 # Introduction
-R and R studio. 
+This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine. 
+![google search results]({{ site.github.url }}/images/google_search_spss_r.PNG)
 
-Many many example websites for use of R. 
+Most of these hits start with the basics and slowly work your way up to more advanced examples. I don't want to. So I will only show you a few basics, which I think you need. Any specifics can be found in a google search. really, it's very easy. 
 
-These lessons have one goal: getting started and making plots. 
+The goal of these three lessons is to show you how things work, to load a dataset from spss into R and to create a plot. Because plotting is one of the reasons people switch sides and join the R-community. 
 
-One primary reason to switch from old program to new. 
 
 # This lesson
-This lesson is some quirks of R and useful rstudio things. 
-
-We will also import data from spss and start to manipulate it in lesson 2. In lesson 3 we will make beautiful plots.  The approach is hands on, I want you to do all the things, go through all the motions and start working. start making mistakes and learn from them. 
+This lesson is about Rstudio, basics, and we will import data from spss. 
+Datamanipulation takes place in lesson 2 and in lesson 3 we will make beautiful plots.  The approach is hands on, I want you to do all the things, go through all the motions and start working. Start making mistakes and learn from them. 
 
 We will first install R and Rstudio. R is the program, and Rstudio is a very useful shell around R. Rstudio helps you organize your scripts and data and helps in codecompletion and a million other things. Furthermore, it looks a bit like spss. 
 
 ## installing the software
-You will need the latest version of R itself https://cran.rstudio.com/, and also download the latest version of Rstudio from https://www.rstudio.com/products/rstudio/download/ 
+You will need the latest version of R itself [](https://cran.rstudio.com/), and also download the latest version of Rstudio from [](https://www.rstudio.com/products/rstudio/download/) 
 
 ## Start Rstudio
 You have installed Rstudio, congratulations!
@@ -45,19 +45,18 @@ With
 </figure>
 
 ## working with R
-R is a statistical program, but is used for many things. You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
+You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
 
 ![script and console]({{ site.github.url }}/images/rstudio-script-console.PNG)
 
-To simplify your work, you can create functions or scripts to automate stuff. In R this can be taken further. Everyone can make packages that contain useful functions and their documentation. Installed packages can be activated by the code `library(name_of_package)` . When activated the functions from that package can be used in your scripts and in the console.
-
+To simplify your work, you can create functions or scripts that automate stuff. In R this can be taken further. Everyone can make packages that contain useful functions and their documentation. Installed packages can be activated by the code `library(name_of_package)` . When activated, the functions from that package can be used in your scripts and in the console.
 
 Tasks:
 
 - open your version of Rstudio. open a new R script.
 - copy the following code to that new script (you will see changes in color):
 
-```r 
+{% highlight r linenos %}
 # Oh my god a script!
 # 
 # comments start with a pound symbol (aka hashtag).
@@ -70,7 +69,7 @@ ggplot()
 # activate the package ggplot2 in the next line with the library command
 
 # then try line 9 again. 
-```
+{% endhighlight %}
 
 - uncomment line 5
 - execute part of the script by selecting the line with your mouse and pressing ctrl-R or just put the cursor on the line and press ctrl-R.
