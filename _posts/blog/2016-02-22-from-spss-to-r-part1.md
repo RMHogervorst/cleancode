@@ -34,7 +34,7 @@ You will need the latest version of R itself https://cran.rstudio.com/, and also
 You have installed Rstudio, congratulations!
 
 The main screen looks like this:
-![Rstudio main](cleancode/images/rstudio-bare.PNG)
+![Rstudio main](/images/rstudio-bare.PNG)
 
 With 
 
@@ -47,7 +47,7 @@ With
 ## working with R
 R is a statistical program, but is used for many things. You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
 
-![script and console](cleancode/images/rstudio-script-console.PNG)
+![script and console](/images/rstudio-script-console.PNG)
 
 To simplify your work, you can create functions or scripts to automate stuff. In R this can be taken further. Everyone can make packages that contain useful functions and their documentation. Installed packages can be activated by the code `library(name_of_package)` . When activated the functions from that package can be used in your scripts and in the console.
 
