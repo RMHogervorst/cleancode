@@ -48,20 +48,14 @@ With
 
 ## working with R
 You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
-<<<<<<< HEAD
+
 <div class = "entry-wrapper">
-=======
-<span class = "entry-wrapper">
->>>>>>> 2b20d1cb41efafd1db21e576c3d7d4154a239d93
 <figure class="full">
 	<img src="{{ site.github.url }}/images/rstudio-script-console.PNG">
 	<figcaption> script and console </figcaption>
 </figure>
-<<<<<<< HEAD
 </div>
-=======
-</span>
->>>>>>> 2b20d1cb41efafd1db21e576c3d7d4154a239d93
+
 To simplify your work, you can create functions or scripts that automate stuff. In R this can be taken further. Everyone can make packages that contain useful functions and their documentation. Installed packages can be activated by the code `library(name_of_package)` . When activated, the functions from that package can be used in your scripts and in the console.
 
 Tasks:
