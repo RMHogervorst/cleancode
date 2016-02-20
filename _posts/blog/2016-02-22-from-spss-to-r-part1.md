@@ -34,12 +34,12 @@ You will need the latest version of R itself https://cran.rstudio.com/, and also
 You have installed Rstudio, congratulations!
 
 The main screen looks like this:
-![Rstudio main](images/rstudio-bare.PNG)
+![Rstudio main](cleancode/images/rstudio-bare.PNG)
 
 With 
 
 <figure class="half">
-	<img src="images/rstudio-packages-files-plots-history-environment.PNG" alt="image">
+	<img src="{{ site.baseurl }}images/rstudio-packages-files-plots-history-environment.PNG" alt="image">
 	<img src="cleancode/images/rstudio-new-open.PNG" alt="image">
 	<figcaption>many hidden options right and left</figcaption>
 </figure>
