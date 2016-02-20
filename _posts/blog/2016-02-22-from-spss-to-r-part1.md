@@ -157,7 +157,7 @@ In the next lesson we will manipulate dataframes, in lesson 3 we will make aweso
 
 ## Further Reading
 
-^[introduction on r-bloggers.com](http://www.r-bloggers.com/migrating-from-spss-to-r-rstats/)
-^ [all the r-bloggers post with spss](http://www.r-bloggers.com/?s=spss)
-^ [spss code in R, rbloggers](http://www.r-bloggers.com/translate2r-easy-switch-from-spss-to-r-by-using-common-concepts-like-temporary-and-column-wise-missing-values/)
-^[spss to R, rbloggers](http://www.r-bloggers.com/translate2r-and-translatespss2r-implanting-spss-functionality-into-r/)
+[][introduction on r-bloggers.com](http://www.r-bloggers.com/migrating-from-spss-to-r-rstats/)
+[][all the r-bloggers post with spss](http://www.r-bloggers.com/?s=spss)
+[][spss code in R, rbloggers](http://www.r-bloggers.com/translate2r-easy-switch-from-spss-to-r-by-using-common-concepts-like-temporary-and-column-wise-missing-values/)
+[][spss to R, rbloggers](http://www.r-bloggers.com/translate2r-and-translatespss2r-implanting-spss-functionality-into-r/)
