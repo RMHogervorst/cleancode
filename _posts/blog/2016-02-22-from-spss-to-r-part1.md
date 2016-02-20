@@ -7,8 +7,8 @@ categories: blog
 excerpt: Just enough information about r and reading in .sav
 tags: [beginner, ggplot2,spps-to-r]
 image: 
-  feature: from_spss_to_r.PNG
-date: 2016-02-20
+  feature: from_spss_to_r.png
+date: 2016-02-22
 ---
 
 # Introduction
