@@ -21,7 +21,7 @@ In this lesson we will open a .sav file in Rstudio and manipulate the data.frame
 
 ## Download a .sav file
 
-I downloaded the following dataset from DUO (Dienst uitvoering onderwijs): [**Aantal wo ingeschrevenen (binnen domein ho)**](https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp) [^note1]. 
+I downloaded the following dataset from DUO (Dienst uitvoering onderwijs): [**Aantal wo ingeschrevenen (binnen domein ho)**][3]. 
 This dataset has a <span title="creative commons version 0"> cc0 </span> declaration, which means it is in the public domain and we can do anything we want with this <span title="thank you Dutch Goverment!" > file. </span> 
 More information about the file can be found in the [Toelichting.pdf](https://www.duo.nl/open_onderwijsdata/images/Toelichting%2001.%20Ingeschrevenen%20wo.pdf "all in Dutch I'm afraid").
 
@@ -40,7 +40,7 @@ haven, dplyr. Click on install:
 
 and fill in the names, or type `install.packages("haven", "dplyr"). 
 
-Follow the description below or look at the complete script at:[github.com/RMHogervorst/cleancodeexamples](https://github.com/RMHogervorst/cleancodeexamples/tree/master/scripts/opening-spss-file-manipulate-with-dplyr-2016-feb). The script and this page are more or less the same (spelling might be better here :stuck_out_tongue_winking_eye: ).
+Follow the description below or look at the complete script at:[github.com/RMHogervorst/cleancodeexamples](https://github.com/RMHogervorst/cleancodeexamples/tree/master/scripts/opening-spss-file-manipulate-with-dplyr-2016-feb). The script and this page are more or less the same (spelling might be better here ;p ).
 
 ### Opening the SPSS file and getting it in R
 {% highlight r linenos %}
@@ -310,13 +310,13 @@ see you then.
 
 
 ### Notes
-[^note1]( Because this was the first dataset I found, but this dataset is actually useful for me in my work as well)
+[3]: https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp "Because this was the first dataset I found, but this dataset is actually useful for me in my work as well"
 
 ### Further Reading
 The following introduction is better than I could have made:
 
-[1] [https://stat545-ubc.github.io/block009_dplyr-intro.html](https://stat545-ubc.github.io/block009_dplyr-intro.html)
+[1]: https://stat545-ubc.github.io/block009_dplyr-intro.html](https://stat545-ubc.github.io/block009_dplyr-intro.html
 
 and here is some background information
 
-[2](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)  
+[2]: https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html  
