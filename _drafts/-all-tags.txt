@@ -3,7 +3,7 @@ advanced, startup
 beginner: easy stuff, many examples
 
 beginner:
-for, loops, apply, brackets, vectors, data structures, subsetting, functions, qplot, ggplot2, dplyr, spps-to-r
+for, loops, apply, brackets, vectors, data structures, subsetting, functions, qplot, ggplot2, dplyr, spps-to-r, haven
 
 intermediate: tools, building packages, testing, slides in markdown
 

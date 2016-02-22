@@ -2,7 +2,7 @@
 layout: post
 title: "From spss to R, part 1"
 author: roel_hogervorst
-modified:
+modified: 2016-02-22
 categories: blog
 excerpt: Just enough information about r and reading in .sav files
 tags: [beginner, ggplot2,spps-to-r]
