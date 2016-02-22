@@ -136,7 +136,7 @@ But don't believe me on my word, let's get to work.
 
 ### SELECT
 
-`SELECT (dataframe, variablename1, variablename2, etc)`
+	SELECT (dataframe, variablename1, variablename2, etc)
 
 Select is used to select variables (columns) in your data frame.
 
@@ -149,7 +149,8 @@ We have selected 4 variables. as you can see in the output. It also says: Source
 
 ### FILTER
 
-`FILTER (dataframe, ways to filter)`
+	FILTER (dataframe, ways to filter)
+
 Filter selects cases (rows of the dataframe).
 
 ```r
@@ -300,6 +301,7 @@ In other words:
 In this lesson you have learned to open .sav files with haven,
 how to change labelled values from the Haven package, and worked with most of the dplyr commands.
 
+## Next time:
 dplyr is also called the grammar of data manipulation. 
 In the next lesson we will take on the grammar of graphics with ggplot2,
 see you then.
@@ -308,7 +310,7 @@ see you then.
 
 
 ### Notes
-[^note1]: "Because this was the first dataset I found, but this dataset is actually useful for me in my work as well"
+[^note1]: (Because this was the first dataset I found, but this dataset is actually useful for me in my work as well)
 
 ### Further Reading
 The following introduction is better than I could have made:
