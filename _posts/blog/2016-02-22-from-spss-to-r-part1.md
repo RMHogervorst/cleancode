@@ -15,7 +15,11 @@ share: true
 ## Introduction
 This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine. 
 ![google search results]({{ site.github.url }}/images/google_search_spss_r.PNG)
-Most of these hits start with the basics and slowly work your way up to more advanced examples. I don't want to. So I will only show you a few basics, which I think you need. Any specifics can be found in a google search. really, it's very easy. 
+Most of these hits start with the basics and slowly work your way up to more advanced examples.
+> There is often one reason to start with R: you want to achieve something that doesn't work in other programs.
+
+This is not a dedicated R programming course, there are a gazillion really great courses( see below [^1], [^2], [^3], [^4]). 
+So I will only show you a few basics, which I think you need. Any specifics can be found in a google search. really, it's very easy. 
 
 The goal of these three lessons is to show you how things work, to load a dataset from spss into R and to create a plot. Because plotting is one of the reasons people switch sides and join the R-community. 
 
@@ -89,6 +93,7 @@ ggplot()
 
 You found that the function ggplot() was activated after activating the ggplot2 package. You might have spotted that every line you execute is displayed in the console. That is where the R program really lives. Copy the next part to a new script:
 
+### getting help
 {% highlight r %}
 # quite helpful to describe what you want to
 # do with this script here. 
@@ -99,7 +104,23 @@ help("ggplot")
 ?ggplot
 {% endhighlight %}
 
- The help file gives you a description of the function, usage and how the arguments work. And at the bottom are some examples for the functions use.
+The help files give you a description of the function, usage and how the arguments work. And at the bottom are some examples. The help files are often somewhat technical but if you look at the examples (and try them) you will find out how things work. Another great place is the vignettes.
+
+Vignettes are long form documentation, often describing every function in the package, practical use, examples and more. 
+
+Or type the following command:
+```r
+RSiteSearch("vignette") 
+```
+
+But the best advice is this: try google. 
+
+Really, the R community is huuuuuge! Type your question and somewhere on stackoverflow, r-mailinglists or other websites, someone else has had the same question you have. If I need to find out how a function works, I type `?function` if I want something else, I search for it online. 
+
+To be more specific, use the following format in your search: [r] [package you want to use] [function if any] [... your problem]
+for example
+![]({{ site.github.url }}/images/example_search.PNG)
+
 
 # From SPSS to R
 
@@ -166,3 +187,9 @@ In the next lesson we will manipulate dataframes, in lesson 3 we will make aweso
 * [all the r-bloggers post with spss](http://www.r-bloggers.com/?s=spss)
 * [spss code in R, rbloggers](http://www.r-bloggers.com/translate2r-easy-switch-from-spss-to-r-by-using-common-concepts-like-temporary-and-column-wise-missing-values/)
 * [spss to R, rbloggers](http://www.r-bloggers.com/translate2r-and-translatespss2r-implanting-spss-functionality-into-r/)
+
+## R courses
+[^1]: https://www.coursera.org/learn/r-programming "Coursera R programming: This is a great course, not sure if it's still free"
+[^2]: https://www.codeschool.com/courses/try-r "Codeschool, I have not tried this one, don't know"
+[^3]: https://www.datacamp.com/courses/free-introduction-to-r "Datacamp: I've heard great things from this course"
+[^4]: https://www.rstudio.com/resources/training/online-learning/ "By the Rstudio people"
