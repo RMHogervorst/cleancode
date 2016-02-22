@@ -19,31 +19,30 @@ In this lesson we will open a .sav file in Rstudio and manipulate the data.frame
 
 
 
-## download a .sav file
+## Download a .sav file
 
-I downloaded the following dataset from DUO (Dienst uitvoering onderwijs): [**Aantal wo ingeschrevenen (binnen domein ho)**](https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp) [note1]. 
-
+I downloaded the following dataset from DUO (Dienst uitvoering onderwijs): [**Aantal wo ingeschrevenen (binnen domein ho)**](https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp) [^note1]. 
 This dataset has a <span title="creative commons version 0"> cc0 </span> declaration, which means it is in the public domain and we can do anything we want with this <span title="thank you Dutch Goverment!" > file. </span> 
-
 More information about the file can be found in the [Toelichting.pdf](https://www.duo.nl/open_onderwijsdata/images/Toelichting%2001.%20Ingeschrevenen%20wo.pdf "all in Dutch I'm afraid").
 
 *We can already work with this file, because it is in an open format, but for this exercise I will transform it to a .sav file. [See the transformation here](https://github.com/RMHogervorst/cleancodeexamples/blob/master/scripts/dplyr-example-duo.R "Github example of csv -> .sav with haven")*
 
 Download the .sav [file]({{ site.github.url }}/datasets/ingeschrevenwo2015.sav) to start. Do remember where you put the file, you will need it later. 
-Or let R download the file, even better for reasons of [reproducability](https://rmhogervorst.github.io/cleancode/tags/#reproducibility).
+Or let R download the file, even better for reasons of [reproducability](https://rmhogervorst.github.io/cleancode/tags/#reproducibility "all posts about repro-research").
 Consider starting a new [project](https://rmhogervorst.github.io/cleancode/tags/#rproject "with a rProject you files will be more organized") for this example.
 
 # Opening the file in Rstudio
-
-Fire up your trusty rstudio. 
+Fire up your trusty rstudio.
+ 
 You will need the following packages:
-haven, dplyr. Click on ![]({{ site.github.url }}/images/installing-packages-rstudio.PNG)
-or type `install.packages("haven", "dplyr"). 
+haven, dplyr. Click on install:
+![]({{ site.github.url }}/images/installing-packages-rstudio.PNG)
 
-Follow the description or look at the complete file at:[github.com/RMHogervorst/cleancodeexamples](https://github.com/RMHogervorst/cleancodeexamples/tree/master/scripts/opening-spss-file-manipulate-with-dplyr-2016-feb)
+and fill in the names, or type `install.packages("haven", "dplyr"). 
 
-### Opening the SPSS file and putting it in R
+Follow the description below or look at the complete script at:[github.com/RMHogervorst/cleancodeexamples](https://github.com/RMHogervorst/cleancodeexamples/tree/master/scripts/opening-spss-file-manipulate-with-dplyr-2016-feb). The script and this page are more or less the same (spelling might be better here :stuck_out_tongue_winking_eye: ).
 
+### Opening the SPSS file and getting it in R
 {% highlight r linenos %}
 # necessary packages: #### 
 library(haven)
@@ -57,9 +56,7 @@ wo2015 <- read_sav(link)
 So we activated the necessary packages, saved a link to the datafile, told the `read_sav()` command where to find the file, and finally assigned the output of the command to a name `wo2015`. 
 
 ### Exploration of the data frame in base-R
-
 The following commands are very often the first things you will use when you get your hands on a new dataset.
-
 ```r
 str(wo2015) # str is short for structure
 names(wo2015) # what are the columnsnames?
@@ -84,15 +81,14 @@ When we used the command `View(table(wo2015$SOORT.INSTELLING))` there were actua
 When looking at the endresult from the last command, you can see the frequencies of the types of SOORT INSTELLING (type of university).
 
 **Do the same thing (display a table of frequencies) with INSTELLINGSNAAM.ACTUEEL (name of university)**
+
 *How many universities are there?*
 
 ### Some Haven and SPSS specific things
-
 As you know SPSS cannot work with factor (nominal) values.
 You have to tell SPSS that the variable is a nominal variable
 and you have to create numbered values, with a label assigned to the values *(3 = male, 4 = female)*.
 When you import a .sav file into R that information can get lost. But on the other hand you might want to use the numbered information. As an compromise the haven package imports the numbers and the labels. So can we find the labels?
-
 ```r
 class(wo2015$OPLEIDINGSVORM) # no, that just tells us that it's labelled. 
 attributes(wo2015$OPLEIDINGSVORM) # the command attributes gives you back all the metadata
@@ -109,21 +105,20 @@ mistakes about which form of eduction your talking about.
 the haven package has a function as_labeled. So let's make the OPLEIDINGSVORM column a bit more informative:
 ```r
 as_factor(wo2015$OPLEIDINGSVORM) 
-# Now look back at wo2015
-# Nothing has changed!
-# That's right, you need to assign the result of the operation back to a column
+``` 
+Now look back at wo2015
+Nothing has changed!
+That's right, you need to assign the result of the operation back to a column
+```r
 wo2015$OPLEIDINGSVORM2 <- as_factor(wo2015$OPLEIDINGSVORM) 
 ```
 **Do the same thing to OPLEIDINGSFASE.ACTUEEL**
 
 
 ## data manipulation with dplyr
-
-
 Data manipulation was sometimes hard with r. However the [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html "Dplyr is a package for manipulating dataframes. this link is an introduction by the creator") package changed everything.  
 
 ## dplyr Functions
-
 There are 7 'verbs' that do all the work.
 
     filter() (and slice())
@@ -134,8 +129,7 @@ There are 7 'verbs' that do all the work.
     summarise()
     sample_n() and sample_frac()
 
-Filter filters rows, select selects columns, distinct is a variant of unique and mutate changes. These verbs are tools, the plyrs of a dataframe. Very generic tools that help you select and filter your data.
-
+Filter filters rows, select selects columns, distinct is a variant of unique and mutate creates new variables. These verbs are tools, the plyrs of a dataframe. Very generic tools that help you select and filter your data.
 All the verbs have the same arguments: first argument = dataframe, the next arguments are for the function. 
 
 But don't believe me on my word, let's get to work.
@@ -314,7 +308,7 @@ see you then.
 
 
 ### Notes
-[note1]: "Because this was the first dataset I found, but this dataset is actually useful for me in my work as well"
+[^note1]: "Because this was the first dataset I found, but this dataset is actually useful for me in my work as well"
 
 ### Further Reading
 The following introduction is better than I could have made:

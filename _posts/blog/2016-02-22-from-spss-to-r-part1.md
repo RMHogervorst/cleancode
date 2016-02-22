@@ -26,7 +26,7 @@ The goal of these three lessons is to show you how things work, to load a datase
 
 # This lesson
 This lesson is about Rstudio, basics, and we will import data from spss. 
-Datamanipulation takes place in lesson 2 and in lesson 3 we will make beautiful plots.  The approach is hands on, I want you to do all the things, go through all the motions and start working. Start making mistakes and learn from them. 
+Datamanipulation takes place in [lesson 2]({{site.github.url}}/blog/2016/02/22/from-spss-to-r-part2.html#introduction "lesson 2: haven and dplyr") and in lesson 3 we will make beautiful plots.  The approach is hands on, I want you to do all the things, go through all the motions and start working. Start making mistakes and learn from them. 
 
 We will first install R and Rstudio. R is the program, and Rstudio is a very useful shell around R. Rstudio helps you organize your scripts and data and helps in codecompletion and a million other things. Furthermore, it looks a bit like spss. 
 
