@@ -16,6 +16,7 @@ share: true
 This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine. 
 ![google search results]({{ site.github.url }}/images/google_search_spss_r.PNG)
 Most of these hits start with the basics and slowly work your way up to more advanced examples.
+
 > There is often one reason to start with R: you want to achieve something that doesn't work in other programs.
 
 This is not a dedicated R programming course, there are a gazillion really great courses( see below [^1], [^2], [^3], [^4]). 
@@ -23,15 +24,14 @@ So I will only show you a few basics, which I think you need. Any specifics can 
 
 The goal of these three lessons is to show you how things work, to load a dataset from spss into R and to create a plot. Because plotting is one of the reasons people switch sides and join the R-community. 
 
-* Content
-{:toc} 
-
-
 # This lesson
 This lesson is about Rstudio, basics, and we will import data from spss. 
 Datamanipulation takes place in lesson 2 and in lesson 3 we will make beautiful plots.  The approach is hands on, I want you to do all the things, go through all the motions and start working. Start making mistakes and learn from them. 
 
 We will first install R and Rstudio. R is the program, and Rstudio is a very useful shell around R. Rstudio helps you organize your scripts and data and helps in codecompletion and a million other things. Furthermore, it looks a bit like spss. 
+
+* Content
+{:toc} 
 
 ## installing the software
 You will need the latest version of R itself [R](https://cran.rstudio.com/), and also download the latest version of Rstudio from [Rstudio.com/download](https://www.rstudio.com/products/rstudio/download/) 
@@ -50,7 +50,7 @@ With
 	<figcaption>many hidden options right and left</figcaption>
 </figure>
 
-## working with R
+## Working with R
 You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).
 
 
@@ -93,7 +93,7 @@ ggplot()
 
 You found that the function ggplot() was activated after activating the ggplot2 package. You might have spotted that every line you execute is displayed in the console. That is where the R program really lives. Copy the next part to a new script:
 
-### getting help
+### Getting help
 {% highlight r %}
 # quite helpful to describe what you want to
 # do with this script here. 
@@ -161,7 +161,8 @@ g
 #  g is a vector. can we add this vector to the dataframe?
 df$oh_yes_you_can<-g   # we assign g to this variable
 ```
-## importing from SPSS.
+
+## Importing data from SPSS.
 
 There are multiple packages that import spss files. Many people use the foreign package, but a new one is the haven package. 
 
