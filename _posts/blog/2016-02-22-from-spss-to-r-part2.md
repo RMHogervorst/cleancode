@@ -310,13 +310,13 @@ see you then.
 
 
 ### Notes
-[^note1]: (Because this was the first dataset I found, but this dataset is actually useful for me in my work as well)
+[^note1]( Because this was the first dataset I found, but this dataset is actually useful for me in my work as well)
 
 ### Further Reading
 The following introduction is better than I could have made:
 
-[1] https://stat545-ubc.github.io/block009_dplyr-intro.html
+[1] [https://stat545-ubc.github.io/block009_dplyr-intro.html](https://stat545-ubc.github.io/block009_dplyr-intro.html)
 
 and here is some background information
 
-[2] https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html  
+[2](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)  
