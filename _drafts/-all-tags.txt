@@ -3,7 +3,7 @@ advanced, startup
 beginner: easy stuff, many examples
 
 beginner:
-for, loops, apply, brackets, vectors, data structures, subsetting, functions, qplot, ggplot2, dplyr, spps-to-r, haven
+for, loops, apply, brackets, vectors, data structures, subsetting, functions, qplot, ggplot2, dplyr, spps-to-r, haven, tidyr
 
 intermediate: tools, building packages, testing, slides in markdown
 
@@ -13,4 +13,4 @@ package, advanced ggplot2, environments, animation, test, workflow, reproducabil
 advanced:  S4 classes, extensions , shiny, 
 
 advanced:
-Object Oriented Programming, Non standard Evaluation, code performance, profiling, Rcpp, optimizing,
+Object Oriented Programming, Non standard Evaluation, code performance, profiling, Rcpp, optimize-your-code
