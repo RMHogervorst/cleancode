@@ -33,11 +33,10 @@ TWEE PLAATJES
 	<figcaption>many hidden options right and left</figcaption>
 </figure>
 
-of:
-
 
 
 R highlight 
+				enter anders komt de r er bij te staan.
 ```r 
 CODE 
 ```
@@ -52,4 +51,9 @@ CODE
 
 ## Further Reading
 
-* [name of link](link)
+* [introduction on r-bloggers.com](http://www.r-bloggers.com/migrating-from-spss-to-r-rstats/)
+
+### References
+
+[^1]: Wickham, Hadley. “Tidy Data.” Journal of Statistical Software 59, no. 10 (2014). doi:10.18637/jss.v059.i10.
+[^2]: <https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp>
