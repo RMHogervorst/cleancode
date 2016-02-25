@@ -129,7 +129,7 @@ So in one line we replaced the spaces in the names of the variables and assigned
 Then save it to a file:
 `write_csv(duo2015_tidy, "files/duo2015_tidy.csv")`
 
-**That's it, we're done. You data is tidy. and ready for analyses or plots.**
+**That's it, we're done. Your data is tidy. and ready for analyses or plots.**
 
 ### References
 
