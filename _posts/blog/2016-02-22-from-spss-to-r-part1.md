@@ -109,6 +109,7 @@ The help files give you a description of the function, usage and how the argumen
 Vignettes are long form documentation, often describing every function in the package, practical use, examples and more. 
 
 Or type the following command:
+
 ```r
 RSiteSearch("vignette") 
 ```
@@ -174,6 +175,9 @@ I will cheat a bit and let you create a .sav file and read it in afterwards, but
 
 ``` r
 write_sav(df, "~/df.sav") # this saves the file in your working dir (see console)
+# or find the whole path to f.i. your working directory in MY case
+write_sav(df, "C://Users/roel/Downloads/df.sav") # that should save the file to 
+#your downloads (once you changed it to your settings). 
 # the following line reads the file (pick your .sav file) and assigns it to df2 
 df2<-read_sav(file.choose()) # you could also specify your 
 # file with "path/to/your/file.sav" instead of file.choose().
