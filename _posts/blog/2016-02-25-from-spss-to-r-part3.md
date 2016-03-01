@@ -8,7 +8,7 @@ excerpt: Getting started with ggplot2
 tags: [beginner, ggplot2,spps-to-r, mtcars, chickwts]
 image: 
   feature: from_spss_to_r.png
-date: 2016-02-25
+date: 2016-03-01
 share: true
 ---
 
@@ -150,7 +150,7 @@ ggplot(chickwts, aes(feed, weight)) + geom_violin()
 Boxplots are nice, but you lose information about the middle of the distribution. So let's plot the real distribution. `ggplot(chickwts, aes(feed, weight)) + geom_point()` This doesn't really help us, what about all the chicks with the same weight and same feed? The jitter geom helps you out.
 `ggplot(chickwts, aes(feed, weight)) + geom_jitter()`
 
-The jitter function adds some noise to points to seperate the individual points.
+The jitter function adds some noise to points to separate the individual points.
 let's combine and see what looks best
 
 ```r
@@ -166,8 +166,7 @@ ggplot(mtcars, aes(as.factor(cyl), mpg)) +geom_violin() +geom_jitter( aes(color 
 ```
 
 ## Customization
-Most simple plots in ggplot2 look quite good from the start, it's a credit to Hadley Wickham that he chose ggplot2's defaults so well. However, there are many ways to custimize your plots. Every element can change colour, shape, etc. 
-A simple thing to change is the theme. Themes change multiple things at once. For instance:
+Most simple plots in ggplot2 look quite good from the start, it's a credit to Hadley Wickham that he chose ggplot2's defaults so well. However, there are many ways to custimize your plots. Every element can change colour[^4], shape, etc. But if you like to change things in multiple plots you should try to change the theme. Themes change multiple things at once. For instance:
 
 ```r
 g <- ggplot(mtcars, aes(as.factor(cyl), mpg)) +geom_violin() +geom_jitter( aes(color = as.factor(am))) 
@@ -179,7 +178,7 @@ g + theme_bw()
 g + theme_dark()  # the addition doesn't stick untill you save it to a variable
 g + theme_void()
 ```
-It is relatively easy to change parts of themes, or to create a whole new theme. But quite easy is also the ggtheme package, see their website []. 
+It is relatively easy to change parts of themes, or to create a whole new theme. But quite easy is also the ggtheme package, see their website [5]. 
 
 ```r
 install.packages("ggthemes")
@@ -199,12 +198,13 @@ So now you know a few graphics and the basics of ggplot use. In the next lesson 
 * [Overview of r graphics on stat.ubc.ca, with tons of resources](http://www.stat.ubc.ca/~jenny/STAT545A/block90_baseLatticeGgplot2.html)
 * [a google search with "r lattice base ggplot2" gives me 26900 results](http://lmgtfy.com/?q=r+lattice+base+ggplot2)
 * [ If you ever need to know any sort of plot, use the cookbook. bookmark it ](http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_%28ggplot2%29/)
-* [beautiful graphs]
+* [beautiful graphs cheatcheat](http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/)
 
 ### References
 
 * [^1]: Explanation of lattice system and trellisplots on statmethods.net <http://www.statmethods.net/advgraphs/trellis.html>
 * [^2]: Wilkinson, Leland, and Graham Wills. The Grammar of Graphics. 2nd ed. Statistics and Computing. New York: Springer, 2005.
 * [^3]:Wickham, Hadley. “A Layered Grammar of Graphics.” Journal of Computational and Graphical Statistics 19, no. 1 (January 2010): 3–28. doi:10.1198/jcgs.2009.07098.
-* []: ggthemes website < >
+* [^4]: Did you notice that both color and colour are allowed in ggplot? In  the dplyr package both summarize and summarise work. 
+* [5]: ggthemes website <https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html>
 
