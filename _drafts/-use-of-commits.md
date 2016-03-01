@@ -33,15 +33,19 @@ these are the messages in ggplot2, knitr and a repo about datasharing.
 
 ## bad examples of messages
 It's ok to make mistakes:
+
 > We don't make mistakes, just happy little accidents -- *Bob Ross*
 
 In the next real world example the second commit is really uninformative:
 
 ![github.com/rmhogervorst/imdb/commit](wrong_commit.png)
 
+Or as xkcd says:
+![Git commit XKCD](http://imgs.xkcd.com/comics/git_commit.png)
+
 And here are some illustrative examples in a separate repo:
 
-https://github.com/RMHogervorst/badcommits/commits/master 
+<https://github.com/RMHogervorst/badcommits/commits/master> 
 
 
 ## how large should a commit be?

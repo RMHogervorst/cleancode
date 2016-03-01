@@ -14,3 +14,7 @@ advanced:  S4 classes, extensions , shiny,
 
 advanced:
 Object Oriented Programming, Non standard Evaluation, code performance, profiling, Rcpp, optimize-your-code
+
+tutorial =  stap voor stap met stukjes code (test aan begin en einde om te zien dat het werkt?)
+clarification  = uitleg voor als je uit andere taal komt, python, spss, excel
+reminder = how to van package met voorbeeld, lijstje van commands
