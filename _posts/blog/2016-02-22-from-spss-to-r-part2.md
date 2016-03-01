@@ -19,7 +19,7 @@ In this lesson we will open a .sav file in Rstudio and manipulate the data.frame
 
 
 
-## Download a .sav file
+## Download a .sav (SPSS) file
 
 I downloaded the following dataset from DUO (Dienst uitvoering onderwijs): [**Aantal wo ingeschrevenen (binnen domein ho)**][3]. 
 This dataset has a <span title="creative commons version 0"> cc0 </span> declaration, which means it is in the public domain and we can do anything we want with this <span title="thank you Dutch Goverment!" > file. </span> 
