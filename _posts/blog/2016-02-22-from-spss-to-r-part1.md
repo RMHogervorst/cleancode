@@ -194,7 +194,7 @@ In the next lesson we will manipulate dataframes, in lesson 3 we will make aweso
 * [spss to R, rbloggers](http://www.r-bloggers.com/translate2r-and-translatespss2r-implanting-spss-functionality-into-r/)
 
 ## R courses
-[^1]: <https://www.coursera.org/learn/r-programming "Coursera R programming>: This is a great course, not sure if it's still free"
+[^1]: <https://www.coursera.org/learn/r-programming> "Coursera R programming>: This is a great course, not sure if it's still free"
 [^2]: <https://www.codeschool.com/courses/try-r> "Codeschool, I have not tried this one, don't know"
 [^3]: <https://www.datacamp.com/courses/free-introduction-to-r> "Datacamp: I've heard great things from this course"
 [^4]: <https://www.rstudio.com/resources/training/online-learning/> "By the Rstudio people"
