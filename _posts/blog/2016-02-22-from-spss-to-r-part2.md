@@ -9,6 +9,7 @@ tags: [beginner, haven, dplyr, spps-to-r, duo2015]
 image: 
   feature: from_spss_to_r.png
 date: 2016-02-22
+share: true
 ---
 # Introduction
 

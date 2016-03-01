@@ -8,7 +8,7 @@ excerpt: introduction to version control, and simple rstudio git
 tags: [beginner, git, version control]
 image:
   feature:
-date: 2016-02-14
+date: 2016-03-01
 ---
 
 ## Keeping track of versions 
@@ -157,7 +157,7 @@ No, first of all all r scripts are essentially plain text files and take up litt
 
 * Nice! Can I add my data files to a git repo as well?
 
-It is not recommended to add datafiles to a repo. I think it can work with txt files such as .txt, .csv, .tdv . But many files can't be read by git, so it treats them as binary files. Git can only see that the file has changed, but doesn't know WHAT changed. So it saves the new version as a whole. If you have some large binary files, it will eat up a lot of space. There is a git large file system but I don't know how it works yet. 
+It is not recommended to add datafiles to a repo. I think it can work with plain text files such as .txt, .csv, .tdv . But many other files can't be read by git, so it treats them as binary files. Git can only see that the file has changed, but doesn't know WHAT changed. So it saves the new version as a whole. If you have some large binary files that change often, they will eat up a lot of space. There is a git large file system but I don't know how it works yet. 
 Do add example csv files or smaller files if you'd like to.   
 
 
