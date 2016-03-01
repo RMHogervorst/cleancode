@@ -39,6 +39,7 @@ group work
 
 
 # wiki
-Not really necassary but could be useful, especially the linking between pages. More important to make explanation in help files really good.
+Not really necessary but could be useful, especially the linking between pages. More important to make explanation in help files really good.
+I would focus most work on your help files, using the roxygen commits 
 
 [according to github this one is realy nice](https://github.com/mbostock/d3/wiki)

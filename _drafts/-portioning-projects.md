@@ -13,6 +13,7 @@ date: 2016-02-14
 
 This is the intro to a series about projects.
 
+
 # Code to solve a Problem
 
 Your code is solving a large and important Problem . But to get to the solving of the big Problem (with a capital P), you need to overcome small problems (small p). One way to solve your Problem is to put everything into one script,  or one function. But I would like to argue for the use of modules. Make one project for your big and important Problem and make small functions or modules for your problems. 
@@ -38,4 +39,4 @@ When it works start a new one until your Problem is solved.
 Next week we will go into the nitty gritty of your code.
 
 ### Further reading
-[Modular Programming, wikipedia](https://en.wikipedia.org/wiki/Modular_programming)
+* [Modular Programming, wikipedia](https://en.wikipedia.org/wiki/Modular_programming)

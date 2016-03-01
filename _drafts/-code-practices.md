@@ -13,4 +13,24 @@ date: 2016-02-14
 
 # good 
 
-Name your submodules with verbs and your datastructures with nouns. 
+Name your submodules with verbs and your datastructures with nouns.
+
+# indentation
+
+```r
+function(
+	one thing, two things
+)
+
+if(blablbal){
+	something happens here
+}else {
+somthing
+}
+```
+
+# Google style guide 
+
+
+
+# breaking stuff up 
