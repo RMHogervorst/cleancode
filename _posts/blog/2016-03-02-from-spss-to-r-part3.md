@@ -206,9 +206,13 @@ So now you know a few graphics and the basics of ggplot use. In the next lesson 
 
 ### References
 
-* [^1]: Explanation of lattice system and trellisplots on statmethods.net <http://www.statmethods.net/advgraphs/trellis.html>
-* [^2]: Wilkinson, Leland, and Graham Wills. The Grammar of Graphics. 2nd ed. Statistics and Computing. New York: Springer, 2005.
-* [^3]:Wickham, Hadley. “A Layered Grammar of Graphics.” Journal of Computational and Graphical Statistics 19, no. 1 (January 2010): 3–28. doi:10.1198/jcgs.2009.07098.
-* [^4]: Did you notice that both color and colour are allowed in ggplot? In  the dplyr package both summarize and summarise work. 
-* [5]: ggthemes website <https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html>
+[^1]: Explanation of lattice system and trellisplots on statmethods.net <http://www.statmethods.net/advgraphs/trellis.html>
+
+[^2]: Wilkinson, Leland, and Graham Wills. The Grammar of Graphics. 2nd ed. Statistics and Computing. New York: Springer, 2005.
+ 
+[^3]:Wickham, Hadley. “A Layered Grammar of Graphics.” Journal of Computational and Graphical Statistics 19, no. 1 (January 2010): 3–28. doi:10.1198/jcgs.2009.07098.
+
+[^4]: Did you notice that both color and colour are allowed in ggplot? In  the dplyr package both summarize and summarise work. 
+
+ [5]: ggthemes website <https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html>
 
