@@ -8,7 +8,7 @@ excerpt: Getting started with ggplot2
 tags: [beginner, ggplot2,spps-to-r, mtcars, chickwts]
 image: 
   feature: from_spss_to_r.png
-date: 2016-03-01
+date: 2016-03-02
 share: true
 ---
 
@@ -45,11 +45,13 @@ The most important thing to realize is this:
 Every graph consists of the basic data, some transformations to axes, title information and the representation of the data. In ggplot you have to specify the data, and the aesthetics (some mapping of the position of x, and y, colours and shapes). Furthermore you have to tell ggplot what type of chart you want. Bars, lines, and points are all examples of geometric objects or geoms for short. 
 
 ## Example: a basic scatter plot in ggplot
+
 {% highlight r linenos %}
 library(ggplot2)
 str(mtcars) # just to show you the variables in mtcars.
 ggplot(data = mtcars, aes(x= mpg, y= wt) ) + geom_point()
-{% endhighlight %}    
+{% endhighlight %} 
+   
 We called a ggplot element, specified the data, then the aesthetics so that miles per gallon (mpg) is on the x axis and weight (wt) on the Y axis. 
 
 * select the first part ggplot(data = mtcars, aes(x= mpg, y= wt) ) and execute ctrl/cmd-r 
@@ -126,6 +128,7 @@ ggplot()+geom_point(data = mtcars, aes(x= mpg, y= wt)) +
 We will work through a few more examples, but see Further reading for more examples of graph types and resources with lists and lists of plots and how to make them. 
 
 ##  Example 2: a bargraph
+
 A bargraph has only one aesthetic mapping:
 `ggplot(data = mtcars, aes(as.factor(cyl))) + geom_bar(stat ="count")`
 only the x aesthetic is specified, the geom is a bar (`?geom_bar`) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = "identity"). For example
