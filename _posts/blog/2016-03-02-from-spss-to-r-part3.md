@@ -28,12 +28,12 @@ automobile design and performance for 32 automobiles (1973–74 models)."
 
 The mtcars documentation gives us an example of displaying the mtcars information:
 
-{% highlight r linenos %}
+```r
 pairs(mtcars, main = "mtcars data")
 # this is one plot next is an other
 coplot(mpg ~ disp | as.factor(cyl), data = mtcars,
        panel = panel.smooth, rows = 1)
-{% endhighlight %}
+```
 
 ## Plotting graphs in R
 R has three plotting systems, each based on different ideas. The base plot system is very fast and is very useful for quick views of your data. But you need to tinker a lot to make plots nicer.  Then there is the lattice system [^1]. Which is probably very useful, but I mostly use ggplot. For you ggplot might be THE reason to come to R. 
@@ -46,11 +46,11 @@ Every graph consists of the basic data, some transformations to axes, title info
 
 ## Example: a basic scatter plot in ggplot
 
-{% highlight r linenos %}
+```r
 library(ggplot2)
 str(mtcars) # just to show you the variables in mtcars.
 ggplot(data = mtcars, aes(x= mpg, y= wt) ) + geom_point()
-{% endhighlight %} 
+```
    
 We called a ggplot element, specified the data, then the aesthetics so that miles per gallon (mpg) is on the x axis and weight (wt) on the Y axis. 
 
@@ -66,7 +66,7 @@ ggplot(data = mtcars, aes(x= mpg, y= wt )) + geom_point( color = "red" )
 ```
 We've specified a color in the point layer. But much more effective is to use color as an extra dimension in your plots.
 
-{% highlight r linenos %}
+```r
 ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) 
 # note that we don't have to tell arguments in functions what they are.
 # according to ?ggplot    :
@@ -78,7 +78,7 @@ ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear)))
 # you CAN change the order of arguments, but then you WILL need to
 # explicitly call the arguments:
 ggplot(aes(y=wt, x=mpg ), data = mtcars, ) + geom_point(aes(color = as.factor(gear))) 
-{% endhighlight %} 
+``` 
 
 * Did you check that lines 1 and 11 had the same output?
 
@@ -102,11 +102,11 @@ You will have to think about the aes() command as something that depends on you 
 
 So I said layers. let's add layers.
 
-{% highlight r linenos %}
+```r
 ggplot(data = mtcars, aes(x= mpg, y= wt)) + 
         geom_point(aes( color = as.factor(gear) )) +
         geom_smooth(method = lm) # a linear model Y ~ x smoothing
-{% endhighlight %}
+```
 
 In this example there are three layers, a base layer, points and a smoothing
 on top of the points. 
@@ -133,13 +133,13 @@ A bargraph has only one aesthetic mapping:
 `ggplot(data = mtcars, aes(as.factor(cyl))) + geom_bar(stat ="count")`
 only the x aesthetic is specified, the geom is a bar (`?geom_bar`) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = "identity"). For example
 
-{% highlight r linenos %}
+```r
 dat<-data.frame(
         Name = c("hork", "dork", "bork"),
         Frequency = c(5, 8,12)
 ) # a very silly dataframe
 ggplot(dat, aes(Name, Frequency)) + geom_bar(stat ="identity")
-{% endhighlighter %}  
+```
 
 ## Example 3: boxplots, with points behind
 
