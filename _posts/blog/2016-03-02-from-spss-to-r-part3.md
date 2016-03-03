@@ -51,6 +51,10 @@ library(ggplot2)
 str(mtcars) # just to show you the variables in mtcars.
 ggplot(data = mtcars, aes(x= mpg, y= wt) ) + geom_point()
 ```
+
+Which will look like this:
+
+![ggplot(data = mtcars, aes(x= mpg, y= wt) ) + geom_point()]({{ site.github.url}} /images/ggplot2-simple-scatterplot.png)
    
 We called a ggplot element, specified the data, then the aesthetics so that miles per gallon (mpg) is on the x axis and weight (wt) on the Y axis. 
 
@@ -79,6 +83,7 @@ ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear)))
 # explicitly call the arguments:
 ggplot(aes(y=wt, x=mpg ), data = mtcars, ) + geom_point(aes(color = as.factor(gear))) 
 ``` 
+![ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) ]({{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor.png)
 
 * Did you check that lines 1 and 11 had the same output?
 
@@ -115,6 +120,13 @@ or inherits them from the base element `ggplot()`.
 In the above example `geom_smooth()` inherits the part [ aes(x, y) ] from
  `ggplot(data = mtcars, aes(x= mpg, y= wt))`.
 
+<figure class="half">
+	<img src="{{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor-andsmoothing.PNG" alt="ggplot geom_point and geom smooth method=lm">
+	<img src="{{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups" alt="ggplot with group= as.factor gear geom_point geom smooth">
+	<figcaption>adding group = as.factor(gear) to aes of ggplot leads to seperate smoothings per gear</figcaption>
+</figure>
+
+
 ```r
 ggplot()+geom_point(data = mtcars, aes(x= mpg, y= wt)) +geom_smooth(method = lm)
 ```
@@ -131,7 +143,9 @@ We will work through a few more examples, but see Further reading for more examp
 
 A bargraph has only one aesthetic mapping:
 `ggplot(data = mtcars, aes(as.factor(cyl))) + geom_bar(stat ="count")`
-only the x aesthetic is specified, the geom is a bar (`?geom_bar`) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = "identity"). For example
+![bargraph mtcars]({{ site.github.url }}/images/ggplot2-simplebargraph.png)
+
+only the x aesthetic is specified, the geom is a bar (see `?geom_bar`) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = "identity"). For example
 
 ```r
 dat<-data.frame(
@@ -140,6 +154,8 @@ dat<-data.frame(
 ) # a very silly dataframe
 ggplot(dat, aes(Name, Frequency)) + geom_bar(stat ="identity")
 ```
+
+![ggplot(dat, aes(Name, Frequency)) + geom_bar(stat ="identity")]({{ site.github.url }}/images/ggplot2-simplebargraph-fictionaldata.png)
 
 ## Example 3: boxplots, with points behind
 
@@ -151,6 +167,9 @@ str(chickwts)
 ggplot(chickwts, aes(feed, weight)) + geom_boxplot()
 ggplot(chickwts, aes(feed, weight)) + geom_violin()
 ```
+
+![ggplot violinplot]({{ site.github.url }}/images/ggplot2-chickwts-violin.png)
+
 Boxplots are nice, but you lose information about the middle of the distribution. So let's plot the real distribution. `ggplot(chickwts, aes(feed, weight)) + geom_point()` This doesn't really help us, what about all the chicks with the same weight and same feed? The jitter geom helps you out.
 `ggplot(chickwts, aes(feed, weight)) + geom_jitter()`
 
@@ -162,6 +181,8 @@ ggplot(chickwts, aes(feed, weight)) + geom_boxplot() + geom_jitter()
 ggplot(chickwts, aes(feed, weight)) + geom_boxplot() + geom_point()
 ggplot(chickwts, aes(feed, weight)) + geom_violin() + geom_jitter()
 ```
+![chickwts violin and points on top]({{ site.github.url }}/images/ggplot2-chickwts-violin-points.png)
+
 I like the last one best, but for different data different visualizations are better. 
 
 ```r
@@ -193,6 +214,9 @@ g + theme_base()
 g + theme_excel()  # you will love this, especially the description
 g + theme_fivethirtyeight()
 ```
+
+![ggthemes example with tufte]({{ site.github.url }}/images/ggplot2-themetufte-mtcars-violin-points-color.png)
+
 
 So now you know a few graphics and the basics of ggplot use. In the next lesson we will combine dplyr and ggplot to filter, slice and dice through a dataset. Hopefully we will get some insights! 
 
