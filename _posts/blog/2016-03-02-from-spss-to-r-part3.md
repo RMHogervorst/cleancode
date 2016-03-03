@@ -121,8 +121,8 @@ In the above example `geom_smooth()` inherits the part [ aes(x, y) ] from
  `ggplot(data = mtcars, aes(x= mpg, y= wt))`.
 
 <figure class="half">
-	<img src="{{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor-andsmoothing.PNG" alt="ggplot geom_point and geom smooth method=lm">
-	<img src="{{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups" alt="ggplot with group= as.factor gear geom_point geom smooth">
+	<img src="{{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor-andsmoothing.png" alt="ggplot geom_point and geom smooth method=lm">
+	<img src="{{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png" alt="ggplot with group= as.factor gear geom_point geom smooth">
 	<figcaption>adding group = as.factor(gear) to aes of ggplot leads to seperate smoothings per gear</figcaption>
 </figure>
 
