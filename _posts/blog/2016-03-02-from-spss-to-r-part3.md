@@ -123,7 +123,7 @@ In the above example `geom_smooth()` inherits the part [ aes(x, y) ] from
 <figure class="half">
 	<img src="{{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor-andsmoothing.png" alt="ggplot geom_point and geom smooth method=lm">
 	<img src="{{ site.github.url }}/images/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png" alt="ggplot with group= as.factor gear geom_point geom smooth">
-	<figcaption>adding group = as.factor(gear) to aes of ggplot leads to seperate smoothings per gear</figcaption>
+	<figcaption>adding:  'group = as.factor(gear)' to aes() of ggplot leads to seperate smoothings per gear</figcaption>
 </figure>
 
 
@@ -157,10 +157,10 @@ ggplot(dat, aes(Name, Frequency)) + geom_bar(stat ="identity")
 
 ![ggplot(dat, aes(Name, Frequency)) + geom_bar(stat ="identity")]({{ site.github.url }}/images/ggplot2-simplebargraph-fictionaldata.png)
 
-## Example 3: boxplots, with points behind
+## Example 3: boxplots, violingplots with points behind
 
-Now a boxplot. The chickwts dataset is a small dataset of weights of chicks (baby chickens, not human ladies), with the diet they received.  
-By now you now the drill: the data is chickwts, the aes are feed and weight. Then we add a boxplot geom. See `?geom_boxplot` for more info about changing parameters. I have also displayed a violin plot, which displays more information about the distribution.   
+Now a violinplot. The chickwts dataset is a small dataset of weights of chicks (baby chickens, not human ladies), with the diet they received.  
+By now you now the drill: the data is chickwts, the aes are feed and weight. Then we add a boxplot geom. See `?geom_boxplot` for more info about changing parameters. I have displayed a violin plot, which displays more information about the underlying distribution.   
  
 ```r
 str(chickwts)
