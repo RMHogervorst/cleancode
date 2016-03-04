@@ -261,7 +261,7 @@ But perhaps you would like to know the mean number of students per opleidingsfas
 Summarize works with `group_by`, let's use that pipe operator again:
 
 ```r
-wo2015 %>% group_by(OPLEIDINGSFASE.ACTUEEL2) %>% 
+wo2015 %>% group_by(OPLEIDINGSFASE.ACTUEEL) %>% 
 	summarise(mean2015_males = mean(j2015.MAN, na.rm = T))
 ```
 
@@ -271,20 +271,20 @@ Let's take numbers in zuid-holland only
 ```r
 wo2015 %>% 
 	filter(PROVINCIE == "Zuid-Holland") %>%      # R will continue on the following line
-        group_by(OPLEIDINGSFASE.ACTUEEL2) %>%           # It also helps in readability
+        group_by(OPLEIDINGSFASE.ACTUEEL) %>%           # It also helps in readability
         summarise(mean2015_males = mean(j2015.MAN, na.rm = T))
 ```
 
 Grouping can be done on multiple levels and with multiple arguments:
 
 ```r
-wo2015 %>% group_by(PROVINCIE, OPLEIDINGSFASE.ACTUEEL2) %>%
+wo2015 %>% group_by(PROVINCIE, OPLEIDINGSFASE.ACTUEEL) %>%
         summarise(mean2015_males = mean(j2015.MAN, na.rm = T))
 wo2015 %>% filter(PROVINCIE == "Zuid-Holland" | PROVINCIE == "Limburg") %>%  # | means or
-        group_by(OPLEIDINGSFASE.ACTUEEL2) %>% 
+        group_by(OPLEIDINGSFASE.ACTUEEL) %>% 
         summarise(mean2015_males = mean(j2015.MAN, na.rm = T))
 # That was an OR operator, there is also an AND.
-wo2015 %>% filter(PROVINCIE == "Zuid-Holland" & OPLEIDINGSFASE.ACTUEEL2 == "propedeuse bachelor") %>%  
+wo2015 %>% filter(PROVINCIE == "Zuid-Holland" & OPLEIDINGSFASE.ACTUEEL == "propedeuse bachelor") %>%  
         group_by(OPLEIDINGSVORM2) %>% 
         summarise(mean2015_males = mean(j2015.MAN, na.rm = T), number = n()) # n() gives a count
 ```
@@ -295,7 +295,7 @@ We start with all the cases, **THEN** only take the cases (rows) where variable 
 
 ```r 
 wo2015 %>% filter(j2011.VROUW <= 10) %>% # so less or equal to 10 women in 2011
-        filter(OPLEIDINGSFASE.ACTUEEL2 == "propedeuse bachelor") %>% # multipe filters? no problem.
+        filter(OPLEIDINGSFASE.ACTUEEL == "propedeuse bachelor") %>% # multipe filters? no problem.
         filter(j2015.VROUW > 10)  %>% # more then 10 in 2015. 
         group_by(PROVINCIE) %>% summarize(number_of_programs = n())
 ```
