@@ -57,6 +57,7 @@ So we activated the necessary packages, saved a link to the datafile, told the `
 
 ### Exploration of the data frame in base-R
 The following commands are very often the first things you will use when you get your hands on a new dataset.
+
 ```r
 str(wo2015) # str is short for structure
 names(wo2015) # what are the columnsnames?
@@ -89,6 +90,7 @@ As you know SPSS cannot work with factor (nominal) values.
 You have to tell SPSS that the variable is a nominal variable
 and you have to create numbered values, with a label assigned to the values *(3 = male, 4 = female)*.
 When you import a .sav file into R that information can get lost. But on the other hand you might want to use the numbered information. As an compromise the haven package imports the numbers and the labels. So can we find the labels?
+
 ```r
 class(wo2015$OPLEIDINGSVORM) # no, that just tells us that it's labelled. 
 attributes(wo2015$OPLEIDINGSVORM) # the command attributes gives you back all the metadata
@@ -109,6 +111,7 @@ as_factor(wo2015$OPLEIDINGSVORM)
 Now look back at wo2015
 Nothing has changed!
 That's right, you need to assign the result of the operation back to a column
+
 ```r
 wo2015$OPLEIDINGSVORM2 <- as_factor(wo2015$OPLEIDINGSVORM) 
 ```
@@ -201,6 +204,7 @@ We can't see the new variable from14to15M, it is there because the output says:
 `
 
 So let's see.
+
 ```r
 test<-mutate(wo2015, from14to15M = j2015.MAN - j2014.MAN)
 View(test)
@@ -233,6 +237,7 @@ wo2015 %>%
 The pipe operator puts the data.frame from the left side as first argument in the right side.
 
 Read the pipe operator as THEN:
+
 ```r
 wo2015 %>% 
 	mutate(from14to15M = j2015.MAN - j2014.MAN) %>% 
@@ -262,6 +267,7 @@ wo2015 %>% group_by(OPLEIDINGSFASE.ACTUEEL2) %>%
 
 Chaining can make things very easy. 
 Let's take numbers in zuid-holland only
+
 ```r
 wo2015 %>% 
 	filter(PROVINCIE == "Zuid-Holland") %>%      # R will continue on the following line
@@ -270,6 +276,7 @@ wo2015 %>%
 ```
 
 Grouping can be done on multiple levels and with multiple arguments:
+
 ```r
 wo2015 %>% group_by(PROVINCIE, OPLEIDINGSFASE.ACTUEEL2) %>%
         summarise(mean2015_males = mean(j2015.MAN, na.rm = T))
