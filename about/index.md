@@ -11,6 +11,9 @@ image:
 
 > What is clean code? 
 
-Writing more readable code is important or something.
+I created this site to display examples and tutorials for nice R code. 
 
-just fill this text up you know..
+I have a series about getting from spss to R learning to work with dplyr and ggplot2.
+There are some blogposts about version control and github. 
+
+This website is hosted on github and build with markdown documents.
