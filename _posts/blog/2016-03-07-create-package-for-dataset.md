@@ -229,5 +229,6 @@ This is a good thing, it means your settings are so that non failing builds are 
 - [R packages book: What to put in your description file](http://r-pkgs.had.co.nz/description.html)
 - [Rstudio: Building checking and distributing packages](https://support.rstudio.com/hc/en-us/articles/200486508-Building-Testing-and-Distributing-Packages)
 
+## References
 
 [^1]: Wickham, Hadley. R Packages. First edition. Sebastopol, CA: O’Reilly Media, 2015. <http://r-pkgs.had.co.nz/>

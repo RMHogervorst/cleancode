@@ -227,6 +227,7 @@ So now you know a few graphics and the basics of ggplot use. In the next lesson 
 * [a google search with "r lattice base ggplot2" gives me 26900 results](http://lmgtfy.com/?q=r+lattice+base+ggplot2)
 * [ If you ever need to know any sort of plot, use the cookbook. bookmark it ](http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_%28ggplot2%29/)
 * [beautiful graphs cheatcheat](http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/)
+* [R graph catalog an interactive display of graphs including the code in ggplot2](http://shiny.stat.ubc.ca/r-graph-catalog/)
 
 ### References
 
