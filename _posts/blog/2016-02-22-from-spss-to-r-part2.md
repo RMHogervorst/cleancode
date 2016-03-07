@@ -9,10 +9,11 @@ tags: [beginner, haven, dplyr, spps-to-r, duo2015]
 image: 
   feature: from_spss_to_r.png
 date: 2016-02-22
+share: true
 ---
 # Introduction
 
-In this lesson we will open a .sav file in Rstudio and manipulate the data.frame. We will select parts of the file and create some simple overviews. First time with R? No problem, see lesson [1]({{ site.github.url }}/blog/2016/02/20/from-spss-to-r-part1.html#introduction "From spss to R, part 1")
+In this lesson we will open a .sav file in Rstudio and manipulate the data.frame. We will select parts of the file and create some simple overviews. First time with R? No problem, see lesson [1] ({{ site.github.url }}/blog/2016/02/20/from-spss-to-r-part1.html#introduction "From spss to R, part 1")
 
 * toc
 {:toc} 
@@ -317,13 +318,13 @@ see you then.
 
 
 ### Notes
-[3]: https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp "Because this was the first dataset I found, but this dataset is actually useful for me in my work as well"
+[3]: <https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp > "Because this was the first dataset I found, but this dataset is actually useful for me in my work as well"
 
 ### Further Reading
 The following introduction is better than I could have made:
 
-[1]: https://stat545-ubc.github.io/block009_dplyr-intro.html](https://stat545-ubc.github.io/block009_dplyr-intro.html
+[1]: <https://stat545-ubc.github.io/block009_dplyr-intro.html](https://stat545-ubc.github.io/block009_dplyr-intro.html>
 
 and here is some background information
 
-[2]: https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html  
+<https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html>  

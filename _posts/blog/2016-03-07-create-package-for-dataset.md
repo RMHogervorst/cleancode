@@ -9,6 +9,7 @@ tags: [intermediate, package, coffeedata]
 image:
   feature:
 date: 2016-03-07
+share: true
 ---
 
 Turning your dataset into a package is very useful for reproducable research. This tutorial is for you, even if you've never created a package in r.
@@ -192,7 +193,7 @@ This also works on bitbucket :
 devtools::install_bitbucket("rmhogervorst/coffeedata")
 ```
 
-Or you download the [source]({{ site.github.url }}/datasets/coffeedata_0.1.0.tar) file from the website and install it manually
+Or you download the [source](https://github.com/RMHogervorst/cleancode/raw/gh-pages/datasets/coffeedata_0.1.0.tar.gz) file from the website and install it manually
 
 Yes I have created the file for you. Now you all know how many coffee I drank. Even worse, you can do what you like with that information, because it's in the public domain. 
 
@@ -221,13 +222,12 @@ in my case my project is in: `Projecten\coffeedata` and the logs are in:
 
 This is a good thing, it means your settings are so that non failing builds are removed. Change this in Rstudio Global Options, go to packages, and uncheck the option: *clean up output after succesful R CMD check*.
 
-### References
-
-[^1]: Wickham, Hadley. R Packages. First edition. Sebastopol, CA: O’Reilly Media, 2015. <http://r-pkgs.had.co.nz/>
-
 
 ## Further Reading
 
 - [Hadley Wickham about naming and starting with a package](http://r-pkgs.had.co.nz/package.html)
-- [What to put in your description file](http://r-pkgs.had.co.nz/description.html)
-- [Building checking and distributing packages](https://support.rstudio.com/hc/en-us/articles/200486508-Building-Testing-and-Distributing-Packages)
+- [R packages book: What to put in your description file](http://r-pkgs.had.co.nz/description.html)
+- [Rstudio: Building checking and distributing packages](https://support.rstudio.com/hc/en-us/articles/200486508-Building-Testing-and-Distributing-Packages)
+
+
+[^1]: Wickham, Hadley. R Packages. First edition. Sebastopol, CA: O’Reilly Media, 2015. <http://r-pkgs.had.co.nz/>
