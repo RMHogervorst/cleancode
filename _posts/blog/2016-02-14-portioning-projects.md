@@ -4,7 +4,7 @@ title: "Portioning projects"
 author: roel_hogervorst
 modified: 2016-03-14
 categories: blog
-excerpt: 
+excerpt: Make small modules that do one thing and increment
 tags: [philosophy, intermediate, modular projects]
 image:
   feature: banner-projects.png
