@@ -7,7 +7,7 @@ search_omit: true
 
 See all the post so far or, if you would like to see the posts sorted by keyword [click here]({{ site.url }}/tags/)
 
-I created a series for people coming [from SPSS to R]({{ site.url }}/cleancode/blog/2016/02/20/from-spss-to-r-part1.html) . 
+I created a series for people coming [from SPSS to R]({{ site.url }}/blog/2016/02/20/from-spss-to-r-part1.html) . 
 
  
 <ul class="post-list">
