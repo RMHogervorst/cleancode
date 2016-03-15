@@ -9,6 +9,5 @@ gem 'activesupport'
 gem 'stringex'
 
 group :test do
-  gem 'html-proofer'
   gem 'github-pages'
 end
