@@ -6,7 +6,7 @@
   {% else %}
     {{ words | divided_by:180 }} mins
   {% endif %}
-  [% assign lines = post.content|split:'pre>'%]
+  {% assign lines = post.content|split:'pre>'%}
 	this document contains {{lines}} lines of code. 
   <br>
   </em>
