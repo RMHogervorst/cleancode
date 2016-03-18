@@ -2,9 +2,9 @@
   <em >Estimated reading time: 
   {% assign words = content | number_of_words %}
   {% if words < 360 %}
-    1 min
+    1 min,
   {% else %}
-    {{ words | divided_by:180 }} mins
+    {{ words | divided_by:180 }} mins,
   {% endif %}
   {% assign lines = content | split:'pre>' %}
 	this document contains {{ lines }} lines of code. 
