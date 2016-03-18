@@ -19,6 +19,12 @@ I created a series for people coming [from SPSS to R]({{ site.url }}/blog/2016/0
         {% assign line_words = line|strip_html|number_of_words|times:mod %}
         {% assign post_words = post_words|plus:line_words %}
     {% endfor %}
-   <li><article class="post" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><a href="{{ site.url }}{{ post.url }}" itemprop="url" >{{ post.title }} <span class="entry-date" itemprop="dateCreated"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span>{% if post.excerpt %} <span class="excerpt" itemprop="description">{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }} </span> <span class="excerpt"> ({{ post_words }} words) </span>{% endif %}</a></article></li>
+   <li><article class="post" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><a href="{{ site.url }}{{ post.url }}" itemprop="url" >{{ post.title }} <span class="entry-date" itemprop="dateCreated"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span>{% if post.excerpt %} <span class="excerpt" itemprop="description">{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }} </span> <span class="excerpt"> 
+   {% if post_words < 360 %}
+    1 min,
+  {% else %}
+    {{ post_words | divided_by:180 }} mins,
+  {% endif %}
+ </span>{% endif %}</a></article></li>
 {% endfor %}
 </ul>
