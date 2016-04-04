@@ -4,7 +4,7 @@ title: "From spss to R, part 4"
 author: roel_hogervorst
 modified:
 categories: blog
-excerpt: 
+excerpt: combining dplyr and ggplot2 advanced ggplot features.
 tags: [beginner, dplyr, ggplot2, spps-to-r]
 image:
   feature: from_spss_to_r.png
@@ -27,7 +27,7 @@ You will need:
 - Internet access
 - Rstudio
 - a recent version of R
-- the packages: dplyr, ggplot2, readr, perhaps tidyr
+- the packages: dplyr, ggplot2, readr.
 
 You need to understand / apply
 
@@ -48,17 +48,19 @@ link<-"https://raw.githubusercontent.com/RMHogervorst/cleancodeexamples/master/f
 # Libraries to use
 library(dplyr) # yes I use it almost daily
 library(ggplot2)
-library(readr) # for the use of read_csv (there is also a read.csv function in base r, but it has some undesirable properties)
+library(readr) # for the use of read_csv 
+# (there is also a read.csv function in base r, but it has some undesirable properties)
 # load the data
 duo2015_tidy<- read_csv(link)
-# This is the same file we used in: https://rmhogervorst.github.io/cleancode/blog/2016/02/24/creating-tidy-data.html
+# This is the same file we used in: 
+# https://rmhogervorst.github.io/cleancode/blog/2016/02/24/creating-tidy-data.html
 # look at the data with View(duo2015_tidy) or
 glimpse(duo2015_tidy)  # often more meaningful
 
 ```
 
 The file contains the number of students per year per gender per program in Dutch Universities between 2011 and 2015.
-Look around the dataset and get a sense of what it contains. Unfortunately for non-Dutch speakers, the set is entirely in Dutch...  But I will explain the variables for you in so far as I know.
+Look around the dataset and get a sense of what it contains. Unfortunately for non-Dutch speakers, the set is entirely in Dutch...  But I will explain the variables for you so far as I know.
 
 - PROVINCIE		province, which of the twelve [provinces](https://en.wikipedia.org/wiki/Provinces_of_the_Netherlands)
 - GEMEENTENUMMER	municipal number	No idea what basis this has
@@ -368,17 +370,6 @@ This was the final introduction to R from SPSS. From now on, you are a R user. Y
  
 
 
-## NOTES
-[^1]: Tidying was done in a different blog post: <https://rmhogervorst.github.io/cleancode/blog/2016/02/24/creating-tidy-data.html> 
-[^2]: R projects keep you code and workspace setting contained. So you can work with wildly different settings without resetting them between sessions. 
-[^3]: I mean, I had to refer to the name of this blog at least once. But I think it's really important. I always lose track of all the subfiles, so this is much better. and faster.
-[^4]: It is odd, and hadley wickham, the creator of ggplot and dplyr (which imported the pipe operator) , agrees. But this is the way it is and changing it will break the code of millions of users...
-[^5]: There are multiple ways to do this but I would use this `length(unique(duo2015_tidy$OPLEIDINGSNAAM.ACTUEEL))`
-[^6]: No these are the programs in total, because of the `distinct()` command. That is the dplyr way of selecting unique cases.
-[^7]: Psychology is arguably a study often chosen for lack of ideas: " I didn't really know what to choose so I chose something social...". I'm not sure how many students have this attitude. 
-[^8]: Or at least in the Netherlands babyblue is a common color for males. Red not so much specific for females, but pink would be.  
-[^9]: I actually found `ggsave("nameofplot.png",scale = 1.5)` to work nicely.
-
 ## Further Reading
 
 ^[Datacamp: 5 hour video introduction to ggplot2](http://www.r-bloggers.com/the-easiest-way-to-learn-ggplot2/ "I have not seen this, let me know")
@@ -393,3 +384,13 @@ This was the final introduction to R from SPSS. From now on, you are a R user. Y
 
 
 
+## NOTES
+[^1]: Tidying was done in a different blog post: <https://rmhogervorst.github.io/cleancode/blog/2016/02/24/creating-tidy-data.html> 
+[^2]: R projects keep you code and workspace setting contained. So you can work with wildly different settings without resetting them between sessions. 
+[^3]: I mean, I had to refer to the name of this blog at least once. But I think it's really important. I always lose track of all the subfiles, so this is much better. and faster.
+[^4]: It is odd, and hadley wickham, the creator of ggplot and dplyr (which imported the pipe operator) , agrees. But this is the way it is and changing it will break the code of millions of users...
+[^5]: There are multiple ways to do this but I would use this `length(unique(duo2015_tidy$OPLEIDINGSNAAM.ACTUEEL))`
+[^6]: No these are the programs in total, because of the `distinct()` command. That is the dplyr way of selecting unique cases.
+[^7]: Psychology is arguably a study often chosen for lack of ideas: " I didn't really know what to choose so I chose something social...". I'm not sure how many students have this attitude. 
+[^8]: Or at least in the Netherlands babyblue is a common color for males. Red not so much specific for females, but pink would be.  
+[^9]: I actually found `ggsave("nameofplot.png",scale = 1.5)` to work nicely.
