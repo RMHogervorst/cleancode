@@ -42,7 +42,7 @@ In the next example you can see what changed in the files, without even looking 
 
 ### Branching
 Even better, you can start from any saved point in time and create a new version. And when you like that version better, merge it back into an other version. 
-![branches]({{ site.github.url }}/images/branches.png) 
+![branches]({{ site.github.url }}/images/branching.png) 
 In the example above, at the second commit I branched (purple line). the third row from below is a commit in the purple branch. Then I changed something in the normal branch and finally I merged the blue and purple line in the second line from the top. 
 
 You don't have to use branching, just saving important points along the way is a great start (It would be the point where you email yourself a version, or save a new version of the file).
@@ -161,7 +161,6 @@ It is not recommended to add datafiles to a repo. I think it can work with plain
 Do add example csv files or smaller files if you'd like to.   
 
 
-
 ### Further Reading
 * [Git in Rstudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
 * [git website](https://git-scm.com/)
@@ -169,7 +168,7 @@ Do add example csv files or smaller files if you'd like to.
 * [Atlassian company of Sourcetree, has a long read about branching models](https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow)
 * [r-bio example of git and rstudio](https://r-bio.github.io/intro-git-rstudio/)
 
-As always: the **best resource** is [https://stat545-ubc.github.io/](https://stat545-ubc.github.io/git00_index.html "pages about git")
+The **best resource** is [https://stat545-ubc.github.io/](https://stat545-ubc.github.io/git00_index.html "pages about git")
 
 ### References
 
