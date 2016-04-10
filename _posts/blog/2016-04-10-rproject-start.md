@@ -10,6 +10,7 @@ image:
   feature: banner-projects.png
 date: 2016-04-10
 share: TRUE
+published: FALSE
 ---
 
 It often makes sense to separate your projects. And since space is cheap you are probably creating separate folders on your computer. In RStudio you can create different projects that live in their own folder. 
