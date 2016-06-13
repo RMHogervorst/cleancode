@@ -5,7 +5,7 @@ author: roel_hogervorst
 modified:
 categories: blog
 excerpt: Getting started with ggplot2
-tags: [beginner, ggplot2,spps-to-r, mtcars, chickwts]
+tags: [beginner, ggplot2,spps-to-r, mtcars, chickwts, tutorial]
 image: 
   feature: from_spss_to_r.png
 date: 2016-03-02

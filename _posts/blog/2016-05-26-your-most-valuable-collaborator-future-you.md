@@ -4,7 +4,7 @@ title: "Your most valuable collaborator, future-you"
 author: roel_hogervorst
 modified:
 categories: blog
-excerpt: 
+excerpt: "future-you loves readme, tests and version control, saving time in the long run."
 tags: [advanced, intermediate, version control, TDD, readme, functional programming]
 image:
   feature:

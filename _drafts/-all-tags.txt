@@ -18,3 +18,28 @@ Object Oriented Programming, Non standard Evaluation, code performance, profilin
 tutorial =  stap voor stap met stukjes code (test aan begin en einde om te zien dat het werkt?)
 clarification  = uitleg voor als je uit andere taal komt, python, spss, excel
 reminder = how to van package met voorbeeld, lijstje van commands
+
+
+
+    TDD 1
+    advanced 1
+    beginner 7
+    chickwts 1
+    coffeedata 1
+    dplyr 3
+    duo2015 2
+    functional programming 1
+    ggplot2 3
+    git 1
+    haven 1
+    intermediate 3
+    link-post 1
+    modular projects 1
+    mtcars 1
+    package 1
+    philosophy 1
+    podcast 1
+    readme 1
+    spps-to-r 4
+    tidyr 1
+    version control 2

@@ -5,7 +5,7 @@ author: roel_hogervorst
 modified:
 categories: blog
 excerpt: combining dplyr and ggplot2 advanced ggplot features.
-tags: [beginner, dplyr, ggplot2, spps-to-r]
+tags: [beginner, dplyr, ggplot2, spps-to-r, tutorial]
 image:
   feature: from_spss_to_r.png
 date: 2016-04-04

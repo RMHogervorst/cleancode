@@ -5,7 +5,7 @@ author: roel_hogervorst
 modified:
 categories: blog
 excerpt: Reshaping your wide data to long with the tidyr package 
-tags: [beginner, dplyr, tidyr, duo2015]
+tags: [beginner, dplyr, tidyr, duo2015, tutorial]
 image: 
   feature:
 date: 2016-02-24
