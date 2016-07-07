@@ -26,3 +26,5 @@ github
 
 
 put it on bithbucket.
+
+link naar hillary parkers blogpost.
