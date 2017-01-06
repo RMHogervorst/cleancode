@@ -4,7 +4,7 @@
  locale: en_US
  description: Tips about clean R-code and reproducible work
  logo: site-logo-new.png
- url: rmhogervorst.nl/cleancode
+ url: //rmhogervorst.github.io/cleancode
 
 # Jekyll configuration
 
@@ -79,7 +79,7 @@ titlecase: true
   weibo: #userid
   google:
     plus: #username
-    analytics: 
+    analytics: UA-73562521-1 
     verify:
     ad-client:
     ad-slot:

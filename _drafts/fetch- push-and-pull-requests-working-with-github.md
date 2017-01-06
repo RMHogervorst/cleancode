@@ -4,7 +4,6 @@ UITLEG VAN WAT IS GIT EN WAT IS GITHUB VOOR R-USER, WAAROM IS HET HANDIG.
 Let's talk about github. What is it and what do you do with it. Specifically for r-user (or use-Rs as they are also known).  Writing software is a collaboration. It's useful to share your code. 
 
 #Short introduction. GIT vs GITHUB
-Ive talked before about [version control](/../../../2016/03/01/version-control-start.html) 
 
 Many types of version control
 
