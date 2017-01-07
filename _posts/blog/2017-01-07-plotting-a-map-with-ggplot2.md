@@ -188,7 +188,7 @@ ggplot(data = NLD, aes(x = long, y = lat))+
 
     ## Regions defined for each Polygons
 
-![](blogpost_idee_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](images/figure-markdown_github/unnamed-chunk-5-1.png)
 
 We got a message: Regions defined for each Polygons, this is ggplot telling us that some work was done on the background to reshape the data for plotting use.
 
@@ -206,7 +206,7 @@ ggplot()+
 
     ## Regions defined for each Polygons
 
-![](blogpost_idee_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](images/figures/unnamed-chunk-6-1.png)
 
 THis looks better, but for people from the Netherlands, this still doesn't look quite right. The country is stretched in a weird way and the center, filled with a [big ass man made lake](https://en.wikipedia.org/wiki/IJsselmeer "this lake used to be a sea, but we didn't want a sea anymore") should not by plotted.
 
@@ -241,7 +241,7 @@ ggplot(NLD_fixed) +
   coord_map()
 ```
 
-![](images/figure-markdown_github2017shape/unnamed-chunk-8-1.png)
+![](images/figures/unnamed-chunk-8-1.png)
 
 Let's add some color!
 
@@ -254,7 +254,7 @@ ggplot(NLD_fixed) +
   coord_map()
 ```
 
-![](images/figure-markdown_github2017shape/unnamed-chunk-9-1.png)
+![](images/figures/unnamed-chunk-9-1.png)
 
 Combine the map with another dataset and color the tiles
 --------------------------------------------------------
@@ -304,7 +304,7 @@ ggplot(final_map)+
   theme(legend.position = "bottom")  # chagne the legend position
 ```
 
-![](images/figure-markdown_github2017shape/unnamed-chunk-12-1.png)
+![](images/figures/unnamed-chunk-12-1.png)
 
 [1] I know! really confusing, polygons inside polygons!, crezy!
 
