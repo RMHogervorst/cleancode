@@ -188,7 +188,7 @@ ggplot(data = NLD, aes(x = long, y = lat))+
 
     ## Regions defined for each Polygons
 
-![](http://rmhogervorst.nl/cleancode/images/figure-markdown_github/unnamed-chunk-5-1.png)
+![](http://rmhogervorst.nl/cleancode/images/figures/unnamed-chunk-5-1.png)
 
 We got a message: Regions defined for each Polygons, this is ggplot telling us that some work was done on the background to reshape the data for plotting use.
 
@@ -208,7 +208,7 @@ ggplot()+
 
 ![](http://rmhogervorst.nl/cleancode/images/figures/unnamed-chunk-6-1.png)
 
-THis looks better, but for people from the Netherlands, this still doesn't look quite right. The country is stretched in a weird way and the center, filled with a [big ass man made lake](https://en.wikipedia.org/wiki/IJsselmeer "this lake used to be a sea, but we didn't want a sea anymore") should not by plotted.
+This looks better, but for people from the Netherlands, this still doesn't look quite right. The country is stretched in a weird way and the center, filled with a [big ass man made lake](https://en.wikipedia.org/wiki/IJsselmeer "this lake used to be a sea, but we didn't want a sea anymore") should not by plotted.
 
 First the stretching. There is a special coordinate thingy in ggplot called coord\_map(). I like the standard projection, but if you liek you can try any of the projections in `?mapproj::mapproject` . Go crazy!
 
