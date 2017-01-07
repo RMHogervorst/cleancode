@@ -79,7 +79,7 @@ titlecase: true
   weibo: #userid
   google:
     plus: #username
-    analytics: UA-73562521-1 
+    analytics:  
     verify:
     ad-client:
     ad-slot:
