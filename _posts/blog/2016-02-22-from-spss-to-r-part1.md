@@ -5,7 +5,7 @@ author: roel_hogervorst
 modified: 2016-02-22
 categories: blog
 excerpt: Just enough information about r and reading in .sav files
-tags: [beginner, ggplot2,spps-to-r]
+tags: [beginner, ggplot2,spps-to-r, tutorial]
 image: 
   feature: from_spss_to_r.png
 date: 2016-02-20
