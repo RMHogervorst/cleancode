@@ -5,7 +5,7 @@ author: roel_hogervorst
 modified:
 categories: blog
 excerpt: Torturing your spss data untill it gives in
-tags: [beginner, haven, dplyr, spps-to-r, duo2015, tutorial]
+tags: [beginner, haven, dplyr, spps-to-r, duo2015]
 image: 
   feature: from_spss_to_r.png
 date: 2016-02-22

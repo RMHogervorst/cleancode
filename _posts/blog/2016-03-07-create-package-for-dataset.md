@@ -5,7 +5,7 @@ author: roel_hogervorst
 modified:
 categories: blog
 excerpt: 
-tags: [intermediate, package, coffeedata, tutorial]
+tags: [intermediate, package, coffeedata]
 image:
   feature:
 date: 2016-03-07
