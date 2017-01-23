@@ -2,9 +2,9 @@
 
  title: Clean Code
  locale: en_US
- description: Tips about clean R-code and reproducable work
+ description: Tips about clean R-code and reproducible work
  logo: site-logo-new.png
- url: //rmhogervorst.github.io/cleancode
+ url: //rmhogervorst.nl/cleancode
 
 # Jekyll configuration
 
@@ -68,7 +68,7 @@ titlecase: true
   email: hogervorst.rm@gmail.com
   disqus-shortname:
   twitter: #username
-  facebook: #username
+  facebook: Clean code r
   github: RMHogervorst
   stackexchange: #http://stackoverflow.com/users/123456/username
   linkedin: #username
@@ -79,7 +79,7 @@ titlecase: true
   weibo: #userid
   google:
     plus: #username
-    analytics: UA-73562521-1 
+    analytics:  
     verify:
     ad-client:
     ad-slot:

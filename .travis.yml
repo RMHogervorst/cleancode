@@ -1,4 +1,9 @@
+before_script: bundle update
+bundler_args: --without benchmark:site:development
+script:  - bundle exec jekyll build
+cache: bundler
 language: ruby
-  
-script: 
- - bundle exec jekyll build --drafts
+sudo: false
+
+rvm: >= 2.0.0
+
