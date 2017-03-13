@@ -27,7 +27,7 @@ To search and insert citations in a file you will need to install the package
 The main reasons to write in RStudio ( and not in f.i. Word ) are reproducibity, and version control. Writing in plain text as you do in RStudio makes it very easy to keep track of your work with version control and the plain files are easily shared. Working from RStudio also allows you to combine the code and text in one document. This is called [literate programming](https://en.wikipedia.org/wiki/Literate_programming "wikipedia link"). Literate programming makes it incredibly easy to share your code (it's in the document) and compiling the document runs the code again, ensuring reproducibility.   
 
 I use RStudio projects so everything
-important to a project is in the same folder and the working directory is  automatically correct. I create a new RMarkdown document ![rmarkdown doc]({{ site.github.url }}/images/example_rstudio_manuscript.PNG)
+important to a project is in the same folder and the working directory is  automatically correct. I create a new RMarkdown document ![rmarkdown doc]({{ site.url }}/images/example_rstudio_manuscript.PNG)
 
 
 #### Earlier workflows 
@@ -108,11 +108,11 @@ Now, making your own bibtex files is a serious pain in the backside. So we don't
 
 I don't want to keep track of the correct way to cite sources, that is just a waste of time. We have excellent reference managers for this goal. I use Zotero. I just throw the pdfs in the correct folder and Zotero finds the correct metadata using the pdfs DOI (digital object identifier). 
 This is how it looks on my computer
-![a snapshot of zotero on my pc]({{ site.github.url }}/images/example_zotero_look.PNG)
+![a snapshot of zotero on my pc]({{ site.url }}/images/example_zotero_look.PNG)
 
 I use the extension [betterbibtex](link), that adds extra functionality to Zotero. In this case it also takes care of synchronizing the bibtext file that you export to the folder you're working in and the corresponding collection in Zotero. (see further on).
 
-I export the collection from zotero into the rstudio folder. ![zotero keep updated image]({{ site.github.url }}/images/example_zotero_keep_updated.PNG)
+I export the collection from zotero into the rstudio folder. ![zotero keep updated image]({{ site.url }}/images/example_zotero_keep_updated.PNG)
 
 
 
@@ -127,7 +127,7 @@ output: html_document
 bibliography: bibliography.bib
 ---
 ```
-While writing the manuscript we cite like so ![image of citing]({{ site.github.url }}/images/example_adding_citations_rmarkdown.PNG)
+While writing the manuscript we cite like so ![image of citing]({{ site.url }}/images/example_adding_citations_rmarkdown.PNG)
 
 For more information about citations and bibliographies look at the RStudio website^[<http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html>]
 
@@ -136,15 +136,15 @@ Then use the citr package <https://github.com/crsh/citr>.
 *Citr works quite nicely, but unfortunately it has recently acquired default behavior that is frankly annoying. If Zotero is active (open in a window on your computer), citr will ignore the bibliography you mentioned in the top of the document and just try to read in the entire zotero library. (which will fail on my computer) I had to change a setting to change this.*^[ you have to change `options(citr.use_betterbiblatex = FALSE)` adding this to .Renviron works].
 
 Loading citations:
-![image of loading citr]({{ site.github.url }}/images/example_loading_citr.PNG)
+![image of loading citr]({{ site.url }}/images/example_loading_citr.PNG)
 
 Adding a citation to a document:
-![image of adding a citation]({{ site.github.url }}/images/example_adding_citation_with_citr.PNG)
+![image of adding a citation]({{ site.url }}/images/example_adding_citation_with_citr.PNG)
 
 
 This adds the correct citation as you can see
 
-![side by side comparison]({{ site.github.url }}/images/example_citation_side_by_side.PNG)
+![side by side comparison]({{ site.url }}/images/example_citation_side_by_side.PNG)
 
 
 ## Conclusion
