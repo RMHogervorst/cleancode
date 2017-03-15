@@ -2,7 +2,7 @@
 layout: post
 title: "Writing manuscripts in Rstudio, easy citations"
 author: roel_hogervorst
-modified: 
+modified: 2017-03-15
 categories: blog
 excerpt: Combine the power of rmarkdown, citr, zotero and pandoc
 tags: [citations, intermediate,tutorial, writing, reproducible, bibtex, workflow ]
@@ -130,6 +130,23 @@ bibliography: bibliography.bib
 While writing the manuscript we cite like so ![image of citing]({{ site.url }}/images/example_adding_citations_rmarkdown.PNG)
 
 For more information about citations and bibliographies look at the RStudio website^[<http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html>]
+
+#### Choosing a citation style in the manuscript
+*update 2017-03-15* Michael Koontz [explains how to add a citation style to your document](https://twitter.com/_mikoontz/status/838859261572591623) in short:
+
+1. search for a citation style <https://github.com/citation-style-language/styles/find/master> (f.i. APA)
+2. find the correct file and click on raw
+3. copy the link to the citation style file in the yaml
+```
+---
+title: "Sample Document"
+output: html_document
+bibliography: bibliography.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+---
+```
+
+
 
 #### Making citing easier with the help of CITR
 Then use the citr package <https://github.com/crsh/citr>. 
