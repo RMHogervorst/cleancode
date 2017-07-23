@@ -2,7 +2,7 @@
 layout: post
 title: "Non-standard-evaluation and standard evaluation in dplyr"
 author: roel_hogervorst
-modified:
+modified: 2017-07-23
 categories: blog
 excerpt: "using dplyr inside functions with lazyeval"
 tags: [advanced, dplyr, NSE, optimize-your-code, duo2015, lazyeval, reminder]
@@ -10,6 +10,8 @@ image:
   feature:
 date: 2016-06-13
 ---
+
+THIS POST IS NO LONGER ENTIRELY RELEVANT. DPLYR 0.7 HAS A SLIGHTLY DIFFERENT (AND SLIGHTLY MORE INTUITIVE) WAY OF WORKING WITH NON-STANDARD EVALUATION.
 
 
 I love the dplyr package with all of its functions, however if you use normal dplyr in functions in your package r-cmd-check will give you a warning: `R CMD check NOTE: No visible binding for global variable NAME OF YOUR VARIABLE` [^1]. The functions do work, and everything is normal, however if you submit your package to CRAN, such a NOTE is not acceptable. A workaround is to add globalVariables to one of your scripts. for instance:
@@ -22,16 +24,16 @@ Which works but it is not necessary.
 
 ## NSE 
 dplyr (and some other packages and functions) work with non-standard-evaluation (NSE). One example is `library(magrittr)` vs `library("magrittr")` , both work. But
-`install.packages(magrittr)` vs `install.packages("magrittr")` is different, you need the quotes. In almost all the functions in r when you name a part of an object you need the qoutes but in some functions you don't. They are designed to work in a non-standard way. Some even miss a standard way. 
+`install.packages(magrittr)` vs `install.packages("magrittr")` is different, you need the quotes. In almost all the functions in r when you name a part of an object you need the quotes but in some functions you don’t. They are designed to work in a non-standard way. Some even miss a standard way. 
 
 I will focus on the dplyr functions only, a general introduction to NON standard evaluation might come later. 
 
 Under the hood the dplyr functions work just as other functions, in fact 
-all the functions use normal evaluation (standard evaluation), but for interactive use there is a non standard evaluation version, which saves you typing. The interactive version is then first evaluated with the lazyeval package and is then send to the SE version. 
+all the functions use normal evaluation (standard evaluation), but for interactive use there is a non standard evaluation version, which saves you typing. The interactive version is then first evaluated with the lazyeval package and is then sent to the SE version. 
 There is even a naming scheme [^2]:
 > Every function that uses NSE should have a standard evaluation (SE) escape hatch that does the actual computation. The SE-function name should end with _.
 
-Therefore there are multiple verbs: select(), select_(), mutate(), mutate_(), etc. Under the hood `select()` is evaluated with the lazyeval package and send to `select_()`.
+Therefore there are multiple verbs: select(), select_(), mutate(), mutate_(), etc. Under the hood `select()` is evaluated with the lazyeval package and sent to `select_()`.
 In functions you should use the SE versions, not only to stop notes from creating, but also because it gives you extra options. 
 
 # From NSE (the standard interactive use) to SE (standard evalation within functions
