@@ -2,7 +2,7 @@
 layout: post
 title: "From spss to R, part 4"
 author: roel_hogervorst
-modified:
+modified: 2017-08-23
 categories: blog
 excerpt: combining dplyr and ggplot2 advanced ggplot features.
 tags: [beginner, dplyr, ggplot2, spps-to-r, tutorial]
@@ -18,7 +18,9 @@ When you make a visualisation you often experiment with different versions of yo
 
 In [the previous lesson](https://rmhogervorst.github.io/cleancode/blog/2016/03/02/from-spss-to-r-part3.html "a full link to the previous lesson") we worked with some build in datasets. But there is often more fun in public real world datasets. 
 
-We will work with the Dutch government data about higher education more info at <https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp>. To help you along I have already transformed the data into a more tidy format [^1]. The data can be found at my github repository at this link: <https://github.com/RMHogervorst/cleancodeexamples/blob/master/files>. 
+We will work with the Dutch government data about higher education more info at <https://www.duo.nl/open_onderwijsdata/databestanden/ho/ingeschreven/wo-ingeschr/ingeschrevenen-wo1.jsp "UPDATE 2017, NEW LOCATION, THANKS GOVERNMENT...">. To help you along I have already transformed the data into a more tidy format [^1]. The data can be found at my github repository at this link: <https://github.com/RMHogervorst/cleancodeexamples/blob/master/files>. UPDATE 2017-08-23, SPSS FORMAT HAS CHANGED IN HAVEN, SO NEW DATA (2016) WITH FILES BOTH IN SPSS AND CSV FORMAT.
+
+*Everything else is the same, but the data is newer (2016, you can still work with the 2015 data in csv format, that will never break)*
 
 # Getting started
 
@@ -44,7 +46,7 @@ Copy the steps in your script or the console or follow the [script](https://gith
 ```r
 #location of files: "https://github.com/RMHogervorst/cleancodeexamples/blob/master/files"
 
-link<-"https://raw.githubusercontent.com/RMHogervorst/cleancodeexamples/master/files/duo2015_tidy.csv"
+link<-"https://raw.githubusercontent.com/RMHogervorst/cleancodeexamples/master/files/duo2016_tidy.csv"
 # Libraries to use
 library(dplyr) # yes I use it almost daily
 library(ggplot2)

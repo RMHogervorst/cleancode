@@ -2,7 +2,7 @@
 layout: post
 title: "From spss to R, part 2"
 author: roel_hogervorst
-modified:
+modified: 2017-08-23
 categories: blog
 excerpt: Torturing your spss data untill it gives in
 tags: [beginner, haven, dplyr, spps-to-r, duo2015, tutorial]
@@ -26,6 +26,8 @@ I downloaded the following dataset from DUO (Dienst uitvoering onderwijs): [**Aa
 This dataset has a <span title="creative commons version 0"> cc0 </span> declaration, which means it is in the public domain and we can do anything we want with this <span title="thank you Dutch Goverment!" > file. </span> 
 More information about the file can be found in the [Toelichting.pdf](https://www.duo.nl/open_onderwijsdata/images/Toelichting%2001.%20Ingeschrevenen%20wo.pdf "all in Dutch I'm afraid").
 
+*UPDATE 2017-08-23: DUO HAS UPDATED THEIR SITE, BREAKING EVERYTHING. THIS IS CURRENLTY THE DOWNLOAD PAGE: https://www.duo.nl/open_onderwijsdata/databestanden/ho/ingeschreven/wo-ingeschr/ingeschrevenen-wo1.jsp*
+
 *We can already work with this file, because it is in an open format, but for this exercise I will transform it to a .sav file. [See the transformation here](https://github.com/RMHogervorst/cleancodeexamples/blob/master/scripts/dplyr-example-duo.R "Github example of csv -> .sav with haven")*
 
 Download the .sav [file]({{ site.github.url }}/datasets/ingeschrevenwo2015.sav) to start. Do remember where you put the file, you will need it later. 
@@ -41,7 +43,7 @@ haven, dplyr. Click on install:
 
 and fill in the names, or type `install.packages("haven", "dplyr"). 
 
-Follow the description below or look at the complete script at:[github.com/RMHogervorst/cleancodeexamples](https://github.com/RMHogervorst/cleancodeexamples/tree/master/scripts/opening-spss-file-manipulate-with-dplyr-2016-feb). The script and this page are more or less the same (spelling might be better here ;p ).
+Follow the description below or look at the complete script at:[github.com/RMHogervorst/cleancodeexamples](https://github.com/RMHogervorst/cleancodeexamples/blob/master/scripts/dplyr-example-duo.R). The script and this page are more or less the same (spelling might be better here ;p ).
 
 ### Opening the SPSS file and getting it in R
 {% highlight r linenos %}
@@ -49,7 +51,8 @@ Follow the description below or look at the complete script at:[github.com/RMHog
 library(haven)
 library(dplyr)
 # location of the datafile online ####
-link <- "https://rmhogervorst.github.io/cleancode/datasets/ingeschrevenwo2015.sav" 
+link <- "https://cdn.rawgit.com/RMHogervorst/cleancode/gh-pages/datasets/duo2016.sav" 
+# UPDATE 2017-08-23 THIS IS A NEW SPSS FILE FROM 2016 DATA.
 # load the .sav file into R using the link ####
 wo2015 <- read_sav(link) 
 {% endhighlight %}
