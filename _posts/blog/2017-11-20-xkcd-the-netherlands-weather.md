@@ -31,7 +31,7 @@ I've seen major cities in the USA (post by Maelle) and where to live in Spain [b
 So I had to make one for the Netherlands too. There is just a small detail, 
 The Netherlands is tiny, the United States is approximately 237 times larger then The Netherlands. From The Hague to the German border directly east is 164 km (101 miles) and from Leeuwarden to Maastricht in the south is 262 km (162 miles). Essentially my home country has a moderate sea climate with warm summers and relatively mild winters. 
 
-I expect there to be no real big differences between the cities. I use the average temperature over december, januari and februari for winter temperature and calculate the humidex using the [comf package](https://cran.r-project.org/web/packages/comf/index.html). This humidex is a combination of humidity and temperature. 
+I expect there to be no real big differences between the cities. I use the average temperature over december, january and february for winter temperature and calculate the humidex using the [comf package](https://cran.r-project.org/web/packages/comf/index.html). This humidex is a combination of humidity and temperature. 
 
 -   20 to 29: Little to no discomfort
 -   30 to 39: Some discomfort
