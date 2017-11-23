@@ -20,11 +20,11 @@ I have a series about getting [from SPSS to R]() learning to work with dplyr and
 
 There are some blogposts about [version control](https://rmhogervorst.github.io/cleancode/tags/#version%20control) and github. 
 
-This website is hosted on github and build with markdown documents.
+This website is hosted on github and build with markdown documents. I really want to move to blogdown but I haven't found the time. You can find small snippets of useful code and solutions on my secondary site [r-we-there-yet](https://rmhogervorst-rwethereyet.netlify.com/)
 
 Any questions or errors can be added to the issue tracker at the bottom of the page.
 
 Look at the excellent website [r-bloggers](http://www.r-bloggers.com) for more posts about r. 
 
 ## About me
-I am Roel Hogervorst currently employed at [Leiden University](https://www.universiteitleiden.nl/en/staffmembers/roel-hogervorst "Leiden University page") predicting student succes for new students. 
+I am Roel Hogervorst previously employed at [Xomnia](https://xomnia.com/)
