@@ -112,7 +112,7 @@ Also I wanted to let the logs show that I was the one doing the scraping and how
 Enter curl. 
 Curl is a library that helps you download stuff, it is used by the httr package and is a wrapper around the c++ package with the same name, *wrapped by Jeroen 'c-plus-plus' Ooms*. 
 
-Since I ran this function a few times I downloaded some of the files, and didn't really want to download every file again, so I also added a check to see if the file wasn't already downloaded^[I thought that was really clever, didn't you?]. And I wanted it to print to the screen, because I like moving text over the screen when I'm debugging.
+Since I ran this function a few times I downloaded some of the files, and didn't really want to download every file again, so I also added a check to see if the file wasn't already downloaded^[I thought that was really clever, didn't you?] . And I wanted it to print to the screen, because I like moving text over the screen when I'm debugging.
 
 ```r
 download_file <- function(file){
