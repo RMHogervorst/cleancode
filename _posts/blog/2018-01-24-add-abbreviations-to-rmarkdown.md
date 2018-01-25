@@ -36,7 +36,7 @@ ggplot themes to style your corporate work.
 For instance: I create an enourmous collection of
 obscure abbreviations in use in my company and put them all in my package. You don't want to use them all in your document, that would be silly. You only want to explain the abbreviations that you use in the document.
 
-```{r}
+```
 library(tidyverse)
 library(your_corp_package)
 all_abbreviations_used <- c("CIA", "DONKLEBODY", "WUT", "SPEEDR")
