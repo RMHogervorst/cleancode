@@ -14,6 +14,12 @@ I love making maps, I also love making gifs.
 In this short post I make an animated gif of parts of a map moving. In this case the parts of the map only move in the xy direction, but [you can also turn them, and make them bigger or smaller](https://r-spatial.github.io/sf/articles/sf3.html#affine-transformations).
 Today I show you how I made a part of the Netherlands 'float away'. It is part of a larger nonsense project (I have many silly projects), and mostly just to document my path to learning about spatial analytics.
 
+
+End result :
+
+![ ]( 
+https://cdn.rawgit.com/RMHogervorst/floating_friesland/44f7adfd/friesland.gif)
+
 ## General principles
 
 * make small functions that do one thing well (not that small in this case)
