@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Moving
+title: Moving parts of a country over a map
 author: roel_hogervorst
 modified:
 categories: blog
@@ -135,3 +135,6 @@ image_animate(frames, 1) %>%
 * [larger githubproject - floating friesland](https://github.com/RMHogervorst/floating_friesland/)
 * [stackoverflow answer that helped me make the gif ](https://stackoverflow.com/questions/48344609/pipe-ggplot2-result-into-1-magick-object)
 * [palleti package: making your own color pallete](https://edwinth.github.io/blog/paletti)
+
+
+I tried to edit this post on github on my mobile phone, boy, that does not work at all!
