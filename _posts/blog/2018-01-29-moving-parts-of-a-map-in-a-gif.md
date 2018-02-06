@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Moving
+title: Moving parts of a country over a map
 author: roel_hogervorst
 modified:
 categories: blog
@@ -13,6 +13,12 @@ date: 2018-01-29
 I love making maps, I also love making gifs.
 In this short post I make an animated gif of parts of a map moving. In this case the parts of the map only move in the xy direction, but [you can also turn them, and make them bigger or smaller](https://r-spatial.github.io/sf/articles/sf3.html#affine-transformations).
 Today I show you how I made a part of the Netherlands 'float away'. It is part of a larger nonsense project (I have many silly projects), and mostly just to document my path to learning about spatial analytics.
+
+
+End result :
+
+![ ]( 
+https://cdn.rawgit.com/RMHogervorst/floating_friesland/44f7adfd/friesland.gif)
 
 ## General principles
 
@@ -129,3 +135,6 @@ image_animate(frames, 1) %>%
 * [larger githubproject - floating friesland](https://github.com/RMHogervorst/floating_friesland/)
 * [stackoverflow answer that helped me make the gif ](https://stackoverflow.com/questions/48344609/pipe-ggplot2-result-into-1-magick-object)
 * [palleti package: making your own color pallete](https://edwinth.github.io/blog/paletti)
+
+
+I tried to edit this post on github on my mobile phone, boy, that does not work at all!
