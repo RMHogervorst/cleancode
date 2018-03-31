@@ -6,6 +6,10 @@
  logo: site-logo-new.png
  url: //rmhogervorst.nl/cleancode
 
+webrick:
+  headers:
+    X-Clacks-Overhead: "GNU Terry Pratchett"
+
 # Jekyll configuration
 
 permalink:   /:categories/:title/
@@ -66,7 +70,7 @@ titlecase: true
   avatar: avatarRoel.png
   email: hogervorst.rm@gmail.com
   disqus-shortname:
-  twitter: #username
+  twitter: RMHoge
   facebook: Clean code r
   github: RMHogervorst
   stackexchange: #http://stackoverflow.com/users/123456/username
