@@ -9,11 +9,6 @@
   &nbsp;|&nbsp;
   <i class="fa fa-clock-o"></i>{{ i18n "readingTime"}} {{ .ReadingTime }} {{ i18n "readTime" }} ({{ .WordCount }} {{ i18n "words" }})
   {{ end }}
-  {{ if .Site.Params.modifyLink }}
-  &nbsp;|&nbsp;
-  <i class="far fa-edit"></i>{{ i18n "edit"}} {{ .ReadingTime }} {{
-  i18n "edit this page" }} {{"Edit this page" $slug }}
-  {{ end }}
   {{- if .Site.Params.staticman -}}
     &nbsp;|&nbsp;  <i class="fa fa-comment-o"></i>
     {{ $slug := replace .URL "/" "" }}
