@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Plotting a map with ggplot2, color by tile</title>
+  <meta property="og:title" content="Plotting a map with ggplot2, color by tile" />
+  <meta name="twitter:title" content="Plotting a map with ggplot2, color by tile" />
+  <meta name="description" content="Introduction Last week I was playing with creating maps using R and GGPLOT2. As I was learning I realized information about creating maps in ggplot is scattered over the internet. So here I combine all that knowledge. So if something is absolutely wrong/ ridiculous / stupid / slightly off or not clear, contact me or open an issue on the github page.
+When you search for plotting examples you will often encounter the packages maps and mapdata.">
+  <meta property="og:description" content="Introduction Last week I was playing with creating maps using R and GGPLOT2. As I was learning I realized information about creating maps in ggplot is scattered over the internet. So here I combine all that knowledge. So if something is absolutely wrong/ ridiculous / stupid / slightly off or not clear, contact me or open an issue on the github page.
+When you search for plotting examples you will often encounter the packages maps and mapdata.">
+  <meta name="twitter:description" content="Introduction Last week I was playing with creating maps using R and GGPLOT2. As I was learning I realized information about creating maps in ggplot is scattered over the internet. So here I combine …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/blog/2017/01/06/plotting-a-map-with-ggplot2-color-by-tile/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/blog/2017/01/06/plotting-a-map-with-ggplot2-color-by-tile/" />
+  <link rel="alternate" href="/cleancode/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Plotting a map with ggplot2, color by tile</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 6, 2017
+  
+    &nbsp;(Last modified on January 7, 2016)
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 11 minutes (2274 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Last week I was playing with creating maps using R and GGPLOT2. As I was learning I realized information about creating maps in ggplot is scattered over the internet. So here I combine all that knowledge. So if something is absolutely wrong/ ridiculous / stupid / slightly off or not clear, contact me or <a href="https://github.com/RMHogervorst/cleancode/issues">open an issue on the github page</a>.</p>
+
+<p>When you search for plotting examples you will often encounter the packages <code>maps</code> and <code>mapdata</code>. However most of the examples are based on the USA, which is conveniently already contained in those packages.</p>
+
+<p>But since I wanted to plot The Netherlands, I was out of luck, I couldn&rsquo;t find a map of The Netherlands in those packages. But.. you can build those maps yourself!</p>
+
+<p>This tutorial consists of :</p>
+
+<ul>
+<li>downloading the shapefile of your country</li>
+<li>getting the file in your R session</li>
+<li>basis plotting with ggplot</li>
+<li>combining the shapefile with other information</li>
+</ul>
+
+<p>The end result is a map of a country with municipals colored by number of people in there.</p>
+
+<h2 id="downloading-the-file-to-your-computer">Downloading the file to your computer</h2>
+
+<p>Steps: download shape files for your country from <a href="http://www.gadm.org/country">http://www.gadm.org/country</a></p>
+
+<p>NOTE THAT YOU CAN NOT USE THESE CHARTS FOR COMMERCIAL APPLICATIONS. <em>You can however use charts created by the Kadaster or Netherlands Statistics Institute (CBS)</em></p>
+
+<p>Choose a country and choose a file format. I chose <code>R (SpatialPolygonsDataFrame)</code>. In the next page you can choose the level of detail in the map.</p>
+
+<p><img src="http://rmhogervorst.nl/cleancode/images/gadm_levels.PNG" alt="image of the Netherlands with different borders" /></p>
+
+<p>The picture above you can see what I saw. This type of picture is available for every country.</p>
+
+<p>If you download the shapefile on</p>
+
+<ul>
+<li>level 0 : you will get the outline of the country (everything yellow)</li>
+<li>level 1 : Major borders, that is every province in the Netherlands (everything red)</li>
+<li>level 2 : Boundaries of counties, districts <em>Dutch: gemeenten</em> (blue lines)</li>
+</ul>
+
+<p>If you download on level 2 you will also get the information of level 1 en level 0. The file is thus larger and has a ridiculous amount of detail.</p>
+
+<p>Download the file to your computer in the folder data [link to best practices]</p>
+
+<h2 id="getting-the-file-into-r">Getting the file into R</h2>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>sp<span class="p">)</span>  <span class="c1"># you need this library to work with SpatialPolygons</span>
+NLD <span class="o">&lt;-</span> <span class="kp">readRDS</span><span class="p">(</span><span class="s">&#34;shapefiles/NLD_adm2.rds&#34;</span><span class="p">)</span></code></pre></div>
+<p>At this point you can already use this file with base plot try: <code>plot(NLD)</code></p>
+
+<p>However we want to manipulate this file and use it in ggplot. The following part is about the structure of the file, to see what happens next, skip it and go to the next.</p>
+
+<h3 id="about-the-structure-of-this-file">about the structure of this file</h3>
+
+<p><strong>Note: you don&rsquo;t need to know this, you can just skip ahead to the next heading.</strong> The file that you imported is a SpatialPolygonsDataFrame, which is a special object. This is a s4 object <em>try google for the difference between s3 and s4 objects and more in R</em>. Whats important is that an S4 object has &lsquo;slots&rsquo; that are accessible through the <code>@</code> symbol. try typing in the name of the object followed by a <code>$</code> and with the <code>@</code> sign. The object contains a slot for <em>data</em>, <em>polygons</em>, <em>plotorder</em>, <em>bbox</em> and <em>proj4strings.</em></p>
+
+<p>*I had great help inspecting this <a href="https://gis.stackexchange.com/questions/87789/spatialpointsdataframe-properties-and-operators-in-r">stackoverflow question</a>. The point of this S4 object is that you almost never have to manipulate the deeper structure of the file. there are functions that do those steps for you.</p>
+
+<p>But I thought it would be interesting to understand this structure</p>
+
+<p>First we look at <strong>data</strong>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>tibble<span class="p">)</span> <span class="c1"># better printing</span>
+<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>  <span class="c1"># obviously</span>
+NLD<span class="o">@</span>data <span class="o">%&gt;%</span> as_tibble<span class="p">()</span></code></pre></div>
+<pre><code>## # A tibble: 491 × 15
+##    OBJECTID  ID_0   ISO      NAME_0  ID_1  NAME_1  ID_2         NAME_2
+##       &lt;int&gt; &lt;int&gt; &lt;chr&gt;       &lt;chr&gt; &lt;int&gt;   &lt;chr&gt; &lt;int&gt;          &lt;chr&gt;
+## 1         1   158   NLD Netherlands     1 Drenthe     1    Aa en Hunze
+## 2         2   158   NLD Netherlands     1 Drenthe     2          Assen
+## 3         3   158   NLD Netherlands     1 Drenthe     3  Borger-Odoorn
+## 4         4   158   NLD Netherlands     1 Drenthe     4      Coevorden
+## 5         5   158   NLD Netherlands     1 Drenthe     5      De Wolden
+## 6         6   158   NLD Netherlands     1 Drenthe     6          Emmen
+## 7         7   158   NLD Netherlands     1 Drenthe     7      Hoogeveen
+## 8         8   158   NLD Netherlands     1 Drenthe     8         Meppel
+## 9         9   158   NLD Netherlands     1 Drenthe     9 Midden-Drenthe
+## 10       10   158   NLD Netherlands     1 Drenthe    10    Noordenveld
+## # ... with 481 more rows, and 7 more variables: HASC_2 &lt;chr&gt;, CCN_2 &lt;int&gt;,
+## #   CCA_2 &lt;chr&gt;, TYPE_2 &lt;chr&gt;, ENGTYPE_2 &lt;chr&gt;, NL_NAME_2 &lt;chr&gt;,
+## #   VARNAME_2 &lt;chr&gt;
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">NLD<span class="o">@</span>data <span class="o">%&gt;%</span> <span class="kp">tail</span><span class="p">(</span><span class="m">2</span><span class="p">)</span></code></pre></div>
+<pre><code>##     OBJECTID ID_0 ISO      NAME_0 ID_1       NAME_1 ID_2      NAME_2
+## 490      490  158 NLD Netherlands   14 Zuid-Holland  490 Zoeterwoude
+## 491      491  158 NLD Netherlands   14 Zuid-Holland  491 Zwijndrecht
+##       HASC_2 CCN_2 CCA_2   TYPE_2    ENGTYPE_2 NL_NAME_2 VARNAME_2
+## 490 NL.ZH.ZD    NA       Gemeente Municipality                    
+## 491 NL.ZH.ZW    NA       Gemeente Municipality
+</code></pre>
+
+<p>The slot data contains 491 rows with 15 variables. This data is hierarchical with level 1 nested under level 0 and level 2 nested under level 1. So this data contains information about municipalies (Dutch: gemeenten) that are part of a province (Dutch: provincie), that are part of a country: Nederland. On every level there is an <code>ID</code> and a <code>NAME</code>. There is a ID_0 and a corresponding NAME_0, and a ID_1 with a NAME_1 and finally a ID_2 and NAME_2.</p>
+
+<p>The structure:</p>
+
+<ul>
+<li>ID_x: level identification ID_0 = country, ID_1 = province, ID_2 = Municipality</li>
+<li>NAME_x: the name of the level region</li>
+</ul>
+
+<p>f.i. :</p>
+
+<pre><code>OBJECTID  ID_0   ISO      NAME_0  ID_1  NAME_1  ID_2         NAME_2   
+8         8   158   NLD Netherlands     1 Drenthe     8         Meppel
+</code></pre>
+
+<p>Meppel is Municipality in the Province Drenthe in the country Netherlands.</p>
+
+<p>other variables: - OBJECTID: link to polygons (and rownumber) - ISO: I think the International Standards Organisation code of the country - HASC_2 some sort of coding Country.province,area - CCN_2 don&rsquo;t know - CCA_2 don&rsquo;t know - TYPE_2 name of type 2 Gemeente in my case - ENGTYPE_2 English name for TYPE_2 (Municipality) - NL_NAME_2 don&rsquo;t know - VARNAME_2 I think variants of the Municipality name</p>
+
+<p>Let&rsquo;s look at the <strong>Polygons</strong></p>
+
+<p>I&rsquo;m not entirely sure about the relation between <em>data</em> and <em>polygons</em> but there seems to be a link where OBJECTID from data corresponds to the group ID of the polygons.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">NLD<span class="o">@</span>polygons <span class="o">%&gt;%</span> <span class="kp">length</span><span class="p">()</span></code></pre></div>
+<pre><code>## [1] 491
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">NLD<span class="o">@</span>polygons<span class="p">[[</span><span class="m">10</span><span class="p">]]</span> <span class="o">%&gt;%</span> <span class="c1"># read the tenth object </span>
+  slotNames<span class="p">()</span>  <span class="c1"># and give me the slotnames</span></code></pre></div>
+<pre><code>## [1] &quot;Polygons&quot;  &quot;plotOrder&quot; &quot;labpt&quot;     &quot;ID&quot;        &quot;area&quot;
+</code></pre>
+
+<p>Every polygon object of the 491 polygons has</p>
+
+<ul>
+<li>Polygons [1] : which make up the area of this part of the chart.</li>
+<li>plotOrder: This has something to do with which shapes are presented first. However all the objects in here have plotOrder 1. So I really don&rsquo;t know what this is.</li>
+<li>labpt: this is the centroid of the polygon. The middle point as it were.</li>
+<li>ID: identical to rownumber/OBJECTID in <code>@data</code></li>
+<li>area: I think the square kilometer area inside the polygon.</li>
+</ul>
+
+<p>I believe that there can be more Polygons inside the Polygons of an area. So if we look inside of one polygon in a polygon..</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">NLD<span class="o">@</span>polygons<span class="p">[[</span><span class="m">10</span><span class="p">]]</span><span class="o">@</span>Polygons<span class="p">[[</span><span class="m">1</span><span class="p">]]</span> <span class="o">%&gt;%</span> slotNames<span class="p">()</span></code></pre></div>
+<pre><code>## [1] &quot;labpt&quot;   &quot;area&quot;    &quot;hole&quot;    &quot;ringDir&quot; &quot;coords&quot;
+</code></pre>
+
+<p>We see that every part has a middle point, area size a hole a ringdir and a matrix of coordinates.</p>
+
+<p>Lets move back out to the top and look at plotorder: which is 1 again&hellip; and the other two slots: bbox and proj4string.</p>
+
+<p><strong>bbox</strong> is the bounding box. the ultimate limits of the area described by this dataframe.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">NLD<span class="o">@</span>bbox</code></pre></div>
+<pre><code>##         min       max
+## x  3.360782  7.227095
+## y 50.723492 53.554585
+</code></pre>
+
+<p><strong>proj4string</strong> is a notation that tells graphical systems what coordinate system is used. Because there are a lot of coordinates!
+in this case <code>+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0</code> So a longitude lattitude projection, with datum wgs84 which is a <a href="https://en.wikipedia.org/wiki/World_Geodetic_System">worldwide used coordinate system</a>. And I think the last part is an ofset if necessary.</p>
+
+<p>So concluding: This dataframe consists of general describing data in <code>@data</code> coordinates for every row, with some coordinate referencing to help translating the coordinates into other projections.</p>
+
+<p><em>Read on from here</em> ## Basic plotting of the map with ggplot Why don&rsquo;t we just plot the map?</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span> <span class="c1"># can&#39;t work without it</span>
+ggplot<span class="p">(</span>data <span class="o">=</span> NLD<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> long<span class="p">,</span> y <span class="o">=</span> lat<span class="p">))</span><span class="o">+</span>
+  geom_polygon<span class="p">(</span> <span class="p">)</span></code></pre></div>
+<pre><code>## Regions defined for each Polygons
+</code></pre>
+
+<p><img src="http://rmhogervorst.nl/cleancode/images/figures/unnamed-chunk-5-1.png" alt="" /></p>
+
+<p>We got a message: Regions defined for each Polygons, this is ggplot telling us that some work was done on the background to reshape the data for plotting use.</p>
+
+<p>Also, the map looks really, really ugly. What&rsquo;s the deal? Because ggplot doesn&rsquo;t know what kind of data this is, it stretches the points untill the plotting region is filled.</p>
+
+<p>Let&rsquo;s try something where all the steps in the x direction are identical to the y direction. Let&rsquo;s fix the coordinates.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+ggplot<span class="p">()</span><span class="o">+</span>
+  geom_polygon<span class="p">(</span>data <span class="o">=</span> NLD<span class="p">,</span> 
+               aes<span class="p">(</span>x <span class="o">=</span> long<span class="p">,</span> y <span class="o">=</span> lat<span class="p">,</span> group <span class="o">=</span> group<span class="p">))</span> <span class="o">+</span>
+  coord_fixed<span class="p">()</span></code></pre></div>
+<pre><code>## Regions defined for each Polygons
+</code></pre>
+
+<p><img src="http://rmhogervorst.nl/cleancode/images/figures/unnamed-chunk-6-1.png" alt="" /></p>
+
+<p>This looks better, but for people from the Netherlands, this still doesn&rsquo;t look quite right. The country is stretched in a weird way and the center, filled with a <a href="https://en.wikipedia.org/wiki/IJsselmeer" title="this lake used to be a sea, but we didn't want a sea anymore">big ass man made lake</a> should not by plotted.</p>
+
+<p>First the stretching. There is a special coordinate thingy in ggplot called coord_map(). I like the standard projection, but if you liek you can try any of the projections in <code>?mapproj::mapproject</code> . Go crazy!</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">()</span><span class="o">+</span>
+  geom_polygon<span class="p">(</span>data <span class="o">=</span> NLD<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> long<span class="p">,</span> y <span class="o">=</span> lat<span class="p">,</span> group <span class="o">=</span> group<span class="p">))</span> <span class="o">+</span>
+  coord_map<span class="p">()</span></code></pre></div>
+<pre><code>## Regions defined for each Polygons
+</code></pre>
+
+<p><img src="http://rmhogervorst.nl/cleancode/images/figures/unnamed-chunk-7-1.png" alt="" /></p>
+
+<p>Lets first take out the lakes. This is where local knowledge comes to play. If we look at the level_1 names <code>NLD@data$NAME_1 %&gt;% unique()</code>, we see 14 different areas. However, there are only 12 provinces in the Netherlands. 2 of these areas are actually lakes: &ldquo;IJsselmeer&rdquo; and &ldquo;Zeeuwse meren&rdquo;. We can get those out by using subset.[2]. The command says: subset NLD where NLD$NAME_! is NOT the two lakes.</p>
+
+<p>I also want to lose the message. Use <code>fortify()</code> to apply the polygons to region transformation.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">NLD_fixed <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>NLD<span class="p">,</span> <span class="o">!</span>NLD<span class="o">$</span>NAME_1  <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;Zeeuwse meren&#34;</span><span class="p">,</span> <span class="s">&#34;IJsselmeer&#34;</span><span class="p">))</span>
+NLD_fixed <span class="o">&lt;-</span> fortify<span class="p">(</span>NLD_fixed<span class="p">)</span></code></pre></div>
+<pre><code>## Regions defined for each Polygons
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="c1">#NLD_fixed &lt;- broom::tidy(NLD) # this would also work and is recommended by Hadley Wickham in the future.</span>
+ggplot<span class="p">(</span>NLD_fixed<span class="p">)</span> <span class="o">+</span>
+  geom_polygon<span class="p">(</span> aes<span class="p">(</span>x <span class="o">=</span> long<span class="p">,</span> y <span class="o">=</span> lat<span class="p">,</span> group <span class="o">=</span> group<span class="p">))</span><span class="o">+</span>
+  coord_map<span class="p">()</span></code></pre></div>
+<p><img src="http://rmhogervorst.nl/cleancode/images/figures/unnamed-chunk-8-1.png" alt="" /></p>
+
+<p>Let&rsquo;s add some color!</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">(</span>NLD_fixed<span class="p">)</span> <span class="o">+</span>
+  theme_minimal<span class="p">()</span><span class="o">+</span>  <span class="c1"># no backgroundcolor</span>
+  geom_polygon<span class="p">(</span> aes<span class="p">(</span>x <span class="o">=</span> long<span class="p">,</span> y <span class="o">=</span> lat<span class="p">,</span> group <span class="o">=</span> group<span class="p">),</span>
+                color <span class="o">=</span> <span class="s">&#34;white&#34;</span><span class="p">,</span>   <span class="c1"># color is the lines of the region</span>
+                fill <span class="o">=</span> <span class="s">&#34;#9C9797&#34;</span><span class="p">)</span><span class="o">+</span> <span class="c1"># fill is the fill of every polygon.</span>
+  coord_map<span class="p">()</span></code></pre></div>
+<p><img src="http://rmhogervorst.nl/cleancode/images/figures/unnamed-chunk-9-1.png" alt="" /></p>
+
+<h2 id="combine-the-map-with-another-dataset-and-color-the-tiles">Combine the map with another dataset and color the tiles</h2>
+
+<p>From the open data portal of the Netherlands I downloaded the number of people every municipally. Yeah open data!</p>
+
+<p>loading the data. skipping the file information, selecting only the columns with a municipal name and number and throwing away empty columns. <em>note that there will be some discrepancies, the map information is a bit older and the municipallies are from 2016, so some names might not match. If I really care I could do some matching. But I don&rsquo;t.</em></p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">gemeenten2016sept <span class="o">&lt;-</span> readr<span class="o">::</span>read_csv2<span class="p">(</span><span class="s">&#34;data/Bevolking__leeftijd,_050117111254.csv&#34;</span><span class="p">,</span>skip <span class="o">=</span> <span class="m">3</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+select<span class="p">(</span>gemeente <span class="o">=</span> <span class="sb">`Regio&#39;s`</span><span class="p">,</span> number <span class="o">=</span> aantal<span class="p">)</span> <span class="o">%&gt;%</span> filter<span class="p">(</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span>number<span class="p">))</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   `Regio's` = col_character(),
+##   Perioden = col_integer(),
+##   Leeftijd = col_character(),
+##   aantal = col_integer()
+## )
+
+## Warning: 1 parsing failure.
+## row col  expected    actual
+## 391  -- 4 columns 1 columns
+</code></pre>
+
+<p>Combining the map information, names of municipalies and number of people in one file.</p>
+
+<ul>
+<li>combine IDs inside the map information, with names and numbers.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">names_and_numbers <span class="o">&lt;-</span> <span class="kt">data_frame</span><span class="p">(</span>id<span class="o">=</span><span class="kp">rownames</span><span class="p">(</span>NLD<span class="o">@</span>data<span class="p">),</span>
+                                gemeente<span class="o">=</span>NLD<span class="o">@</span>data<span class="o">$</span>NAME_2<span class="p">)</span> <span class="o">%&gt;%</span> 
+  left_join<span class="p">(</span>gemeenten2016sept<span class="p">,</span> by <span class="o">=</span> <span class="s">&#34;gemeente&#34;</span><span class="p">)</span></code></pre></div>
+<ul>
+<li>Combining the names and numbers with the map information.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">final_map <span class="o">&lt;-</span> left_join<span class="p">(</span>NLD_fixed<span class="p">,</span> names_and_numbers<span class="p">,</span> by <span class="o">=</span> <span class="s">&#34;id&#34;</span><span class="p">)</span>
+ggplot<span class="p">(</span>final_map<span class="p">)</span><span class="o">+</span>
+  theme_minimal<span class="p">()</span><span class="o">+</span>
+  geom_polygon<span class="p">(</span> aes<span class="p">(</span>x <span class="o">=</span> long<span class="p">,</span> y <span class="o">=</span> lat<span class="p">,</span> group <span class="o">=</span> group<span class="p">,</span> fill<span class="o">=</span> number<span class="p">),</span>
+                color <span class="o">=</span> <span class="s">&#34;grey&#34;</span><span class="p">,</span> alpha <span class="o">=</span> <span class="m">1</span><span class="o">/</span><span class="m">5</span><span class="p">)</span> <span class="o">+</span>
+  coord_map<span class="p">()</span><span class="o">+</span>
+  scale_fill_distiller<span class="p">(</span>name <span class="o">=</span> <span class="s">&#34;Number of people in gemeente&#34;</span><span class="p">,</span> <span class="c1"># change titel legend</span>
+                       palette <span class="o">=</span> <span class="s">&#34;Spectral&#34;</span><span class="p">)</span><span class="o">+</span> <span class="c1"># change the color scheme</span>
+  theme<span class="p">(</span>legend.position <span class="o">=</span> <span class="s">&#34;bottom&#34;</span><span class="p">)</span>  <span class="c1"># chagne the legend position</span></code></pre></div>
+<p><img src="http://rmhogervorst.nl/cleancode/images/figures/unnamed-chunk-12-1.png" alt="" /></p>
+
+<p>[1] I know! really confusing, polygons inside polygons!, crezy!</p>
+
+<p>[2] I haven&rsquo;t found a tidy way to do this yet</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li><a href="http://www.milanor.net/blog/maps-in-r-introduction-drawing-the-map-of-europe/">http://www.milanor.net/blog/maps-in-r-introduction-drawing-the-map-of-europe/</a></li>
+<li><a href="http://stackoverflow.com/questions/9199727/themathic-map-choropleth-map-of-the-netherlands">http://stackoverflow.com/questions/9199727/themathic-map-choropleth-map-of-the-netherlands</a></li>
+<li><a href="https://www.pdok.nl/nl/producten/pdok-downloads/basis-registratie-kadaster/bestuurlijke-grenzen-actueel">https://www.pdok.nl/nl/producten/pdok-downloads/basis-registratie-kadaster/bestuurlijke-grenzen-actueel</a></li>
+<li><a href="http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html">http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html</a></li>
+</ul>
+
+<h4 id="session-info">Session info</h4>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">devtools<span class="o">::</span>session_info<span class="p">()</span></code></pre></div>
+<pre><code>## Session info --------------------------------------------------------------
+
+##  setting  value                       
+##  version  R version 3.3.2 (2016-10-31)
+##  system   x86_64, mingw32             
+##  ui       RTerm                       
+##  language (EN)                        
+##  collate  Dutch_Netherlands.1252      
+##  tz       Europe/Berlin               
+##  date     2017-01-07
+
+## Packages ------------------------------------------------------------------
+
+##  package      * version date       source        
+##  assertthat     0.1     2013-12-06 CRAN (R 3.3.0)
+##  backports      1.0.4   2016-10-24 CRAN (R 3.3.2)
+##  colorspace     1.3-2   2016-12-14 CRAN (R 3.3.2)
+##  DBI            0.5-1   2016-09-10 CRAN (R 3.3.1)
+##  devtools       1.12.0  2016-06-24 CRAN (R 3.3.1)
+##  digest         0.6.10  2016-08-02 CRAN (R 3.3.1)
+##  dplyr        * 0.5.0   2016-06-24 CRAN (R 3.3.1)
+##  evaluate       0.10    2016-10-11 CRAN (R 3.3.2)
+##  ggplot2      * 2.2.1   2016-12-30 CRAN (R 3.3.2)
+##  gtable         0.2.0   2016-02-26 CRAN (R 3.3.0)
+##  htmltools      0.3.5   2016-03-21 CRAN (R 3.3.0)
+##  knitr          1.15.1  2016-11-22 CRAN (R 3.3.2)
+##  labeling       0.3     2014-08-23 CRAN (R 3.3.0)
+##  lattice        0.20-34 2016-09-06 CRAN (R 3.3.2)
+##  lazyeval       0.2.0   2016-06-12 CRAN (R 3.3.0)
+##  magrittr       1.5     2014-11-22 CRAN (R 3.3.0)
+##  mapproj        1.2-4   2015-08-03 CRAN (R 3.3.2)
+##  maps           3.1.1   2016-07-27 CRAN (R 3.3.2)
+##  memoise        1.0.0   2016-01-29 CRAN (R 3.3.0)
+##  munsell        0.4.3   2016-02-13 CRAN (R 3.3.0)
+##  plyr           1.8.4   2016-06-08 CRAN (R 3.3.0)
+##  R6             2.2.0   2016-10-05 CRAN (R 3.3.1)
+##  RColorBrewer   1.1-2   2014-12-07 CRAN (R 3.3.0)
+##  Rcpp           0.12.8  2016-11-17 CRAN (R 3.3.2)
+##  readr          1.0.0   2016-08-03 CRAN (R 3.3.1)
+##  rmarkdown      1.3     2016-12-21 CRAN (R 3.3.2)
+##  rprojroot      1.1     2016-10-29 CRAN (R 3.3.2)
+##  scales         0.4.1   2016-11-09 CRAN (R 3.3.2)
+##  sp           * 1.2-4   2016-12-22 CRAN (R 3.3.2)
+##  stringi        1.1.2   2016-10-01 CRAN (R 3.3.1)
+##  stringr        1.1.0   2016-08-19 CRAN (R 3.3.1)
+##  tibble       * 1.2     2016-08-26 CRAN (R 3.3.1)
+##  withr          1.0.2   2016-06-20 CRAN (R 3.3.1)
+##  yaml           2.1.14  2016-11-12 CRAN (R 3.3.2)
+</code></pre>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="/cleancode//tags/ggplot2/">ggplot2</a>&nbsp;
+            
+              <a href="/cleancode//tags/intermediate/">intermediate</a>&nbsp;
+            
+              <a href="/cleancode//tags/tutorial/">tutorial</a>&nbsp;
+            
+              <a href="/cleancode//tags/maps/">maps</a>&nbsp;
+            
+              <a href="/cleancode//tags/sp/">sp</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/cleancode/blog/2016/07/09/submitting-your-first-package-to-cran-my-experience/" data-toggle="tooltip" data-placement="top" title="Submitting your first package to CRAN, my experience">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/cleancode/blog/2017/01/21/generate-text-using-markov-chains-sort-of/" data-toggle="tooltip" data-placement="top" title="Generate text using Markov Chains (sort of)">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

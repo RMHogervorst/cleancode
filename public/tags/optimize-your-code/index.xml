@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Optimize Your Code on Clean Code</title>
+    <link>/cleancode/tags/optimize-your-code/</link>
+    <description>Recent content in Optimize Your Code on Clean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Mon, 13 Jun 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/cleancode/tags/optimize-your-code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Non-standard-evaluation and standard evaluation in dplyr</title>
+      <link>/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</link>
+      <pubDate>Mon, 13 Jun 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</guid>
+      <description>
+
+&lt;p&gt;THIS POST IS NO LONGER ENTIRELY RELEVANT. DPLYR 0.7 HAS A SLIGHTLY DIFFERENT (AND SLIGHTLY MORE INTUITIVE) WAY OF WORKING WITH NON-STANDARD EVALUATION.&lt;/p&gt;
+
+&lt;p&gt;I love the dplyr package with all of its functions, however if you use normal dplyr in functions in your package r-cmd-check will give you a warning: &lt;code&gt;R CMD check NOTE: No visible binding for global variable NAME OF YOUR VARIABLE&lt;/code&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. The functions do work, and everything is normal, however if you submit your package to CRAN, such a NOTE is not acceptable. A workaround is to add globalVariables to one of your scripts. for instance:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;globalVariables&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;var1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;var2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;varyourmother&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+				&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which works but it is not necessary.&lt;/p&gt;
+
+&lt;h2 id=&#34;nse&#34;&gt;NSE&lt;/h2&gt;
+
+&lt;p&gt;dplyr (and some other packages and functions) work with non-standard-evaluation (NSE). One example is &lt;code&gt;library(magrittr)&lt;/code&gt; vs &lt;code&gt;library(&amp;quot;magrittr&amp;quot;)&lt;/code&gt; , both work. But
+&lt;code&gt;install.packages(magrittr)&lt;/code&gt; vs &lt;code&gt;install.packages(&amp;quot;magrittr&amp;quot;)&lt;/code&gt; is different, you need the quotes. In almost all the functions in r when you name a part of an object you need the quotes but in some functions you don’t. They are designed to work in a non-standard way. Some even miss a standard way.&lt;/p&gt;
+
+&lt;p&gt;I will focus on the dplyr functions only, a general introduction to NON standard evaluation might come later.&lt;/p&gt;
+
+&lt;p&gt;Under the hood the dplyr functions work just as other functions, in fact
+all the functions use normal evaluation (standard evaluation), but for interactive use there is a non standard evaluation version, which saves you typing. The interactive version is then first evaluated with the lazyeval package and is then sent to the SE version.
+There is even a naming scheme &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:
+&amp;gt; Every function that uses NSE should have a standard evaluation (SE) escape hatch that does the actual computation. The SE-function name should end with _.&lt;/p&gt;
+
+&lt;p&gt;Therefore there are multiple verbs: select(), select&lt;em&gt;(), mutate(), mutate&lt;/em&gt;(), etc. Under the hood &lt;code&gt;select()&lt;/code&gt; is evaluated with the lazyeval package and sent to &lt;code&gt;select_()&lt;/code&gt;.
+In functions you should use the SE versions, not only to stop notes from creating, but also because it gives you extra options.&lt;/p&gt;
+
+&lt;h1 id=&#34;from-nse-the-standard-interactive-use-to-se-standard-evalation-within-functions&#34;&gt;From NSE (the standard interactive use) to SE (standard evalation within functions&lt;/h1&gt;
+
+&lt;p&gt;So this is a list of things i regularly do with NSE and their translation in SE.&lt;/p&gt;
+
+&lt;p&gt;I will use the data file about students in higher education in the Netherlands.&lt;/p&gt;
+
+&lt;h3 id=&#34;background&#34;&gt;background&lt;/h3&gt;
+
+&lt;p&gt;There are basicaly three ways to quote variables that dplyr/ lazyeval understands:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;with a formula &lt;code&gt;~mean(mpg)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;with quote()   &lt;code&gt;quote(mean(mpg))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;as a string  &lt;code&gt;&amp;quot;mean(mpg)&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;select&#34;&gt;Select()&lt;/h2&gt;
+
+&lt;p&gt;Example of the select function from dplyr.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dplyr&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+ &lt;span class=&#34;c1&#34;&gt;# first the normal NSE version&lt;/span&gt;
+select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# standard evaluation &lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# comma doesn&amp;#39;t work, + doesn&amp;#39;t work&lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;quote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# nope&lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;quote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;quote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# yes!&lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;OPLEIDINGSNAAM.ACTUEEL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;FREQUENCY&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;YEAR&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;OPLEIDINGSFASE.ACTUEEL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# works&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Source: local data frame [24,150 x 2]
+
+   OPLEIDINGSNAAM.ACTUEEL FREQUENCY
+                    (chr)     (int)
+1     B Aarde en Economie       121
+2     B Aarde en Economie        54
+3     B Aarde en Economie       140
+4     B Aarde en Economie        52
+5     B Aarde en Economie       132
+6     B Aarde en Economie        55
+7     B Aarde en Economie       144
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;filter&#34;&gt;Filter()&lt;/h2&gt;
+
+&lt;p&gt;Then the filter function ( I also use the select function here)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ways that work. &lt;/span&gt;
+filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; YEAR &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+filter_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;YEAR &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+filter_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;quote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;YEAR &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+filter_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;YEAR ==2015&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# or with a list to dots.&lt;/span&gt;
+dotsfilter &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+filter_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;YEAR ==2015&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; dotsfilter&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Source: local data frame [4,830 x 2]
+
+         OPLEIDINGSNAAM.ACTUEEL FREQUENCY
+                          (chr)     (int)
+1           B Aarde en Economie       151
+2           B Aarde en Economie        60
+3           B Aardwetenschappen         0
+4           B Aardwetenschappen       149
+5           B Aardwetenschappen       335
+6           B Aardwetenschappen         0
+7           B Aardwetenschappen        83
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;group-by-summarize&#34;&gt;Group_by() &amp;amp; Summarize()&lt;/h2&gt;
+
+&lt;p&gt;Group_by and summarize examples, see also the NSE vignette on dplyr &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;group_by&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;total &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; n&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# group by in SE, and summarize with NSE&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;total &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# both NSE, pass list of arguments to .dots&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;total &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# does not work&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# does work. &lt;/span&gt;
+dots &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; dots&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; setNames&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dots&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;total&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;sum(FREQUENCY)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Source: local data frame [2 x 2]
+
+  GENDER sum(FREQUENCY)
+   (chr)          (int)
+1    MAN         609755
+2  VROUW         639609
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mutate-and-slightly-more-advanced-use&#34;&gt;Mutate() and slightly more advanced use&lt;/h2&gt;
+
+&lt;p&gt;You want to add two columns up, but you don&amp;rsquo;t yet know which columns that will be (example from Paul Hiemstra&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# normal interactive use  &lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dplyr&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;new_column &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So you would like a function that does something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;f &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;col1&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; col2&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; new_col_name&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;new_col_name &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; col1 &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; col2&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The problem is that r will search for col1 and col2, which don&amp;rsquo;t exist.
+Furthermore the name of the endresult will be new_col_name, and not the content of new_col_name. To get around non-standard evaluation, you can use the lazyeval package. The following function does what we expect:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;f &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;col1&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; col2&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; new_col_name&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    mutate_call &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; lazyeval&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;interp&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt; a &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; b&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; a &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;col1&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; b &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;col2&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+    mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; setNames&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mutate_call&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; new_col_name&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You first create a call that will be evaluated by mutate_ . the call is first interpreted so that the final and correct names are used by mutate_&lt;/p&gt;
+
+&lt;p&gt;Of course if you already knew wich varibles you would use, there is no need for interpretation, and something like this would work:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; setNames&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;mpg&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;wt&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;sum mpg wt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;mpg&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;wt&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# if you don&amp;#39;t need the name specified&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;nse-in-context&#34;&gt;NSE in context&lt;/h1&gt;
+
+&lt;p&gt;So if you want to use the dplyr functions in your own functions these are some variants that you could use. See the list of References and Notes for more information.&lt;/p&gt;
+
+&lt;h1 id=&#34;references&#34;&gt;References:&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/26724124/standard-evaluation-in-dplyr-summarise-on-variable-given-as-a-character-string&#34;&gt;question on stack overflow&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/&#34;&gt;using mutate inside a function, shows excellent use of mutate function,  r-bloggers&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.carlboettiger.info/2015/02/06/fun-standardizing-non-standard-evaluation.html&#34;&gt;fun standardizing NSE (he has a particular kind of fun&amp;hellip;)&lt;/a&gt;
+&lt;a href=&#34;http://adv-r.had.co.nz/Computing-on-the-language.html&#34;&gt;advanced r chapter about NSE - hadley wickham&lt;/a&gt;
+&lt;a href=&#34;http://developer.r-project.org/nonstandard-eval.pdf&#34;&gt;on r, I have not read this one &lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;notes&#34;&gt;NOTES&lt;/h1&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;an issue that demonstrates the r cmd check NOTE. &lt;a href=&#34;https://github.com/Rdatatable/data.table/issues/850&#34;&gt;https://github.com/Rdatatable/data.table/issues/850&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;wow the package is updated yesterday, but this describes the naming &lt;a href=&#34;https://cran.r-project.org/web/packages/lazyeval/vignettes/lazyeval-old.html&#34;&gt;https://cran.r-project.org/web/packages/lazyeval/vignettes/lazyeval-old.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;NSE in dplyr &lt;a href=&#34;https://cran.r-project.org/web/packages/dplyr/vignettes/nse.html&#34;&gt;https://cran.r-project.org/web/packages/dplyr/vignettes/nse.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;This example comes from Paul Hiemstra on his numbertheory blog that I found via r-bloggers. &lt;a href=&#34;http://www.numbertheory.nl/2015/09/23/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/&#34;&gt;http://www.numbertheory.nl/2015/09/23/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/&lt;/a&gt; With the reference to the r-bloggers version in the links above.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

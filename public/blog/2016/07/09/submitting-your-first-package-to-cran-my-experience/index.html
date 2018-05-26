@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Submitting your first package to CRAN, my experience</title>
+  <meta property="og:title" content="Submitting your first package to CRAN, my experience" />
+  <meta name="twitter:title" content="Submitting your first package to CRAN, my experience" />
+  <meta name="description" content="I recently published my first R package to The Comprehensive R Archive Network (CRAN). It was very exciting and also quite easy. Let me walk you through my process.
+First a description of my brand new package: badgecreatr, then a description of steps to take for submission.
+Package description When you go around github looking at projects you often see these interesting images in the readme  
+The ones you see above are from ggplot2.">
+  <meta property="og:description" content="I recently published my first R package to The Comprehensive R Archive Network (CRAN). It was very exciting and also quite easy. Let me walk you through my process.
+First a description of my brand new package: badgecreatr, then a description of steps to take for submission.
+Package description When you go around github looking at projects you often see these interesting images in the readme  
+The ones you see above are from ggplot2.">
+  <meta name="twitter:description" content="I recently published my first R package to The Comprehensive R Archive Network (CRAN). It was very exciting and also quite easy. Let me walk you through my process.
+First a description of my brand new …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/blog/2016/07/09/submitting-your-first-package-to-cran-my-experience/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/blog/2016/07/09/submitting-your-first-package-to-cran-my-experience/" />
+  <link rel="alternate" href="/cleancode/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Submitting your first package to CRAN, my experience</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on July 9, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 5 minutes (1034 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>I recently published my first R package to  The Comprehensive R Archive Network  (CRAN). It was very exciting and also quite easy. Let me walk you through my process.</p>
+
+<p>First a description of my brand new package: badgecreatr, then a description of steps to take for submission.</p>
+
+<h1 id="package-description">Package description</h1>
+
+<p>When you go around github looking at projects you often see these interesting images in the readme
+<a href="https://travis-ci.org/hadley/ggplot2"><img src="https://travis-ci.org/hadley/ggplot2.svg?branch=master" alt="Build Status" /></a>
+<a href="http://cran.r-project.org/package=ggplot2"><img src="http://www.r-pkg.org/badges/version/ggplot2" alt="CRAN_Status_Badge" /></a></p>
+
+<p>The ones you see above are from <a href="https://github.com/hadley/ggplot2">ggplot2</a>.</p>
+
+<p>What are these? These are what we call badges or shields and they are often actively generated to indicate if software is actually working or not.</p>
+
+<p>Travis-ci, a continous integration service, creates the first one: the one that says build | passing. Everytime a new commit is pushed to Github a new version of the package will be build and tested. Of that test passes without problem the badge will remain green, but if the latest build fails, the green part will turn red like so <a href="https://travis-ci.org/RMHogervorst/badgecreatr"><img src="https://travis-ci.org/RMHogervorst/badgecreatr.svg?branch=develop" alt="Build Status" /></a> &lt;- this is my develop branch of badgecreatr that fails while I write this. It could turn green if your read this later on.</p>
+
+<p>The point of these badges is that they quickly signal some quality aspects of your package to new users. I think these badges are incredibly useful, but I found it tedious to copy them to every new project I had, with some small tweaks for different packages <em>(I&rsquo;m making this a big deal but I have only build 3 packages)</em>. Since you will use almost the same badges for many projects  I thought it would be interesting to create a package that would copy them in your readme file with one command.
+I was not the first one with this idea, someone created the briljant badgerbadgerbadger which does the same thing for ruby on rails projects.</p>
+
+<p>After some thoughts I decided to submit it to CRAN so that people can download it from within R without the use of devtools. So that was the why.</p>
+
+<h1 id="why-would-you-submit-a-package-to-cran">Why would you submit a package to CRAN?</h1>
+
+<p>The main advantage to getting your package on CRAN is that it will be easier for users to install (with install.packages). Your package will also be tested daily on multiple systems <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>.</p>
+
+<h1 id="how-do-you-submit-a-package-to-cran">How do you submit a package to CRAN?</h1>
+
+<p>Well, the good people of CRAN have put it on the bottom of their <a href="https://cran.r-project.org/">main page</a>:</p>
+
+<blockquote>
+<p>To “submit” a package to CRAN, check that your submission meets the CRAN Repository Policy and then use the web form.</p>
+</blockquote>
+
+<p>Mainly you need to run r cmd-check on your package and make sure there are no warnings, and no notes. Or if there are notes, you have to explain them to the people of CRAN. So what does r-cmd-check actually do? It checks if your package can be build and installed and removed without problems, it checks for common problems in naming and if accurate documentation is provided. In other words, it checks if your package will play nice with R and possible other packages, and if people can actually read what you said about your functions in the package. r-cmd-check also checks if your DESCRIPTION and NAMESPACE files are correctly formatted.</p>
+
+<p>You also have to do some effort to check if your package will work on other systems (solaris,  FreeBSD, Linux, Windows, MacOS, more?). Since I work on a windows computer, I know it works on my computer. But since I push all my code to Github, and I use Travis-CI, after each commit the entire package is checked on linux (or more, I could even put several mac OS versions in the test I believe).</p>
+
+<p>Furthermore I checked the functionality of most of the code with unit tests. So I was pretty sure it worked on all systems, also because I haven&rsquo;t used complicated programs that could differ in systems.</p>
+
+<p>The submission process is quite easy, you have to give your name, your email and then you can add your package (the tarball). It is a simple point and click form.</p>
+
+<p>The website reads a part of your package, you have to check if the information is correct. Then you have to promise that you read the information and you hit submit.</p>
+
+<h1 id="what-happens-after-i-submit-a-package">What happens after I submit a package?</h1>
+
+<p>You receive a confirmation mail with everything you typed in the website.
+And someone looks over the submission to see if you missed something and if the package works.</p>
+
+<p>I recieved an e-mail back (really fast!), to tell me that I mistyped some things (too bad that devtools or R-cmd-check doesn&rsquo;t check for these things).
+I was very excited and quickly did a resubmission (which is identical to a first submission, but I explained what I changed according to their comments )</p>
+
+<p>Things that I should have done that I forgot or didn&rsquo;t notice:</p>
+
+<ul>
+<li>single quote software names so &lsquo;Windows 8.1&rsquo;</li>
+<li>write R and CRAN with caps, not small letters</li>
+<li>I wrote github, projectstatus, travis, rmd etc which should have been:</li>
+<li>&lsquo;Github&rsquo;, Projectstatus, &lsquo;Travis-CI&rsquo; etc.</li>
+<li>linked to a URL that didn&rsquo;t exist yet</li>
+<li>used a link with http, should have been https</li>
+</ul>
+
+<p>That was it, it took me 2 rounds but then it was finished, I received an email with: &ldquo;on CRAN now.  Best (name of the reviewer)&rdquo;. that&rsquo;s it.</p>
+
+<p>And it&rsquo;s on CRAN now: <a href="https://cran.r-project.org/web/packages/badgecreatr/index.html">https://cran.r-project.org/web/packages/badgecreatr/index.html</a></p>
+
+<h2 id="general-remarks">General remarks</h2>
+
+<p>CRAN submission used to be really hard, you had to manually write all the documentation in a seperate file, had to hand check everything, you had to search for computers to test your package on, etc. But with devtools and the excellent manuals online, starting and building a package is really easy. The final step of submission takes almost no work if you followed best practices beforehand.</p>
+
+<h2 id="references">References:</h2>
+
+<p>I had a lot of help from the following sources about writing r packages:</p>
+
+<ul>
+<li>a very short but extremely useful example of writing packages by Hillary Parker <a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/">https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/</a></li>
+<li>Hadley Wickham&rsquo;s book about writing packages <a href="http://r-pkgs.had.co.nz/">http://r-pkgs.had.co.nz/</a></li>
+<li>Karl Broman about writing packages <a href="http://kbroman.org/pkg_primer/">http://kbroman.org/pkg_primer/</a></li>
+<li>You actually have to search for things in the policies, which is a bit dense, but quite ok. <a href="https://cran.r-project.org/web/packages/policies.html">https://cran.r-project.org/web/packages/policies.html</a></li>
+<li>the ropensci organisation has some excellent advise on writing packages <a href="https://github.com/ropensci/packaging_guide">https://github.com/ropensci/packaging_guide</a></li>
+</ul>
+
+<h2 id="notes">Notes</h2>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">This I outright copied from Karl Broman found here <a href="http://kbroman.org/pkg_primer/pages/cran.html">http://kbroman.org/pkg_primer/pages/cran.html</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="/cleancode//tags/intermediate/">intermediate</a>&nbsp;
+            
+              <a href="/cleancode//tags/package/">package</a>&nbsp;
+            
+              <a href="/cleancode//tags/badgecreatr/">badgecreatr</a>&nbsp;
+            
+              <a href="/cleancode//tags/reminder/">reminder</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/cleancode/blog/2016/07/08/introducing-badgecreatr-a-package-that-places-badges-in-your-readme/" data-toggle="tooltip" data-placement="top" title="Introducing Badgecreatr, a package that places badges in your readme">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/cleancode/blog/2017/01/06/plotting-a-map-with-ggplot2-color-by-tile/" data-toggle="tooltip" data-placement="top" title="Plotting a map with ggplot2, color by tile">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

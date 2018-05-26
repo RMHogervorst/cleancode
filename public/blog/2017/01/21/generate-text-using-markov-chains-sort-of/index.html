@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Generate text using Markov Chains (sort of)</title>
+  <meta property="og:title" content="Generate text using Markov Chains (sort of)" />
+  <meta name="twitter:title" content="Generate text using Markov Chains (sort of)" />
+  <meta name="description" content="Inspired by the hilarious podcast The Greatest Generation, I have worked again with all the lines from all the episode scripts of TNG. Today I will make a clunky bot (although it does nothing and is absolutely not useful) that talks like Captain Picard. I actually wanted to use a Markov Chain to generate text. A Markov Chain has a specific property. It doesn&rsquo;t care what happened before, it only looks at probabilities from the current state to a next state.">
+  <meta property="og:description" content="Inspired by the hilarious podcast The Greatest Generation, I have worked again with all the lines from all the episode scripts of TNG. Today I will make a clunky bot (although it does nothing and is absolutely not useful) that talks like Captain Picard. I actually wanted to use a Markov Chain to generate text. A Markov Chain has a specific property. It doesn&rsquo;t care what happened before, it only looks at probabilities from the current state to a next state.">
+  <meta name="twitter:description" content="Inspired by the hilarious podcast The Greatest Generation, I have worked again with all the lines from all the episode scripts of TNG. Today I will make a clunky bot (although it does nothing and is …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/blog/2017/01/21/generate-text-using-markov-chains-sort-of/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/blog/2017/01/21/generate-text-using-markov-chains-sort-of/" />
+  <link rel="alternate" href="/cleancode/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Generate text using Markov Chains (sort of)</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 21, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 6 minutes (1256 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>Inspired by the hilarious podcast <a href="gagh.biz" title="A podcast by two people who are a little embarrassed to have a podcast about Star Trek the Next Generation">The Greatest Generation</a>, I have worked again with all the lines from all the episode scripts of TNG.
+Today I will make a clunky bot (although it does nothing and is absolutely not useful) that talks like Captain Picard.
+I actually wanted to use a Markov Chain to generate text. A Markov Chain has a specific property. It doesn&rsquo;t care what happened before, it only looks at probabilities from the current state to a next state.</p>
+
+<h3 id="markov-chains">Markov Chains</h3>
+
+<p>An example is a board game based on dice throws. Every time I throw the die there are equal opportunities to go from my current side to any other side. In this case every probability is equal, but when the die is loaded probabilities would change.</p>
+
+<p>In the current example I&rsquo;m using all the phrases I extracted from the series TNG <a href="For%20more%20info%20about%20this%20particular%20dataset,%20go%20to%20%3Chttp://github.com/rtrek%3E">1</a>. And then well use words that follow each other choosing &ldquo;randomly&rdquo; but weighted by occurrence.</p>
+
+<h1 id="but-first-cleaning">But first cleaning</h1>
+
+<p>I&rsquo;m using the packages dplyr, stringr, tidytext and tidyr.
+If you&rsquo;d like to follow along download the <a href="https://github.com/RTrek/TNG/raw/master/data/TNG.rda" title="this link goes to the dataset ~26 mb, if you don't trust that, go to that repo and download the csv file from data-raw">dataset</a> and load it in R with load(&ldquo;path to file&rdquo;)</p>
+
+<p>The dataset itself is rather large <code>dim(TNG) #110176     17</code> with 11 thousand rows and 17 variables. However we will only use the variables <code>type</code>, <code>who</code> and <code>text</code>. <code>Type</code> contains either &ldquo;description&rdquo; or &ldquo;speech&rdquo;. We only need speech. Because I was a novice and because in general I&rsquo;m not very tidy <a href="Which%20is%20rather%20ironic%20since%20I%20like%20to%20adore%20to%20Tidy%20principles...">2</a> this dataset is rather dirty. I copied and did not sanitize the who part. This means that if you filter on &ldquo;Riker&rdquo;, you will not get everything he said. The script has weird things like: &ldquo;Riker&rsquo;s com voice&rdquo;, &ldquo;Riker&rsquo;s voice&rdquo; and several variants of &ldquo;V.O.&rdquo; (means voice over).</p>
+
+<h2 id="cleaning-the-who-column">Cleaning the who column</h2>
+
+<p>We have to clean out the who column, filter only the rows that contain speech. Perhaps we also want to select only rows for certain characters. And finally we want to cut up the text into bigrams or trigrams. Thanks to an excellent <a href="http://tidytextmining.com/" title="free to read on the internet">book</a> by Julia Silge and David Robinson this was surprisingly easy to do. I cannot recommend their package <a href="https://cran.r-project.org/package=tidytext">tidytext</a> enough, truly awesome!</p>
+
+<p>You could do the following steps all in one pipe, but for clarity sake, and your sanity, we will take smaller steps.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">speech_TNG <span class="o">&lt;-</span> TNG <span class="o">%&gt;%</span>
+        filter<span class="p">(</span>type <span class="o">==</span> <span class="s">&#34;speech&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>    <span class="c1"># select only speech parts</span>
+        mutate<span class="p">(</span>who <span class="o">=</span> str_replace<span class="p">(</span>who<span class="p">,</span> <span class="s">&#34;&#39;S COM VOICE&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+                       str_replace<span class="p">(</span> <span class="s">&#34;\\(.{1,}\\)&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+                       str_replace<span class="p">(</span> <span class="s">&#34;\&#34;.{1,}\&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+                       str_replace<span class="p">(</span> <span class="s">&#34;YOUNG&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+                       str_replace<span class="p">(</span> <span class="s">&#34;&#39;S VOICE&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+                       str_trim<span class="p">())</span></code></pre></div>
+<p>This looks crazy, but don&rsquo;t despair:</p>
+
+<ul>
+<li>assign to speech_TNG the result of:</li>
+<li>take TNG <code>THEN</code></li>
+<li>return only the rows where type is &ldquo;speech&rdquo; <code>THEN</code></li>
+<li>mutate the who column by
+
+<ul>
+<li>replacing from the who column &ldquo;&rsquo;S COM VOICE&rdquo; with nothing <code>THEN</code></li>
+<li>replacing a &ldquo;(&rdquo; followed by at least 1 any character followed by a &ldquo;)&rdquo; with nothing <code>THEN</code></li>
+<li>replacing quotation marks (&rdquo; &ldquo;) with any characters in between with nothing <code>THEN</code></li>
+<li>replacing YOUNG with nothing <code>THEN</code></li>
+<li>replacing &rsquo;s voice with nothing <code>THEN</code></li>
+<li>trimming all whitespace at start and end</li>
+</ul></li>
+</ul>
+
+<p>How did I know how to build this enormous pipe? I took a sample of the who column and tried stuff untill it suited my needs [3].</p>
+
+<p>[3]: for example <code>sample &lt;- TNG %&gt;% filter(type == &quot;speech&quot;) %&gt;% select(who) %&gt;% sample_n(20) %&gt;% .$who</code></p>
+
+<h1 id="extracting-bi-and-trigrams-per-character">Extracting bi- and trigrams per character</h1>
+
+<p>And now we can create seperate datasets for every character.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">bigrams_data <span class="o">&lt;-</span> speech_TNG <span class="o">%&gt;%</span>
+        filter<span class="p">(</span>who <span class="o">==</span> <span class="s">&#34;DATA&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        unnest_tokens<span class="p">(</span>bigram<span class="p">,</span> text<span class="p">,</span> token <span class="o">=</span> <span class="s">&#34;ngrams&#34;</span><span class="p">,</span>to_lower <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> n<span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        separate<span class="p">(</span>bigram<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;word1&#34;</span><span class="p">,</span> <span class="s">&#34;word2&#34;</span><span class="p">),</span> sep <span class="o">=</span> <span class="s">&#34; &#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        count<span class="p">(</span>word1<span class="p">,</span> word2<span class="p">,</span> sort <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+<p>We use the <code>unnest_tokens</code> command from the tidytext package. This command will take your cell with text and extract either sentences, words, ngrams or paragraphs. It also converts everything to lowercase and delete any punctuation. The resulting variable I now call &ldquo;bigram&rdquo;. Then I take that variable &ldquo;bigram&rdquo; and split it up into two variables calling them &ldquo;word1&rdquo; and &ldquo;word2&rdquo;. Finally I count how many times the combinations occur.</p>
+
+<p>For Picard, the bigrams would be:</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">bigrams_picard <span class="o">&lt;-</span> speech_TNG <span class="o">%&gt;%</span>
+        filter<span class="p">(</span>who <span class="o">==</span> <span class="s">&#34;PICARD&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        unnest_tokens<span class="p">(</span>bigram<span class="p">,</span> text<span class="p">,</span> token <span class="o">=</span> <span class="s">&#34;ngrams&#34;</span><span class="p">,</span>to_lower <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> n<span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        separate<span class="p">(</span>bigram<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;word1&#34;</span><span class="p">,</span> <span class="s">&#34;word2&#34;</span><span class="p">),</span> sep <span class="o">=</span> <span class="s">&#34; &#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        count<span class="p">(</span>word1<span class="p">,</span> word2<span class="p">,</span> sort <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+<p>And his trigrams would be</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">trigrams_picard <span class="o">&lt;-</span> speech_TNG <span class="o">%&gt;%</span>
+        filter<span class="p">(</span>who <span class="o">==</span> <span class="s">&#34;PICARD&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        unnest_tokens<span class="p">(</span>trigram<span class="p">,</span> text<span class="p">,</span> token <span class="o">=</span> <span class="s">&#34;ngrams&#34;</span><span class="p">,</span>to_lower <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> n<span class="o">=</span> <span class="m">3</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        separate<span class="p">(</span>trigram<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;word1&#34;</span><span class="p">,</span> <span class="s">&#34;word2&#34;</span><span class="p">,</span> <span class="s">&#34;word3&#34;</span><span class="p">),</span> sep <span class="o">=</span> <span class="s">&#34; &#34;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        count<span class="p">(</span>word1<span class="p">,</span> word2<span class="p">,</span>word3<span class="p">,</span> sort <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+<h1 id="creating-a-markov-chain-sort-of">Creating a markov chain (sort of)</h1>
+
+<p>My endproduct takes two words and tries to find a third word. Then it takes the final two words and tries to find another word untill the sentance has a length that I specify at the start.</p>
+
+<p>What I actually created is a trigram dataframe, and a function that searches that frame. The function takes two words and returns all the rows where the first word matches the first column and the second word matches the second column.</p>
+
+<p>Furthermore I made a sentence creator, a function where you supply the first two words and the length of the sentence. That function keeps using the last words in the sentence until the correct length is achieved. With the fallback method of using bigrams when the trigrams don&rsquo;t work anymore it could still fail, but not so often.</p>
+
+<h3 id="word-generator">Word generator</h3>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">return_third_word <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span> woord1<span class="p">,</span> woord2<span class="p">){</span>
+        woord <span class="o">&lt;-</span> trigrams_picard <span class="o">%&gt;%</span>
+                filter_<span class="p">(</span><span class="o">~</span>word1 <span class="o">==</span> woord1<span class="p">,</span> <span class="o">~</span>word2 <span class="o">==</span> woord2<span class="p">)</span> <span class="o">%&gt;%</span>
+                sample_n<span class="p">(</span><span class="m">1</span><span class="p">,</span> weight <span class="o">=</span> n<span class="p">)</span> <span class="o">%&gt;%</span>
+                <span class="m">.</span><span class="p">[[</span><span class="s">&#34;word3&#34;</span><span class="p">]]</span>
+        woord
+<span class="p">}</span></code></pre></div>
+<p>However this function sometimes returns an empty row. So I baked in a backup for when it can&rsquo;t find the word combination.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">return_third_word <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span> woord1<span class="p">,</span> woord2<span class="p">){</span>
+        woord <span class="o">&lt;-</span> trigrams_picard <span class="o">%&gt;%</span>
+                filter_<span class="p">(</span><span class="o">~</span>word1 <span class="o">==</span> woord1<span class="p">,</span> <span class="o">~</span>word2 <span class="o">==</span> woord2<span class="p">)</span> <span class="o">%&gt;%</span>
+                sample_n<span class="p">(</span><span class="m">1</span><span class="p">,</span> weight <span class="o">=</span> n<span class="p">)</span> <span class="o">%&gt;%</span>
+                <span class="m">.</span><span class="p">[[</span><span class="s">&#34;word3&#34;</span><span class="p">]]</span>
+        <span class="kr">if</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>woord<span class="p">)</span> <span class="o">==</span> <span class="m">0</span><span class="p">){</span>
+                bleh <span class="o">&lt;-</span> filter_<span class="p">(</span>bigrams_picard<span class="p">,</span> <span class="o">~</span>word1 <span class="o">==</span> woord2<span class="p">)</span> <span class="o">%&gt;%</span>
+                        sample_n<span class="p">(</span><span class="m">1</span><span class="p">,</span> weight <span class="o">=</span> n<span class="p">)</span>
+                <span class="kp">warning</span><span class="p">(</span><span class="s">&#34;no word found, adding &#34;</span><span class="p">,</span> bleh<span class="p">,</span> <span class="s">&#34;to&#34;</span><span class="p">,</span> woord1 <span class="p">,</span> woord2<span class="p">)</span>
+                woord <span class="o">&lt;-</span> bleh
+        <span class="p">}</span>
+        woord
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>From trigrams_picard,</li>
+<li>return the rows where word 1 matches woord1, and word2 matches woord2.</li>
+<li>Of those rows * return a single random row, where the randomness is weighted by occurrence. * Return the single word.</li>
+</ul>
+
+<p>I also used a bit of <a href="http://rmhogervorst.nl/cleancode/blog/2016/06/13/NSE_standard_evaluation_dplyr.html" title="link to NSE article">non-standard evalation (NSE)</a> just for fun.</p>
+
+<h3 id="sentence-generator">Sentence generator</h3>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">generate_sentence <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>word1<span class="p">,</span> word2<span class="p">,</span> sentencelength <span class="o">=</span><span class="m">5</span><span class="p">,</span> debug <span class="o">=</span><span class="kc">FALSE</span><span class="p">){</span>
+        <span class="c1">#input validation</span>
+        <span class="kr">if</span><span class="p">(</span>sentencelength <span class="o">&lt;</span><span class="m">3</span><span class="p">)</span><span class="kp">stop</span><span class="p">(</span><span class="s">&#34;I need more to work with&#34;</span><span class="p">)</span>
+        sentencelength <span class="o">&lt;-</span> sentencelength <span class="m">-2</span>
+        <span class="c1"># starting</span>
+        sentence <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>word1<span class="p">,</span> word2<span class="p">)</span>
+        woord1 <span class="o">&lt;-</span> word1
+        woord2 <span class="o">&lt;-</span> word2
+        <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq_len</span><span class="p">(</span>sentencelength<span class="p">)){</span>
+                <span class="kr">if</span><span class="p">(</span>debug <span class="o">==</span> <span class="kc">TRUE</span><span class="p">)</span><span class="kp">print</span><span class="p">(</span>i<span class="p">)</span>
+                word <span class="o">&lt;-</span> return_third_word<span class="p">(</span> woord1<span class="p">,</span> woord2<span class="p">)</span>
+                sentence <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>sentence<span class="p">,</span> word<span class="p">)</span>
+                woord1 <span class="o">&lt;-</span> woord2
+                woord2 <span class="o">&lt;-</span> word
+        <span class="p">}</span>
+        output <span class="o">&lt;-</span><span class="kp">paste</span><span class="p">(</span>sentence<span class="p">,</span> collapse <span class="o">=</span> <span class="s">&#34; &#34;</span><span class="p">)</span>
+        output
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Check that there are more then 2 lenght.</li>
+<li>Loop a certain times
+
+<ul>
+<li>in that loop use woord1 and woord 2 as input</li>
+<li>create a new word</li>
+<li>add that word to sentence</li>
+<li>change the values of woord1 and woord2</li>
+</ul></li>
+<li>output the sentance with all the words in one line.</li>
+</ul>
+
+<p>For example this created for me: <code>generate_sentence(&quot;I&quot;, &quot;am&quot;, 9)</code></p>
+
+<pre><code>&quot;i am loathe to do with you because they&quot;
+&quot;i am not the case however wesley is alive&quot;
+&quot;i am aware of the tachyon pulse it might be able to determine how to&quot;
+# and with the enterprise and length 9
+&quot;the enterprise we use the cloak to escape do&quot;
+ &quot;the enterprise we have had&quot;
+ &quot;the enterprise for a thing&quot;
+</code></pre>
+
+<ul>
+<li>it&rsquo;s incredibly slow and inefficient, but hey, it&rsquo;s a toy project!</li>
+<li>Also it failed on me multiple times on 15 length</li>
+</ul>
+
+<p>Right it makes no sense whatsover. Thanks for following along!</p>
+
+<p>Do you have suggestions, improvements, found errors? open an issue or email me. <a href="https://github.com/RMHogervorst/cleancode/issues/new/">https://github.com/RMHogervorst/cleancode/issues/new/</a></p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="/cleancode//tags/markov/">Markov</a>&nbsp;
+            
+              <a href="/cleancode//tags/tng/">TNG</a>&nbsp;
+            
+              <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+            
+              <a href="/cleancode//tags/tidytext/">tidytext</a>&nbsp;
+            
+              <a href="/cleancode//tags/bot/">bot</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/cleancode/blog/2017/01/06/plotting-a-map-with-ggplot2-color-by-tile/" data-toggle="tooltip" data-placement="top" title="Plotting a map with ggplot2, color by tile">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/cleancode/blog/2017/03/14/writing-manuscripts-in-rstudio-easy-citations/" data-toggle="tooltip" data-placement="top" title="Writing manuscripts in Rstudio, easy citations">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

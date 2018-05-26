@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Readme on Clean Code</title>
+    <link>/cleancode/tags/readme/</link>
+    <description>Recent content in Readme on Clean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Thu, 26 May 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/cleancode/tags/readme/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Your most valuable collaborator, future-you</title>
+      <link>/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</link>
+      <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</guid>
+      <description>
+
+&lt;p&gt;I was recently at a R users &lt;a href=&#34;http://www.meetup.com/amst-R-dam/&#34; title=&#34;amst-R-dam&#34;&gt;meetup&lt;/a&gt; where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list of data frames and add that list to your data frame. Very cool,  and more useful then I thought, but that is not what I wanted to talk about.&lt;/p&gt;
+
+&lt;p&gt;I would like to give you some tips about working with someone you will probably work with in the future. Hadley will introduce that person to you:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;“In every project you have at least one other collaborator; future-you. You don&amp;rsquo;t want future-you to curse past-you”&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And future-you is an important collaborator. I have worked with R for a almost two years &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; and when I look back I actually see some progress in what I do with R. Most of the things I did in the past were poorly documented. I recently wanted to update my imdb search package but I decided not to touch it, because I don&amp;rsquo;t know what will break if I change some things. I have less worries for more recent packages, because I have tests for almost all the functions and I could just run the tests after every change to see if the functionality is still there.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;[update: I tried to find older creations in my github, but I was actually pretty impressed by how well documented it all was! So my example is not so good, or I just didn&amp;rsquo;t upload bad examples&amp;hellip;]&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;What I did find was that hurry jobs take up the most time in the end. If I just coded something up fast and  then revisit that after a week it might still work and I might still know what I meant to do. But if the time delay gets longer future-you will need to spend more time figuring out what past-you was trying to achieve.&lt;/p&gt;
+
+&lt;p&gt;So even if you are in a hurry now, you will  not remember the reasons for certain decisions in the future. Especially if your project gets bigger, you tend to forget things.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The key thing is to be as explicit and clear as possible towards future-you&lt;/strong&gt;. So how do we help future-you (or other collaborators) understand past-you?&lt;/p&gt;
+
+&lt;p&gt;Here are some suggestions based on lots of quotes and tidbits.&lt;/p&gt;
+
+&lt;h2 id=&#34;readme-driven-development&#34;&gt;Readme driven development&lt;/h2&gt;
+
+&lt;p&gt;Almost all of the github projects have a nicely formated readme. This is a very simple markdown document that describes the overal intent of the project and how to use and install it. The readme is a nice documentation of the software. So how do you make sure that the readme accurately describes the software?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;You write the readme first.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tom Preson-Werner wrote a nice &lt;a href=&#34;http://tom.preston-werner.com/2010/08/23/readme-driven-development.html&#34; title=&#34; readme driven development 2010-08-23&#34;&gt;article&lt;/a&gt; about this. If you write the readme first then you can think through the project first and you already know what the end user (probably mostly future-you) will need. And you don&amp;rsquo;t need to write the documentation afterwards.  I have actually tried this in a few projects (f.i. &lt;a href=&#34;https://github.com/RMHogervorst/badgecreatr&#34;&gt;badgecreator&lt;/a&gt;), it helped me to think about the functions and the logical steps. And if you describe the next steps, other people can jump in more easily.&lt;/p&gt;
+
+&lt;h2 id=&#34;write-the-test-first&#34;&gt;Write the test first&lt;/h2&gt;
+
+&lt;p&gt;A way to understand past-you&amp;rsquo;s incoherent ramblings in the future (see what I did there?), is to write the tests before you write the part of the code that passes the test. I am talking about unit-tests, tests that check if your code is still working as you planned it out.&lt;/p&gt;
+
+&lt;p&gt;So how would writing the tests first, help future-you and current(?)-you understand each other? If written correctly the unittest is a promise, an understanding if you like, about how pieces of code should function. For instance in one of my projects the unit-test expects an error under certain conditions. Thus the code is supposed to give an error when those conditions arise.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;test_that&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;rowsums larger or smaller than 1 are failing&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,{&lt;/span&gt;
+        expect_error&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;CreateVertices&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;errorset&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;var1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;var2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;vartoomuch&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; verticeName &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;regexp &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;column means are not equal to 1&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        expect_error&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;CreateVertices&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;errorset&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;var1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;var2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;vartoolittle&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; verticeName &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;regexp &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;column means are not equal to 1&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I really like the elegance of the testthat package, it &lt;strong&gt;literaly&lt;/strong&gt; says what it tests: &amp;ldquo; &lt;em&gt;test that&lt;/em&gt; rowsoms larger or smaller than 1 are failing&amp;rdquo;. And if the test fails it will tell you exactly &lt;strong&gt;where&lt;/strong&gt; it failed and &lt;strong&gt;what&lt;/strong&gt; it was trying to test (according to you).&lt;/p&gt;
+
+&lt;p&gt;So how would you implement this? &lt;em&gt;I will make a seperate blogpost about this later, but for now look at r-pkg &lt;a href=&#34;http://r-pkgs.had.co.nz/tests.html&#34;&gt;chapter&lt;/a&gt; about testing&lt;/em&gt; Start with the thing you would like to create, for instance: Count all the people that are called Roel. That is nice small function. Give it a name: &lt;code&gt;roel_counter&lt;/code&gt;, for example.&lt;/p&gt;
+
+&lt;p&gt;Create a seperate testscript &lt;code&gt;test_roel_counter.r&lt;/code&gt;. With the testthat framework you would put that file in &lt;code&gt;tests/testthat/&lt;/code&gt; so that it and all the other unit tests will be executed if you hit the shortkey.&lt;/p&gt;
+
+&lt;p&gt;I usually write tests like this.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;context&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;roel_counter&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+teststring &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Roel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Roel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Hans&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+confusestring &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Roel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;roel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;rOel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;roef&amp;#34;&lt;/span&gt;
+         
+test_that&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;roel_counter finds accurate number of roel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,{&lt;/span&gt;
+   expect_equal&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;roel_counter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; teststring&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+   expect_false&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;roel_counter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; teststring&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+   expect_equal&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;roel_counter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; confusestring&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+   expect_false&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;roel_counter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; confusestring&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first test will check if Roel counter finds 2 Roels and the second test will check if the string will not just return the total length of the string.&lt;/p&gt;
+
+&lt;p&gt;I could add all sorts of variations of my name to the test to see if the function works. In fact most of the things you would try out in the console to see if the function works could be put into the testfile. But in test driven development you would first create the tests and then write the function. After you have written a part of the code that works you will test and see what passes and what fails. Then you add things to the code to pass more tests. Afte all the tests have passed, you write a new test for a new part of the code.&lt;/p&gt;
+
+&lt;p&gt;If current-you is interupted and future-you finds itself back at the code, future-you can just press the hotkey for the tests and find out which are failing and continue on that part. So in a way, future-you can explicitly find out what past-you was trying to achieve.&lt;/p&gt;
+
+&lt;h2 id=&#34;use-version-control&#34;&gt;use version control&lt;/h2&gt;
+
+&lt;p&gt;Version control can help you stay sane. It saves your work if you try something new, it helps you to start again at any previously committed point in history and apart from the merge errors it works generally very well.&lt;/p&gt;
+
+&lt;p&gt;Version control lets you record snapshots of previous code, but also lets you comment on what you solved or changed. When you save a new version of the code to version control you will have to be a bit explicit. Otherwise you will find yourself in this situation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/wrong_commit.PNG&#34; alt=&#34;an example of a less helpful commit message&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Version control, if you use meaningful descriptions, can help you find out where you did some actions and what you were trying to do. Describe intent in the commit messages. A quote I really like is:&lt;br /&gt;
+&amp;gt; &amp;ldquo;You mostly collaborate with yourself, and me-from-two-months-ago never responds to email.&amp;rdquo;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;My commits have become somewhat better:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/example_better_commit.PNG&#34; alt=&#34;somewhat better commit messages&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You could even use a github-issue-based-workflow where you write down the problems you want to solve in seperate issues and after you solved a particular issue, you push the code to github referencing the issue number.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;functional-programming&#34;&gt;Functional programming&lt;/h2&gt;
+
+&lt;p&gt;Hadley is really big on functional programming. That is, making clear what you want to achieve, and abstract away what happens in the computer itself.&lt;/p&gt;
+
+&lt;p&gt;One example of this is the pipe operator. The pipe operator is in use in many programming languages (big thing in UNIX) but is not part of base r. Untill it was introduced in the magritr package&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:5&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; by Stefan Milton Bache. The pipe does nothing special except that it takes the thing to the left of it and places that in the first place of the thing to the right.
+So for instance &lt;code&gt;dataset %&amp;gt;% filter(name==&amp;quot;Roel&amp;quot;)&lt;/code&gt; means that we start with dataset and then filter the rows that have &lt;code&gt;&amp;quot;Roel&amp;quot;&lt;/code&gt; in the name column.
+In the background it does &lt;code&gt;filter(dataset, name == &amp;quot;Roel&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Which makes code much much easier to read.
+compare:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;filter_by(select( filter(dataset, year == 2012), month, children, accidents ),accidents)&lt;/code&gt; with&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;dataset %&amp;gt;% 
+filter(year==2012) %&amp;gt;% 
+select(month, children, accidents) %&amp;gt;%
+group_by(accidents)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then there the  map functions from the purr package, which essentially replace loops. Not because loops are inherently bad, but the functions focus on the operation being performed instead of the details of the loop itself. I will write about these functions once I get used to them in the future.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:6&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:6&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;comments&#34;&gt;comments&lt;/h2&gt;
+
+&lt;p&gt;A final thought about comments in the code.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Do it often.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Describe in comments mostly what your intent was, or your reasons for a function. Don&amp;rsquo;t describe the &lt;strong&gt;what&lt;/strong&gt;, but describe the &lt;strong&gt;why&lt;/strong&gt;.
+Do comment as often as you find necessary. More is better then less. However don&amp;rsquo;t put future plans or errors in the comments, you will not read them. An issue tracker is a great place for those.&lt;/p&gt;
+
+&lt;h1 id=&#34;final-thoughts&#34;&gt;Final thoughts&lt;/h1&gt;
+
+&lt;p&gt;Think about this quote:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;But looking back at this whole post, &lt;strong&gt;you&lt;/strong&gt; will probably be the violent psychopath maintaining the code.&lt;/p&gt;
+
+&lt;p&gt;So these are some ways to help yourself in the future, try some and tell me how it went.&lt;/p&gt;
+
+&lt;h1 id=&#34;references&#34;&gt;references&lt;/h1&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Or close to these words, I wrote it down later. - Wickham amsterdam 18-5-16
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;I don&amp;rsquo;t know exactly, but if I use the time when I created a Github Account (november third 2014) it is almost 19 months at the moment of writing.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;a tweet of mtholder: &lt;a href=&#34;https://twitter.com/kcranstn/status/370914072511791104&#34;&gt;https://twitter.com/kcranstn/status/370914072511791104&lt;/a&gt; text tweet: @mtholder motivating git: You mostly collaborate with yourself, and me-from-two-months-ago never responds to email. @swcarpentry
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;That might be too much, but it&amp;rsquo;s quite nice. if you type &amp;lsquo;closes #10&amp;rsquo; or &amp;lsquo;fix #10&amp;rsquo; github will close issue 10 and refer to that commit. I have also heard of people using seperate branches for problemfixing and using pull requests to the main branch to solve the issues (works the same with fix or closes). I have tried this approach in some cases and it helps structuring your work.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34;&gt;It took me forever to find out why it was called magritr. Because most R packages are named after their function or are a weird pun on something* I couldn&amp;rsquo;t place the name. But it is a pun on a famous painting by Magrit (La trahison des images, according to wikipedia) of a pipe with the text below &amp;ldquo;ceci n`est pa une pipe&amp;rdquo; &amp;lsquo;this is not a pipe&amp;rsquo;.&lt;a href=&#34;https://en.wikipedia.org/wiki/The_Treachery_of_Images&#34;&gt;https://en.wikipedia.org/wiki/The_Treachery_of_Images&lt;/a&gt; and for the package &lt;a href=&#34;https://cran.r-project.org/web/packages/magrittr/index.html&#34;&gt;https://cran.r-project.org/web/packages/magrittr/index.html&lt;/a&gt;&lt;br /&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:5&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34;&gt;See for more information about loops &lt;a href=&#34;http://r4ds.had.co.nz/iteration.html&#34;&gt;chapter 16 (iteration)&lt;/a&gt; of the &amp;ldquo;r for datascience&amp;rdquo; book by hadley wickham. The book is still under development but is a treasuretrove of information.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:6&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

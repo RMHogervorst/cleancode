@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Writing manuscripts in Rstudio, easy citations</title>
+  <meta property="og:title" content="Writing manuscripts in Rstudio, easy citations" />
+  <meta name="twitter:title" content="Writing manuscripts in Rstudio, easy citations" />
+  <meta name="description" content="Intro and setup This is a simple explanation of how to write a manuscript in RStudio. Writing a manuscript in RStudio is not ideal, but it has gotten better over time. It is now relatively easy to add citations to documents in RStudio.
+**The goal is not think about formatting, and citations, but to write the manuscript and add citations on the fly with a nice visual help. **">
+  <meta property="og:description" content="Intro and setup This is a simple explanation of how to write a manuscript in RStudio. Writing a manuscript in RStudio is not ideal, but it has gotten better over time. It is now relatively easy to add citations to documents in RStudio.
+**The goal is not think about formatting, and citations, but to write the manuscript and add citations on the fly with a nice visual help. **">
+  <meta name="twitter:description" content="Intro and setup This is a simple explanation of how to write a manuscript in RStudio. Writing a manuscript in RStudio is not ideal, but it has gotten better over time. It is now relatively easy to add …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/" />
+  <link rel="alternate" href="/cleancode/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Writing manuscripts in Rstudio, easy citations</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 14, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 7 minutes (1387 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h2 id="intro-and-setup">Intro and setup</h2>
+
+<p>This is a simple explanation of how to write a manuscript in RStudio. Writing a manuscript in RStudio is not ideal, but it has gotten better over time. It is now relatively easy to add citations to documents in RStudio.</p>
+
+<p>**The goal is not think about formatting, and citations, but to write the manuscript and add citations on the fly with a nice visual help. **</p>
+
+<p>This tutorial explains how to link Zotero (a reference manager) to your project folder and how to easily add citations.
+In this tutorial I assume you have <a href="www.zotero.org">Zotero</a> installed.
+You will need to have the zotero extension <a href="https://github.com/retorquere/zotero-better-bibtex/wiki">betterBibtex</a> installed and I will
+use RStudio, with the packages knitr, shiny and other basic tooling in place.
+To search and insert citations in a file you will need to install the package
+<code>citr</code>  install the latest <a href="https://github.com/crsh/citr"><em>dev-version from github</em></a> or the stable version from <a href="https://CRAN.R-project.org/package=citr">cran</a>.</p>
+
+<h2 id="why-would-i-write-my-manuscript-in-rstudio">Why would I write my manuscript in RStudio?</h2>
+
+<p>The main reasons to write in RStudio ( and not in f.i. Word ) are reproducibity, and version control. Writing in plain text as you do in RStudio makes it very easy to keep track of your work with version control and the plain files are easily shared. Working from RStudio also allows you to combine the code and text in one document. This is called <a href="https://en.wikipedia.org/wiki/Literate_programming" title="wikipedia link">literate programming</a>. Literate programming makes it incredibly easy to share your code (it&rsquo;s in the document) and compiling the document runs the code again, ensuring reproducibility.</p>
+
+<p>I use RStudio projects so everything
+important to a project is in the same folder and the working directory is  automatically correct. I create a new RMarkdown document <img src="{{ site.url }}/images/example_rstudio_manuscript.PNG" alt="rmarkdown doc" /></p>
+
+<h4 id="earlier-workflows">Earlier workflows</h4>
+
+<p>It was always possible to intersperse code and text in R, previously people used the <code>Sweave</code> package to combine code and text. You had to write the text in Latex and markup the code. Latex prints very pretty, but in raw form it is horrible to read, as you can see in the example:</p>
+
+<pre><code>\documentclass[12pt]{article}
+\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\begin{document}
+
+\section*{Notes for My Paper}
+
+Don't forget to include examples of topicalization.
+They look like this:
+
+{\small
+\enumsentence{Topicalization from sentential subject:\\ 
+\shortex{7}{a John$_i$ [a &amp; kltukl &amp; [el &amp; 
+  {\bf l-}oltoir &amp; er &amp; ngii$_i$ &amp; a Mary]]}
+{ &amp; {\bf R-}clear &amp; {\sc comp} &amp; 
+  {\bf IR}.{\sc 3s}-love   &amp; P &amp; him &amp; }
+{John, (it's) clear that Mary loves (him).}}
+}
+</code></pre>
+
+<p><em>I copied this from a example page.<sup class="footnote-ref" id="fnref:http-mally-stanf"><a rel="footnote" href="#fn:http-mally-stanf">1</a></sup></em></p>
+
+<p>The output looks beautiful, but it&rsquo;s damn near unworkable in plain text. And even worse, mistakes are easily made and very hard to find (since you don&rsquo;t know where the trouble started, and the error messages are quite cryptic).</p>
+
+<h4 id="from-latex-sweave-to-rmarkdown">From latex / Sweave to RMarkdown</h4>
+
+<p>Markdown is a very simple markup language that is readable for humans and can be translated into html / latex / word / etc by computers. In stead of \section{name fo the section} we can just use a pound symbol (a.k.a. hashtag: #) to mark a heading. One pound for a heading 1, 2 for heading 2 etc. The difference between markdown and RMarkdown is R-code in the text. There are plenty good tutorials out there so I will only give you one<sup class="footnote-ref" id="fnref:http-rmarkdown-r"><a rel="footnote" href="#fn:http-rmarkdown-r">2</a></sup> and a search online will give you more.</p>
+
+<h4 id="citations">Citations</h4>
+
+<p>Citations connect your paper to the past, linking your research to earlier research. It is essential that people can find the correct paper or book you are referring to. For that reason (and vanity I think) there are many styles of citations. I&rsquo;ve used the APA and Chicago style in the past and there are probably about 500. Every single one has different rules; cite inline by author name and year, or by number, etc.</p>
+
+<p>If you resubmit your paper to a journal with a different citation style you have to rewrite every citation in the manuscript. Because we have better things to do, there are reference managers that automatically use the correct styling. And that change all the references in the text. I have used this in Word and LibreOffice in the past. But changing styles works a bit different in plain text formats such as markdown and latex. In general you cite research by a <strong>key</strong> that refers to a <strong>bibliography</strong>. In the build process the keys are replaced with the citations in the style that you want, so that the endproduct has the correct citations.
+This is also implemented in Latex and RStudio. In general the workflow is as follows:</p>
+
+<ol>
+<li>add the citations in the correct &lsquo;language&rsquo; (bibtex) to your document or to a different document and provide a link to.</li>
+<li>Use <strong>keys</strong> that refer to the correct entry in the bibtex.</li>
+<li>The citation manager inserts the correctly styled reference in the correct location while it writes the final version.</li>
+</ol>
+
+<p>You write and cite like this:</p>
+
+<p>&ldquo;The ggplot2 package is used to plot images in layers [@wickham_ggplot2_2009].&rdquo;</p>
+
+<p>The key (a at-sign and name) refers to a bibtex entry. For example:</p>
+
+<pre><code>@book{wickham_ggplot2_2009,
+  address = {New York, NY},
+  title = {Ggplot2},
+  isbn = {978-0-387-98140-6 978-0-387-98141-3},
+  language = {en},
+  timestamp = {2017-02-19T10:19:27Z},
+  urldate = {2015-11-09},
+  url = {http://ggplot2.org},
+  publisher = {{Springer New York}},
+  author = {Wickham, Hadley},
+  year = {2009},
+  note = {04749},
+  file = {ggplot2 - hadley wickham.pdf:C\:\\Users\\roel\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\aw40nx7l.default\\zotero\\storage\\AADU9XVP\\ggplot2 - hadley wickham.pdf:application/pdf}
+}
+</code></pre>
+
+<p>Which will resolve to (if you use APA formatting):</p>
+
+<blockquote>
+<p>The ggplot2 package is used to plot images in layers (Wickham, 2009).</p>
+</blockquote>
+
+<h3 id="bibtex-files-creation">Bibtex files creation</h3>
+
+<p>Now, making your own bibtex files is a serious pain in the backside. So we don&rsquo;t do that. We also don&rsquo;t try to remember all the keys, but first about the creation of the bibtex file.</p>
+
+<p>I don&rsquo;t want to keep track of the correct way to cite sources, that is just a waste of time. We have excellent reference managers for this goal. I use Zotero. I just throw the pdfs in the correct folder and Zotero finds the correct metadata using the pdfs DOI (digital object identifier).
+This is how it looks on my computer
+<img src="{{ site.url }}/images/example_zotero_look.PNG" alt="a snapshot of zotero on my pc" /></p>
+
+<p>I use the extension <a href="link">betterbibtex</a>, that adds extra functionality to Zotero. In this case it also takes care of synchronizing the bibtext file that you export to the folder you&rsquo;re working in and the corresponding collection in Zotero. (see further on).</p>
+
+<p>I export the collection from zotero into the rstudio folder. <img src="{{ site.url }}/images/example_zotero_keep_updated.PNG" alt="zotero keep updated image" /></p>
+
+<h4 id="the-rmarkdown-document">The RMarkdown document</h4>
+
+<p>If you open a new rmarkdown document from the RStudio console a basic document with metadata is already opened.
+The top of your manuscript should contain metadata such as the title output and in this case we also need to append it to show where to find the bibliography.:
+For example we make a html document called sample_Document with a bibliography based on a document bibliography.bib found in the same folder.</p>
+
+<pre><code>---
+title: &quot;Sample Document&quot;
+output: html_document
+bibliography: bibliography.bib
+---
+</code></pre>
+
+<p>While writing the manuscript we cite like so <img src="{{ site.url }}/images/example_adding_citations_rmarkdown.PNG" alt="image of citing" /></p>
+
+<p>For more information about citations and bibliographies look at the RStudio website<sup class="footnote-ref" id="fnref:http-rmarkdown-r"><a rel="footnote" href="#fn:http-rmarkdown-r">3</a></sup></p>
+
+<h4 id="choosing-a-citation-style-in-the-manuscript">Choosing a citation style in the manuscript</h4>
+
+<p><em>update 2017-03-15</em> Michael Koontz <a href="https://twitter.com/_mikoontz/status/838859261572591623">explains how to add a citation style to your document</a> in short:</p>
+
+<ol>
+<li>search for a citation style <a href="https://github.com/citation-style-language/styles/find/master">https://github.com/citation-style-language/styles/find/master</a> (f.i. APA)</li>
+<li>find the correct file and click on raw</li>
+<li>copy the link to the citation style file in the yaml
+<code>
+---
+title: &quot;Sample Document&quot;
+output: html_document
+bibliography: bibliography.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+---
+</code></li>
+</ol>
+
+<h4 id="making-citing-easier-with-the-help-of-citr">Making citing easier with the help of CITR</h4>
+
+<p>Then use the citr package <a href="https://github.com/crsh/citr">https://github.com/crsh/citr</a>.
+<em>Citr works quite nicely, but unfortunately it has recently acquired default behavior that is frankly annoying. If Zotero is active (open in a window on your computer), citr will ignore the bibliography you mentioned in the top of the document and just try to read in the entire zotero library. (which will fail on my computer) I had to change a setting to change this.</em><sup class="footnote-ref" id="fnref:you-have-to-chan"><a rel="footnote" href="#fn:you-have-to-chan">4</a></sup>.</p>
+
+<p>Loading citations:
+<img src="{{ site.url }}/images/example_loading_citr.PNG" alt="image of loading citr" /></p>
+
+<p>Adding a citation to a document:
+<img src="{{ site.url }}/images/example_adding_citation_with_citr.PNG" alt="image of adding a citation" /></p>
+
+<p>This adds the correct citation as you can see</p>
+
+<p><img src="{{ site.url }}/images/example_citation_side_by_side.PNG" alt="side by side comparison" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This piece became a bit longer then anticipated but I discovered new behavior of <code>citr</code>, so there&rsquo;s that.
+All in all RStudio / R and related tools can become the complete workbench for reading in data, cleaning and analyzing, and also writing the manuscript.</p>
+
+<p>For practical examples of reproducible work see this book<sup class="footnote-ref" id="fnref:https-www-practi"><a rel="footnote" href="#fn:https-www-practi">5</a></sup></p>
+
+<h2 id="references">References</h2>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:http-mally-stanf"><a href="http://mally.stanford.edu/~sr/computing/latex-example.html">http://mally.stanford.edu/~sr/computing/latex-example.html</a> <a class="footnote-return" href="#fnref:http-mally-stanf"><sup>[return]</sup></a></li>
+<li id="fn:http-rmarkdown-r"><a href="http://rmarkdown.rstudio.com/lesson-1.html">http://rmarkdown.rstudio.com/lesson-1.html</a> <a class="footnote-return" href="#fnref:http-rmarkdown-r"><sup>[return]</sup></a></li>
+<li id="fn:http-rmarkdown-r"><a href="http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html">http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html</a> <a class="footnote-return" href="#fnref:http-rmarkdown-r"><sup>[return]</sup></a></li>
+<li id="fn:you-have-to-chan"> you have to change <code>options(citr.use_betterbiblatex = FALSE)</code> adding this to .Renviron works <a class="footnote-return" href="#fnref:you-have-to-chan"><sup>[return]</sup></a></li>
+<li id="fn:https-www-practi"><a href="https://www.practicereproducibleresearch.org/">https://www.practicereproducibleresearch.org/</a> <a class="footnote-return" href="#fnref:https-www-practi"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="/cleancode//tags/citations/">citations</a>&nbsp;
+            
+              <a href="/cleancode//tags/intermediate/">intermediate</a>&nbsp;
+            
+              <a href="/cleancode//tags/tutorial/">tutorial</a>&nbsp;
+            
+              <a href="/cleancode//tags/writing/">writing</a>&nbsp;
+            
+              <a href="/cleancode//tags/reproducible/">reproducible</a>&nbsp;
+            
+              <a href="/cleancode//tags/bibtex/">bibtex</a>&nbsp;
+            
+              <a href="/cleancode//tags/workflow/">workflow</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/" data-toggle="tooltip" data-placement="top" title="Generate text using Markov Chains (sort of)">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/" data-toggle="tooltip" data-placement="top" title="Turning kindle notes into a tidy data">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

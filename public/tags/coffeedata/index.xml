@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coffeedata on Clean Code</title>
+    <link>/cleancode/tags/coffeedata/</link>
+    <description>Recent content in Coffeedata on Clean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Mon, 07 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/cleancode/tags/coffeedata/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating a package for your data set</title>
+      <link>/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</link>
+      <pubDate>Mon, 07 Mar 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</guid>
+      <description>
+
+&lt;p&gt;Turning your dataset into a package is very useful for reproducable research. This tutorial is for you, even if you&amp;rsquo;ve never created a package in r.&lt;/p&gt;
+
+&lt;p&gt;Why would you turn your dataset into a package?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;very easy to share&lt;/li&gt;
+&lt;li&gt;easy to load (library(name) is easier then &lt;code&gt;load(&amp;quot;path/to/file&amp;quot;)&lt;/code&gt; or &lt;code&gt;data&amp;lt;-read.csv(&amp;quot;path/to/file&amp;quot;)&lt;/code&gt; etc.)&lt;/li&gt;
+&lt;li&gt;documentation is part of the package and will never separate from data&lt;/li&gt;
+&lt;li&gt;attributes of file remain&lt;/li&gt;
+&lt;li&gt;nice and easy introduction to package building&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What do you need to do to create a dataset package:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Step 0: locate your dataset, both raw and clean&lt;/li&gt;
+&lt;li&gt;step 1: create a new project with Rstudio&lt;/li&gt;
+&lt;li&gt;step 2: save the clean file&lt;/li&gt;
+&lt;li&gt;step 3: create a description file&lt;/li&gt;
+&lt;li&gt;step 4: describe the package with a vignette.*&lt;/li&gt;
+&lt;li&gt;step 5: test and build*&lt;/li&gt;
+&lt;li&gt;step 6: maintain your dataset if it changes. *&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;*: Steps 4-6 are optional, but will help you in practicing for other packages.&lt;/p&gt;
+
+&lt;p&gt;What you need:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Rstudio&lt;/li&gt;
+&lt;li&gt;devtools installed&lt;/li&gt;
+&lt;li&gt;a dataset that you want to turn into a package&lt;/li&gt;
+&lt;li&gt;You need to know how to load a file&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this example I will make a package from my all the times I drank coffee.
+I started keeping score because I realized I drank more coffee since working full time.
+This is just a file which contains time stamps whenever I drank coffee. I have some missing values, because I sometimes forget, but mostly it&amp;rsquo;s correct.&lt;/p&gt;
+
+&lt;p&gt;This file is not really useful to anybody except maybe me, but a package is quite useful for a variety of analyses. Let&amp;rsquo;s walk through the steps, follow along with your dataset.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-0-locating-your-datasets&#34;&gt;Step 0: locating your datasets&lt;/h1&gt;
+
+&lt;p&gt;You need a dataset on your harddisk&lt;/p&gt;
+
+&lt;h1 id=&#34;step-1-create-a-new-project&#34;&gt;Step 1: Create a new project&lt;/h1&gt;
+
+&lt;p&gt;Create a new project in Rstudio, choose new directory, R package:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-project-package-new.PNG&#34; alt=&#34;image of starting a new project&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;naming-the-package&#34;&gt;Naming the package&lt;/h2&gt;
+
+&lt;p&gt;Think about a simple descriptive name with the following tips:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;no spaces     Good: Coffeedata Bad: Coffee data&lt;/li&gt;
+&lt;li&gt;no points     good: Coffeeproject Bad: Coffee.Project&lt;/li&gt;
+&lt;li&gt;no dashes     Good: datasetCoffee. Bad:  dataset-Coffee&lt;/li&gt;
+&lt;li&gt;use lowercase, CoffeeDataSet gets confusing.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Naming packages is really hard, it needs to be descriptive and unique. But this is less important if you only share the package with yourself and friends.
+think about the name, dataset21really is not descriptive nor helpful for you in the future.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-2-save-the-clean-file&#34;&gt;Step 2: save the clean file&lt;/h1&gt;
+
+&lt;p&gt;Ideally you will want to save both the raw file and the cleaned dataset, with a script (or rmarkdown document) that describes the actions you took to clean the raw file.&lt;/p&gt;
+
+&lt;p&gt;I assume that you are now in the rproject you have just started.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-coffeedata-project-empty.PNG&#34; alt=&#34;images of empty project&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Locate the file you want to put in the package. And load it so that it&amp;rsquo;s active in the environment:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-loaded-coffeedata.PNG&#34; alt=&#34;image of loaded coffeedata&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then do one of the following (replace coffeedata with your data set&amp;rsquo;s name).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;devtools&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+use_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;coffeedata&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or use devtools directly&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;devtools&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;use_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;coffeedata&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command will create a data folder and put the file in there with the rda extension.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-3-create-a-description-file&#34;&gt;Step 3: create a description file&lt;/h1&gt;
+
+&lt;p&gt;When you started the project a description file and an example function was created:
+&lt;img src=&#34;/cleancode/img/rstudio-project-package-prepopulate.PNG&#34; alt=&#34;image of standard rstudio project&#34; /&gt;
+Open the description file.&lt;/p&gt;
+
+&lt;p&gt;I just copied this from the excellent package building book &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, please read his website:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Every package must have a DESCRIPTION. In fact, it’s the defining feature of a package (RStudio and devtools consider any directory containing DESCRIPTION to be a package). To get you started, devtools::create(&amp;ldquo;mypackage&amp;rdquo;) automatically adds a bare-bones description file. This will allow you to start writing the package without having to worry about the metadata until you need to.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The minimal description will vary a bit depending on your settings, but should look something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/package-description.PNG&#34; alt=&#34;image of package description&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Fill in the meta-data of your package.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Package: name of package
+Title: Use Title Case in One Line.
+Version: 0.1.0 
+Author: who you are
+Maintainer: Who to bother when it breaks
+Description: What the package does (one paragraph)
+Licence: see below
+LazyData: TRUE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;a-license&#34;&gt;a license?&lt;/h3&gt;
+
+&lt;p&gt;You might think that the license is a bit too much for a package you build. But it it&amp;rsquo;s really hard. If you don&amp;rsquo;t give a licence your data is under your copyright and no one can use it.
+For datasets a &lt;a href=&#34;https://creativecommons.org/about/cc0/&#34;&gt;CC0 licence&lt;/a&gt; puts the data in the public domain and makes it free to  build upon, enhance and reuse the works for any purposes without restriction under copyright or database law.&lt;/p&gt;
+
+&lt;p&gt;For packages that contain code (most of the packages) other licenses are better: &lt;a href=&#34;http://choosealicense.com/&#34;&gt;http://choosealicense.com/&lt;/a&gt; .&lt;/p&gt;
+
+&lt;h2 id=&#34;a-description-of-the-file&#34;&gt;A description of the file&lt;/h2&gt;
+
+&lt;p&gt;If you look at &lt;code&gt;?mtcars&lt;/code&gt; there is a description of the file. You want to avoid this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/failure-to-describe-package.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The help file is created with&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;devtools::use_package_doc()&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;this creates a file in the folder &lt;code&gt;R/&lt;/code&gt; . Click on the file and add stuff.
+&lt;img src=&#34;/cleancode/img/coffeedata-package-r.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;See also this example in &lt;a href=&#34;https://github.com/hadley/babynames/blob/master/R/data.R&#34;&gt;hadley&amp;rsquo;s babyname package&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;step-4-describe-the-package-with-a-vignette&#34;&gt;Step 4: describe the package with a vignette.&lt;/h1&gt;
+
+&lt;p&gt;Use the template from rstudio:
+&lt;img src=&#34;/cleancode/img/rstudio-document-dataset.PNG&#34; alt=&#34;rstudio rdocument window&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Give it the name of your dataset&lt;/p&gt;
+
+&lt;p&gt;This is the endresult&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-document-dataset2.PNG&#34; alt=&#34;example rstudio rdocument with coffee filled in&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;after you changed the files use &lt;code&gt;devtools::document()&lt;/code&gt; to create documents.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-5-test-and-build&#34;&gt;step 5: test and build&lt;/h1&gt;
+
+&lt;p&gt;Then check your package with the check button or &lt;code&gt;devtools::check()&lt;/code&gt;. You will probably need to change some stuff based on the check. The check tries to build your package and checks for common problems. The endresult is in: /packagename.Rcheck/&lt;/p&gt;
+
+&lt;p&gt;If your package is very simple, consisting of only documentation and a datafile, your build will be completed and works.&lt;/p&gt;
+
+&lt;p&gt;Click on build &amp;amp; Reload and try out your new package.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-do-i-share-this-package&#34;&gt;How do I share this package?&lt;/h3&gt;
+
+&lt;p&gt;Once installed you can use the package anytime you like with &lt;code&gt;library(package)&lt;/code&gt; But you might want to share your package with colleagues.&lt;/p&gt;
+
+&lt;p&gt;Build a source or binary version:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://www.rstudio.com/images/docs/build_pane_build.png&#34; alt=&#34;rstudiowebsite image of sharing &#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After you build the source package, a file is created, in my case:
+&amp;ldquo;coffeedata_0.1.0.tar&amp;rdquo;. That file is shareble and can be installed on someones computer. They will need to build from source.&lt;/p&gt;
+
+&lt;p&gt;Online: upload your project using git to either Github &lt;a href=&#34;https://github.com/&#34;&gt;https://github.com/&lt;/a&gt; (many people use it, but can&amp;rsquo;t restrict access in free version) or Bitbucket &lt;a href=&#34;https://bitbucket.org/&#34;&gt;https://bitbucket.org/&lt;/a&gt; (close off your project). Or any other sharing service.&lt;/p&gt;
+
+&lt;p&gt;If it&amp;rsquo;s on github everyone can install the file using devtools, in my case:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;devtools&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;install_github&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;rmhogervorst/coffeedata&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This also works on bitbucket :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;devtools&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;install_bitbucket&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;rmhogervorst/coffeedata&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or you download the &lt;a href=&#34;https://github.com/RMHogervorst/cleancode/raw/gh-pages/datasets/coffeedata_0.1.0.tar.gz&#34;&gt;source&lt;/a&gt; file from the website and install it manually&lt;/p&gt;
+
+&lt;p&gt;Yes I have created the file for you. Now you all know how many coffee I drank. Even worse, you can do what you like with that information, because it&amp;rsquo;s in the public domain.&lt;/p&gt;
+
+&lt;p&gt;See Further reading to find out more about other ways to share your package.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-6-maintain-your-dataset-if-it-changes&#34;&gt;step 6: maintain your dataset if it changes&lt;/h1&gt;
+
+&lt;p&gt;If your dataset changes, you should update the package.&lt;/p&gt;
+
+&lt;h3 id=&#34;problems&#34;&gt;Problems&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;I don&amp;rsquo;t have a description file or any of the other folders&amp;hellip; or devtools gives me errors.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Check if your project has forbidden characters: dots, dashes or spaces.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Rcheck fails!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Check the log. The log is in the folder next to your package &lt;code&gt;/packagename.Rcheck/00check.txt&lt;/code&gt;
+in my case my project is in: &lt;code&gt;Projecten\coffeedata&lt;/code&gt; and the logs are in:
+ &lt;code&gt;Projecten\coffeedata.Rcheck\00check.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;the folder disappears! I cant check the log.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is a good thing, it means your settings are so that non failing builds are removed. Change this in Rstudio Global Options, go to packages, and uncheck the option: &lt;em&gt;clean up output after succesful R CMD check&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;further-reading&#34;&gt;Further Reading&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://r-pkgs.had.co.nz/package.html&#34;&gt;Hadley Wickham about naming and starting with a package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://r-pkgs.had.co.nz/description.html&#34;&gt;R packages book: What to put in your description file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.rstudio.com/hc/en-us/articles/200486508-Building-Testing-and-Distributing-Packages&#34;&gt;Rstudio: Building checking and distributing packages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Wickham, Hadley. R Packages. First edition. Sebastopol, CA: O’Reilly Media, 2015. &lt;a href=&#34;http://r-pkgs.had.co.nz/&#34;&gt;http://r-pkgs.had.co.nz/&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

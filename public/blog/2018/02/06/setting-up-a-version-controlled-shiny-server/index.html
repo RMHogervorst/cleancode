@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Setting up a version controlled shiny-server</title>
+  <meta property="og:title" content="Setting up a version controlled shiny-server" />
+  <meta name="twitter:title" content="Setting up a version controlled shiny-server" />
+  <meta name="description" content="Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.
+Shiny server (I used the open source version) has multiple installers provided by RStudio.
+The installers for shiny-server create a user shiny and installs all the services needed.
+I used a guide specific for my version of linux to install shiny-server and combined it with two other guides to make it version controlled.">
+  <meta property="og:description" content="Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.
+Shiny server (I used the open source version) has multiple installers provided by RStudio.
+The installers for shiny-server create a user shiny and installs all the services needed.
+I used a guide specific for my version of linux to install shiny-server and combined it with two other guides to make it version controlled.">
+  <meta name="twitter:description" content="Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.
+Shiny server (I used the open source …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/blog/2018/02/06/setting-up-a-version-controlled-shiny-server/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/blog/2018/02/06/setting-up-a-version-controlled-shiny-server/" />
+  <link rel="alternate" href="/cleancode/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Setting up a version controlled shiny-server</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on February 6, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (612 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.</p>
+
+<p>Shiny server (I used the open source version) has multiple installers provided by RStudio.</p>
+
+<p>The installers for shiny-server create a user shiny and installs all the services needed.</p>
+
+<p>I used a guide specific for my version of linux to install shiny-server and combined it with two other guides to make it version controlled.</p>
+
+<p>I have added the instructions to this <a href="https://gist.github.com/RMHogervorst/9d88ebff914b66b984ede8e78876c92f">github gist</a> but you can also follow along.</p>
+
+<h3 id="server-setup">Server setup</h3>
+
+<p>After you&rsquo;ve installed shiny-server, the server serves all apps in &lsquo;/etc/shiny-server&rsquo; but I really don&rsquo;t like to scp into the server to upload files, I&rsquo;d rather work on my computer, put everything under version control and push the changes to the server. That way I can easily revert my changes if something fails and I don&rsquo;t lose work.</p>
+
+<p>I&rsquo;ve used Dean Atalli&rsquo;s <a href="https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/">excellent guide to setting up a server on digital ocean</a> but I&rsquo;ve modified a small part. He is using github to push his changes and then pulls from github to his server.
+I was in a situation where I did not have access to github and I wanted a slightly simpler setup.</p>
+
+<p>I created a bare repository on the server (that accepts my changes and responds just as github would, except the pretty website features) and used a git-hook. The files in the bare repo are not laid out in the same way as in the original files (on my computer) so I have to do something with that.</p>
+
+<p>A git hook is something that runs  before, during or after you change a repo (it hooks into git). It is a simple shell script that (in my case) runs after a change is made in the repo and executes a command. After a change this &lsquo;post-receive&rsquo;-hook checks out the latest branch and moves it to &lsquo;/etc/shiny-server/&rsquo;.</p>
+
+<p>So the set up is like <a href="http://toroid.org/git-website-howto" title="I modified this to make it apply to shiny-server">this</a> :</p>
+
+<pre><code>/home/shiny/shiny.git
+/etc/shiny-server/
+/all the other folders in a linux system
+</code></pre>
+
+<p>You move into the shiny.git folder (no real need to use that extension, but it is common) and go to the .git folder. inside the folder you add and modify a file called post-receive like this:</p>
+
+<pre><code>#!/bin/sh
+GIT_WORK_TREE = /srv/shiny-server git checkout -f
+</code></pre>
+
+<p>You also need to tell the server that this file &lsquo;post-receive&rsquo; may be executed. by &lsquo;chmod +x hooks/post-receive&rsquo;.</p>
+
+<h3 id="setting-up-you-local-computer">setting up you local computer.</h3>
+
+<ul>
+<li>(optional) Move the files from the server /etc/shiny-server/ to you computer so you can always revert back to the basic settings.</li>
+<li>make sure you have a ssh key set up (this is safer to work with than username password)</li>
+<li>we are going to move the ssh key of your computer to the list of accepted ssh keys in the server.</li>
+<li>make a repo which will be your root folder on the server, meaning this folder will be mirrored in &lsquo;/etc/shiny-server/&rsquo; so shiny-server could be a good name.</li>
+</ul>
+
+<h3 id="a-few-changes-on-your-server">a few changes on your server</h3>
+
+<ul>
+<li>add your ssh key to &lsquo;~/.ssh/authorized_keys&rsquo; on the server</li>
+</ul>
+
+<h3 id="back-to-your-local-computer">back to your local computer</h3>
+
+<ul>
+<li><p>add a remote to your repo: &lsquo;git remote add shinyserver ssh://shiny@server.example.org/home/shiny/shiny-repo.git&rsquo;</p></li>
+
+<li><p>git remote add:  <em>add a remote</em></p></li>
+
+<li><p>shinyserver   <em>the name of that remote</em></p></li>
+
+<li><p>ssh:// <em>make a ssh connection to</em></p></li>
+
+<li><p>shiny@adres/ <em>the user shiny on server</em></p></li>
+
+<li><p>home/shiny/shiny-repo.git <em>to the folder shiny-repo in user shiny</em></p></li>
+</ul>
+
+<p>push to repo $ git push shinyserver +master:refs/heads/master</p>
+
+<h3 id="this-should-now-work">This should now work</h3>
+
+<p>Good luck!</p>
+
+<p>(I did not have access to the server while I wrote this, so I could have made mistakes, PR me with hints and answers or open an issue, alternatively: reach me on twitter @rmhoge)</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="/cleancode//tags/shiny/">shiny</a>&nbsp;
+            
+              <a href="/cleancode//tags/shiny-server/">shiny-server</a>&nbsp;
+            
+              <a href="/cleancode//tags/git/">git</a>&nbsp;
+            
+              <a href="/cleancode//tags/githook/">githook</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/cleancode/blog/2018/01/29/moving-parts-of-a-country-over-a-map/" data-toggle="tooltip" data-placement="top" title="Moving parts of a country over a map">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/cleancode/blog/2018/02/28/adding-logging-to-a-shiny-app-with-loggit/" data-toggle="tooltip" data-placement="top" title="Adding logging to a shiny app with loggit">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

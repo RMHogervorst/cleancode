@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Curl on Clean Code</title>
+    <link>/cleancode/tags/curl/</link>
+    <description>Recent content in Curl on Clean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Fri, 08 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/cleancode/tags/curl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Downloading files from a webserver, and failing.</title>
+      <link>/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</link>
+      <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</guid>
+      <description>
+
+&lt;p&gt;Recently I wanted to download all the transcripts of a podcast (600+ episodes).
+The transcripts are simple txt files so in a way
+I am  not even &amp;lsquo;web&amp;rsquo;-scraping but just reading in 600 or so text files which is
+not really a big deal. I thought.&lt;/p&gt;
+
+&lt;p&gt;This post shows you where I went wrong&lt;/p&gt;
+
+&lt;p&gt;Also here is a &lt;a href=&#34;https://www.flickr.com/photos/32123311@N00/502155430&#34; title=&#34;source: flickr, cc-by 2.0 jbloom&#34;&gt;picture&lt;/a&gt; I found of scraping.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/scraping_a_plate.jpg&#34; alt=&#34;Scraping a plate &#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;webscraping-general&#34;&gt;Webscraping general&lt;/h3&gt;
+
+&lt;p&gt;For every download you ask the server for a file and it returns the file (this is also how you normally browse the web btw, your browser requests the pages).&lt;/p&gt;
+
+&lt;p&gt;In general it is nice if you ask permission (I did, on twitter and the author was really nice! I recommend it!) and don&amp;rsquo;t
+push the website to its limit. The  servers where these files are hosted are quite beefy and I will
+probably not even make a dent in them, when I&amp;rsquo;m downloading these files. But still, be gentle.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;No really, be a responsible scraper and tell the website owners you are scraping (in person or by identifying in the header) and check if it is allowed&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I recently witnessed a demo where someone explained a lot of dirty tricks on how to get over those pesky servers denying them access and generally ignoring good practices and it made me sick&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Here are some general guides:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://rud.is/b/2017/07/28/analyzing-wait-delay-settings-in-common-crawl-robots-txt-data-with-r/&#34;&gt;Bob Rudis (@hrbrmstr) about scraping and robots.txt&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html&#34;&gt;excellent vignette of the httr package, read the part about user-agent&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;downloading-non-html-files&#34;&gt;Downloading non-html files&lt;/h3&gt;
+
+&lt;p&gt;There are multiple ways I could do this downloading:
+if I had used rvest to scrape a website I would have set a user-agent
+header&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:a-piece-of-infor&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:a-piece-of-infor&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;
+and I would have used incremental backoff: when the server refuses a connection
+we would wait and retry again, if it still refuses we would wait twice as long
+and retry again etc.&lt;/p&gt;
+
+&lt;p&gt;However, since these are txt files I can just use read_lines&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:This-is-the-read&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:This-is-the-read&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;
+to read the txt file of a transcript and apply further work downstream.&lt;/p&gt;
+
+&lt;h4 id=&#34;a-first-failing-approach-tidy-but-wrong&#34;&gt;A first, failing approach, tidy but wrong&lt;/h4&gt;
+
+&lt;p&gt;This was my first approach:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;all episodes are numbered and the transcript files are sequental too, so just a paste0 of &amp;ldquo;&lt;a href=&#34;https://first-part-of-link&amp;quot;&#34;&gt;https://first-part-of-link&amp;quot;&lt;/a&gt; number&amp;rdquo;.txt&amp;rdquo; would work.&lt;/li&gt;
+&lt;li&gt;put all links as row into dataframe&lt;/li&gt;
+&lt;li&gt;apply some purrr magic by mapping every link to a read_lines function (&lt;em&gt;what? use the read_lines() function on every link&lt;/em&gt; ).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;latest_episode &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;636&lt;/span&gt;
+ 
+
+&lt;span class=&#34;kp&#34;&gt;system.time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+ 
+    df_sn &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;data_frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;link &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;paste0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https:linktowebsite.com/firstpart-&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ 
+
+                                      &lt;span class=&#34;kp&#34;&gt;formatC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;latest_episode&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; width &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;flag &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+ 
+        mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;transcript &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; map&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;link&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; read_lines2&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+ 
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This failed.&lt;/p&gt;
+
+&lt;p&gt;Some episodes don&amp;rsquo;t exists or have no transcript (I didn&amp;rsquo;t know). Sometimes the internet connection didn&amp;rsquo;t want to work and just threw me out. Sometimes the server stopped my requests.&lt;/p&gt;
+
+&lt;p&gt;On every of those occasions the process would stop, give an informative error&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:really-it-did&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:really-it-did&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;. But the R-process would stop and I had no endresult.&lt;/p&gt;
+
+&lt;h4 id=&#34;getting-more-information-to-my-eyeballs-and-pausing-in-between-requests&#34;&gt;Getting more information to my eyeballs and pausing in between requests&lt;/h4&gt;
+
+&lt;p&gt;Also I didn&amp;rsquo;t know where it failed. So I created a new function that also sometimes waited (to not overwhelm the server)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;## to see where we are this function wraps read_lines and prints the episodenumber&lt;/span&gt;
+ 
+
+read_lines2 &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+ 
+
+    &lt;span class=&#34;kp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+ 
+    &lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;runif&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0.008&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;Sys.sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    read_lines&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This one also failed, but more informatively, I now knew if it failed on a certain episode.&lt;/p&gt;
+
+&lt;p&gt;But ultimately, downloading files from the internet is a somewhat unpredictable process. And it is much easier to just first download all the files and read them in afterwards.&lt;/p&gt;
+
+&lt;h4 id=&#34;a-two-step-approach-download-first-parse-later&#34;&gt;A two step approach, download first, parse later.&lt;/h4&gt;
+
+&lt;p&gt;Also I wanted to let the logs show that I was the one doing the scraping and how to reach me if I was overwhelming the service.&lt;/p&gt;
+
+&lt;p&gt;Enter curl.
+Curl is a library that helps you download stuff, it is used by the httr package and is a wrapper around the c++ package with the same name, &lt;em&gt;wrapped by Jeroen &amp;lsquo;c-plus-plus&amp;rsquo; Ooms&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Since I ran this function a few times I downloaded some of the files, and didn&amp;rsquo;t really want to download every file again, so I also added a check to see if the file wasn&amp;rsquo;t already downloaded&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:I-thought-that-w&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:I-thought-that-w&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; . And I wanted it to print to the screen, because I like moving text over the screen when I&amp;rsquo;m debugging.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;download_file &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    filename &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;basename&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;file.exists&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;paste0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;filename&lt;span class=&#34;p&#34;&gt;))){&lt;/span&gt;
+        &lt;span class=&#34;kp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;paste&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;file exists: &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;filename&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;kp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;paste0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;downloading file:&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+        h &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; new_handle&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;failonerror &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;FALSE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        h &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; handle_setheaders&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;h&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;User-Agent&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;scraper by RM Hogervorst, @rmhoge, gh: rmhogervorst&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        curl_download&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;url &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;destfile &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;paste0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;filename&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;mode &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;wb&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; handle &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; h&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;kp&#34;&gt;Sys.sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;sample&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;seq&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# copied this from  Bob Rudis(@hrbrmstr)&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I set the header (I think&amp;hellip;) and I tell &lt;code&gt;curl&lt;/code&gt; not to worry if it fails, &lt;em&gt;we all need reassurance sometimes&lt;/em&gt;, but just to continue.&lt;/p&gt;
+
+&lt;p&gt;And the downloading begins:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# we choose walk here, because we don&amp;#39;t expect output (we do get prints)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# We specificaly do this for the side-effect: downloading to a folder.&lt;/span&gt;
+
+latest_episode &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;636&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#downloading&lt;/span&gt;
+walk&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;paste0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://first-part-of-link.com/episodenr-&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+           &lt;span class=&#34;kp&#34;&gt;formatC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;latest_episode&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; width &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;flag &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; download_file&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So in general, don&amp;rsquo;t be a dick, ask permission and take it easy.&lt;/p&gt;
+
+&lt;p&gt;The final download approach works great! And it doesn&amp;rsquo;t matter if you stop it halfway. In the future you can see why I wanted all of these files.&lt;/p&gt;
+
+&lt;p&gt;I thought this would be the easy step, would the rest be even harder? Tune in next time!&lt;/p&gt;
+
+&lt;h4 id=&#34;cool-things-that-i-could-have-done&#34;&gt;Cool things that I could have done:&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;use purrr::safely ? I think it will continue to work after a fail then?&lt;/li&gt;
+&lt;li&gt;use a trycatch in the download&lt;/li&gt;
+&lt;li&gt;first check if the file exists&lt;/li&gt;
+&lt;li&gt;Do something more with curl, honestly it has many many options that I just didn&amp;rsquo;t explore.&lt;/li&gt;
+&lt;li&gt;use some CLI spinners for every download, way cooler&lt;/li&gt;
+&lt;li&gt;write to a log, and not to the console.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:a-piece-of-infor&#34;&gt;a piece of information we snd with every request that describes who we are &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:a-piece-of-infor&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:This-is-the-read&#34;&gt;This is the readr variant of readLines from base-R, it is much faster then the original &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:This-is-the-read&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:really-it-did&#34;&gt;really, it did &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:really-it-did&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:I-thought-that-w&#34;&gt;I thought that was really clever, didn&amp;rsquo;t you? &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:I-thought-that-w&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Your most valuable collaborator, future-you</title>
+  <meta property="og:title" content="Your most valuable collaborator, future-you" />
+  <meta name="twitter:title" content="Your most valuable collaborator, future-you" />
+  <meta name="description" content="I was recently at a R users meetup where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list of data frames and add that list to your data frame. Very cool, and more useful then I thought, but that is not what I wanted to talk about.
+I would like to give you some tips about working with someone you will probably work with in the future.">
+  <meta property="og:description" content="I was recently at a R users meetup where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list of data frames and add that list to your data frame. Very cool, and more useful then I thought, but that is not what I wanted to talk about.
+I would like to give you some tips about working with someone you will probably work with in the future.">
+  <meta name="twitter:description" content="I was recently at a R users meetup where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/" />
+  <link rel="alternate" href="/cleancode/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Your most valuable collaborator, future-you</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on May 26, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 9 minutes (1826 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>I was recently at a R users <a href="http://www.meetup.com/amst-R-dam/" title="amst-R-dam">meetup</a> where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list of data frames and add that list to your data frame. Very cool,  and more useful then I thought, but that is not what I wanted to talk about.</p>
+
+<p>I would like to give you some tips about working with someone you will probably work with in the future. Hadley will introduce that person to you:</p>
+
+<blockquote>
+<p>“In every project you have at least one other collaborator; future-you. You don&rsquo;t want future-you to curse past-you”<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup></p>
+</blockquote>
+
+<p>And future-you is an important collaborator. I have worked with R for a almost two years <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup> and when I look back I actually see some progress in what I do with R. Most of the things I did in the past were poorly documented. I recently wanted to update my imdb search package but I decided not to touch it, because I don&rsquo;t know what will break if I change some things. I have less worries for more recent packages, because I have tests for almost all the functions and I could just run the tests after every change to see if the functionality is still there.</p>
+
+<p><em>[update: I tried to find older creations in my github, but I was actually pretty impressed by how well documented it all was! So my example is not so good, or I just didn&rsquo;t upload bad examples&hellip;]</em></p>
+
+<p>What I did find was that hurry jobs take up the most time in the end. If I just coded something up fast and  then revisit that after a week it might still work and I might still know what I meant to do. But if the time delay gets longer future-you will need to spend more time figuring out what past-you was trying to achieve.</p>
+
+<p>So even if you are in a hurry now, you will  not remember the reasons for certain decisions in the future. Especially if your project gets bigger, you tend to forget things.</p>
+
+<p><strong>The key thing is to be as explicit and clear as possible towards future-you</strong>. So how do we help future-you (or other collaborators) understand past-you?</p>
+
+<p>Here are some suggestions based on lots of quotes and tidbits.</p>
+
+<h2 id="readme-driven-development">Readme driven development</h2>
+
+<p>Almost all of the github projects have a nicely formated readme. This is a very simple markdown document that describes the overal intent of the project and how to use and install it. The readme is a nice documentation of the software. So how do you make sure that the readme accurately describes the software?</p>
+
+<p><strong>You write the readme first.</strong></p>
+
+<p>Tom Preson-Werner wrote a nice <a href="http://tom.preston-werner.com/2010/08/23/readme-driven-development.html" title=" readme driven development 2010-08-23">article</a> about this. If you write the readme first then you can think through the project first and you already know what the end user (probably mostly future-you) will need. And you don&rsquo;t need to write the documentation afterwards.  I have actually tried this in a few projects (f.i. <a href="https://github.com/RMHogervorst/badgecreatr">badgecreator</a>), it helped me to think about the functions and the logical steps. And if you describe the next steps, other people can jump in more easily.</p>
+
+<h2 id="write-the-test-first">Write the test first</h2>
+
+<p>A way to understand past-you&rsquo;s incoherent ramblings in the future (see what I did there?), is to write the tests before you write the part of the code that passes the test. I am talking about unit-tests, tests that check if your code is still working as you planned it out.</p>
+
+<p>So how would writing the tests first, help future-you and current(?)-you understand each other? If written correctly the unittest is a promise, an understanding if you like, about how pieces of code should function. For instance in one of my projects the unit-test expects an error under certain conditions. Thus the code is supposed to give an error when those conditions arise.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">test_that<span class="p">(</span><span class="s">&#34;rowsums larger or smaller than 1 are failing&#34;</span><span class="p">,{</span>
+        expect_error<span class="p">(</span>CreateVertices<span class="p">(</span>errorset<span class="p">,</span><span class="s">&#34;var1&#34;</span><span class="p">,</span> <span class="s">&#34;var2&#34;</span><span class="p">,</span> <span class="s">&#34;vartoomuch&#34;</span><span class="p">,</span> verticeName <span class="o">=</span> <span class="bp">T</span><span class="p">),</span>regexp <span class="o">=</span> <span class="s">&#34;column means are not equal to 1&#34;</span> <span class="p">)</span>
+        expect_error<span class="p">(</span>CreateVertices<span class="p">(</span>errorset<span class="p">,</span><span class="s">&#34;var1&#34;</span><span class="p">,</span> <span class="s">&#34;var2&#34;</span><span class="p">,</span> <span class="s">&#34;vartoolittle&#34;</span><span class="p">,</span> verticeName <span class="o">=</span> <span class="bp">T</span><span class="p">),</span>regexp <span class="o">=</span> <span class="s">&#34;column means are not equal to 1&#34;</span> <span class="p">)</span>
+<span class="p">})</span></code></pre></div>
+<p>I really like the elegance of the testthat package, it <strong>literaly</strong> says what it tests: &ldquo; <em>test that</em> rowsoms larger or smaller than 1 are failing&rdquo;. And if the test fails it will tell you exactly <strong>where</strong> it failed and <strong>what</strong> it was trying to test (according to you).</p>
+
+<p>So how would you implement this? <em>I will make a seperate blogpost about this later, but for now look at r-pkg <a href="http://r-pkgs.had.co.nz/tests.html">chapter</a> about testing</em> Start with the thing you would like to create, for instance: Count all the people that are called Roel. That is nice small function. Give it a name: <code>roel_counter</code>, for example.</p>
+
+<p>Create a seperate testscript <code>test_roel_counter.r</code>. With the testthat framework you would put that file in <code>tests/testthat/</code> so that it and all the other unit tests will be executed if you hit the shortkey.</p>
+
+<p>I usually write tests like this.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">context<span class="p">(</span><span class="s">&#34;roel_counter&#34;</span><span class="p">)</span>
+teststring <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;Roel&#34;</span><span class="p">,</span> <span class="s">&#34;Roel&#34;</span><span class="p">,</span> <span class="s">&#34;Hans&#34;</span><span class="p">)</span>
+confusestring <span class="o">&lt;</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;Roel&#34;</span><span class="p">,</span> <span class="s">&#34;roel&#34;</span><span class="p">,</span> <span class="s">&#34;rOel&#34;</span><span class="p">,</span> <span class="s">&#34;roef&#34;</span>
+         
+test_that<span class="p">(</span><span class="s">&#34;roel_counter finds accurate number of roel&#34;</span><span class="p">,{</span>
+   expect_equal<span class="p">(</span>roel_counter<span class="p">(</span> teststring<span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+   expect_false<span class="p">(</span>roel_counter<span class="p">(</span> teststring<span class="p">)</span> <span class="o">==</span> <span class="m">3</span><span class="p">)</span>
+   expect_equal<span class="p">(</span>roel_counter<span class="p">(</span> confusestring<span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+   expect_false<span class="p">(</span>roel_counter<span class="p">(</span> confusestring<span class="p">)</span> <span class="o">==</span> <span class="m">4</span><span class="p">)</span> 
+<span class="p">}</span></code></pre></div>
+<p>The first test will check if Roel counter finds 2 Roels and the second test will check if the string will not just return the total length of the string.</p>
+
+<p>I could add all sorts of variations of my name to the test to see if the function works. In fact most of the things you would try out in the console to see if the function works could be put into the testfile. But in test driven development you would first create the tests and then write the function. After you have written a part of the code that works you will test and see what passes and what fails. Then you add things to the code to pass more tests. Afte all the tests have passed, you write a new test for a new part of the code.</p>
+
+<p>If current-you is interupted and future-you finds itself back at the code, future-you can just press the hotkey for the tests and find out which are failing and continue on that part. So in a way, future-you can explicitly find out what past-you was trying to achieve.</p>
+
+<h2 id="use-version-control">use version control</h2>
+
+<p>Version control can help you stay sane. It saves your work if you try something new, it helps you to start again at any previously committed point in history and apart from the merge errors it works generally very well.</p>
+
+<p>Version control lets you record snapshots of previous code, but also lets you comment on what you solved or changed. When you save a new version of the code to version control you will have to be a bit explicit. Otherwise you will find yourself in this situation:</p>
+
+<p><img src="/img/wrong_commit.PNG" alt="an example of a less helpful commit message" /></p>
+
+<p>Version control, if you use meaningful descriptions, can help you find out where you did some actions and what you were trying to do. Describe intent in the commit messages. A quote I really like is:<br />
+&gt; &ldquo;You mostly collaborate with yourself, and me-from-two-months-ago never responds to email.&rdquo;<sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">3</a></sup></p>
+
+<p>My commits have become somewhat better:</p>
+
+<p><img src="/img/example_better_commit.PNG" alt="somewhat better commit messages" /></p>
+
+<p>You could even use a github-issue-based-workflow where you write down the problems you want to solve in seperate issues and after you solved a particular issue, you push the code to github referencing the issue number.<sup class="footnote-ref" id="fnref:4"><a rel="footnote" href="#fn:4">4</a></sup></p>
+
+<h2 id="functional-programming">Functional programming</h2>
+
+<p>Hadley is really big on functional programming. That is, making clear what you want to achieve, and abstract away what happens in the computer itself.</p>
+
+<p>One example of this is the pipe operator. The pipe operator is in use in many programming languages (big thing in UNIX) but is not part of base r. Untill it was introduced in the magritr package<sup class="footnote-ref" id="fnref:5"><a rel="footnote" href="#fn:5">5</a></sup> by Stefan Milton Bache. The pipe does nothing special except that it takes the thing to the left of it and places that in the first place of the thing to the right.
+So for instance <code>dataset %&gt;% filter(name==&quot;Roel&quot;)</code> means that we start with dataset and then filter the rows that have <code>&quot;Roel&quot;</code> in the name column.
+In the background it does <code>filter(dataset, name == &quot;Roel&quot;)</code></p>
+
+<p>Which makes code much much easier to read.
+compare:</p>
+
+<p><code>filter_by(select( filter(dataset, year == 2012), month, children, accidents ),accidents)</code> with</p>
+
+<p><code>dataset %&gt;% 
+filter(year==2012) %&gt;% 
+select(month, children, accidents) %&gt;%
+group_by(accidents)</code></p>
+
+<p>Then there the  map functions from the purr package, which essentially replace loops. Not because loops are inherently bad, but the functions focus on the operation being performed instead of the details of the loop itself. I will write about these functions once I get used to them in the future.<sup class="footnote-ref" id="fnref:6"><a rel="footnote" href="#fn:6">6</a></sup></p>
+
+<h2 id="comments">comments</h2>
+
+<p>A final thought about comments in the code.</p>
+
+<blockquote>
+<p>Do it often.</p>
+</blockquote>
+
+<p>Describe in comments mostly what your intent was, or your reasons for a function. Don&rsquo;t describe the <strong>what</strong>, but describe the <strong>why</strong>.
+Do comment as often as you find necessary. More is better then less. However don&rsquo;t put future plans or errors in the comments, you will not read them. An issue tracker is a great place for those.</p>
+
+<h1 id="final-thoughts">Final thoughts</h1>
+
+<p>Think about this quote:</p>
+
+<blockquote>
+<p>&ldquo;Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.&rdquo;</p>
+</blockquote>
+
+<p>But looking back at this whole post, <strong>you</strong> will probably be the violent psychopath maintaining the code.</p>
+
+<p>So these are some ways to help yourself in the future, try some and tell me how it went.</p>
+
+<h1 id="references">references</h1>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Or close to these words, I wrote it down later. - Wickham amsterdam 18-5-16
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">I don&rsquo;t know exactly, but if I use the time when I created a Github Account (november third 2014) it is almost 19 months at the moment of writing.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:3">a tweet of mtholder: <a href="https://twitter.com/kcranstn/status/370914072511791104">https://twitter.com/kcranstn/status/370914072511791104</a> text tweet: @mtholder motivating git: You mostly collaborate with yourself, and me-from-two-months-ago never responds to email. @swcarpentry
+ <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+<li id="fn:4">That might be too much, but it&rsquo;s quite nice. if you type &lsquo;closes #10&rsquo; or &lsquo;fix #10&rsquo; github will close issue 10 and refer to that commit. I have also heard of people using seperate branches for problemfixing and using pull requests to the main branch to solve the issues (works the same with fix or closes). I have tried this approach in some cases and it helps structuring your work.
+ <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
+<li id="fn:5">It took me forever to find out why it was called magritr. Because most R packages are named after their function or are a weird pun on something* I couldn&rsquo;t place the name. But it is a pun on a famous painting by Magrit (La trahison des images, according to wikipedia) of a pipe with the text below &ldquo;ceci n`est pa une pipe&rdquo; &lsquo;this is not a pipe&rsquo;.<a href="https://en.wikipedia.org/wiki/The_Treachery_of_Images">https://en.wikipedia.org/wiki/The_Treachery_of_Images</a> and for the package <a href="https://cran.r-project.org/web/packages/magrittr/index.html">https://cran.r-project.org/web/packages/magrittr/index.html</a><br />
+ <a class="footnote-return" href="#fnref:5"><sup>[return]</sup></a></li>
+<li id="fn:6">See for more information about loops <a href="http://r4ds.had.co.nz/iteration.html">chapter 16 (iteration)</a> of the &ldquo;r for datascience&rdquo; book by hadley wickham. The book is still under development but is a treasuretrove of information.
+ <a class="footnote-return" href="#fnref:6"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="/cleancode//tags/advanced/">advanced</a>&nbsp;
+            
+              <a href="/cleancode//tags/intermediate/">intermediate</a>&nbsp;
+            
+              <a href="/cleancode//tags/version-control/">version control</a>&nbsp;
+            
+              <a href="/cleancode//tags/tdd/">TDD</a>&nbsp;
+            
+              <a href="/cleancode//tags/readme/">readme</a>&nbsp;
+            
+              <a href="/cleancode//tags/functional-programming/">functional programming</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/" data-toggle="tooltip" data-placement="top" title="Introduction to R projects">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/" data-toggle="tooltip" data-placement="top" title="Non-standard-evaluation and standard evaluation in dplyr">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

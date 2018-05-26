@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Clean Code</title>
+    <link>/cleancode/tags/git/</link>
+    <description>Recent content in Git on Clean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Tue, 06 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/cleancode/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setting up a version controlled shiny-server</title>
+      <link>/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</link>
+      <pubDate>Tue, 06 Feb 2018 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</guid>
+      <description>
+
+&lt;p&gt;Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.&lt;/p&gt;
+
+&lt;p&gt;Shiny server (I used the open source version) has multiple installers provided by RStudio.&lt;/p&gt;
+
+&lt;p&gt;The installers for shiny-server create a user shiny and installs all the services needed.&lt;/p&gt;
+
+&lt;p&gt;I used a guide specific for my version of linux to install shiny-server and combined it with two other guides to make it version controlled.&lt;/p&gt;
+
+&lt;p&gt;I have added the instructions to this &lt;a href=&#34;https://gist.github.com/RMHogervorst/9d88ebff914b66b984ede8e78876c92f&#34;&gt;github gist&lt;/a&gt; but you can also follow along.&lt;/p&gt;
+
+&lt;h3 id=&#34;server-setup&#34;&gt;Server setup&lt;/h3&gt;
+
+&lt;p&gt;After you&amp;rsquo;ve installed shiny-server, the server serves all apps in &amp;lsquo;/etc/shiny-server&amp;rsquo; but I really don&amp;rsquo;t like to scp into the server to upload files, I&amp;rsquo;d rather work on my computer, put everything under version control and push the changes to the server. That way I can easily revert my changes if something fails and I don&amp;rsquo;t lose work.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve used Dean Atalli&amp;rsquo;s &lt;a href=&#34;https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/&#34;&gt;excellent guide to setting up a server on digital ocean&lt;/a&gt; but I&amp;rsquo;ve modified a small part. He is using github to push his changes and then pulls from github to his server.
+I was in a situation where I did not have access to github and I wanted a slightly simpler setup.&lt;/p&gt;
+
+&lt;p&gt;I created a bare repository on the server (that accepts my changes and responds just as github would, except the pretty website features) and used a git-hook. The files in the bare repo are not laid out in the same way as in the original files (on my computer) so I have to do something with that.&lt;/p&gt;
+
+&lt;p&gt;A git hook is something that runs  before, during or after you change a repo (it hooks into git). It is a simple shell script that (in my case) runs after a change is made in the repo and executes a command. After a change this &amp;lsquo;post-receive&amp;rsquo;-hook checks out the latest branch and moves it to &amp;lsquo;/etc/shiny-server/&amp;rsquo;.&lt;/p&gt;
+
+&lt;p&gt;So the set up is like &lt;a href=&#34;http://toroid.org/git-website-howto&#34; title=&#34;I modified this to make it apply to shiny-server&#34;&gt;this&lt;/a&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/home/shiny/shiny.git
+/etc/shiny-server/
+/all the other folders in a linux system
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You move into the shiny.git folder (no real need to use that extension, but it is common) and go to the .git folder. inside the folder you add and modify a file called post-receive like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/sh
+GIT_WORK_TREE = /srv/shiny-server git checkout -f
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You also need to tell the server that this file &amp;lsquo;post-receive&amp;rsquo; may be executed. by &amp;lsquo;chmod +x hooks/post-receive&amp;rsquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;setting-up-you-local-computer&#34;&gt;setting up you local computer.&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;(optional) Move the files from the server /etc/shiny-server/ to you computer so you can always revert back to the basic settings.&lt;/li&gt;
+&lt;li&gt;make sure you have a ssh key set up (this is safer to work with than username password)&lt;/li&gt;
+&lt;li&gt;we are going to move the ssh key of your computer to the list of accepted ssh keys in the server.&lt;/li&gt;
+&lt;li&gt;make a repo which will be your root folder on the server, meaning this folder will be mirrored in &amp;lsquo;/etc/shiny-server/&amp;rsquo; so shiny-server could be a good name.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;a-few-changes-on-your-server&#34;&gt;a few changes on your server&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;add your ssh key to &amp;lsquo;~/.ssh/authorized_keys&amp;rsquo; on the server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;back-to-your-local-computer&#34;&gt;back to your local computer&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;add a remote to your repo: &amp;lsquo;git remote add shinyserver ssh://shiny@server.example.org/home/shiny/shiny-repo.git&amp;rsquo;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;git remote add:  &lt;em&gt;add a remote&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;shinyserver   &lt;em&gt;the name of that remote&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ssh:// &lt;em&gt;make a ssh connection to&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;shiny@adres/ &lt;em&gt;the user shiny on server&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;home/shiny/shiny-repo.git &lt;em&gt;to the folder shiny-repo in user shiny&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;push to repo $ git push shinyserver +master:refs/heads/master&lt;/p&gt;
+
+&lt;h3 id=&#34;this-should-now-work&#34;&gt;This should now work&lt;/h3&gt;
+
+&lt;p&gt;Good luck!&lt;/p&gt;
+
+&lt;p&gt;(I did not have access to the server while I wrote this, so I could have made mistakes, PR me with hints and answers or open an issue, alternatively: reach me on twitter @rmhoge)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduction to R projects</title>
+      <link>/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</link>
+      <pubDate>Sun, 10 Apr 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</guid>
+      <description>
+
+&lt;p&gt;It often makes sense to separate your projects. And since space is cheap you are probably creating separate folders on your computer. In RStudio you can create different projects that live in their own folder.&lt;/p&gt;
+
+&lt;p&gt;When you start a different project the files of that project work independently from other projects. And the standard locations of your workspace and other things are also separated from the rest.&lt;/p&gt;
+
+&lt;p&gt;In my case, for example, I have several projects and the last 10 or so are displayed in the dropdown menu:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-project-dropdown.PNG&#34; alt=&#34;Roel&#39;s last projects image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Opening a new project presents you with a screen .&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;rstudio new project image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can create a new project in a new location, in an old location or download from &lt;a href=&#34;https://rmhogervorst.github.io/cleancode/blog/2016/03/01/version-control-start.html&#34; title=&#34;See a previous post about version control&#34;&gt;version control&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Did you try the new directory one already?&lt;/p&gt;
+
+&lt;p&gt;In the following example, you can clone (or checkout) a file from the internet.&lt;/p&gt;
+
+&lt;p&gt;I presume you have version control installed already, if not &lt;a href=&#34;https://stat545-ubc.github.io/git03_rstudio-meet-git.html&#34;&gt;this article&lt;/a&gt;  will help you along. Once you&amp;rsquo;ve installed git, you can use version control for all your projects. See the post version control&lt;/p&gt;
+
+&lt;p&gt;If you click on &lt;code&gt;checkout from version control&lt;/code&gt; this will happen&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-versioncontrol.PNG&#34; alt=&#34;image of checkout from version control&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on git&lt;/p&gt;
+
+&lt;p&gt;and fill in some details.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-clone-git.PNG&#34; alt=&#34;image of my repo clone&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;in my case I&amp;rsquo;ve dowloaded from my own repository but cloning a project from github is possible from every project.&lt;/p&gt;
+
+&lt;p&gt;I went to the website &lt;a href=&#34;https://github.com/RMHogervorst/cleancodeexamples&#34;&gt;https://github.com/RMHogervorst/cleancodeexamples&lt;/a&gt; and selected the clone address. &lt;em&gt;which is usually the address ending in .git&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Here the clone address at a different repository:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/clone-image.PNG&#34; alt=&#34;image of hadley&#39;s ggplot2 repo address&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That is it, a short introduction to projects.&lt;/p&gt;
+
+&lt;h3 id=&#34;further-reading&#34;&gt;Further reading&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects&#34;&gt;Rstudio: Using Projects&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Version control with Git</title>
+      <link>/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</link>
+      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</guid>
+      <description>
+
+&lt;h2 id=&#34;keeping-track-of-versions&#34;&gt;Keeping track of versions&lt;/h2&gt;
+
+&lt;p&gt;You work on a project and would like to keep track of what you did.
+That is why keep old versions of your files. That way you can go back if you messed up beyond recognition.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Usually that looks like this:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/versioncontrol2.png&#34; alt=&#34;filesystem without version control&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Or you use dropbox or something like it:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/dropboxversion.png&#34; alt=&#34;dropbox versions&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Other people use email. Emailing to themselves or to collaborators when they finished something.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And that is fine. If it works, it works.
+However in some cases you might want to go back to a previous version and work from there, or start with a variant your colleague made. That could become very difficult with these ways of versioning. Also you never know what changed in these versions untill you open the file and manually compare things. That gets tedious.&lt;/p&gt;
+
+&lt;h2 id=&#34;version-control-software&#34;&gt;Version control software&lt;/h2&gt;
+
+&lt;p&gt;With version control software you can create snapshots of the points where you fixed bugs, where you finished features and even better, you can  tell exactly  where versions of the file are different.&lt;/p&gt;
+
+&lt;p&gt;The most widely used software are Mercurial, SVN and GIT. We will work with GIT, first of all because it can be used with &lt;a href=&#34;https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN&#34; title=&#34;Version control with git - Rstudio&#34;&gt;Rstudio&lt;/a&gt;, though svn works too, and second because it works nicely with Github.&lt;/p&gt;
+
+&lt;p&gt;So how does Git work? Every time you reach a point in you project that you think is critical, you make a commit. You save a current state of all the files in the directory. And when you make this snapshot of your files, you can (and should) write down what you solved and what you changed since last time. In the future when you look back at your commit history you can read in what state your project was.&lt;/p&gt;
+
+&lt;p&gt;In the next example you can see what changed in the files, without even looking at the files themselves.
+&lt;img src=&#34;/cleancode/img/commits_example.png&#34; alt=&#34;commits from test_dat, from github&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;branching&#34;&gt;Branching&lt;/h3&gt;
+
+&lt;p&gt;Even better, you can start from any saved point in time and create a new version. And when you like that version better, merge it back into an other version.
+&lt;img src=&#34;/cleancode/img/branching.png&#34; alt=&#34;branches&#34; /&gt;
+In the example above, at the second commit I branched (purple line). the third row from below is a commit in the purple branch. Then I changed something in the normal branch and finally I merged the blue and purple line in the second line from the top.&lt;/p&gt;
+
+&lt;p&gt;You don&amp;rsquo;t have to use branching, just saving important points along the way is a great start (It would be the point where you email yourself a version, or save a new version of the file).&lt;/p&gt;
+
+&lt;h2 id=&#34;starting-with-git&#34;&gt;Starting with Git&lt;/h2&gt;
+
+&lt;p&gt;Git was developed by people at Linux because their other version control software was hard to work with [^1]. Git is designed to work with a distributed nonlinear workflow&amp;hellip; Which means that everyone can work at any time at their version of software and you can merge those versions together. What you need to know is that it works, it&amp;rsquo;s free, works on all systems, and that many people use it. You can use it for your projects, even if you work alone. It helps keeping your files under control and makes it easy to go back to previous versions of your files. It is not a backup solution (please make backups!) and it is not a unicorn [^2]. But how do you work with git?&lt;/p&gt;
+
+&lt;h3 id=&#34;graphical-user-interfaces-gui-for-git&#34;&gt;graphical user interfaces (gui) for git&lt;/h3&gt;
+
+&lt;p&gt;Git lives in the command line, you need to navigate to the right folder on your computer within the command line, and type the right commands. Unfortunately I always forget what the commands are. But for people like me there is a GUI for windows that takes care of many things. But I would actually recommend Sourcetree for windows (mac also). It&amp;rsquo;s a graphical user interface where you keep track of all your repositories. It&amp;rsquo;s a great tool, see &lt;a href=&#34;https://www.youtube.com/watch?v=1lBdlh3AGSc&#34;&gt;this&lt;/a&gt; youtube video for a short [14 mins] tutorial into sourcetree.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Do I need to install all this new sofware? I&amp;rsquo;m just coding for fun!&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;No, you don&amp;rsquo;t have to. All I would recommend is to &lt;a href=&#34;https://git-scm.com/downloads&#34;&gt;download Git&lt;/a&gt; and install it. Rstudio has gitsupport build in, you only need to install git on your system and tell rstudio where to find it. After that you can click icons.&lt;/p&gt;
+
+&lt;h3 id=&#34;rstudio-and-git&#34;&gt;Rstudio and Git&lt;/h3&gt;
+
+&lt;p&gt;According to &lt;a href=&#34;https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN&#34;&gt;Rstudio&lt;/a&gt;, you will have to activate git support after you have downloaded and installed it to your computer.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Go to Global Options (from the Tools menu)&lt;/li&gt;
+&lt;li&gt;Click Git/SVN&lt;/li&gt;
+&lt;li&gt;Click &amp;lsquo;Enable version control interface for RStudio projects&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;If necessary, enter the path for your Git or SVN executable where provided.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/enabling-git-rstudio.PNG&#34; alt=&#34;enabling git in rstudio example&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So, how do you use version control within Rstudio?&lt;/p&gt;
+
+&lt;h1 id=&#34;rstudio-project-and-git&#34;&gt;Rstudio project and git.&lt;/h1&gt;
+
+&lt;p&gt;Start a new project
+&lt;img src=&#34;/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I chose an empty project in a new directory&lt;/p&gt;
+
+&lt;p&gt;and then click &amp;lsquo;Create a git repository&amp;rsquo;
+&lt;img src=&#34;/cleancode/img/rstudio-new-project-enablegit.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The repo and real folder on windows 8.1 look like this.
+&lt;figure class=&#34;half&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-empty-git.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/folderview-new-git-project.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;figcaption&gt;rstudio and the real folder with hidden folders showing&lt;/figcaption&gt;
+&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;When you start a new project a Rproject file is placed in the folder that contains all the project settings you have. But when you enable git, a .gitignore file is also placed in your folder. That file tells git which files not to track for changes. Rproject makes sure that the the temporary r files are not tracked, because temporary files will be recreated every time and tracking them is useless. In my case I have turned on the &amp;lsquo;show hidden files&amp;rsquo; option in windows. If you don&amp;rsquo;t have that on (and you don&amp;rsquo;t have to) you will only see the gitignore file (with no name) and the rstudioproject file.&lt;/p&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s look back at rstudio git tab.&lt;/p&gt;
+
+&lt;h2 id=&#34;git-version-control-within-rstudio-your-first-commit&#34;&gt;Git version control within Rstudio: your first commit&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-git-first-commit.PNG&#34; alt=&#34;&#34; /&gt;
+I have added the second file, the icon changes to a green A (short for: add to repository), the first one shows two yellow questionmarks (short for: not tracked, not changed, I think).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;add the two files of your project and click &amp;lsquo;commit&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A new window will open:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-git-commit-window.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The left part of the screen shows what files are in the commit, the bottom part displays the changes since last commit. Green means added, red means subtracted.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Click on the second file in your commit, the bottom part displays what has changed.&lt;/li&gt;
+&lt;li&gt;Write a commit message, never commit without a message, if you don&amp;rsquo;t have a description, it probably wasn&amp;rsquo;t worth committing. The message does not have to be long, short is better. in this case I used: &amp;ldquo;init commit&amp;rdquo; That just tells me it was the first commit before I did anything.&lt;/li&gt;
+&lt;li&gt;Click &amp;lsquo;commit&amp;rsquo; when you typed your description.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;a window will open with a description of what happened.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-git-commit-message.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When you return to the main view of rstudio you will see that the git tab has changed a bit, there are no files (because nothing has changed yet since your commit 2 seconds ago) and next to the gear wheel it says: &amp;lsquo;master&amp;rsquo; . This is the branch you are on right now. By default the first branch is master.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s create a new file&lt;/p&gt;
+
+&lt;h2 id=&#34;git-version-control-within-rstudio-your-first-new-file&#34;&gt;Git version control within Rstudio: your first new file.&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a new file and fill it with some code or:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# This is a awesome function&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# It takes a number and gives you &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# the corresponding letter in the&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# alphabet.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# 2016-02-27&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# YOUR name &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Then save it in scripts/  (yes, you must create that folder as well, or don&amp;rsquo;t I&amp;rsquo;m not the police&amp;hellip;)&lt;/li&gt;
+&lt;li&gt;add it to the repo (clicking it will tell git to track that file from now on)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It will look like this
+&lt;figure class=&#34;half&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-commit1.PNG&#34; alt=&#34;before tracking&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-commit2.PNG&#34; alt=&#34;after tracking&#34;&gt;
+    &lt;figcaption&gt;rstudio adding files to commit before and after&lt;/figcaption&gt;
+&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at the history of your commits, click on the clock in the git tab.
+Mine looks like this:
+&lt;img src=&#34;/cleancode/img/rstudio-commit-history.PNG&#34; alt=&#34;rstudio commit history&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note the commit message, it says what the commit adds to the repo. Try to write your messages as if you fulfull a order and discribe the contents. For example: &amp;ldquo;adds count_messages function that counts messages send to the user&amp;rdquo;
+or, &amp;ldquo;fix issue #2 can&amp;rsquo;t work with arrays&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;That way you can scan through your commits and see what changed where. When you click on a commit you can see what changed since the commit before.&lt;/p&gt;
+
+&lt;h2 id=&#34;some-questions&#34;&gt;some questions&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Will version control eat up all my hard disk space?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;No, first of all all r scripts are essentially plain text files and take up little space and second, git only saves what changed since the last time. So the total file size should not go up that much. And third, space is cheap, you will not easily run out of space on modern computers.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nice! Can I add my data files to a git repo as well?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is not recommended to add datafiles to a repo. I think it can work with plain text files such as .txt, .csv, .tdv . But many other files can&amp;rsquo;t be read by git, so it treats them as binary files. Git can only see that the file has changed, but doesn&amp;rsquo;t know WHAT changed. So it saves the new version as a whole. If you have some large binary files that change often, they will eat up a lot of space. There is a git large file system but I don&amp;rsquo;t know how it works yet.
+Do add example csv files or smaller files if you&amp;rsquo;d like to.&lt;/p&gt;
+
+&lt;h3 id=&#34;further-reading&#34;&gt;Further Reading&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN&#34;&gt;Git in Rstudio&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://git-scm.com/&#34;&gt;git website&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.r-bloggers.com/?s=git&#34;&gt;r-blogger.com all articles about git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow&#34;&gt;Atlassian company of Sourcetree, has a long read about branching models&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://r-bio.github.io/intro-git-rstudio/&#34;&gt;r-bio example of git and rstudio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;strong&gt;best resource&lt;/strong&gt; is &lt;a href=&#34;https://stat545-ubc.github.io/git00_index.html&#34; title=&#34;pages about git&#34;&gt;https://stat545-ubc.github.io/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[^1]: Linus Torvald (the main man behind linux) actually said he wouldn&amp;rsquo;t touch subversion with a ten-foot pole. &lt;a href=&#34;https://git.wiki.kernel.org/index.php/LinusTalk200705Transcript&#34;&gt;https://git.wiki.kernel.org/index.php/LinusTalk200705Transcript&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[^2]: &lt;em&gt;Chasing unicorns, the pursuit of something that’s, for all intents and purposes, unobtainable as unicorns don&amp;rsquo;t exist.&lt;/em&gt; Meaning it doesn&amp;rsquo;t magically solve all the problems other version control software has.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

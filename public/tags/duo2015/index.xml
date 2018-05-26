@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Duo2015 on Clean Code</title>
+    <link>/cleancode/tags/duo2015/</link>
+    <description>Recent content in Duo2015 on Clean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Mon, 13 Jun 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/cleancode/tags/duo2015/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Non-standard-evaluation and standard evaluation in dplyr</title>
+      <link>/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</link>
+      <pubDate>Mon, 13 Jun 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</guid>
+      <description>
+
+&lt;p&gt;THIS POST IS NO LONGER ENTIRELY RELEVANT. DPLYR 0.7 HAS A SLIGHTLY DIFFERENT (AND SLIGHTLY MORE INTUITIVE) WAY OF WORKING WITH NON-STANDARD EVALUATION.&lt;/p&gt;
+
+&lt;p&gt;I love the dplyr package with all of its functions, however if you use normal dplyr in functions in your package r-cmd-check will give you a warning: &lt;code&gt;R CMD check NOTE: No visible binding for global variable NAME OF YOUR VARIABLE&lt;/code&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. The functions do work, and everything is normal, however if you submit your package to CRAN, such a NOTE is not acceptable. A workaround is to add globalVariables to one of your scripts. for instance:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;globalVariables&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;var1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;var2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;varyourmother&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+				&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which works but it is not necessary.&lt;/p&gt;
+
+&lt;h2 id=&#34;nse&#34;&gt;NSE&lt;/h2&gt;
+
+&lt;p&gt;dplyr (and some other packages and functions) work with non-standard-evaluation (NSE). One example is &lt;code&gt;library(magrittr)&lt;/code&gt; vs &lt;code&gt;library(&amp;quot;magrittr&amp;quot;)&lt;/code&gt; , both work. But
+&lt;code&gt;install.packages(magrittr)&lt;/code&gt; vs &lt;code&gt;install.packages(&amp;quot;magrittr&amp;quot;)&lt;/code&gt; is different, you need the quotes. In almost all the functions in r when you name a part of an object you need the quotes but in some functions you don’t. They are designed to work in a non-standard way. Some even miss a standard way.&lt;/p&gt;
+
+&lt;p&gt;I will focus on the dplyr functions only, a general introduction to NON standard evaluation might come later.&lt;/p&gt;
+
+&lt;p&gt;Under the hood the dplyr functions work just as other functions, in fact
+all the functions use normal evaluation (standard evaluation), but for interactive use there is a non standard evaluation version, which saves you typing. The interactive version is then first evaluated with the lazyeval package and is then sent to the SE version.
+There is even a naming scheme &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:
+&amp;gt; Every function that uses NSE should have a standard evaluation (SE) escape hatch that does the actual computation. The SE-function name should end with _.&lt;/p&gt;
+
+&lt;p&gt;Therefore there are multiple verbs: select(), select&lt;em&gt;(), mutate(), mutate&lt;/em&gt;(), etc. Under the hood &lt;code&gt;select()&lt;/code&gt; is evaluated with the lazyeval package and sent to &lt;code&gt;select_()&lt;/code&gt;.
+In functions you should use the SE versions, not only to stop notes from creating, but also because it gives you extra options.&lt;/p&gt;
+
+&lt;h1 id=&#34;from-nse-the-standard-interactive-use-to-se-standard-evalation-within-functions&#34;&gt;From NSE (the standard interactive use) to SE (standard evalation within functions&lt;/h1&gt;
+
+&lt;p&gt;So this is a list of things i regularly do with NSE and their translation in SE.&lt;/p&gt;
+
+&lt;p&gt;I will use the data file about students in higher education in the Netherlands.&lt;/p&gt;
+
+&lt;h3 id=&#34;background&#34;&gt;background&lt;/h3&gt;
+
+&lt;p&gt;There are basicaly three ways to quote variables that dplyr/ lazyeval understands:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;with a formula &lt;code&gt;~mean(mpg)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;with quote()   &lt;code&gt;quote(mean(mpg))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;as a string  &lt;code&gt;&amp;quot;mean(mpg)&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;select&#34;&gt;Select()&lt;/h2&gt;
+
+&lt;p&gt;Example of the select function from dplyr.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dplyr&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+ &lt;span class=&#34;c1&#34;&gt;# first the normal NSE version&lt;/span&gt;
+select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# standard evaluation &lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# comma doesn&amp;#39;t work, + doesn&amp;#39;t work&lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;quote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# nope&lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;quote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;quote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# yes!&lt;/span&gt;
+select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;OPLEIDINGSNAAM.ACTUEEL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;FREQUENCY&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;YEAR&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;OPLEIDINGSFASE.ACTUEEL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# works&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Source: local data frame [24,150 x 2]
+
+   OPLEIDINGSNAAM.ACTUEEL FREQUENCY
+                    (chr)     (int)
+1     B Aarde en Economie       121
+2     B Aarde en Economie        54
+3     B Aarde en Economie       140
+4     B Aarde en Economie        52
+5     B Aarde en Economie       132
+6     B Aarde en Economie        55
+7     B Aarde en Economie       144
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;filter&#34;&gt;Filter()&lt;/h2&gt;
+
+&lt;p&gt;Then the filter function ( I also use the select function here)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ways that work. &lt;/span&gt;
+filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; YEAR &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+filter_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;YEAR &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+filter_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;quote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;YEAR &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+filter_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;YEAR ==2015&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# or with a list to dots.&lt;/span&gt;
+dotsfilter &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;OPLEIDINGSNAAM.ACTUEEL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+filter_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;YEAR ==2015&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; dotsfilter&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Source: local data frame [4,830 x 2]
+
+         OPLEIDINGSNAAM.ACTUEEL FREQUENCY
+                          (chr)     (int)
+1           B Aarde en Economie       151
+2           B Aarde en Economie        60
+3           B Aardwetenschappen         0
+4           B Aardwetenschappen       149
+5           B Aardwetenschappen       335
+6           B Aardwetenschappen         0
+7           B Aardwetenschappen        83
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;group-by-summarize&#34;&gt;Group_by() &amp;amp; Summarize()&lt;/h2&gt;
+
+&lt;p&gt;Group_by and summarize examples, see also the NSE vignette on dplyr &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;group_by&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;total &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; n&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# group by in SE, and summarize with NSE&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;total &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# both NSE, pass list of arguments to .dots&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;total &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# does not work&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# does work. &lt;/span&gt;
+dots &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; dots&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; setNames&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dots&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;total&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;sum(FREQUENCY)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+group_by_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarise_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;FREQUENCY&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Source: local data frame [2 x 2]
+
+  GENDER sum(FREQUENCY)
+   (chr)          (int)
+1    MAN         609755
+2  VROUW         639609
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mutate-and-slightly-more-advanced-use&#34;&gt;Mutate() and slightly more advanced use&lt;/h2&gt;
+
+&lt;p&gt;You want to add two columns up, but you don&amp;rsquo;t yet know which columns that will be (example from Paul Hiemstra&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# normal interactive use  &lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dplyr&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;new_column &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So you would like a function that does something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;f &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;col1&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; col2&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; new_col_name&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;new_col_name &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; col1 &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; col2&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The problem is that r will search for col1 and col2, which don&amp;rsquo;t exist.
+Furthermore the name of the endresult will be new_col_name, and not the content of new_col_name. To get around non-standard evaluation, you can use the lazyeval package. The following function does what we expect:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;f &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;col1&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; col2&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; new_col_name&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    mutate_call &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; lazyeval&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;interp&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt; a &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; b&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; a &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;col1&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; b &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;col2&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+    mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; setNames&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mutate_call&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; new_col_name&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You first create a call that will be evaluated by mutate_ . the call is first interpreted so that the final and correct names are used by mutate_&lt;/p&gt;
+
+&lt;p&gt;Of course if you already knew wich varibles you would use, there is no need for interpretation, and something like this would work:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; setNames&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;mpg&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;wt&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;sum mpg wt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+mtcars &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate_&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;dots &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;mpg&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;wt&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# if you don&amp;#39;t need the name specified&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;nse-in-context&#34;&gt;NSE in context&lt;/h1&gt;
+
+&lt;p&gt;So if you want to use the dplyr functions in your own functions these are some variants that you could use. See the list of References and Notes for more information.&lt;/p&gt;
+
+&lt;h1 id=&#34;references&#34;&gt;References:&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/26724124/standard-evaluation-in-dplyr-summarise-on-variable-given-as-a-character-string&#34;&gt;question on stack overflow&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/&#34;&gt;using mutate inside a function, shows excellent use of mutate function,  r-bloggers&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.carlboettiger.info/2015/02/06/fun-standardizing-non-standard-evaluation.html&#34;&gt;fun standardizing NSE (he has a particular kind of fun&amp;hellip;)&lt;/a&gt;
+&lt;a href=&#34;http://adv-r.had.co.nz/Computing-on-the-language.html&#34;&gt;advanced r chapter about NSE - hadley wickham&lt;/a&gt;
+&lt;a href=&#34;http://developer.r-project.org/nonstandard-eval.pdf&#34;&gt;on r, I have not read this one &lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;notes&#34;&gt;NOTES&lt;/h1&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;an issue that demonstrates the r cmd check NOTE. &lt;a href=&#34;https://github.com/Rdatatable/data.table/issues/850&#34;&gt;https://github.com/Rdatatable/data.table/issues/850&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;wow the package is updated yesterday, but this describes the naming &lt;a href=&#34;https://cran.r-project.org/web/packages/lazyeval/vignettes/lazyeval-old.html&#34;&gt;https://cran.r-project.org/web/packages/lazyeval/vignettes/lazyeval-old.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;NSE in dplyr &lt;a href=&#34;https://cran.r-project.org/web/packages/dplyr/vignettes/nse.html&#34;&gt;https://cran.r-project.org/web/packages/dplyr/vignettes/nse.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;This example comes from Paul Hiemstra on his numbertheory blog that I found via r-bloggers. &lt;a href=&#34;http://www.numbertheory.nl/2015/09/23/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/&#34;&gt;http://www.numbertheory.nl/2015/09/23/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/&lt;/a&gt; With the reference to the r-bloggers version in the links above.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tidying your data</title>
+      <link>/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</link>
+      <pubDate>Wed, 24 Feb 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</guid>
+      <description>
+
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;To make analyses work we often need to change the way files look.
+Sometimes information is recorded in a way that was very efficient for input but not workable for your analyses. In other words, the data is messy and we need to
+make it tidy.&lt;/p&gt;
+
+&lt;p&gt;Tidy data means &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Each variable forms a column.&lt;/li&gt;
+&lt;li&gt;Each observation forms a row.&lt;/li&gt;
+&lt;li&gt;Each type of observational unit forms a table.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Today we will work with the DUO dataset about the number of students per program in the past 5 years &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; which was used in lesson 2 of &lt;a href=&#34;{{ site.github.url }}/blog/2016/02/22/from-spss-to-r-part2.html&#34;&gt;from-spps-to-r&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The raw datafile in r looks like this:
+&lt;img src=&#34;/cleancode/img/tidy-duo-before.PNG&#34; alt=&#34;messy data duo&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Which is efficient in space, but not useful for analyses. For many analyses you will need to refer to multiple columns. For example:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;is the total number of people (both males and females) in 2012 different from the total in 2015 in the regular bachelor propedeuses?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The format of the raw file is  also called the wide format.&lt;br /&gt;
+What we want is a long format like this:
+&lt;img src=&#34;/cleancode/img/tidy-duo-endresult.PNG&#34; alt=&#34;tidy data duo&#34; /&gt;
+Where every observation (the number of people in the group) has it&amp;rsquo;s own row.&lt;/p&gt;
+
+&lt;p&gt;What you need to know before we start:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the dplyr package, the pipe (%&amp;gt;%) operator, see&lt;a href=&#34;{{ site.github.url }}/blog/2016/02/22/from-spss-to-r-part2.html&#34;&gt;from-spss-to-r-2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;subsetting, data frames, basic manipulation of data&lt;/li&gt;
+&lt;li&gt;how to install packages, see &lt;a href=&#34;{{ site.github.url }}/blog/2016/02/20/from-spss-to-r-part1.html&#34;&gt;from-spss-to-r-1&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;preparation&#34;&gt;Preparation&lt;/h3&gt;
+
+&lt;p&gt;Set up a project or clean your workspace in r. Follow the instructions by copying the code or see the script &lt;a href=&#34;https://github.com/RMHogervorst/cleancodeexamples/blob/master/scripts/tidyr-on-duo-data.R&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# we will use the tidy r package&lt;/span&gt;
+install.packages&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;tidyr&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;readr&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;tidyr&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dplyr&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+link&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://www.duo.nl/open_onderwijsdata/images/01.%20Ingeschrevenen%20wo-2015.csv&amp;#34;&lt;/span&gt;
+ingeschreven_wo_2015&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;read_csv2&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;link&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; trim_ws &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#uses the ; notation therefore csv2&lt;/span&gt;
+View&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;ingeschreven_wo_2015&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When we look at the tail end of the data.frame we see some weird cases, some are empty and some are  summary variables.&lt;/p&gt;
+
+&lt;h2 id=&#34;tasks&#34;&gt;Tasks&lt;/h2&gt;
+
+&lt;p&gt;To get to tidy data we need to do a few things:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;remove final two rows that contain whitespaces and totals&lt;/li&gt;
+&lt;li&gt;shape the data into frequencies per year per gender&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;removing-the-final-two-rows&#34;&gt;Removing the final two rows&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ingeschreven_wo_2015&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2415&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2417&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;  
+&lt;span class=&#34;c1&#34;&gt;#show the bottom part of the data.frame &lt;/span&gt;
+duo2015&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;ingeschreven_wo_2015&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2416&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2417&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),]&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# compare:&lt;/span&gt;
+&lt;span class=&#34;kp&#34;&gt;tail&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;ingeschreven_wo_2015&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# with&lt;/span&gt;
+&lt;span class=&#34;kp&#34;&gt;tail&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;shape-the-data-into-frequencies-per-year-per-gender&#34;&gt;Shape the data into frequencies per year per gender&lt;/h3&gt;
+
+&lt;p&gt;Check the description in the vignette to see some examples and use cases of tidyr.  &lt;code&gt;vignette(&amp;quot;tidy-data&amp;quot;)&lt;/code&gt;
+First we shape the file from  wide to long format, the columns 13 - 22
+contain both year and gender. Which I would like to have seperated.
+In this first step we gather all the data from the columns 13 to 22
+and put turn them into cases.
+I think this is equivalent to Restructure in SPSS?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;duo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; gather&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;year&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; frequency&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; View&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you look at this temporary file you see that it contains 24150 cases  and only 14 columns. Compared to the 2415 cases and 22 columns in the original set.&lt;br /&gt;
+Unfortunately the 13th column contains both year and gender. Let&amp;rsquo;s fix this.&lt;/p&gt;
+
+&lt;h3 id=&#34;separating-the-year-gender-column&#34;&gt;Separating the year-gender column&lt;/h3&gt;
+
+&lt;p&gt;Again this is temporary file. Only when we are happy with the endresult wil we save the file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;duo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; gather&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;year&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; frequency&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        separate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;year&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;year&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;gender&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        arrange&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`OPLEIDINGSNAAM ACTUEEL`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; year&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; gender&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;  
+		&lt;span class=&#34;c1&#34;&gt;# sort on name, year gender&lt;/span&gt;
+        View &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That works, let&amp;rsquo;s create a new datafile. The commands remain the same but we assign the entire thing to a new name:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;duo2015_tidy&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;duo2015  &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        gather&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;year&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; FREQUENCY&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        separate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;year&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;YEAR&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;GENDER&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        arrange&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`OPLEIDINGSNAAM ACTUEEL`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; YEAR&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; GENDER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+View&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We left out the View command, because that would show it to the Viewer, but we need a new data.frame. The last command in the chain, &lt;code&gt;arrange&lt;/code&gt; , does not really change the file, but orders the rows in a different way.
+The next step could be saving it to a new csv file. But something is bothering me.&lt;/p&gt;
+
+&lt;h2 id=&#34;cleaning-up-some-variablenames&#34;&gt;Cleaning up some variablenames&lt;/h2&gt;
+
+&lt;p&gt;Some of the variable names (columnnames) contain spaces, for example: OPLEIDINGSNAAM ACTUEEL. we can access those variables with the backtick: &lt;code&gt;duo2015_tidy$`OPLEIDINGSNAAM ACTUEEL`&lt;/code&gt;  but it&amp;rsquo;s not pretty, often confusing and prone to mistakes. Let&amp;rsquo;s replace the columnnames with a bar in place of the space.First the command then the explanation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kp&#34;&gt;names&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;gsub&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;names&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;duo2015_tidy&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The command &lt;code&gt;names()&lt;/code&gt;  returns the variablenames, the command gsub uses pattern recognition and  replacement (for more info see &lt;code&gt;?gsub&lt;/code&gt;).
+The first argument of gsub is what to recognize, (&amp;rdquo; &amp;ldquo;) meaning spaces
+the second argument is the replacement. I chose a bar (&amp;ldquo;-&amp;rdquo;), but nothing (&amp;ldquo;&amp;rdquo;) or a dot (&amp;ldquo;.&amp;rdquo;) would work equaly well.
+The third argument is the vector to apply this principle on, the names of the variables in this case. Finally we assign the endresult of that command to names(duo2015).&lt;/p&gt;
+
+&lt;p&gt;So in one line we replaced the spaces in the names of the variables and assigned the new columnnames.&lt;/p&gt;
+
+&lt;p&gt;Then save it to a file:
+&lt;code&gt;write_csv(duo2015_tidy, &amp;quot;files/duo2015_tidy.csv&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;That&amp;rsquo;s it, we&amp;rsquo;re done. Your data is tidy. and ready for analyses or plots.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Wickham, Hadley. “Tidy Data.” Journal of Statistical Software 59, no. 10 (2014). doi:10.18637/jss.v059.i10.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;&lt;a href=&#34;https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp&#34;&gt;https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>From spss to R, part 2</title>
+      <link>/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</link>
+      <pubDate>Mon, 22 Feb 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</guid>
+      <description>
+
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;In this lesson we will open a .sav file in Rstudio and manipulate the data.frame. We will select parts of the file and create some simple overviews. First time with R? No problem, see lesson &lt;a href=&#34;{{ site.github.url }}/blog/2016/02/20/from-spss-to-r-part1.html#introduction&#34; title=&#34;From spss to R, part 1&#34;&gt;1&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;toc
+{:toc}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;download-a-sav-spss-file&#34;&gt;Download a .sav (SPSS) file&lt;/h2&gt;
+
+&lt;p&gt;I downloaded the following dataset from DUO (Dienst uitvoering onderwijs): [&lt;strong&gt;Aantal wo ingeschrevenen (binnen domein ho)&lt;/strong&gt;][3].
+This dataset has a &lt;span title=&#34;creative commons version 0&#34;&gt; cc0 &lt;/span&gt; declaration, which means it is in the public domain and we can do anything we want with this &lt;span title=&#34;thank you Dutch Goverment!&#34; &gt; file. &lt;/span&gt;
+More information about the file can be found in the &lt;a href=&#34;https://www.duo.nl/open_onderwijsdata/images/Toelichting%2001.%20Ingeschrevenen%20wo.pdf&#34; title=&#34;all in Dutch I&#39;m afraid&#34;&gt;Toelichting.pdf&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;UPDATE 2017-08-23: DUO HAS UPDATED THEIR SITE, BREAKING EVERYTHING. THIS IS CURRENLTY THE DOWNLOAD PAGE: &lt;a href=&#34;https://www.duo.nl/open_onderwijsdata/databestanden/ho/ingeschreven/wo-ingeschr/ingeschrevenen-wo1.jsp&#34;&gt;https://www.duo.nl/open_onderwijsdata/databestanden/ho/ingeschreven/wo-ingeschr/ingeschrevenen-wo1.jsp&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;We can already work with this file, because it is in an open format, but for this exercise I will transform it to a .sav file. &lt;a href=&#34;https://github.com/RMHogervorst/cleancodeexamples/blob/master/scripts/dplyr-example-duo.R&#34; title=&#34;Github example of csv -&amp;gt; .sav with haven&#34;&gt;See the transformation here&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Download the .sav &lt;a href=&#34;{{ site.github.url }}/datasets/ingeschrevenwo2015.sav&#34;&gt;file&lt;/a&gt; to start. Do remember where you put the file, you will need it later.
+Or let R download the file, even better for reasons of &lt;a href=&#34;https://rmhogervorst.github.io/cleancode/tags/#reproducibility&#34; title=&#34;all posts about repro-research&#34;&gt;reproducability&lt;/a&gt;.
+Consider starting a new &lt;a href=&#34;https://rmhogervorst.github.io/cleancode/tags/#rproject&#34; title=&#34;with a rProject you files will be more organized&#34;&gt;project&lt;/a&gt; for this example.&lt;/p&gt;
+
+&lt;h1 id=&#34;opening-the-file-in-rstudio&#34;&gt;Opening the file in Rstudio&lt;/h1&gt;
+
+&lt;p&gt;Fire up your trusty rstudio.&lt;/p&gt;
+
+&lt;p&gt;You will need the following packages:
+haven, dplyr. Click on install:
+&lt;img src=&#34;/cleancode/img/installing-packages-rstudio.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;and fill in the names, or type `install.packages(&amp;ldquo;haven&amp;rdquo;, &amp;ldquo;dplyr&amp;rdquo;).&lt;/p&gt;
+
+&lt;p&gt;Follow the description below or look at the complete script at:&lt;a href=&#34;https://github.com/RMHogervorst/cleancodeexamples/blob/master/scripts/dplyr-example-duo.R&#34;&gt;github.com/RMHogervorst/cleancodeexamples&lt;/a&gt;. The script and this page are more or less the same (spelling might be better here ;p ).&lt;/p&gt;
+
+&lt;h3 id=&#34;opening-the-spss-file-and-getting-it-in-r&#34;&gt;Opening the SPSS file and getting it in R&lt;/h3&gt;
+
+&lt;p&gt;{% highlight r linenos %}&lt;/p&gt;
+
+&lt;h1 id=&#34;necessary-packages&#34;&gt;necessary packages: ####&lt;/h1&gt;
+
+&lt;p&gt;library(haven)
+library(dplyr)&lt;/p&gt;
+
+&lt;h1 id=&#34;location-of-the-datafile-online&#34;&gt;location of the datafile online&lt;/h1&gt;
+
+&lt;p&gt;link &amp;lt;- &amp;ldquo;&lt;a href=&#34;https://cdn.rawgit.com/RMHogervorst/cleancode/gh-pages/datasets/duo2016.sav&amp;quot;&#34;&gt;https://cdn.rawgit.com/RMHogervorst/cleancode/gh-pages/datasets/duo2016.sav&amp;quot;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;update-2017-08-23-this-is-a-new-spss-file-from-2016-data&#34;&gt;UPDATE 2017-08-23 THIS IS A NEW SPSS FILE FROM 2016 DATA.&lt;/h1&gt;
+
+&lt;h1 id=&#34;load-the-sav-file-into-r-using-the-link&#34;&gt;load the .sav file into R using the link&lt;/h1&gt;
+
+&lt;p&gt;wo2015 &amp;lt;- read_sav(link)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;So we activated the necessary packages, saved a link to the datafile, told the &lt;code&gt;read_sav()&lt;/code&gt; command where to find the file, and finally assigned the output of the command to a name &lt;code&gt;wo2015&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;exploration-of-the-data-frame-in-base-r&#34;&gt;Exploration of the data frame in base-R&lt;/h3&gt;
+
+&lt;p&gt;The following commands are very often the first things you will use when you get your hands on a new dataset.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;str&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# str is short for structure&lt;/span&gt;
+&lt;span class=&#34;kp&#34;&gt;names&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# what are the columnsnames?&lt;/span&gt;
+&lt;span class=&#34;kp&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;PROVINCIE&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# create a table&lt;/span&gt;
+&lt;span class=&#34;kp&#34;&gt;sapply&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kp&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;#shows the top part of the data, &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# there is also a tail() function you could try.&lt;/span&gt;
+View&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;SOORT.INSTELLING&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The Rstudio interface already gives you all sorts of information. Just click on all the things in the environment window.
+the structure command &lt;code&gt;str()&lt;/code&gt; displays in your console, and is identical to what Rstudio tells you if you click the blue button in front of the data.frame.
+The table command is very useful, but when there are many values, you can get a cleaner look by &lt;code&gt;View(table())&lt;/code&gt;. The &lt;code&gt;sapply()&lt;/code&gt; command is one you might use a lot in the future, but know now that it repeats a function over the columns of your data.frame and gives you a simple result back.
+Most of the columns are of class character, some are numeric, and two are of the class &amp;ldquo;labelled&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;When we used the command &lt;code&gt;View(table(wo2015$SOORT.INSTELLING))&lt;/code&gt; there were actually three commands in sequence.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;take column SOORT.INSTELLING from dataframe wo2015: &lt;code&gt;wo2015$SOORT.INSTELLING&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;create a table of that: &lt;code&gt;table()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;put the result into the Viewer: &lt;code&gt;View()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;When looking at the endresult from the last command, you can see the frequencies of the types of SOORT INSTELLING (type of university).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Do the same thing (display a table of frequencies) with INSTELLINGSNAAM.ACTUEEL (name of university)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;How many universities are there?&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;some-haven-and-spss-specific-things&#34;&gt;Some Haven and SPSS specific things&lt;/h3&gt;
+
+&lt;p&gt;As you know SPSS cannot work with factor (nominal) values.
+You have to tell SPSS that the variable is a nominal variable
+and you have to create numbered values, with a label assigned to the values &lt;em&gt;(3 = male, 4 = female)&lt;/em&gt;.
+When you import a .sav file into R that information can get lost. But on the other hand you might want to use the numbered information. As an compromise the haven package imports the numbers and the labels. So can we find the labels?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kp&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;OPLEIDINGSVORM&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# no, that just tells us that it&amp;#39;s labelled. &lt;/span&gt;
+&lt;span class=&#34;kp&#34;&gt;attributes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;OPLEIDINGSVORM&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# the command attributes gives you back all the metadata&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can see the labels and numbers. 1 = deeltijd (part time education),
+2 = duaal (), 3 is voltijd (full time)
+The attributes command works on everything try: &lt;code&gt;attributes(wo2015[1,2])&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;So we can display the labels with number. but we would rather use that information
+in R. R has no problem with nominal variables. And furthermore you won&amp;rsquo;t make
+mistakes about which form of eduction your talking about.&lt;/p&gt;
+
+&lt;p&gt;the haven package has a function as_labeled. So let&amp;rsquo;s make the OPLEIDINGSVORM column a bit more informative:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;as_factor&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;OPLEIDINGSVORM&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now look back at wo2015
+Nothing has changed!
+That&amp;rsquo;s right, you need to assign the result of the operation back to a column&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;wo2015&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;OPLEIDINGSVORM2 &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; as_factor&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;OPLEIDINGSVORM&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Do the same thing to OPLEIDINGSFASE.ACTUEEL&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;data-manipulation-with-dplyr&#34;&gt;data manipulation with dplyr&lt;/h2&gt;
+
+&lt;p&gt;Data manipulation was sometimes hard with r. However the &lt;a href=&#34;https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html&#34; title=&#34;Dplyr is a package for manipulating dataframes. this link is an introduction by the creator&#34;&gt;dplyr&lt;/a&gt; package changed everything.&lt;/p&gt;
+
+&lt;h2 id=&#34;dplyr-functions&#34;&gt;dplyr Functions&lt;/h2&gt;
+
+&lt;p&gt;There are 7 &amp;lsquo;verbs&amp;rsquo; that do all the work.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;filter() (and slice())
+arrange()
+select() (and rename())
+distinct()
+mutate() (and transmute())
+summarise()
+sample_n() and sample_frac()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Filter filters rows, select selects columns, distinct is a variant of unique and mutate creates new variables. These verbs are tools, the plyrs of a dataframe. Very generic tools that help you select and filter your data.
+All the verbs have the same arguments: first argument = dataframe, the next arguments are for the function.&lt;/p&gt;
+
+&lt;p&gt;But don&amp;rsquo;t believe me on my word, let&amp;rsquo;s get to work.&lt;/p&gt;
+
+&lt;h3 id=&#34;select&#34;&gt;SELECT&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT (dataframe, variablename1, variablename2, etc)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Select is used to select variables (columns) in your data frame.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dplyr&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; OPLEIDINGSVORM2&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;j2012.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; j2013.MAN &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We have selected 4 variables. as you can see in the output. It also says: Source: local data frame [2,417 x 4]  meaning 2417 cases and 4 variables.&lt;/p&gt;
+
+&lt;h3 id=&#34;filter&#34;&gt;FILTER&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;FILTER (dataframe, ways to filter)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Filter selects cases (rows of the dataframe).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Limburg&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The endresult is a data.frame [91 x 24] with all columns but
+ with only the cases in the Limburg province&lt;/p&gt;
+
+&lt;h3 id=&#34;combining-filter-and-select&#34;&gt;combining FILTER and SELECT&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Limburg&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;PROVINCIE&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; OPLEIDINGSVORM2&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;j2012.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; j2013.MAN &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I will show you a more readable form later on, but this works.
+The data frame has the 91 cases from the filter action and the 4 columns from the select action. This even works the other way around:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; OPLEIDINGSVORM2&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;j2012.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; j2013.MAN &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; PROVINCIE &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Limburg&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But not always:
+&lt;code&gt;filter(select(wo2015, OPLEIDINGSVORM2,j2012.MAN, j2013.MAN ), PROVINCIE == &amp;quot;Limburg&amp;quot;)
+&lt;/code&gt; will not work (try it).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Why not?&lt;/em&gt;
+The different functions accept data.frames as input and give a data.frame as output. The data.frame from the &lt;strong&gt;select&lt;/strong&gt; action does not contain the column PROVINCIE. Therefore the &lt;strong&gt;filter&lt;/strong&gt; function can&amp;rsquo;t select on that variable.&lt;/p&gt;
+
+&lt;h3 id=&#34;arrange-distinct&#34;&gt;ARRANGE &amp;amp; DISTINCT&lt;/h3&gt;
+
+&lt;p&gt;The functions &lt;code&gt;arrange()&lt;/code&gt; and &lt;code&gt;distinct()&lt;/code&gt; sort the data and select the unique values from a data frame:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;arrange&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; GEMEENTENUMMER&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# data frame [2,417 x 24] all cases, all variables.&lt;/span&gt;
+distinct&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; GEMEENTENAAM&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# data frame [16 x 24]  (all the variables, only unique gemeentenamen)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;mutate&#34;&gt;MUTATE&lt;/h3&gt;
+
+&lt;p&gt;MUTATE(dataframe, name_of new variable = action).
+Mutate creates new variables from other variables.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s find the difference between 2015 and 2014 in males.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;mutate(wo2015, from14to15M = j2015.MAN - j2014.MAN)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok, but what happened?
+We can&amp;rsquo;t see the new variable from14to15M, it is there because the output says:
+&lt;code&gt;Variables not shown: CROHO.ONDERDEEL (chr), [......] from14to15M (dbl)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s see.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;test&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; from14to15M &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; j2015.MAN &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; j2014.MAN&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+View&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;test&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Scroll to the end of the viewer or use &lt;code&gt;test$from14to15M&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;An other way would be to select the variables first.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; from14to15M &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; j2015.MAN &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; j2014.MAN&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; from14to15M&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But these nested commands become complicated very fast. You lose the overview of your actions. But since 2014 we can use a new way to type commands in R.&lt;/p&gt;
+
+&lt;h1 id=&#34;piping-chaining-and-dplyr&#34;&gt;Piping / chaining and dplyr&lt;/h1&gt;
+
+&lt;p&gt;With the pipe operator (%&amp;gt;%) you can chain the commands together.
+The functions work the same but it is much easier to read.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#from:&lt;/span&gt;
+select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; from14to15M &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; j2015.MAN &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; j2014.MAN&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; from14to15M&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# to:&lt;/span&gt;
+wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;from14to15M &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; j2015.MAN &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; j2014.MAN&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;from14to15M&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# or even better&lt;/span&gt;
+wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+	mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;from14to15M &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; j2015.MAN &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; j2014.MAN&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+	select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;from14to15M&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# much easier to read! &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The pipe operator puts the data.frame from the left side as first argument in the right side.&lt;/p&gt;
+
+&lt;p&gt;Read the pipe operator as THEN:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+	mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;from14to15M &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; j2015.MAN &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; j2014.MAN&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+	select&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;from14to15M&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; PROVINCIE&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# take the dataframe, THEN mutate                       THEN select these variables.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Take the data.frame, THEN mutate                       THEN select these variables.
+The commands follow in the way that you use them instead of nested in each other.&lt;/p&gt;
+
+&lt;h3 id=&#34;summarize-summarise-both-work&#34;&gt;SUMMARIZE / SUMMARISE (both work)&lt;/h3&gt;
+
+&lt;p&gt;Use summarize to apply functions over groups of cases. For instance the mean of an entire column.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;summarize&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; mean2015_males &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;mean&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2015.MAN&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;# if one value is missing (NA)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# there is no mean value. &lt;/span&gt;
+summarize&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;wo2015&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; mean2015_males &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;mean&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2015.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; na.rm &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# this way we remove the missings&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But perhaps you would like to know the mean number of students per opleidingsfase?
+Summarize works with &lt;code&gt;group_by&lt;/code&gt;, let&amp;rsquo;s use that pipe operator again:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; group_by&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSFASE.ACTUEEL&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+	summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mean2015_males &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;mean&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2015.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; na.rm &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Chaining can make things very easy.
+Let&amp;rsquo;s take numbers in zuid-holland only&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+	filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;PROVINCIE &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Zuid-Holland&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;# R will continue on the following line&lt;/span&gt;
+        group_by&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSFASE.ACTUEEL&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;           &lt;span class=&#34;c1&#34;&gt;# It also helps in readability&lt;/span&gt;
+        summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mean2015_males &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;mean&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2015.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; na.rm &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Grouping can be done on multiple levels and with multiple arguments:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; group_by&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;PROVINCIE&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; OPLEIDINGSFASE.ACTUEEL&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mean2015_males &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;mean&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2015.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; na.rm &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;PROVINCIE &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Zuid-Holland&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; PROVINCIE &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Limburg&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# | means or&lt;/span&gt;
+        group_by&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSFASE.ACTUEEL&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mean2015_males &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;mean&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2015.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; na.rm &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# That was an OR operator, there is also an AND.&lt;/span&gt;
+wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;PROVINCIE &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Zuid-Holland&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; OPLEIDINGSFASE.ACTUEEL &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;propedeuse bachelor&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;  
+        group_by&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSVORM2&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        summarise&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mean2015_males &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;mean&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2015.MAN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; na.rm &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; number &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; n&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# n() gives a count&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;summarize&lt;/code&gt; command can make multiple columns (remember that every output is also a dataframe).&lt;/p&gt;
+
+&lt;p&gt;Finally a filter action with numbers. Just to show you that that works as well.
+We start with all the cases, &lt;strong&gt;THEN&lt;/strong&gt; only take the cases (rows) where variable j2011.VROUW has less or equal to 10, &lt;strong&gt;THEN&lt;/strong&gt; take only the propedeuse cases &lt;strong&gt;THEN&lt;/strong&gt; filter the cases with more then 10 cases and &lt;strong&gt;THEN&lt;/strong&gt; group the cases by provincie, and &lt;strong&gt;THEN&lt;/strong&gt; count the number of cases per province.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;wo2015 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2011.VROUW &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# so less or equal to 10 women in 2011&lt;/span&gt;
+        filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;OPLEIDINGSFASE.ACTUEEL &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;propedeuse bachelor&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# multipe filters? no problem.&lt;/span&gt;
+        filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;j2015.VROUW &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# more then 10 in 2015. &lt;/span&gt;
+        group_by&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;PROVINCIE&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; summarize&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;number_of_programs &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; n&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In other words:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In every province, how many programs had less then 10 women in 2011 and more then 10 in 2015?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;review&#34;&gt;Review&lt;/h1&gt;
+
+&lt;p&gt;In this lesson you have learned to open .sav files with haven,
+how to change labelled values from the Haven package, and worked with most of the dplyr commands.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-time&#34;&gt;Next time:&lt;/h2&gt;
+
+&lt;p&gt;dplyr is also called the grammar of data manipulation.
+In the next lesson we will take on the grammar of graphics with ggplot2,
+see you then.&lt;/p&gt;
+
+&lt;h3 id=&#34;notes&#34;&gt;Notes&lt;/h3&gt;
+
+&lt;p&gt;[3]: &lt;https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp &gt; &amp;ldquo;Because this was the first dataset I found, but this dataset is actually useful for me in my work as well&amp;rdquo;&lt;/p&gt;
+
+&lt;h3 id=&#34;further-reading&#34;&gt;Further Reading&lt;/h3&gt;
+
+&lt;p&gt;The following introduction is better than I could have made:&lt;/p&gt;
+
+&lt;p&gt;and here is some background information&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html&#34;&gt;https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

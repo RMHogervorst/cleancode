@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Building the oomsifyer</title>
+  <meta property="og:title" content="Building the oomsifyer" />
+  <meta name="twitter:title" content="Building the oomsifyer" />
+  <meta name="description" content="Today I will show you a quick hack (OK it took me like 4 hours during my travels today yesterday and today), on how to add a dancing banana to any picture.
+Now, you might be thinking&hellip; Really, why would you add a dancing banana to a picture, but I don&rsquo;t have time for that kind of negativity in my life.
+Why oomsifier? Jeroen Ooms is one of those crazy productive people in the R world.">
+  <meta property="og:description" content="Today I will show you a quick hack (OK it took me like 4 hours during my travels today yesterday and today), on how to add a dancing banana to any picture.
+Now, you might be thinking&hellip; Really, why would you add a dancing banana to a picture, but I don&rsquo;t have time for that kind of negativity in my life.
+Why oomsifier? Jeroen Ooms is one of those crazy productive people in the R world.">
+  <meta name="twitter:description" content="Today I will show you a quick hack (OK it took me like 4 hours during my travels today yesterday and today), on how to add a dancing banana to any picture.
+Now, you might be thinking&hellip; Really, …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/blog/2017/11/28/building-the-oomsifyer/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/blog/2017/11/28/building-the-oomsifyer/" />
+  <link rel="alternate" href="/cleancode/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Building the oomsifyer</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on November 28, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (542 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>Today I will show you a quick hack (OK it took me like 4 hours during my travels today yesterday and today),
+on how to add a dancing banana to any picture.</p>
+
+<p>Now, you might be thinking&hellip; Really, why would you add a dancing banana to
+a picture, but I don&rsquo;t have time for that kind of negativity in my life.</p>
+
+<p><img src="{{ site.github.url }}/images/r-pkg.gif" alt="" /></p>
+
+<h2 id="why-oomsifier">Why oomsifier?</h2>
+
+<p>Jeroen Ooms is one of those crazy productive people in the R world. The way he
+wraps c++ libraries into packages makes you think his middle name is c-plus-plus.</p>
+
+<p>At the Sat-R-day in budapest in 2016 (?) Jeroen demonstrated the magick library.
+You can now control images from inside R using dark magic and the bindings to
+ the magick library. In honor of this work and because I needed a cool name,
+I will demonstrate <strong>THE OOMSIFYER</strong>.</p>
+
+<blockquote>
+<p>Solving the life long dream of people all around the world &hellip; of adding dancing banana gifs to pictures&hellip;</p>
+</blockquote>
+
+<p>If you are like me, you would have thought this would be really easy, but you would be wrong.</p>
+
+<p>First the function then the explanation and some stuff that took me waaay too long
+to find out.</p>
+
+<p>The function</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">banana <span class="o">&lt;-</span> image_read<span class="p">(</span><span class="s">&#34;images/banana.gif&#34;</span><span class="p">)</span> <span class="c1"># this assumes you have a project with the folder /images/ inside.</span>
+
+add_banana <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>image<span class="p">,</span> offset <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> debug <span class="o">=</span> <span class="kc">FALSE</span><span class="p">){</span>
+    image_in <span class="o">&lt;-</span> magick<span class="o">::</span>image_read<span class="p">(</span>image<span class="p">)</span>
+    banana <span class="o">&lt;-</span> image_read<span class="p">(</span><span class="s">&#34;images/banana.gif&#34;</span><span class="p">)</span> <span class="c1"># 365w 360 h</span>
+    image_info <span class="o">&lt;-</span> image_info<span class="p">(</span>image_in<span class="p">)</span>
+    <span class="kr">if</span><span class="p">(</span><span class="s">&#34;gif&#34;</span> <span class="o">%in%</span> image_info<span class="o">$</span>format <span class="p">){</span><span class="kp">stop</span><span class="p">(</span><span class="s">&#34;gifs are to difficult for  me now&#34;</span><span class="p">)}</span>
+    <span class="kp">stopifnot</span><span class="p">(</span><span class="kp">nrow</span><span class="p">(</span>image_info<span class="p">)</span><span class="o">==</span><span class="m">1</span><span class="p">)</span>
+    <span class="c1"># scale banana to correct size:</span>
+    <span class="c1"># take smallest dimension.</span>
+    target_height <span class="o">&lt;-</span> <span class="kp">min</span><span class="p">(</span>image_info<span class="o">$</span>width<span class="p">,</span> image_info<span class="o">$</span>height<span class="p">)</span>
+    <span class="c1"># scale banana to 1/3 of the size</span>
+    scaling <span class="o">&lt;-</span>  <span class="p">(</span>target_height <span class="o">/</span><span class="m">3</span><span class="p">)</span>
+    front <span class="o">&lt;-</span> image_scale<span class="p">(</span>banana<span class="p">,</span> scaling<span class="p">)</span>
+    <span class="c1"># place in lower right corner</span>
+    <span class="c1"># offset is width and hieight minus dimensions picutre?</span>
+    scaled_dims <span class="o">&lt;-</span> image_info<span class="p">(</span>front<span class="p">)</span>
+    x_c <span class="o">&lt;-</span> image_info<span class="o">$</span>width <span class="o">-</span> scaled_dims<span class="o">$</span>width
+    y_c <span class="o">&lt;-</span> image_info<span class="o">$</span>height <span class="o">-</span> scaled_dims<span class="o">$</span>height
+    offset_value <span class="o">&lt;-</span> <span class="kp">ifelse</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>offset<span class="p">),</span> <span class="kp">paste0</span><span class="p">(</span><span class="s">&#34;+&#34;</span><span class="p">,</span>x_c<span class="p">,</span><span class="s">&#34;+&#34;</span><span class="p">,</span>y_c<span class="p">),</span> offset<span class="p">)</span>
+    <span class="kr">if</span><span class="p">(</span><span class="kp">debug</span><span class="p">)</span> <span class="kp">print</span><span class="p">(</span>offset_value<span class="p">)</span>
+    frames <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span><span class="kp">as.list</span><span class="p">(</span>front<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> image_composite<span class="p">(</span>image_in<span class="p">,</span> x<span class="p">,</span> offset <span class="o">=</span> offset_value<span class="p">))</span>
+
+    result <span class="o">&lt;-</span> image_animate<span class="p">(</span>image_join<span class="p">(</span>frames<span class="p">),</span> fps <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+    result
+<span class="p">}</span></code></pre></div>
+<h2 id="so-what-can-it-do">So what can it do?</h2>
+
+<p>This function takes an image, f.i. a ggplot2 image that you saved to disk, and adds the dancing banana gif to the bottom right corner.</p>
+
+<p><img src="{{ site.github.url }}/images/ggplot.gif" alt="ggplot with banana example" /></p>
+
+<p>I had to combine information from the magick <a href="https://cran.r-project.org/web/packages/magick/vignettes/intro.html#animation">vignette</a>  and an earlier <a href="https://ropensci.org/blog/2016/08/23/z-magick-release/">blogpost</a> about magick in R.</p>
+
+<p>Things I learned:</p>
+
+<ul>
+<li>the magick package returns image information as a data frame</li>
+<li>a gif is a succesion of images (frames)</li>
+<li>a normal picture is a single frame</li>
+<li>to combine a gif and a single frame you have to have exactly as much frames of your original picture as the number of frames in the gif</li>
+<li>for every frame you have to merge the gif and image with each other into a composite image</li>
+<li>the offset is the number of pixels from the left of the frame and from the top of the frame. I wanted to put the dancing banana at the bottom right of the picture AND I wanted to scale the banana so that it would take over the entire image so the offset needed to be responsive to both scaling and the input dimensions</li>
+<li><a href="https://twitter.com/ThePracticalDev">the practical dev</a> has many silly o-reilly like book covers that I find hilarious</li>
+</ul>
+
+<p><img src="{{site.github.url}}/images/spss.gif" alt="spss picture" /></p>
+
+<p>In a the following posts I might turn this function into an API, stay tuned!</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="/cleancode//tags/magick/">magick</a>&nbsp;
+            
+              <a href="/cleancode//tags/example_function/">example_function</a>&nbsp;
+            
+              <a href="/cleancode//tags/hack/">hack</a>&nbsp;
+            
+              <a href="/cleancode//tags/banana/">banana</a>&nbsp;
+            
+              <a href="/cleancode//tags/gif/">gif</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/cleancode/blog/2017/11/20/where-to-live-in-the-netherlands-based-on-temperature-xkcd-style/" data-toggle="tooltip" data-placement="top" title="Where to live in the Netherlands based on temperature XKCD style">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/cleancode/blog/2017/12/08/downloading-files-from-a-webserver-and-failing./" data-toggle="tooltip" data-placement="top" title="Downloading files from a webserver, and failing.">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

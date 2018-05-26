@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Tidying your data</title>
+  <meta property="og:title" content="Tidying your data" />
+  <meta name="twitter:title" content="Tidying your data" />
+  <meta name="description" content="Introduction To make analyses work we often need to change the way files look. Sometimes information is recorded in a way that was very efficient for input but not workable for your analyses. In other words, the data is messy and we need to make it tidy.
+Tidy data means 1:
+ Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table.">
+  <meta property="og:description" content="Introduction To make analyses work we often need to change the way files look. Sometimes information is recorded in a way that was very efficient for input but not workable for your analyses. In other words, the data is messy and we need to make it tidy.
+Tidy data means 1:
+ Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table.">
+  <meta name="twitter:description" content="Introduction To make analyses work we often need to change the way files look. Sometimes information is recorded in a way that was very efficient for input but not workable for your analyses. In other …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/" />
+  <link rel="alternate" href="/cleancode/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Tidying your data</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on February 24, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 4 minutes (808 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="introduction">Introduction</h1>
+
+<p>To make analyses work we often need to change the way files look.
+Sometimes information is recorded in a way that was very efficient for input but not workable for your analyses. In other words, the data is messy and we need to
+make it tidy.</p>
+
+<p>Tidy data means <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>:</p>
+
+<ol>
+<li>Each variable forms a column.</li>
+<li>Each observation forms a row.</li>
+<li>Each type of observational unit forms a table.</li>
+</ol>
+
+<p>Today we will work with the DUO dataset about the number of students per program in the past 5 years <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup> which was used in lesson 2 of <a href="{{ site.github.url }}/blog/2016/02/22/from-spss-to-r-part2.html">from-spps-to-r</a>.</p>
+
+<p>The raw datafile in r looks like this:
+<img src="/img/tidy-duo-before.PNG" alt="messy data duo" /></p>
+
+<p>Which is efficient in space, but not useful for analyses. For many analyses you will need to refer to multiple columns. For example:</p>
+
+<ul>
+<li>is the total number of people (both males and females) in 2012 different from the total in 2015 in the regular bachelor propedeuses?</li>
+</ul>
+
+<p>The format of the raw file is  also called the wide format.<br />
+What we want is a long format like this:
+<img src="/img/tidy-duo-endresult.PNG" alt="tidy data duo" />
+Where every observation (the number of people in the group) has it&rsquo;s own row.</p>
+
+<p>What you need to know before we start:</p>
+
+<ul>
+<li>the dplyr package, the pipe (%&gt;%) operator, see<a href="{{ site.github.url }}/blog/2016/02/22/from-spss-to-r-part2.html">from-spss-to-r-2</a>.</li>
+<li>subsetting, data frames, basic manipulation of data</li>
+<li>how to install packages, see <a href="{{ site.github.url }}/blog/2016/02/20/from-spss-to-r-part1.html">from-spss-to-r-1</a>.</li>
+</ul>
+
+<h3 id="preparation">Preparation</h3>
+
+<p>Set up a project or clean your workspace in r. Follow the instructions by copying the code or see the script <a href="https://github.com/RMHogervorst/cleancodeexamples/blob/master/scripts/tidyr-on-duo-data.R">here</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="c1"># we will use the tidy r package</span>
+install.packages<span class="p">(</span><span class="s">&#34;tidyr&#34;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>readr<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>tidyr<span class="p">)</span> 
+<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
+link<span class="o">&lt;-</span><span class="s">&#34;https://www.duo.nl/open_onderwijsdata/images/01.%20Ingeschrevenen%20wo-2015.csv&#34;</span>
+ingeschreven_wo_2015<span class="o">&lt;-</span>read_csv2<span class="p">(</span>link<span class="p">,</span> trim_ws <span class="o">=</span> <span class="bp">T</span><span class="p">)</span> <span class="c1">#uses the ; notation therefore csv2</span>
+View<span class="p">(</span>ingeschreven_wo_2015<span class="p">)</span></code></pre></div>
+<p>When we look at the tail end of the data.frame we see some weird cases, some are empty and some are  summary variables.</p>
+
+<h2 id="tasks">Tasks</h2>
+
+<p>To get to tidy data we need to do a few things:</p>
+
+<ul>
+<li>remove final two rows that contain whitespaces and totals</li>
+<li>shape the data into frequencies per year per gender</li>
+</ul>
+
+<h3 id="removing-the-final-two-rows">Removing the final two rows</h3>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ingeschreven_wo_2015<span class="p">[</span><span class="m">2415</span><span class="o">:</span><span class="m">2417</span><span class="p">,</span><span class="m">12</span><span class="o">:</span><span class="m">16</span><span class="p">]</span>  
+<span class="c1">#show the bottom part of the data.frame </span>
+duo2015<span class="o">&lt;-</span>ingeschreven_wo_2015<span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="m">2416</span><span class="o">:</span><span class="m">2417</span><span class="p">),]</span>
+<span class="c1"># compare:</span>
+<span class="kp">tail</span><span class="p">(</span>ingeschreven_wo_2015<span class="p">)</span>
+<span class="c1"># with</span>
+<span class="kp">tail</span><span class="p">(</span>duo2015<span class="p">)</span></code></pre></div>
+<h3 id="shape-the-data-into-frequencies-per-year-per-gender">Shape the data into frequencies per year per gender</h3>
+
+<p>Check the description in the vignette to see some examples and use cases of tidyr.  <code>vignette(&quot;tidy-data&quot;)</code>
+First we shape the file from  wide to long format, the columns 13 - 22
+contain both year and gender. Which I would like to have seperated.
+In this first step we gather all the data from the columns 13 to 22
+and put turn them into cases.
+I think this is equivalent to Restructure in SPSS?</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">duo2015 <span class="o">%&gt;%</span> gather<span class="p">(</span>year<span class="p">,</span> frequency<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">13</span><span class="o">:</span><span class="m">22</span><span class="p">))</span> <span class="o">%&gt;%</span> View</code></pre></div>
+<p>If you look at this temporary file you see that it contains 24150 cases  and only 14 columns. Compared to the 2415 cases and 22 columns in the original set.<br />
+Unfortunately the 13th column contains both year and gender. Let&rsquo;s fix this.</p>
+
+<h3 id="separating-the-year-gender-column">Separating the year-gender column</h3>
+
+<p>Again this is temporary file. Only when we are happy with the endresult wil we save the file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">duo2015 <span class="o">%&gt;%</span> gather<span class="p">(</span>year<span class="p">,</span> frequency<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">13</span><span class="o">:</span><span class="m">22</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+        separate<span class="p">(</span>year<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;year&#34;</span><span class="p">,</span> <span class="s">&#34;gender&#34;</span> <span class="p">))</span>  <span class="o">%&gt;%</span>
+        arrange<span class="p">(</span><span class="sb">`OPLEIDINGSNAAM ACTUEEL`</span><span class="p">,</span> year<span class="p">,</span> gender<span class="p">)</span> <span class="o">%&gt;%</span>  
+		<span class="c1"># sort on name, year gender</span>
+        View </code></pre></div>
+<p>That works, let&rsquo;s create a new datafile. The commands remain the same but we assign the entire thing to a new name:</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">duo2015_tidy<span class="o">&lt;-</span>duo2015  <span class="o">%&gt;%</span> 
+        gather<span class="p">(</span>year<span class="p">,</span> FREQUENCY<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">13</span><span class="o">:</span><span class="m">22</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+        separate<span class="p">(</span>year<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;YEAR&#34;</span><span class="p">,</span> <span class="s">&#34;GENDER&#34;</span> <span class="p">))</span>  <span class="o">%&gt;%</span>
+        arrange<span class="p">(</span><span class="sb">`OPLEIDINGSNAAM ACTUEEL`</span><span class="p">,</span> YEAR<span class="p">,</span> GENDER<span class="p">)</span>
+View<span class="p">(</span>duo2015_tidy<span class="p">)</span></code></pre></div>
+<p>We left out the View command, because that would show it to the Viewer, but we need a new data.frame. The last command in the chain, <code>arrange</code> , does not really change the file, but orders the rows in a different way.
+The next step could be saving it to a new csv file. But something is bothering me.</p>
+
+<h2 id="cleaning-up-some-variablenames">Cleaning up some variablenames</h2>
+
+<p>Some of the variable names (columnnames) contain spaces, for example: OPLEIDINGSNAAM ACTUEEL. we can access those variables with the backtick: <code>duo2015_tidy$`OPLEIDINGSNAAM ACTUEEL`</code>  but it&rsquo;s not pretty, often confusing and prone to mistakes. Let&rsquo;s replace the columnnames with a bar in place of the space.First the command then the explanation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kp">names</span><span class="p">(</span>duo2015_tidy<span class="p">)</span><span class="o">&lt;-</span><span class="kp">gsub</span><span class="p">(</span><span class="s">&#34; &#34;</span><span class="p">,</span> <span class="s">&#34;-&#34;</span><span class="p">,</span> <span class="kp">names</span><span class="p">(</span>duo2015_tidy<span class="p">))</span></code></pre></div>
+<p>The command <code>names()</code>  returns the variablenames, the command gsub uses pattern recognition and  replacement (for more info see <code>?gsub</code>).
+The first argument of gsub is what to recognize, (&rdquo; &ldquo;) meaning spaces
+the second argument is the replacement. I chose a bar (&ldquo;-&rdquo;), but nothing (&ldquo;&rdquo;) or a dot (&ldquo;.&rdquo;) would work equaly well.
+The third argument is the vector to apply this principle on, the names of the variables in this case. Finally we assign the endresult of that command to names(duo2015).</p>
+
+<p>So in one line we replaced the spaces in the names of the variables and assigned the new columnnames.</p>
+
+<p>Then save it to a file:
+<code>write_csv(duo2015_tidy, &quot;files/duo2015_tidy.csv&quot;)</code></p>
+
+<p><strong>That&rsquo;s it, we&rsquo;re done. Your data is tidy. and ready for analyses or plots.</strong></p>
+
+<h3 id="references">References</h3>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Wickham, Hadley. “Tidy Data.” Journal of Statistical Software 59, no. 10 (2014). doi:10.18637/jss.v059.i10.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2"><a href="https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp">https://www.duo.nl/open_onderwijsdata/databestanden/ho/Ingeschreven/wo_ingeschr/Ingeschrevenen_wo1.jsp</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="/cleancode//tags/beginner/">beginner</a>&nbsp;
+            
+              <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+            
+              <a href="/cleancode//tags/tidyr/">tidyr</a>&nbsp;
+            
+              <a href="/cleancode//tags/duo2015/">duo2015</a>&nbsp;
+            
+              <a href="/cleancode//tags/tutorial/">tutorial</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/" data-toggle="tooltip" data-placement="top" title="From spss to R, part 2">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/" data-toggle="tooltip" data-placement="top" title="Version control with Git">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

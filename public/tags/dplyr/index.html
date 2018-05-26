@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Dplyr</title>
+  <meta property="og:title" content="Dplyr" />
+  <meta name="twitter:title" content="Dplyr" />
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/cleancode/tags/dplyr/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/cleancode/tags/dplyr/" />
+  <link rel="alternate" href="/cleancode/tags/dplyr/index.xml" type="application/rss+xml" title="Clean Code">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/cleancode/css/syntax.css" /><link rel="stylesheet" href="/cleancode/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/cleancode/">Clean Code</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code" href="/cleancode/">
+            <img class="avatar-img" src="/cleancode/img/avatar-icon.png" alt="Clean Code" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  <header class="header-section ">
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>#Dplyr</h1>
+              <hr class="small">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="/cleancode/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/">
+                <h2 class="post-title">Cleaning up and combining data, a dataset for practice</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 12, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (564 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  tldr: I created an open dataset for the explicit practice of data munging. Feel free to use it in assignments, but do mention where you got it from (CC-by-4.0). Also unicorns are awesome.
+Find the dataset at: https://github.com/RMHogervorst/unicorns_on_unicycles
+Data munging / cleaning / engineering At work I was working with a two excel files that were slightly different but could be combined into 1 dataset. This is very typical for day to day cleaning operations that analysts and data scientists do (statisticians too).
+                  <a href="/cleancode/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="/cleancode//tags/dirty-data/">dirty data</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/munging/">munging</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/readxl/">readxl</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/unicorns/">unicorns</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/unicycles/">unicycles</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/exercise/">exercise</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/cleancode/blog/2018/01/24/content/post/2018-01-24-add-abbreviations-to-rmarkdown/">
+                <h2 class="post-title">add abbreviations to your rmarkdown doc</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 24, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 2 minutes (238 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Today a small tip for when you write rmarkdown documents. Add a chunk on top with abbreviations.
+in the first chunks you set the options and load the packages. Next create abbreviations, you don&rsquo;t have to care about the ordering, just put them down as you realize you are creating them.
+The first step makes a dataframe (a tibble, rowwise), and the second step orders them.
+tribble( ~Abbreviation, ~ Explanation, &quot;CIA&quot;, &quot;Central Intelligence Agency&quot;, &quot;dplyr&quot;, &quot;data.
+                  <a href="/cleancode/blog/2018/01/24/content/post/2018-01-24-add-abbreviations-to-rmarkdown/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="/cleancode//tags/rmarkdown/">rmarkdown</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/tibble/">tibble</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/cleancode/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/">
+                <h2 class="post-title">Where to live in the Netherlands based on temperature XKCD style</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on November 20, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 5 minutes (1037 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  After seeing a plot of best places to live in Spain and the USA based on the weather, I had to chime in and do the same thing for the Netherlands. The idea is simple, determine where you want to live based on your temperature preferences.
+First the end result: How to read this plot?
+In this xkcd comic we see that the topleft of the the graph represents &ldquo;if you hate cold and hate heat&rdquo;, if you go down from the topleft to the bottom left the winters get colder and ending in &ldquo;if you love cold and hate heat&rdquo;.
+                  <a href="/cleancode/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="/cleancode//tags/xkcd/">XKCD</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/weather/">weather</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/humidex/">humidex</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/ggplot2/">ggplot2</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/readr/">readr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/netherlands/">Netherlands</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/">
+                <h2 class="post-title">Generate text using Markov Chains (sort of)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 21, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 6 minutes (1256 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Inspired by the hilarious podcast The Greatest Generation, I have worked again with all the lines from all the episode scripts of TNG. Today I will make a clunky bot (although it does nothing and is absolutely not useful) that talks like Captain Picard. I actually wanted to use a Markov Chain to generate text. A Markov Chain has a specific property. It doesn&rsquo;t care what happened before, it only looks at probabilities from the current state to a next state.
+                  <a href="/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="/cleancode//tags/markov/">Markov</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/tng/">TNG</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/tidytext/">tidytext</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/bot/">bot</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/">
+                <h2 class="post-title">Non-standard-evaluation and standard evaluation in dplyr</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on June 13, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 5 minutes (1060 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  THIS POST IS NO LONGER ENTIRELY RELEVANT. DPLYR 0.7 HAS A SLIGHTLY DIFFERENT (AND SLIGHTLY MORE INTUITIVE) WAY OF WORKING WITH NON-STANDARD EVALUATION.
+I love the dplyr package with all of its functions, however if you use normal dplyr in functions in your package r-cmd-check will give you a warning: R CMD check NOTE: No visible binding for global variable NAME OF YOUR VARIABLE 1. The functions do work, and everything is normal, however if you submit your package to CRAN, such a NOTE is not acceptable.
+                  <a href="/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="/cleancode//tags/advanced/">advanced</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/nse/">NSE</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/optimize-your-code/">optimize-your-code</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/duo2015/">duo2015</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/lazyeval/">lazyeval</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/reminder/">reminder</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/">
+                <h2 class="post-title">From spss to R, part 4</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on April 4, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 15 minutes (3074 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  This is the second part of working with ggplot. We will combine the packages dplyr and ggplot to improve our workflow. When you make a visualisation you often experiment with different versions of your plot. Our workflow will be dynamic, in stead of saving every version of the plot you created, we will recreate the plot untill it looks the way you want it.
+In the previous lesson we worked with some build in datasets.
+                  <a href="/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="/cleancode//tags/beginner/">beginner</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/ggplot2/">ggplot2</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/spps-to-r/">spps-to-r</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/tutorial/">tutorial</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/">
+                <h2 class="post-title">Tidying your data</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on February 24, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 4 minutes (808 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Introduction To make analyses work we often need to change the way files look. Sometimes information is recorded in a way that was very efficient for input but not workable for your analyses. In other words, the data is messy and we need to make it tidy.
+Tidy data means 1:
+ Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table.
+                  <a href="/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="/cleancode//tags/beginner/">beginner</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/tidyr/">tidyr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/duo2015/">duo2015</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/tutorial/">tutorial</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/">
+                <h2 class="post-title">From spss to R, part 2</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on February 22, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 9 minutes (1881 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Introduction In this lesson we will open a .sav file in Rstudio and manipulate the data.frame. We will select parts of the file and create some simple overviews. First time with R? No problem, see lesson 1
+ toc {:toc}  Download a .sav (SPSS) file I downloaded the following dataset from DUO (Dienst uitvoering onderwijs): [Aantal wo ingeschrevenen (binnen domein ho)][3]. This dataset has a cc0  declaration, which means it is in the public domain and we can do anything we want with this file.
+                  <a href="/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="/cleancode//tags/beginner/">beginner</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/haven/">haven</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/spps-to-r/">spps-to-r</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/duo2015/">duo2015</a>&nbsp;
+                  
+                    <a href="/cleancode//tags/tutorial/">tutorial</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/cleancode/tags/dplyr/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/cleancode/">Clean Code</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/cleancode/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
