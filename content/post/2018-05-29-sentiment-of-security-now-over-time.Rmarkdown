@@ -1,0 +1,113 @@
+---
+title: Sentiment of Security Now! over time
+author: Roel M. Hogervorst
+date: '2018-05-29'
+slug: sentiment-of-security-now-over-time
+categories:
+  - blog
+tags:
+  - sentiment
+  - security-now
+  - tutorial
+  - tidytext
+  - tidyverse
+  - dplyr
+  - ggplot2
+  - intermediate
+  - widyr
+subtitle: ''
+---
+
+If you believe some people, everything is getting worse^[Not if we learn from Hans Rosling but that is a story for an other time]. More so in
+infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show [Security Now!](https://twit.tv/shows/security-now). 
+The hosts Steven Gibson and Leo Laporte have been talking about security
+related news every week over 13 years. Although the content has changed
+over time, there used to be more explanations but the majority of time is
+now filled with news, we could use the sentiment in the episodes to see if
+'everything is getting worse'. Has the sentiment of the security now! podcast changed over time? It helps that every episode is transcribed into text so we can use natural language processing tools to work through this problem.
+
+## Extracting the data
+To gather and extract the relevant information from the transcripts
+I point you kindly to a seperate github page where I explain how I downloaded
+every episode and extracted the structure. <https://github.com/RMHogervorst/NLP_SN> 
+
+I asked permission to scrape all the transcripts but I'm not entirely sure if I
+can share the content. In any case I'd guide you to the links at the bottom of this page with all the archive. I might share the rda file with the episode information and transcripts into 1 dataframe. 
+
+What I ended up with is a dataframe with 664 rows (the number of episodes today) and 9 columns.
+
+
+```{r}
+library(tidytext)
+library(tidyverse)
+library(widyr) 
+df_sn <- read_rds("../NLP_SN/df_sn.RDS") # this link will not work for you
+# but you can use this link to download the file I used when I wrote this. <https://cdn.rawgit.com/RMHogervorst/NLP_SN/dcec078d/df_sn.RDS> 
+# Every week / or once a month at least I will update the file with new transcript(s) so your data could be newer than this post.
+#dim_desc(df_sn)
+tail(df_sn,2)
+```
+
+The text column contains a tibble with a row for everytime anyone speaks untill the other takes over. The length
+
+```{r}
+df_sn[664,9][[1]][[1]]
+```
+
+Steve talks a lot more then Leo, and we see that in the number of words per line of a single episode:
+
+```{r}
+df_sn[664,9][[1]][[1]] %>% 
+    mutate(
+        nr_char = str_length(text),
+        N_words = str_count(text, "\\w+")
+        ) %>% 
+    ggplot(aes(linenr, N_words, fill = speaker))+
+    geom_col()+
+    labs(
+        title = "Number of words in every line in episode 664",
+        subtitle = "Steve talks a lot more than Leo (not surprising)",
+        x = "line number", y = "Number of words (log2 scale)",
+        caption = "Transcripts Security Now! - 664"
+    )+
+    scale_y_continuous(trans = "log2")
+```
+
+Interestingly my scraper seems to not have detected who said the words on line 45. It was Steve.
+
+It might be better to use an average over the episode
+
+```{r}
+df_sn[664,9][[1]][[1]] %>% 
+    mutate(
+        N_words = str_count(text, "\\w+"),
+        speaker = ifelse(is.na(speaker), "STEVE", speaker)
+        ) %>% 
+    ggplot(aes(speaker, N_words, fill = speaker))+
+    geom_violin()+
+    geom_jitter(height = 0,width = .2, alpha  = 2/3)+
+    scale_y_continuous(trans = "log2")+
+    labs(
+        title = "Number of words in every line in episode 664",
+        subtitle = "Steve has a few more long pieces",
+        x = "", y = "Number of words (log2 scale)",
+        caption = "Transcripts Security Now! - 664"
+    )
+```
+
+
+
+## Links
+- [Archive of transcripts and audio](https://www.grc.com/securitynow.htm)
+
+
+
+##### State of the machine
+<details>
+<summary> At the moment of creation (when I knitted this document ) this was the state of my machine: <click> </summary>
+
+```{r}
+sessioninfo::session_info()
+```
+
+</details>
