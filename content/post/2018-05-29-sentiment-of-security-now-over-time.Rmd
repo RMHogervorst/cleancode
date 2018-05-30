@@ -41,8 +41,15 @@ What I ended up with is a dataframe with 664 rows (the number of episodes today)
 library(tidytext)
 library(tidyverse)
 library(widyr) 
-df_sn <- read_rds("../NLP_SN/df_sn.RDS") # this link will not work for you
-# but you can use this link to download the file I used when I wrote this. <https://cdn.rawgit.com/RMHogervorst/NLP_SN/dcec078d/df_sn.RDS> 
+if(!file.exists("df_sn.RDS")){
+    download.file(
+        url = "https://github.com/RMHogervorst/NLP_SN/raw/master/df_sn.RDS",
+        destfile =  "df_sn.RDS",cacheOK = TRUE)    
+}
+
+df_sn <- read_rds("df_sn.RDS")  
+#df_sn <- read_rds("../NLP_SN/df_sn.RDS") # when working locally
+# 
 # Every week / or once a month at least I will update the file with new transcript(s) so your data could be newer than this post.
 #dim_desc(df_sn)
 tail(df_sn,2)
