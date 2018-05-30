@@ -51,7 +51,22 @@
         <p class="credits theme-by text-muted">
           {{ i18n "poweredBy" . | safeHTML }}
           {{ with .Site.Params.commit }}&nbsp;&bull;&nbsp;[<a href="{{.}}{{ getenv "GIT_COMMIT_SHA" }}">{{ getenv "GIT_COMMIT_SHA_SHORT" }}</a>]{{ end }}
-<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a>
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a> <br>
+            {{ if .File.Path }}
+
+{{ $Rmd := (print .File.BaseFileName ".Rmd") }}
+
+{{ if (where (readDir (print "content/" .File.Dir)) "Name" $Rmd) }}
+  {{ $.Scratch.Set "FilePath" (print .File.Dir $Rmd) }}
+{{ else }}
+  {{ $.Scratch.Set "FilePath" .File.Path }}
+{{ end }}
+
+{{ with .Site.Params.GithubEdit}}
+<a href='{{ . }}{{ $.Scratch.Get "FilePath" }}'>or edit this page on github.</a>
+{{ end }}
+
+{{ end }}
         </p>
       </div>
     </div>

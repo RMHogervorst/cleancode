@@ -19,7 +19,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   comments = true
   readingTime = true
   modifyLink = true
-  GithubEdit = "https://github.com/RMHogervorst/cleancode/tree/testvar/content/post"
+  GithubEdit = "https://github.com/RMHogervorst/cleancode/tree/testvar/content/"
 
 
 [Author]

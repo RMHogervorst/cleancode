@@ -1,5 +1,10 @@
 TODO
 
+-[] maak kopie van rss feed op dit moment.
+- [ ] link rmhogervorst naar hele pagina op netlify ipv github
+- [ ] zorg dat links kloppen verder 
+- [ ] controleer of blogfeed identiek is aan eerder
+- [ ] maak test.rmhogervorst voor tests in blog (zorg dat netlify dingen goed verwijzen)
 -[ ] logo veranderen?
 -[x] ga door alle posts heen en gebruik bestandsnaam als slug
 -[x] discard yaml fields except: title, author, date, categories, tags
@@ -13,7 +18,7 @@ TODO
     - [x] twitter, 
     - [x] github, 
     - [x] linkedin
-- [] githublink naar modify page? (zou moeten kunnen, "/blog/:year/:month/:day/:slug/",  "github.com/rmhogervorst/cleancode/content/post/jaar-maand-dag-slug.md") in page
+- [x] githublink naar modify page? (zou moeten kunnen, "/blog/:year/:month/:day/:slug/",  "github.com/rmhogervorst/cleancode/content/post/jaar-maand-dag-slug.md") in page
 zit in layouts/partials/post_meta.html (mogelijk ook voor packages?)
 
 - [] security.txt (https://securitytxt.org/#generate) (zit erin, maar verwijzing op homepage?)
