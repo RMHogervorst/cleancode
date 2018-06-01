@@ -4,7 +4,7 @@ TODO
 - [ ] link rmhogervorst naar hele pagina op netlify ipv github
 - [ ] zorg dat links kloppen verder 
 - [ ] controleer of blogfeed identiek is aan eerder
-- [ ] maak test.rmhogervorst voor tests in blog (zorg dat netlify dingen goed verwijzen)
+- [ ] maak test.rmhogervorst voor tests in blog (zorg dat netlify dingen goed verwijzen. dus hoofddomein is dit. main url is test.rmhogervorst.nl voor testbranche. rmhogervorst.nl/cleancode is master)
 -[ ] logo veranderen?
 -[x] ga door alle posts heen en gebruik bestandsnaam als slug
 -[x] discard yaml fields except: title, author, date, categories, tags

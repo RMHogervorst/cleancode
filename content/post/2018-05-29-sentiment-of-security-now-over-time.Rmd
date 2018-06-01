@@ -104,6 +104,8 @@ df_sn[664,9][[1]][[1]] %>%
 
 
 
+
+
 ## Links
 - [Archive of transcripts and audio](https://www.grc.com/securitynow.htm)
 
