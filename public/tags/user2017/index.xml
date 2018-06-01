@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>User2017 on Clean Code (and R-fun)</title>
+    <link>/tags/user2017/</link>
+    <description>Recent content in User2017 on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Thu, 27 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/user2017/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>UseR Brussels 2017 </title>
+      <link>/blog/2017/07/27/content/post/2017-07-27-use-r-2017-roundup/</link>
+      <pubDate>Thu, 27 Jul 2017 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2017/07/27/content/post/2017-07-27-use-r-2017-roundup/</guid>
+      <description>&lt;p&gt;I went to UseR-2017 in Brussels. It was my first time at an UseR (I have been to the first satRday), AND I LOVED IT!
+There were many interesting talks, I am so going to use Fast Frugal Trees in the future for instance
+and I saw a lot of shiny applications and R professional.&lt;/p&gt;
+
+&lt;p&gt;But best of all. I talked to a lot of people, people I only spoke to online.
+Thanked some people for their help in my packages and generally had a lot of fun!&lt;/p&gt;
+
+&lt;p&gt;One of the fun things I did was asking people about packages that should be created but
+are not yet there, I put them here:  &lt;a href=&#34;https://github.com/RMHogervorst/shouldbeapackage&#34;&gt;https://github.com/RMHogervorst/shouldbeapackage&lt;/a&gt; Contribute if you want.&lt;/p&gt;
+
+&lt;p&gt;One of the packages that should exist is one that gives you suggestions for Kareoke, preferably powerballads,
+of course I used one of the breaks to create a github page and a package. However a suggestion app needs songs, so
+me and &lt;a href=&#34;https://twitter.com/kobriendublin&#34;&gt;Kevin O&amp;rsquo;Brian&lt;/a&gt; tricked people into adding to the list of powerballads.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What we still need though, is a shiny app that you can access from your phone when you are IN the kareoke bar.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We put the package under a new github group: &lt;a href=&#34;https://github.com/Reoke/powrballad&#34;&gt;R-eoke &lt;/a&gt;
+And yes, submit your songs!&lt;/p&gt;
+
+&lt;p&gt;See you around.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

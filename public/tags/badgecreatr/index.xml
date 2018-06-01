@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Badgecreatr on Clean Code (and R-fun)</title>
+    <link>/tags/badgecreatr/</link>
+    <description>Recent content in Badgecreatr on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Sat, 09 Jul 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/badgecreatr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Submitting your first package to CRAN, my experience</title>
+      <link>/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</link>
+      <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</guid>
+      <description>
+
+&lt;p&gt;I recently published my first R package to  The Comprehensive R Archive Network  (CRAN). It was very exciting and also quite easy. Let me walk you through my process.&lt;/p&gt;
+
+&lt;p&gt;First a description of my brand new package: badgecreatr, then a description of steps to take for submission.&lt;/p&gt;
+
+&lt;h1 id=&#34;package-description&#34;&gt;Package description&lt;/h1&gt;
+
+&lt;p&gt;When you go around github looking at projects you often see these interesting images in the readme
+&lt;a href=&#34;https://travis-ci.org/hadley/ggplot2&#34;&gt;&lt;img src=&#34;https://travis-ci.org/hadley/ggplot2.svg?branch=master&#34; alt=&#34;Build Status&#34; /&gt;&lt;/a&gt;
+&lt;a href=&#34;http://cran.r-project.org/package=ggplot2&#34;&gt;&lt;img src=&#34;http://www.r-pkg.org/badges/version/ggplot2&#34; alt=&#34;CRAN_Status_Badge&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The ones you see above are from &lt;a href=&#34;https://github.com/hadley/ggplot2&#34;&gt;ggplot2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;What are these? These are what we call badges or shields and they are often actively generated to indicate if software is actually working or not.&lt;/p&gt;
+
+&lt;p&gt;Travis-ci, a continous integration service, creates the first one: the one that says build | passing. Everytime a new commit is pushed to Github a new version of the package will be build and tested. Of that test passes without problem the badge will remain green, but if the latest build fails, the green part will turn red like so &lt;a href=&#34;https://travis-ci.org/RMHogervorst/badgecreatr&#34;&gt;&lt;img src=&#34;https://travis-ci.org/RMHogervorst/badgecreatr.svg?branch=develop&#34; alt=&#34;Build Status&#34; /&gt;&lt;/a&gt; &amp;lt;- this is my develop branch of badgecreatr that fails while I write this. It could turn green if your read this later on.&lt;/p&gt;
+
+&lt;p&gt;The point of these badges is that they quickly signal some quality aspects of your package to new users. I think these badges are incredibly useful, but I found it tedious to copy them to every new project I had, with some small tweaks for different packages &lt;em&gt;(I&amp;rsquo;m making this a big deal but I have only build 3 packages)&lt;/em&gt;. Since you will use almost the same badges for many projects  I thought it would be interesting to create a package that would copy them in your readme file with one command.
+I was not the first one with this idea, someone created the briljant badgerbadgerbadger which does the same thing for ruby on rails projects.&lt;/p&gt;
+
+&lt;p&gt;After some thoughts I decided to submit it to CRAN so that people can download it from within R without the use of devtools. So that was the why.&lt;/p&gt;
+
+&lt;h1 id=&#34;why-would-you-submit-a-package-to-cran&#34;&gt;Why would you submit a package to CRAN?&lt;/h1&gt;
+
+&lt;p&gt;The main advantage to getting your package on CRAN is that it will be easier for users to install (with install.packages). Your package will also be tested daily on multiple systems &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;how-do-you-submit-a-package-to-cran&#34;&gt;How do you submit a package to CRAN?&lt;/h1&gt;
+
+&lt;p&gt;Well, the good people of CRAN have put it on the bottom of their &lt;a href=&#34;https://cran.r-project.org/&#34;&gt;main page&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;To “submit” a package to CRAN, check that your submission meets the CRAN Repository Policy and then use the web form.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Mainly you need to run r cmd-check on your package and make sure there are no warnings, and no notes. Or if there are notes, you have to explain them to the people of CRAN. So what does r-cmd-check actually do? It checks if your package can be build and installed and removed without problems, it checks for common problems in naming and if accurate documentation is provided. In other words, it checks if your package will play nice with R and possible other packages, and if people can actually read what you said about your functions in the package. r-cmd-check also checks if your DESCRIPTION and NAMESPACE files are correctly formatted.&lt;/p&gt;
+
+&lt;p&gt;You also have to do some effort to check if your package will work on other systems (solaris,  FreeBSD, Linux, Windows, MacOS, more?). Since I work on a windows computer, I know it works on my computer. But since I push all my code to Github, and I use Travis-CI, after each commit the entire package is checked on linux (or more, I could even put several mac OS versions in the test I believe).&lt;/p&gt;
+
+&lt;p&gt;Furthermore I checked the functionality of most of the code with unit tests. So I was pretty sure it worked on all systems, also because I haven&amp;rsquo;t used complicated programs that could differ in systems.&lt;/p&gt;
+
+&lt;p&gt;The submission process is quite easy, you have to give your name, your email and then you can add your package (the tarball). It is a simple point and click form.&lt;/p&gt;
+
+&lt;p&gt;The website reads a part of your package, you have to check if the information is correct. Then you have to promise that you read the information and you hit submit.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-happens-after-i-submit-a-package&#34;&gt;What happens after I submit a package?&lt;/h1&gt;
+
+&lt;p&gt;You receive a confirmation mail with everything you typed in the website.
+And someone looks over the submission to see if you missed something and if the package works.&lt;/p&gt;
+
+&lt;p&gt;I recieved an e-mail back (really fast!), to tell me that I mistyped some things (too bad that devtools or R-cmd-check doesn&amp;rsquo;t check for these things).
+I was very excited and quickly did a resubmission (which is identical to a first submission, but I explained what I changed according to their comments )&lt;/p&gt;
+
+&lt;p&gt;Things that I should have done that I forgot or didn&amp;rsquo;t notice:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;single quote software names so &amp;lsquo;Windows 8.1&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;write R and CRAN with caps, not small letters&lt;/li&gt;
+&lt;li&gt;I wrote github, projectstatus, travis, rmd etc which should have been:&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;Github&amp;rsquo;, Projectstatus, &amp;lsquo;Travis-CI&amp;rsquo; etc.&lt;/li&gt;
+&lt;li&gt;linked to a URL that didn&amp;rsquo;t exist yet&lt;/li&gt;
+&lt;li&gt;used a link with http, should have been https&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That was it, it took me 2 rounds but then it was finished, I received an email with: &amp;ldquo;on CRAN now.  Best (name of the reviewer)&amp;rdquo;. that&amp;rsquo;s it.&lt;/p&gt;
+
+&lt;p&gt;And it&amp;rsquo;s on CRAN now: &lt;a href=&#34;https://cran.r-project.org/web/packages/badgecreatr/index.html&#34;&gt;https://cran.r-project.org/web/packages/badgecreatr/index.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;general-remarks&#34;&gt;General remarks&lt;/h2&gt;
+
+&lt;p&gt;CRAN submission used to be really hard, you had to manually write all the documentation in a seperate file, had to hand check everything, you had to search for computers to test your package on, etc. But with devtools and the excellent manuals online, starting and building a package is really easy. The final step of submission takes almost no work if you followed best practices beforehand.&lt;/p&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References:&lt;/h2&gt;
+
+&lt;p&gt;I had a lot of help from the following sources about writing r packages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a very short but extremely useful example of writing packages by Hillary Parker &lt;a href=&#34;https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/&#34;&gt;https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hadley Wickham&amp;rsquo;s book about writing packages &lt;a href=&#34;http://r-pkgs.had.co.nz/&#34;&gt;http://r-pkgs.had.co.nz/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Karl Broman about writing packages &lt;a href=&#34;http://kbroman.org/pkg_primer/&#34;&gt;http://kbroman.org/pkg_primer/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;You actually have to search for things in the policies, which is a bit dense, but quite ok. &lt;a href=&#34;https://cran.r-project.org/web/packages/policies.html&#34;&gt;https://cran.r-project.org/web/packages/policies.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;the ropensci organisation has some excellent advise on writing packages &lt;a href=&#34;https://github.com/ropensci/packaging_guide&#34;&gt;https://github.com/ropensci/packaging_guide&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;This I outright copied from Karl Broman found here &lt;a href=&#34;http://kbroman.org/pkg_primer/pages/cran.html&#34;&gt;http://kbroman.org/pkg_primer/pages/cran.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introducing Badgecreatr, a package that places badges in your readme</title>
+      <link>/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/</link>
+      <pubDate>Fri, 08 Jul 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/</guid>
+      <description>
+
+&lt;p&gt;Introducing &lt;strong&gt;Badgecreatr&lt;/strong&gt;, a package to create and place badges in your readme.Rmd file on Github.&lt;/p&gt;
+
+&lt;p&gt;Badgecreatr will create the following badges (aka shields):&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.repostatus.org/#active&#34;&gt;&lt;img src=&#34;http://www.repostatus.org/badges/latest/active.svg&#34; alt=&#34;Project Status: Active ? The project has reached a stable, usable state and is being actively developed.&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://www.gnu.org/licenses/gpl-3.0.en.html&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/licence-GPL--3-blue.svg&#34; alt=&#34;Licence&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://travis-ci.org/RMHogervorst/badgecreatr&#34;&gt;&lt;img src=&#34;https://travis-ci.org/RMHogervorst/badgecreatr.svg?branch=master&#34; alt=&#34;Build Status&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://codecov.io/gh/RMHogervorst/badgecreatr&#34;&gt;&lt;img src=&#34;https://codecov.io/gh/RMHogervorst/badgecreatr/branch/master/graph/badge.svg&#34; alt=&#34;codecov&#34; /&gt;&lt;/a&gt;
+&lt;a href=&#34;https://cran.r-project.org/&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/R%3E%3D-3.2.4-6666ff.svg&#34; alt=&#34;minimal R version&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://cran.r-project.org/package=badgecreatr&#34;&gt;&lt;img src=&#34;http://www.r-pkg.org/badges/version/badgecreatr&#34; alt=&#34;CRAN\_Status\_Badge&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;commits/master&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square&#34; alt=&#34;packageversion&#34; /&gt;&lt;/a&gt;
+&lt;a href=&#34;/commits/master&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/last%20change-2016--07--08-yellowgreen.svg&#34; alt=&#34;Last-changedate&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;Install the package with &lt;code&gt;install.packages(&amp;quot;badgecreatr&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;how-do-you-use-badgecreatr&#34;&gt;How do you use badgecreatr?&lt;/h3&gt;
+
+&lt;p&gt;Badgecreatr has one main function: &lt;code&gt;badgeplacer()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The most simple command is:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;badgecreatr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;badgeplacer&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; githubaccount &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;yourgithubname&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;githubrepo &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;yourpackagename&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; branch &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;master&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If your project is in its infancy and you don&amp;rsquo;t want people to use it yet:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;badgecreatr::badgeplacer(status = &amp;quot;wip&amp;quot; , githubaccount = &amp;quot;yourgithubname&amp;quot;,githubrepo = &amp;quot;yourpackagename&amp;quot;)&lt;/code&gt; which will give it the status &amp;lsquo;Work in Progress&amp;rsquo;.&lt;/p&gt;
+
+&lt;p&gt;Repostatus gives you seven &lt;a href=&#34;www.repostatus.org&#34;&gt;project statuses&lt;/a&gt;; Concept, WIP, Suspended, Abandoned, Active, Inactive, and Unsupported.&lt;/p&gt;
+
+&lt;h3 id=&#34;why-would-you-use-this-package&#34;&gt;Why would you use this package?&lt;/h3&gt;
+
+&lt;p&gt;When you have started yet another Github based r-package, copied the travis file and created a readme.Rmd file and you want to add these badges.
+Frankly I was a bit annoyed to copy almost identical markdown to new projects, it seemed right for automation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why would I not use this package?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;you don&amp;rsquo;t create a r-package&lt;/li&gt;
+&lt;li&gt;you don&amp;rsquo;t want to create badges&lt;/li&gt;
+&lt;li&gt;you don&amp;rsquo;t use Github&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-does-badgecreatr-do&#34;&gt;What does badgecreatr do?&lt;/h2&gt;
+
+&lt;p&gt;Badgecreatr reads your &lt;code&gt;readme.Rmd&lt;/code&gt; file, reads your &lt;code&gt;DESCRIPTION&lt;/code&gt; file and searches for a &lt;code&gt;.travis.yml&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Within the &lt;code&gt;DESCRIPTION&lt;/code&gt; file badgecreatr will find:
+- package name
+- the version number of your package
+- the license : GPL-3, GPL-2, MIT, or CC0
+- Minimal R version&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Badgecreatr will create&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;www.repostatus.org&#34;&gt;repostatus&lt;/a&gt; badge (by default it will give you an active status)&lt;/li&gt;
+&lt;li&gt;a licence badge&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;If it finds a .travis.yml file&lt;/em&gt;:a Travis-CI Build-Status Badge&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;If it finds a codecov reference in the .travis.yml file,&lt;/em&gt; a Codecov Coverage Status Badge&lt;/li&gt;
+&lt;li&gt;a badge to indicate the version of R you are using&lt;/li&gt;
+&lt;li&gt;a CRAN status badge (will say &amp;lsquo;not published&amp;rsquo; if your package is not on CRAN)&lt;/li&gt;
+&lt;li&gt;a package version badge&lt;/li&gt;
+&lt;li&gt;a last change badge&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you created badges in your readme before, badgecreatr will skip that badge.&lt;/p&gt;
+
+&lt;p&gt;Enjoy. - Roel&lt;/p&gt;
+
+&lt;h3 id=&#34;notes&#34;&gt;Notes:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The badges for R version, package version and last change are my invention.&lt;/li&gt;
+&lt;li&gt;The last change badge will update every time you re-knit your readme.md file&lt;/li&gt;
+&lt;li&gt;If you have suggestions or improvement open an &lt;a href=&#34;https://github.com/RMHogervorst/badgecreatr/issues&#34;&gt;issue&lt;/a&gt; or submit a &lt;a href=&#34;https://github.com/RMHogervorst/badgecreatr/compare&#34;&gt;pull request&lt;/a&gt;.
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;further-reading&#34;&gt;Further reading&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The package on CRAN: &lt;a href=&#34;https://cran.r-project.org/web/packages/badgecreatr/index.html&#34;&gt;https://cran.r-project.org/web/packages/badgecreatr/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The package on Github : &lt;a href=&#34;https://github.com/RMHogervorst/badgecreatr&#34;&gt;https://github.com/RMHogervorst/badgecreatr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;My inspiration: &lt;a href=&#34;https://github.com/badges/badgerbadgerbadger&#34;&gt;https://github.com/badges/badgerbadgerbadger&lt;/a&gt; &amp;amp; &lt;a href=&#34;http://shields.io/&#34;&gt;http://shields.io/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

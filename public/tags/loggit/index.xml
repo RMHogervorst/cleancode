@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Loggit on Clean Code (and R-fun)</title>
+    <link>/tags/loggit/</link>
+    <description>Recent content in Loggit on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Wed, 28 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/loggit/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Adding logging to a shiny app with loggit</title>
+      <link>/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/</link>
+      <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;This is a very short post with example code&lt;/em&gt;
+Over time when you move your shiny app from your computer to a server, you
+want to add some logging. Generally logging is defined in levels : INFO (everything you want to print),
+WARNING (it does not stop the application, but it could be a problem), and
+ERROR (fatal things).&lt;/p&gt;
+
+&lt;p&gt;Shiny server does already log all it&amp;rsquo;s actions to
+a file on the server, but that file can be hard to access.
+It would be nice if every app has its own logging, close to the app location.&lt;/p&gt;
+
+&lt;p&gt;The package &lt;a href=&#34;https://github.com/ryapric/loggit&#34;&gt;loggit&lt;/a&gt; by Ryan J. Price,
+overwrites the normal message, warning and stop functions
+in R and replaces them with identically functioning functions, but the package
+ALSO writes to a file. Thus the loggit packages writes to a json file of your
+choosing and has nice timestamped data, which is extremely easy to parse.&lt;/p&gt;
+
+&lt;h4 id=&#34;some-prerequisites&#34;&gt;Some prerequisites:&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;you need to have the loggit package installed on your shiny-server&lt;/li&gt;
+&lt;li&gt;you need to create the logfile first (empty)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;example-code&#34;&gt;example code&lt;/h4&gt;
+
+&lt;p&gt;This is a non functioning app.r example.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;shiny&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;loggit&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+setLogFile&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;loggit.json&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+loggit&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;INFO&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;app has started&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; app &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;start&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+ui &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; fluidpage&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+  &lt;span class=&#34;c1&#34;&gt;#your ui here&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+server &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;ui&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; server&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; session&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+  &lt;span class=&#34;kp&#34;&gt;message&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;this is an message&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;c1&#34;&gt;# it would be nice if you had some server logic here&lt;/span&gt;
+  session&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;onSessionEnded&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(){&lt;/span&gt;loggit&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;INFO&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;app has stopped&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; app &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;stop&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)})&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+shinyApp&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;ui&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; server&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This example has the ui and server defined and a function shinyApp() that
+starts the server.&lt;/p&gt;
+
+&lt;p&gt;There are 3 things I&amp;rsquo;d like to point your attention to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;you first set your logfile location (you need to create it first)&lt;/li&gt;
+&lt;li&gt;I&amp;rsquo;ve used both loggit() and the general function message() They both write to loglevel INFO&lt;/li&gt;
+&lt;li&gt;I also used the session$onSessionEnded thingy, this is activated when you
+close the app&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Are all these things necessary? No absolutely not, you generally don&amp;rsquo;t want to
+know if an app has started, and stopped. You might only want to write the
+warnings and errors to the log.&lt;/p&gt;
+
+&lt;p&gt;I think the package is extremely user friendly and easy to implement, would you use this in production?&lt;/p&gt;
+
+&lt;p&gt;Did I miss anything? Did I make a mistake? open an issue on &lt;a href=&#34;https://github.com/rmhogervorst/cleancode/issues&#34;&gt;github&lt;/a&gt;,
+or send me a message on &lt;a href=&#34;https://twitter.com/RMHoge&#34;&gt;twitter&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

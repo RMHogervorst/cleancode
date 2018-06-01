@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" /> 
+
+  <title>Sentiment of Security Now! over time</title>
+  <meta property="og:title" content="Sentiment of Security Now! over time" />
+  <meta name="twitter:title" content="Sentiment of Security Now! over time" />
+  <meta name="description" content="If you believe some people, everything is getting worse1. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show Security Now!. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’.">
+  <meta property="og:description" content="If you believe some people, everything is getting worse1. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show Security Now!. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’.">
+  <meta name="twitter:description" content="If you believe some people, everything is getting worse1. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show Security Now!. …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/blog/2018/05/29/sentiment-of-security-now-over-time/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code (and R-fun)" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/blog/2018/05/29/sentiment-of-security-now-over-time/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Clean Code (and R-fun)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/css/syntax.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Clean Code (and R-fun)</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code (and R-fun)" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Clean Code (and R-fun)" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Sentiment of Security Now! over time</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on May 29, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 7 minutes (1332 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>If you believe some people, everything is getting worse<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show <a href="https://twit.tv/shows/security-now">Security Now!</a>. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’. Has the sentiment of the security now! podcast changed over time? It helps that every episode is transcribed into text so we can use natural language processing tools to work through this problem.</p>
+<div id="extracting-the-data" class="section level2">
+<h2>Extracting the data</h2>
+<p>To gather and extract the relevant information from the transcripts I point you kindly to a seperate github page where I explain how I downloaded every episode and extracted the structure. <a href="https://github.com/RMHogervorst/NLP_SN" class="uri">https://github.com/RMHogervorst/NLP_SN</a></p>
+<p>I asked permission to scrape all the transcripts but I’m not entirely sure if I can share the content. In any case I’d guide you to the links at the bottom of this page with all the archive. I might share the rda file with the episode information and transcripts into 1 dataframe.</p>
+<p>What I ended up with is a dataframe with 664 rows (the number of episodes today) and 9 columns.</p>
+<pre class="r"><code>library(tidytext)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.5     
+## ✔ tibble  1.4.2          ✔ dplyr   0.7.5     
+## ✔ tidyr   0.8.1          ✔ stringr 1.3.1     
+## ✔ readr   1.1.1          ✔ forcats 0.3.0</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(widyr) 
+if(!file.exists(&quot;df_sn.RDS&quot;)){
+    download.file(
+        url = &quot;https://github.com/RMHogervorst/NLP_SN/raw/master/df_sn.RDS&quot;,
+        destfile =  &quot;df_sn.RDS&quot;,cacheOK = TRUE)    
+}
+
+df_sn &lt;- read_rds(&quot;df_sn.RDS&quot;)  
+#df_sn &lt;- read_rds(&quot;../NLP_SN/df_sn.RDS&quot;) # when working locally
+# 
+# Every week / or once a month at least I will update the file with new transcript(s) so your data could be newer than this post.
+#dim_desc(df_sn)
+tail(df_sn,2)</code></pre>
+<pre><code>## # A tibble: 2 x 9
+##   path             source date  description ep_nr hosts teaser title text 
+##   &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;int&gt; &lt;lis&gt; &lt;chr&gt;  &lt;chr&gt; &lt;lis&gt;
+## 1 data//sn-663.txt https… May … This week …   663 &lt;lis… It&#39;s … Ultr… &lt;tib…
+## 2 data//sn-664.txt https… May … This week …   664 &lt;lis… It&#39;s … Spec… &lt;tib…</code></pre>
+<p>The text column contains a tibble with a row for everytime anyone speaks untill the other takes over. The length</p>
+<pre class="r"><code>df_sn[664,9][[1]][[1]]</code></pre>
+<pre><code>## # A tibble: 139 x 3
+##    linenr text                                                     speaker
+##     &lt;int&gt; &lt;chr&gt;                                                    &lt;chr&gt;  
+##  1      1 This is Security Now! with Steve Gibson, Episode 664, r… LEO    
+##  2      2 Yay, Leo, great to be with you again, as always.         STEVE  
+##  3      3 Always a pleasure.                                       LEO    
+##  4      4 Yeah, we scrambled here a little bit at the end because… STEVE  
+##  5      5 [Crosstalk] half an hour ago.  No, but I also figured y… LEO    
+##  6      6 &quot;Well, yeah.  Two weeks ago the news leaked through Hei… STEVE  
+##  7      7 They were presumably waiting to disclose until companie… LEO    
+##  8      8 Yes.  And even so, I mean, this is - what we heard was … STEVE  
+##  9      9 Right.                                                   LEO    
+## 10     10 I can&#39;t square that with the news of two because all we… STEVE  
+## # ... with 129 more rows</code></pre>
+<p>Steve talks a lot more then Leo, and we see that in the number of words per line of a single episode:</p>
+<pre class="r"><code>df_sn[664,9][[1]][[1]] %&gt;% 
+    mutate(
+        nr_char = str_length(text),
+        N_words = str_count(text, &quot;\\w+&quot;)
+        ) %&gt;% 
+    ggplot(aes(linenr, N_words, fill = speaker))+
+    geom_col()+
+    labs(
+        title = &quot;Number of words in every line in episode 664&quot;,
+        subtitle = &quot;Steve talks a lot more than Leo (not surprising)&quot;,
+        x = &quot;line number&quot;, y = &quot;Number of words (log2 scale)&quot;,
+        caption = &quot;Transcripts Security Now! - 664&quot;
+    )+
+    scale_y_continuous(trans = &quot;log2&quot;)</code></pre>
+<p><img src="/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Interestingly my scraper seems to not have detected who said the words on line 45. It was Steve.</p>
+<p>It might be better to use an average over the episode</p>
+<pre class="r"><code>df_sn[664,9][[1]][[1]] %&gt;% 
+    mutate(
+        N_words = str_count(text, &quot;\\w+&quot;),
+        speaker = ifelse(is.na(speaker), &quot;STEVE&quot;, speaker)
+        ) %&gt;% 
+    ggplot(aes(speaker, N_words, fill = speaker))+
+    geom_violin()+
+    geom_jitter(height = 0,width = .2, alpha  = 2/3)+
+    scale_y_continuous(trans = &quot;log2&quot;)+
+    labs(
+        title = &quot;Number of words in every line in episode 664&quot;,
+        subtitle = &quot;Steve has a few more long pieces&quot;,
+        x = &quot;&quot;, y = &quot;Number of words (log2 scale)&quot;,
+        caption = &quot;Transcripts Security Now! - 664&quot;
+    )</code></pre>
+<p><img src="/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="links" class="section level2">
+<h2>Links</h2>
+<ul>
+<li><a href="https://www.grc.com/securitynow.htm">Archive of transcripts and audio</a></li>
+</ul>
+<div id="state-of-the-machine" class="section level5">
+<h5>State of the machine</h5>
+<p><details> <summary> At the moment of creation (when I knitted this document ) this was the state of my machine: <click> </summary></p>
+<pre class="r"><code>sessioninfo::session_info()</code></pre>
+<pre><code>## ─ Session info ──────────────────────────────────────────────────────────
+##  setting  value                       
+##  version  R version 3.4.4 (2018-03-15)
+##  os       Ubuntu 18.04 LTS            
+##  system   x86_64, linux-gnu           
+##  ui       X11                         
+##  language (EN)                        
+##  collate  en_US.UTF-8                 
+##  tz       Europe/Amsterdam            
+##  date     2018-06-01                  
+## 
+## ─ Packages ──────────────────────────────────────────────────────────────
+##  package     * version    date       source                            
+##  assertthat    0.2.0      2017-04-11 CRAN (R 3.4.3)                    
+##  backports     1.1.2      2017-12-13 CRAN (R 3.4.3)                    
+##  bindr         0.1.1      2018-03-13 CRAN (R 3.4.4)                    
+##  bindrcpp    * 0.2.2      2018-03-29 CRAN (R 3.4.4)                    
+##  blogdown      0.6        2018-04-18 CRAN (R 3.4.4)                    
+##  bookdown      0.7        2018-02-18 CRAN (R 3.4.3)                    
+##  broom         0.4.4      2018-03-29 CRAN (R 3.4.4)                    
+##  cellranger    1.1.0      2016-07-27 CRAN (R 3.4.3)                    
+##  cli           1.0.0      2017-11-05 CRAN (R 3.4.3)                    
+##  clisymbols    1.2.0      2017-05-21 cran (@1.2.0)                     
+##  colorspace    1.3-2      2016-12-14 CRAN (R 3.4.3)                    
+##  crayon        1.3.4      2017-09-16 CRAN (R 3.4.3)                    
+##  digest        0.6.15     2018-01-28 CRAN (R 3.4.3)                    
+##  dplyr       * 0.7.5      2018-05-19 cran (@0.7.5)                     
+##  evaluate      0.10.1     2017-06-24 CRAN (R 3.4.3)                    
+##  forcats     * 0.3.0      2018-02-19 CRAN (R 3.4.3)                    
+##  foreign       0.8-69     2017-06-21 CRAN (R 3.4.2)                    
+##  ggplot2     * 2.2.1.9000 2018-02-22 Github (tidyverse/ggplot2@39e4a3b)
+##  glue          1.2.0.9000 2018-05-21 Github (tidyverse/glue@7230ed2)   
+##  gtable        0.2.0      2016-02-26 CRAN (R 3.4.3)                    
+##  haven         1.1.1      2018-01-18 CRAN (R 3.4.3)                    
+##  hms           0.4.2      2018-03-10 CRAN (R 3.4.4)                    
+##  htmltools     0.3.6      2017-04-28 CRAN (R 3.4.3)                    
+##  httr          1.3.1      2017-08-20 CRAN (R 3.4.3)                    
+##  janeaustenr   0.1.5      2017-06-10 CRAN (R 3.4.3)                    
+##  jsonlite      1.5        2017-06-01 CRAN (R 3.4.3)                    
+##  knitr         1.20       2018-02-20 CRAN (R 3.4.3)                    
+##  labeling      0.3        2014-08-23 CRAN (R 3.4.3)                    
+##  lattice       0.20-35    2017-03-25 CRAN (R 3.4.2)                    
+##  lazyeval      0.2.1      2017-10-29 CRAN (R 3.4.3)                    
+##  lubridate     1.7.4      2018-04-11 CRAN (R 3.4.4)                    
+##  magrittr      1.5        2014-11-22 CRAN (R 3.4.3)                    
+##  Matrix        1.2-14     2018-04-09 CRAN (R 3.4.4)                    
+##  mnormt        1.5-5      2016-10-15 CRAN (R 3.4.3)                    
+##  modelr        0.1.2      2018-05-11 CRAN (R 3.4.4)                    
+##  munsell       0.4.3      2016-02-13 CRAN (R 3.4.3)                    
+##  nlme          3.1-137    2018-04-07 CRAN (R 3.4.4)                    
+##  pillar        1.2.2      2018-04-26 CRAN (R 3.4.4)                    
+##  pkgconfig     2.0.1      2017-03-21 CRAN (R 3.4.3)                    
+##  plyr          1.8.4      2016-06-08 CRAN (R 3.4.3)                    
+##  psych         1.8.4      2018-05-06 CRAN (R 3.4.4)                    
+##  purrr       * 0.2.5      2018-05-29 cran (@0.2.5)                     
+##  R6            2.2.2      2017-06-17 CRAN (R 3.4.3)                    
+##  Rcpp          0.12.17    2018-05-18 cran (@0.12.17)                   
+##  readr       * 1.1.1      2017-05-16 CRAN (R 3.4.3)                    
+##  readxl        1.1.0      2018-04-20 CRAN (R 3.4.4)                    
+##  reshape2      1.4.3      2017-12-11 CRAN (R 3.4.3)                    
+##  rlang         0.2.0.9001 2018-05-31 Github (tidyverse/rlang@4e7e8f7)  
+##  rmarkdown     1.9        2018-03-01 CRAN (R 3.4.3)                    
+##  rprojroot     1.3-2      2018-01-03 CRAN (R 3.4.3)                    
+##  rstudioapi    0.7        2017-09-07 CRAN (R 3.4.3)                    
+##  rvest         0.3.2      2016-06-17 CRAN (R 3.4.3)                    
+##  scales        0.5.0.9000 2018-05-03 Github (hadley/scales@d767915)    
+##  sessioninfo   1.0.0      2017-06-21 cran (@1.0.0)                     
+##  SnowballC     0.5.1      2014-08-09 CRAN (R 3.4.3)                    
+##  stringi       1.2.2      2018-05-02 CRAN (R 3.4.4)                    
+##  stringr     * 1.3.1      2018-05-10 CRAN (R 3.4.4)                    
+##  tibble      * 1.4.2      2018-01-22 CRAN (R 3.4.3)                    
+##  tidyr       * 0.8.1      2018-05-18 CRAN (R 3.4.4)                    
+##  tidyselect    0.2.4      2018-02-26 CRAN (R 3.4.3)                    
+##  tidytext    * 0.1.8      2018-03-21 CRAN (R 3.4.4)                    
+##  tidyverse   * 1.2.1      2017-11-14 CRAN (R 3.4.3)                    
+##  tokenizers    0.2.1      2018-03-29 CRAN (R 3.4.4)                    
+##  utf8          1.1.4      2018-05-24 CRAN (R 3.4.4)                    
+##  widyr       * 0.1.1      2018-03-11 CRAN (R 3.4.4)                    
+##  withr         2.1.2      2018-03-15 CRAN (R 3.4.4)                    
+##  xfun          0.1        2018-01-22 CRAN (R 3.4.3)                    
+##  xml2          1.2.0      2018-01-24 CRAN (R 3.4.3)                    
+##  yaml          2.1.19     2018-05-01 cran (@2.1.19)</code></pre>
+<p></details></p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Not if we learn from Hans Rosling but that is a story for an other time<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="//tags/sentiment/">sentiment</a>&nbsp;
+            
+              <a href="//tags/security-now/">security-now</a>&nbsp;
+            
+              <a href="//tags/tutorial/">tutorial</a>&nbsp;
+            
+              <a href="//tags/tidytext/">tidytext</a>&nbsp;
+            
+              <a href="//tags/tidyverse/">tidyverse</a>&nbsp;
+            
+              <a href="//tags/dplyr/">dplyr</a>&nbsp;
+            
+              <a href="//tags/ggplot2/">ggplot2</a>&nbsp;
+            
+              <a href="//tags/intermediate/">intermediate</a>&nbsp;
+            
+              <a href="//tags/widyr/">widyr</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/" data-toggle="tooltip" data-placement="top" title="Cleaning up and combining data, a dataset for practice">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="find me on GitHub (main stuff)">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="I have some stale stuff on GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="I probably have something on Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Yes! I am active on Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="My LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="There is some stuff on StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Clean Code (and R-fun)</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a> <br>
+            
+
+
+
+
+  
+
+
+
+<a href='https://github.com/RMHogervorst/cleancode/tree/testvar/content/post/2018-05-29-sentiment-of-security-now-over-time.Rmd'>or edit this page on github.</a>
+
+
+
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

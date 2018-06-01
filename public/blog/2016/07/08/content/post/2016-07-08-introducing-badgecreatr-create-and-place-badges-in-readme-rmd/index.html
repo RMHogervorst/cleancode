@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" /> 
+
+  <title>Introducing Badgecreatr, a package that places badges in your readme</title>
+  <meta property="og:title" content="Introducing Badgecreatr, a package that places badges in your readme" />
+  <meta name="twitter:title" content="Introducing Badgecreatr, a package that places badges in your readme" />
+  <meta name="description" content="Introducing Badgecreatr, a package to create and place badges in your readme.Rmd file on Github.
+Badgecreatr will create the following badges (aka shields):
+       
+Installation Install the package with install.packages(&quot;badgecreatr&quot;)
+How do you use badgecreatr? Badgecreatr has one main function: badgeplacer().
+The most simple command is:
+badgecreatr::badgeplacer( githubaccount = &#34;yourgithubname&#34;,githubrepo = &#34;yourpackagename&#34;, branch = &#34;master&#34;) If your project is in its infancy and you don&rsquo;t want people to use it yet:">
+  <meta property="og:description" content="Introducing Badgecreatr, a package to create and place badges in your readme.Rmd file on Github.
+Badgecreatr will create the following badges (aka shields):
+       
+Installation Install the package with install.packages(&quot;badgecreatr&quot;)
+How do you use badgecreatr? Badgecreatr has one main function: badgeplacer().
+The most simple command is:
+badgecreatr::badgeplacer( githubaccount = &#34;yourgithubname&#34;,githubrepo = &#34;yourpackagename&#34;, branch = &#34;master&#34;) If your project is in its infancy and you don&rsquo;t want people to use it yet:">
+  <meta name="twitter:description" content="Introducing Badgecreatr, a package to create and place badges in your readme.Rmd file on Github.
+Badgecreatr will create the following badges (aka shields):
+       
+Installation Install the package …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code (and R-fun)" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Clean Code (and R-fun)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/css/syntax.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Clean Code (and R-fun)</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code (and R-fun)" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Clean Code (and R-fun)" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Introducing Badgecreatr, a package that places badges in your readme</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on July 8, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 2 minutes (373 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>Introducing <strong>Badgecreatr</strong>, a package to create and place badges in your readme.Rmd file on Github.</p>
+
+<p>Badgecreatr will create the following badges (aka shields):</p>
+
+<p><a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active ? The project has reached a stable, usable state and is being actively developed." /></a> <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/licence-GPL--3-blue.svg" alt="Licence" /></a> <a href="https://travis-ci.org/RMHogervorst/badgecreatr"><img src="https://travis-ci.org/RMHogervorst/badgecreatr.svg?branch=master" alt="Build Status" /></a> <a href="https://codecov.io/gh/RMHogervorst/badgecreatr"><img src="https://codecov.io/gh/RMHogervorst/badgecreatr/branch/master/graph/badge.svg" alt="codecov" /></a>
+<a href="https://cran.r-project.org/"><img src="https://img.shields.io/badge/R%3E%3D-3.2.4-6666ff.svg" alt="minimal R version" /></a> <a href="https://cran.r-project.org/package=badgecreatr"><img src="http://www.r-pkg.org/badges/version/badgecreatr" alt="CRAN\_Status\_Badge" /></a> <a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square" alt="packageversion" /></a>
+<a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2016--07--08-yellowgreen.svg" alt="Last-changedate" /></a></p>
+
+<h3 id="installation">Installation</h3>
+
+<p>Install the package with <code>install.packages(&quot;badgecreatr&quot;)</code></p>
+
+<h3 id="how-do-you-use-badgecreatr">How do you use badgecreatr?</h3>
+
+<p>Badgecreatr has one main function: <code>badgeplacer()</code>.</p>
+
+<p>The most simple command is:</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">badgecreatr<span class="o">::</span>badgeplacer<span class="p">(</span> githubaccount <span class="o">=</span> <span class="s">&#34;yourgithubname&#34;</span><span class="p">,</span>githubrepo <span class="o">=</span> <span class="s">&#34;yourpackagename&#34;</span><span class="p">,</span> branch <span class="o">=</span> <span class="s">&#34;master&#34;</span><span class="p">)</span></code></pre></div>
+<p>If your project is in its infancy and you don&rsquo;t want people to use it yet:</p>
+
+<p><code>badgecreatr::badgeplacer(status = &quot;wip&quot; , githubaccount = &quot;yourgithubname&quot;,githubrepo = &quot;yourpackagename&quot;)</code> which will give it the status &lsquo;Work in Progress&rsquo;.</p>
+
+<p>Repostatus gives you seven <a href="www.repostatus.org">project statuses</a>; Concept, WIP, Suspended, Abandoned, Active, Inactive, and Unsupported.</p>
+
+<h3 id="why-would-you-use-this-package">Why would you use this package?</h3>
+
+<p>When you have started yet another Github based r-package, copied the travis file and created a readme.Rmd file and you want to add these badges.
+Frankly I was a bit annoyed to copy almost identical markdown to new projects, it seemed right for automation.</p>
+
+<p><strong>Why would I not use this package?</strong></p>
+
+<ul>
+<li>you don&rsquo;t create a r-package</li>
+<li>you don&rsquo;t want to create badges</li>
+<li>you don&rsquo;t use Github</li>
+</ul>
+
+<h2 id="what-does-badgecreatr-do">What does badgecreatr do?</h2>
+
+<p>Badgecreatr reads your <code>readme.Rmd</code> file, reads your <code>DESCRIPTION</code> file and searches for a <code>.travis.yml</code> file.</p>
+
+<p>Within the <code>DESCRIPTION</code> file badgecreatr will find:
+- package name
+- the version number of your package
+- the license : GPL-3, GPL-2, MIT, or CC0
+- Minimal R version</p>
+
+<p><strong>Badgecreatr will create</strong></p>
+
+<ul>
+<li><a href="www.repostatus.org">repostatus</a> badge (by default it will give you an active status)</li>
+<li>a licence badge</li>
+<li><em>If it finds a .travis.yml file</em>:a Travis-CI Build-Status Badge</li>
+<li><em>If it finds a codecov reference in the .travis.yml file,</em> a Codecov Coverage Status Badge</li>
+<li>a badge to indicate the version of R you are using</li>
+<li>a CRAN status badge (will say &lsquo;not published&rsquo; if your package is not on CRAN)</li>
+<li>a package version badge</li>
+<li>a last change badge</li>
+</ul>
+
+<p>If you created badges in your readme before, badgecreatr will skip that badge.</p>
+
+<p>Enjoy. - Roel</p>
+
+<h3 id="notes">Notes:</h3>
+
+<ul>
+<li>The badges for R version, package version and last change are my invention.</li>
+<li>The last change badge will update every time you re-knit your readme.md file</li>
+<li>If you have suggestions or improvement open an <a href="https://github.com/RMHogervorst/badgecreatr/issues">issue</a> or submit a <a href="https://github.com/RMHogervorst/badgecreatr/compare">pull request</a>.
+<br /></li>
+</ul>
+
+<h2 id="further-reading">Further reading</h2>
+
+<ul>
+<li>The package on CRAN: <a href="https://cran.r-project.org/web/packages/badgecreatr/index.html">https://cran.r-project.org/web/packages/badgecreatr/index.html</a></li>
+<li>The package on Github : <a href="https://github.com/RMHogervorst/badgecreatr">https://github.com/RMHogervorst/badgecreatr</a></li>
+<li>My inspiration: <a href="https://github.com/badges/badgerbadgerbadger">https://github.com/badges/badgerbadgerbadger</a> &amp; <a href="http://shields.io/">http://shields.io/</a></li>
+</ul>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="//tags/badgecreatr/">badgecreatr</a>&nbsp;
+            
+              <a href="//tags/package/">package</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/" data-toggle="tooltip" data-placement="top" title="Non-standard-evaluation and standard evaluation in dplyr">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/" data-toggle="tooltip" data-placement="top" title="Submitting your first package to CRAN, my experience">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="find me on GitHub (main stuff)">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="I have some stale stuff on GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="I probably have something on Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Yes! I am active on Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="My LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="There is some stuff on StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Clean Code (and R-fun)</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a> <br>
+            
+
+
+
+
+  
+
+
+
+<a href='https://github.com/RMHogervorst/cleancode/tree/testvar/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd.md'>or edit this page on github.</a>
+
+
+
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

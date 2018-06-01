@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Githook on Clean Code (and R-fun)</title>
+    <link>/tags/githook/</link>
+    <description>Recent content in Githook on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Tue, 06 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/githook/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setting up a version controlled shiny-server</title>
+      <link>/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</link>
+      <pubDate>Tue, 06 Feb 2018 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</guid>
+      <description>
+
+&lt;p&gt;Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.&lt;/p&gt;
+
+&lt;p&gt;Shiny server (I used the open source version) has multiple installers provided by RStudio.&lt;/p&gt;
+
+&lt;p&gt;The installers for shiny-server create a user shiny and installs all the services needed.&lt;/p&gt;
+
+&lt;p&gt;I used a guide specific for my version of linux to install shiny-server and combined it with two other guides to make it version controlled.&lt;/p&gt;
+
+&lt;p&gt;I have added the instructions to this &lt;a href=&#34;https://gist.github.com/RMHogervorst/9d88ebff914b66b984ede8e78876c92f&#34;&gt;github gist&lt;/a&gt; but you can also follow along.&lt;/p&gt;
+
+&lt;h3 id=&#34;server-setup&#34;&gt;Server setup&lt;/h3&gt;
+
+&lt;p&gt;After you&amp;rsquo;ve installed shiny-server, the server serves all apps in &amp;lsquo;/etc/shiny-server&amp;rsquo; but I really don&amp;rsquo;t like to scp into the server to upload files, I&amp;rsquo;d rather work on my computer, put everything under version control and push the changes to the server. That way I can easily revert my changes if something fails and I don&amp;rsquo;t lose work.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve used Dean Atalli&amp;rsquo;s &lt;a href=&#34;https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/&#34;&gt;excellent guide to setting up a server on digital ocean&lt;/a&gt; but I&amp;rsquo;ve modified a small part. He is using github to push his changes and then pulls from github to his server.
+I was in a situation where I did not have access to github and I wanted a slightly simpler setup.&lt;/p&gt;
+
+&lt;p&gt;I created a bare repository on the server (that accepts my changes and responds just as github would, except the pretty website features) and used a git-hook. The files in the bare repo are not laid out in the same way as in the original files (on my computer) so I have to do something with that.&lt;/p&gt;
+
+&lt;p&gt;A git hook is something that runs  before, during or after you change a repo (it hooks into git). It is a simple shell script that (in my case) runs after a change is made in the repo and executes a command. After a change this &amp;lsquo;post-receive&amp;rsquo;-hook checks out the latest branch and moves it to &amp;lsquo;/etc/shiny-server/&amp;rsquo;.&lt;/p&gt;
+
+&lt;p&gt;So the set up is like &lt;a href=&#34;http://toroid.org/git-website-howto&#34; title=&#34;I modified this to make it apply to shiny-server&#34;&gt;this&lt;/a&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/home/shiny/shiny.git
+/etc/shiny-server/
+/all the other folders in a linux system
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You move into the shiny.git folder (no real need to use that extension, but it is common) and go to the .git folder. inside the folder you add and modify a file called post-receive like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/sh
+GIT_WORK_TREE = /srv/shiny-server git checkout -f
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You also need to tell the server that this file &amp;lsquo;post-receive&amp;rsquo; may be executed. by &amp;lsquo;chmod +x hooks/post-receive&amp;rsquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;setting-up-you-local-computer&#34;&gt;setting up you local computer.&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;(optional) Move the files from the server /etc/shiny-server/ to you computer so you can always revert back to the basic settings.&lt;/li&gt;
+&lt;li&gt;make sure you have a ssh key set up (this is safer to work with than username password)&lt;/li&gt;
+&lt;li&gt;we are going to move the ssh key of your computer to the list of accepted ssh keys in the server.&lt;/li&gt;
+&lt;li&gt;make a repo which will be your root folder on the server, meaning this folder will be mirrored in &amp;lsquo;/etc/shiny-server/&amp;rsquo; so shiny-server could be a good name.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;a-few-changes-on-your-server&#34;&gt;a few changes on your server&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;add your ssh key to &amp;lsquo;~/.ssh/authorized_keys&amp;rsquo; on the server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;back-to-your-local-computer&#34;&gt;back to your local computer&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;add a remote to your repo: &amp;lsquo;git remote add shinyserver ssh://shiny@server.example.org/home/shiny/shiny-repo.git&amp;rsquo;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;git remote add:  &lt;em&gt;add a remote&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;shinyserver   &lt;em&gt;the name of that remote&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ssh:// &lt;em&gt;make a ssh connection to&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;shiny@adres/ &lt;em&gt;the user shiny on server&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;home/shiny/shiny-repo.git &lt;em&gt;to the folder shiny-repo in user shiny&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;push to repo $ git push shinyserver +master:refs/heads/master&lt;/p&gt;
+
+&lt;h3 id=&#34;this-should-now-work&#34;&gt;This should now work&lt;/h3&gt;
+
+&lt;p&gt;Good luck!&lt;/p&gt;
+
+&lt;p&gt;(I did not have access to the server while I wrote this, so I could have made mistakes, PR me with hints and answers or open an issue, alternatively: reach me on twitter @rmhoge)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
