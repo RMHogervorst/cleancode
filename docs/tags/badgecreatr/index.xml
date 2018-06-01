@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Badgecreatr on Clean Code (and R-fun)</title>
-    <link>/tags/badgecreatr/</link>
+    <link>https://rmhogervorst.nl/cleancode/tags/badgecreatr/</link>
     <description>Recent content in Badgecreatr on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Sat, 09 Jul 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/tags/badgecreatr/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://rmhogervorst.nl/cleancode/tags/badgecreatr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Submitting your first package to CRAN, my experience</title>
-      <link>/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</link>
       <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</guid>
       <description>
 
 &lt;p&gt;I recently published my first R package to  The Comprehensive R Archive Network  (CRAN). It was very exciting and also quite easy. Let me walk you through my process.&lt;/p&gt;
@@ -118,10 +118,10 @@ I was very excited and quickly did a resubmission (which is identical to a first
     
     <item>
       <title>Introducing Badgecreatr, a package that places badges in your readme</title>
-      <link>/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/</link>
       <pubDate>Fri, 08 Jul 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/</guid>
       <description>
 
 &lt;p&gt;Introducing &lt;strong&gt;Badgecreatr&lt;/strong&gt;, a package to create and place badges in your readme.Rmd file on Github.&lt;/p&gt;
@@ -130,7 +130,7 @@ I was very excited and quickly did a resubmission (which is identical to a first
 
 &lt;p&gt;&lt;a href=&#34;http://www.repostatus.org/#active&#34;&gt;&lt;img src=&#34;http://www.repostatus.org/badges/latest/active.svg&#34; alt=&#34;Project Status: Active ? The project has reached a stable, usable state and is being actively developed.&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://www.gnu.org/licenses/gpl-3.0.en.html&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/licence-GPL--3-blue.svg&#34; alt=&#34;Licence&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://travis-ci.org/RMHogervorst/badgecreatr&#34;&gt;&lt;img src=&#34;https://travis-ci.org/RMHogervorst/badgecreatr.svg?branch=master&#34; alt=&#34;Build Status&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://codecov.io/gh/RMHogervorst/badgecreatr&#34;&gt;&lt;img src=&#34;https://codecov.io/gh/RMHogervorst/badgecreatr/branch/master/graph/badge.svg&#34; alt=&#34;codecov&#34; /&gt;&lt;/a&gt;
 &lt;a href=&#34;https://cran.r-project.org/&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/R%3E%3D-3.2.4-6666ff.svg&#34; alt=&#34;minimal R version&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://cran.r-project.org/package=badgecreatr&#34;&gt;&lt;img src=&#34;http://www.r-pkg.org/badges/version/badgecreatr&#34; alt=&#34;CRAN\_Status\_Badge&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;commits/master&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square&#34; alt=&#34;packageversion&#34; /&gt;&lt;/a&gt;
-&lt;a href=&#34;/commits/master&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/last%20change-2016--07--08-yellowgreen.svg&#34; alt=&#34;Last-changedate&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&#34;https://rmhogervorst.nl/cleancode/commits/master&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/last%20change-2016--07--08-yellowgreen.svg&#34; alt=&#34;Last-changedate&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
 

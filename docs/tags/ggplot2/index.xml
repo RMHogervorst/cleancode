@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ggplot2 on Clean Code (and R-fun)</title>
-    <link>/tags/ggplot2/</link>
+    <link>https://rmhogervorst.nl/cleancode/tags/ggplot2/</link>
     <description>Recent content in Ggplot2 on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 29 May 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://rmhogervorst.nl/cleancode/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sentiment of Security Now! over time</title>
-      <link>/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
       <description>&lt;p&gt;If you believe some people, everything is getting worse&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show &lt;a href=&#34;https://twit.tv/shows/security-now&#34;&gt;Security Now!&lt;/a&gt;. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’. Has the sentiment of the security now! podcast changed over time? It helps that every episode is transcribed into text so we can use natural language processing tools to work through this problem.&lt;/p&gt;
 &lt;div id=&#34;extracting-the-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Extracting the data&lt;/h2&gt;
@@ -84,7 +84,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )+
     scale_y_continuous(trans = &amp;quot;log2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Interestingly my scraper seems to not have detected who said the words on line 45. It was Steve.&lt;/p&gt;
 &lt;p&gt;It might be better to use an average over the episode&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df_sn[664,9][[1]][[1]] %&amp;gt;% 
@@ -102,7 +102,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         x = &amp;quot;&amp;quot;, y = &amp;quot;Number of words (log2 scale)&amp;quot;,
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;links&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Links&lt;/h2&gt;
@@ -209,17 +209,17 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Where to live in the Netherlands based on temperature XKCD style</title>
-      <link>/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</guid>
       <description>
 
 &lt;p&gt;After seeing a plot of best places to live in Spain and the USA based on the weather, I had to
 chime in and do the same thing for the Netherlands. The idea is simple, determine where you want to live based on your temperature preferences.&lt;/p&gt;
 
 &lt;p&gt;First the end result:
-&lt;img src=&#34;/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;How to read this plot?&lt;/p&gt;
 
@@ -276,7 +276,7 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;p&#3
            yrange &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; yrange&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
   theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
   theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/temperatureranges-in-the-netherlands-1.png&#34; alt=&#34;temperature ranges in the Netherlands alone&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/temperatureranges-in-the-netherlands-1.png&#34; alt=&#34;temperature ranges in the Netherlands alone&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;But what does that mean, in the grand scheme of things? As you might notice the range is very small. It would be interesting to add some US cities and perhaps some Spanisch cities to compare against. For fun I also added the Dutch Caribean islands.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;xrange2 &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# modified these by hand to increase the margins&lt;/span&gt;
@@ -326,7 +326,7 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;p&#3
            yrange &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; yrange2&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
   theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
   theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Finally we can compare the wintertemperature and summer humidex in The Netherlands by placing the points on a map using the coordinates of the measure stations.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;NL &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; map_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;map &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;world&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;region &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Netherlands&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -358,8 +358,8 @@ result &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
     theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
     theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
     scale_color_continuous&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;low &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;white&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; high &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;red&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/humidex_NL.png&#34; alt=&#34;Netherlands, humidex, gps&#34; /&gt;
-&lt;img src=&#34;/img/wintertemp_NL.png&#34; alt=&#34;Netherlands, wintertemp, gps&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/humidex_NL.png&#34; alt=&#34;Netherlands, humidex, gps&#34; /&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/wintertemp_NL.png&#34; alt=&#34;Netherlands, wintertemp, gps&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now show us what your country looks like!&lt;/p&gt;
 </description>
@@ -367,10 +367,10 @@ result &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
     
     <item>
       <title>Plotting a map with ggplot2, color by tile</title>
-      <link>/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</link>
       <pubDate>Fri, 06 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
@@ -690,10 +690,10 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;final_map&lt;span class=&#34;p
     
     <item>
       <title>From spss to R, part 4</title>
-      <link>/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</link>
       <pubDate>Mon, 04 Apr 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</guid>
       <description>
 
 &lt;p&gt;This is the second part of working with ggplot. We will combine the
@@ -872,7 +872,7 @@ What happens here:&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s address both color (going stereotype blue and pink) and program.
 After my first plot, I found the lines a bit thin, so I set the size. I also used a manual color scale.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/plot-psypinkblue.png&#34; alt=&#34;plot with different colors only psychology&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/plot-psypinkblue.png&#34; alt=&#34;plot with different colors only psychology&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;One of the odd things about rstudio is that if you click on the zoom button the plot looks good, but if you use ggsave it takes the uglier version in the side viewer. I guess I could change the settings in  the ggsave command&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:9&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:9&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
@@ -931,7 +931,7 @@ To remove parts of a plot we need to modify the theme settings. A theme is used 
         &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Produces the following plot (with &lt;code&gt;ggsave(&amp;quot;psychologystudentscities.png&amp;quot;, scale = 1.5)&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/psychologystudentscities.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/psychologystudentscities.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you find yourself repeating the same theme changes in multiple plots, you are violating the DRY principle (Do not repeat yourself). ggplot changes are just lists in R, so you can save all the changes to a list and apply that list to your plots. for example:&lt;/p&gt;
 
@@ -986,8 +986,8 @@ duo2015_tidy &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;spa
         ggtitle&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Law students in several cities over five years&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
         studytheme&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/lawstudents-clean.png&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;/img/psystudents-clean.png&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/lawstudents-clean.png&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/psystudents-clean.png&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;law and psychology students plots&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1044,10 +1044,10 @@ duo2015_tidy &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;spa
     
     <item>
       <title>From spss to R, part 3</title>
-      <link>/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</link>
       <pubDate>Wed, 02 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</guid>
       <description>
 
 &lt;p&gt;In this post we will start with a build-in dataset and some basic ggplot graphics. In the next post we will combine dplyr and ggplot to do awesome stuff with the Dutch University student counts from the previous lessons.&lt;/p&gt;
@@ -1075,7 +1075,7 @@ coplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mpg &lt;span class=&#34;o&#34;
 
 &lt;p&gt;To make the most of ggplot, &lt;em&gt;and not go insane&lt;/em&gt;, you will need to understand the underlying principles. the gg in ggplot stand for the grammar of graphics. A concept based on the work of Wilkinson and Wills &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, and put into a graphics package by Hadley Wickham &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:this-is-quite-a-good-read&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:this-is-quite-a-good-read&#34;&gt;0&lt;/a&gt;&lt;/sup&gt;.
 The most important thing to realize is this:
-&lt;img src=&#34;/img/graphs-have-layers.png&#34; alt=&#34;ogres have layers image&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/graphs-have-layers.png&#34; alt=&#34;ogres have layers image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Every graph consists of the basic data, some transformations to axes, title information and the representation of the data. In ggplot you have to specify the data, and the aesthetics (some mapping of the position of x, and y, colours and shapes). Furthermore you have to tell ggplot what type of chart you want. Bars, lines, and points are all examples of geometric objects or geoms for short.&lt;/p&gt;
 
@@ -1110,7 +1110,7 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34
 &lt;span class=&#34;c1&#34;&gt;# you CAN change the order of arguments, but then you WILL need to&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;# explicitly call the arguments:&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;wt&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;mpg &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;gear&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor.png&#34; alt=&#34;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) &#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor.png&#34; alt=&#34;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) &#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Did you check that lines 1 and 11 had the same output?&lt;/li&gt;
@@ -1152,8 +1152,8 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
  &lt;code&gt;ggplot(data = mtcars, aes(x= mpg, y= wt))&lt;/code&gt;.&lt;/p&gt;
 
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor-andsmoothing.png&#34; alt=&#34;ggplot geom_point and geom smooth method=lm&#34;&gt;
-    &lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png&#34; alt=&#34;ggplot with group= as.factor gear geom_point geom smooth&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor-andsmoothing.png&#34; alt=&#34;ggplot geom_point and geom smooth method=lm&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png&#34; alt=&#34;ggplot with group= as.factor gear geom_point geom smooth&#34;&gt;
     &lt;figcaption&gt;adding:  &#39;group = as.factor(gear)&#39; to aes() of ggplot leads to seperate smoothings per gear&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_smooth&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;method &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; lm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1166,7 +1166,7 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
 
 &lt;p&gt;A bargraph has only one aesthetic mapping:
 &lt;code&gt;ggplot(data = mtcars, aes(as.factor(cyl))) + geom_bar(stat =&amp;quot;count&amp;quot;)&lt;/code&gt;
-&lt;img src=&#34;/img/ggplot2-simplebargraph.png&#34; alt=&#34;bargraph mtcars&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simplebargraph.png&#34; alt=&#34;bargraph mtcars&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;only the x aesthetic is specified, the geom is a bar (see &lt;code&gt;?geom_bar&lt;/code&gt;) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = &amp;ldquo;identity&amp;rdquo;). For example&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;dat&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;data.frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
@@ -1174,7 +1174,7 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
         Frequency &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# a very silly dataframe&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dat&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;Name&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; Frequency&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_bar&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;stat &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;identity&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-simplebargraph-fictionaldata.png&#34; alt=&#34;ggplot(dat, aes(Name, Frequency)) + geom_bar(stat =&amp;quot;identity&amp;quot;)&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simplebargraph-fictionaldata.png&#34; alt=&#34;ggplot(dat, aes(Name, Frequency)) + geom_bar(stat =&amp;quot;identity&amp;quot;)&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;example-3-boxplots-violingplots-with-points-behind&#34;&gt;Example 3: boxplots, violingplots with points behind&lt;/h2&gt;
 
@@ -1183,7 +1183,7 @@ By now you now the drill: the data is chickwts, the aes are feed and weight. The
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;str&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-chickwts-violin.png&#34; alt=&#34;ggplot violinplot&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-chickwts-violin.png&#34; alt=&#34;ggplot violinplot&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Boxplots are nice, but you lose information about the middle of the distribution. So let&amp;rsquo;s plot the real distribution. &lt;code&gt;ggplot(chickwts, aes(feed, weight)) + geom_point()&lt;/code&gt; This doesn&amp;rsquo;t really help us, what about all the chicks with the same weight and same feed? The jitter geom helps you out.
 &lt;code&gt;ggplot(chickwts, aes(feed, weight)) + geom_jitter()&lt;/code&gt;&lt;/p&gt;
@@ -1193,7 +1193,7 @@ let&amp;rsquo;s combine and see what looks best&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_jitter&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_jitter&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-chickwts-violin-points.png&#34; alt=&#34;chickwts violin and points on top&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-chickwts-violin-points.png&#34; alt=&#34;chickwts violin and points on top&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I like the last one best, but for different data different visualizations are better.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;cyl&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
@@ -1217,7 +1217,7 @@ g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_tufte&lt;span class=&#34;p&
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_base&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_excel&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# you will love this, especially the description&lt;/span&gt;
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_fivethirtyeight&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-themetufte-mtcars-violin-points-color.png&#34; alt=&#34;ggthemes example with tufte&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-themetufte-mtcars-violin-points-color.png&#34; alt=&#34;ggthemes example with tufte&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So now you know a few graphics and the basics of ggplot use. In the next lesson we will combine dplyr and ggplot to filter, slice and dice through a dataset. Hopefully we will get some insights!&lt;/p&gt;
 
@@ -1252,16 +1252,16 @@ g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_fivethirtyeight&lt;span cla
     
     <item>
       <title>From spss to R, part 1</title>
-      <link>/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</link>
       <pubDate>Sat, 20 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine.
-&lt;img src=&#34;/img/google_search_spss_r.PNG&#34; alt=&#34;google search results&#34; /&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/google_search_spss_r.PNG&#34; alt=&#34;google search results&#34; /&gt;
 Most of these hits start with the basics and slowly work your way up to more advanced examples.&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -1294,13 +1294,13 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 &lt;p&gt;You have installed Rstudio, congratulations!&lt;/p&gt;
 
 &lt;p&gt;The main screen looks like this:
-&lt;img src=&#34;/img/rstudio-bare.PNG&#34; alt=&#34;Rstudio main&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-bare.PNG&#34; alt=&#34;Rstudio main&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;With&lt;/p&gt;
 
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-packages-files-plots-history-environment.PNG&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-new-open.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-packages-files-plots-history-environment.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-new-open.PNG&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;many hidden options right and left&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1309,7 +1309,7 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 &lt;p&gt;You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).&lt;/p&gt;
 
 &lt;figure&gt;
-    &lt;img src=&#34;/img/rstudio-script-console.PNG&#34; &gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-script-console.PNG&#34; &gt;
     &lt;figcaption&gt; script and console &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1387,7 +1387,7 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 
 &lt;p&gt;To be more specific, use the following format in your search: [r] [package you want to use] [function if any] [&amp;hellip; your problem]
 for example
-&lt;img src=&#34;/img/example_search.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/example_search.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;from-spss-to-r&#34;&gt;From SPSS to R&lt;/h1&gt;
 

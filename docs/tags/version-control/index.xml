@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Version Control on Clean Code (and R-fun)</title>
-    <link>/tags/version-control/</link>
+    <link>https://rmhogervorst.nl/cleancode/tags/version-control/</link>
     <description>Recent content in Version Control on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 19 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/tags/version-control/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://rmhogervorst.nl/cleancode/tags/version-control/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>If blogging was like academia, we would all be saved, thank you for your edits.</title>
-      <link>/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/</link>
       <pubDate>Tue, 19 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/</guid>
       <description>&lt;p&gt;A month ago I posted a short piece inspired by a  &lt;a href=&#34;http://www.masalmon.eu/2017/11/16/wheretoliveus/&#34;&gt;post by Maële Salmon&lt;/a&gt;
 She actually reached out to me in 10 minutes, telling me I made a weird spelling
 error (no excuses, I really make those a lot). Then a day or two later &lt;a href=&#34;https://github.com/jonspring&#34;&gt;Jon Spring &lt;/a&gt;
@@ -57,10 +57,10 @@ So thank you!&lt;/p&gt;
     
     <item>
       <title>Your most valuable collaborator, future-you</title>
-      <link>/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</guid>
       <description>
 
 &lt;p&gt;I was recently at a R users &lt;a href=&#34;http://www.meetup.com/amst-R-dam/&#34; title=&#34;amst-R-dam&#34;&gt;meetup&lt;/a&gt; where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list of data frames and add that list to your data frame. Very cool,  and more useful then I thought, but that is not what I wanted to talk about.&lt;/p&gt;
@@ -129,14 +129,14 @@ test_that&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&
 
 &lt;p&gt;Version control lets you record snapshots of previous code, but also lets you comment on what you solved or changed. When you save a new version of the code to version control you will have to be a bit explicit. Otherwise you will find yourself in this situation:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/wrong_commit.PNG&#34; alt=&#34;an example of a less helpful commit message&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/wrong_commit.PNG&#34; alt=&#34;an example of a less helpful commit message&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Version control, if you use meaningful descriptions, can help you find out where you did some actions and what you were trying to do. Describe intent in the commit messages. A quote I really like is:&lt;br /&gt;
 &amp;gt; &amp;ldquo;You mostly collaborate with yourself, and me-from-two-months-ago never responds to email.&amp;rdquo;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;p&gt;My commits have become somewhat better:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/example_better_commit.PNG&#34; alt=&#34;somewhat better commit messages&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/example_better_commit.PNG&#34; alt=&#34;somewhat better commit messages&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You could even use a github-issue-based-workflow where you write down the problems you want to solve in seperate issues and after you solved a particular issue, you push the code to github referencing the issue number.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
@@ -208,10 +208,10 @@ Do comment as often as you find necessary. More is better then less. However don
     
     <item>
       <title>Version control with Git</title>
-      <link>/blog/2016/03/01/content/post/2016-03-01-version-control-start/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/03/01/content/post/2016-03-01-version-control-start/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</guid>
       <description>
 
 &lt;h2 id=&#34;keeping-track-of-versions&#34;&gt;Keeping track of versions&lt;/h2&gt;
@@ -223,13 +223,13 @@ That is why keep old versions of your files. That way you can go back if you mes
 &lt;li&gt;Usually that looks like this:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/versioncontrol2.png&#34; alt=&#34;filesystem without version control&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/versioncontrol2.png&#34; alt=&#34;filesystem without version control&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Or you use dropbox or something like it:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/dropboxversion.png&#34; alt=&#34;dropbox versions&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/dropboxversion.png&#34; alt=&#34;dropbox versions&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Other people use email. Emailing to themselves or to collaborators when they finished something.&lt;/li&gt;
@@ -247,12 +247,12 @@ However in some cases you might want to go back to a previous version and work f
 &lt;p&gt;So how does Git work? Every time you reach a point in you project that you think is critical, you make a commit. You save a current state of all the files in the directory. And when you make this snapshot of your files, you can (and should) write down what you solved and what you changed since last time. In the future when you look back at your commit history you can read in what state your project was.&lt;/p&gt;
 
 &lt;p&gt;In the next example you can see what changed in the files, without even looking at the files themselves.
-&lt;img src=&#34;/img/commits_example.png&#34; alt=&#34;commits from test_dat, from github&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/commits_example.png&#34; alt=&#34;commits from test_dat, from github&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;branching&#34;&gt;Branching&lt;/h3&gt;
 
 &lt;p&gt;Even better, you can start from any saved point in time and create a new version. And when you like that version better, merge it back into an other version.
-&lt;img src=&#34;/img/branching.png&#34; alt=&#34;branches&#34; /&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/branching.png&#34; alt=&#34;branches&#34; /&gt;
 In the example above, at the second commit I branched (purple line). the third row from below is a commit in the purple branch. Then I changed something in the normal branch and finally I merged the blue and purple line in the second line from the top.&lt;/p&gt;
 
 &lt;p&gt;You don&amp;rsquo;t have to use branching, just saving important points along the way is a great start (It would be the point where you email yourself a version, or save a new version of the file).&lt;/p&gt;
@@ -280,24 +280,24 @@ In the example above, at the second commit I branched (purple line). the third r
 &lt;li&gt;If necessary, enter the path for your Git or SVN executable where provided.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/enabling-git-rstudio.PNG&#34; alt=&#34;enabling git in rstudio example&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/enabling-git-rstudio.PNG&#34; alt=&#34;enabling git in rstudio example&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So, how do you use version control within Rstudio?&lt;/p&gt;
 
 &lt;h1 id=&#34;rstudio-project-and-git&#34;&gt;Rstudio project and git.&lt;/h1&gt;
 
 &lt;p&gt;Start a new project
-&lt;img src=&#34;/img/rstudio-create-new-project.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I chose an empty project in a new directory&lt;/p&gt;
 
 &lt;p&gt;and then click &amp;lsquo;Create a git repository&amp;rsquo;
-&lt;img src=&#34;/img/rstudio-new-project-enablegit.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-new-project-enablegit.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The repo and real folder on windows 8.1 look like this.
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-empty-git.PNG&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;/img/folderview-new-git-project.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-empty-git.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/folderview-new-git-project.PNG&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;rstudio and the real folder with hidden folders showing&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 
@@ -307,7 +307,7 @@ In the example above, at the second commit I branched (purple line). the third r
 
 &lt;h2 id=&#34;git-version-control-within-rstudio-your-first-commit&#34;&gt;Git version control within Rstudio: your first commit&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-git-first-commit.PNG&#34; alt=&#34;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-git-first-commit.PNG&#34; alt=&#34;&#34; /&gt;
 I have added the second file, the icon changes to a green A (short for: add to repository), the first one shows two yellow questionmarks (short for: not tracked, not changed, I think).&lt;/p&gt;
 
 &lt;ul&gt;
@@ -316,7 +316,7 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;A new window will open:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-git-commit-window.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-git-commit-window.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The left part of the screen shows what files are in the commit, the bottom part displays the changes since last commit. Green means added, red means subtracted.&lt;/p&gt;
 
@@ -328,7 +328,7 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;a window will open with a description of what happened.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-git-commit-message.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-git-commit-message.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;When you return to the main view of rstudio you will see that the git tab has changed a bit, there are no files (because nothing has changed yet since your commit 2 seconds ago) and next to the gear wheel it says: &amp;lsquo;master&amp;rsquo; . This is the branch you are on right now. By default the first branch is master.&lt;/p&gt;
 
@@ -352,14 +352,14 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;It will look like this
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-commit1.PNG&#34; alt=&#34;before tracking&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-commit2.PNG&#34; alt=&#34;after tracking&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-commit1.PNG&#34; alt=&#34;before tracking&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-commit2.PNG&#34; alt=&#34;after tracking&#34;&gt;
     &lt;figcaption&gt;rstudio adding files to commit before and after&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look at the history of your commits, click on the clock in the git tab.
 Mine looks like this:
-&lt;img src=&#34;/img/rstudio-commit-history.PNG&#34; alt=&#34;rstudio commit history&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-commit-history.PNG&#34; alt=&#34;rstudio commit history&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note the commit message, it says what the commit adds to the repo. Try to write your messages as if you fulfull a order and discribe the contents. For example: &amp;ldquo;adds count_messages function that counts messages send to the user&amp;rdquo;
 or, &amp;ldquo;fix issue #2 can&amp;rsquo;t work with arrays&amp;rdquo;.&lt;/p&gt;

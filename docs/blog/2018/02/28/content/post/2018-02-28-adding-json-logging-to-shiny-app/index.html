@@ -15,24 +15,24 @@ Shiny server does already log all it&rsquo;s actions to a file on the server, bu
 Shiny server does already log all it&rsquo;s actions to a file on the server, but that file can be hard to access.">
   <meta name="twitter:description" content="This is a very short post with example code Over time when you move your shiny app from your computer to a server, you want to add some logging. Generally logging is defined in levels : INFO …">
   <meta name="author" content="Roel M. Hogervorst"/>
-  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="/img/avatar-icon.png" />
-  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <link href='https://rmhogervorst.nl/cleancode/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://rmhogervorst.nl/cleancode/img/avatar-icon.png" />
+  <meta name="twitter:image" content="https://rmhogervorst.nl/cleancode/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@RMHoge" />
   <meta name="twitter:creator" content="@RMHoge" />
-  <meta property="og:url" content="/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/" />
+  <meta property="og:url" content="https://rmhogervorst.nl/cleancode/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Clean Code (and R-fun)" />
 
   <meta name="generator" content="Hugo 0.35" />
-  <link rel="canonical" href="/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/" />
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Clean Code (and R-fun)">
+  <link rel="canonical" href="https://rmhogervorst.nl/cleancode/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/" />
+  <link rel="alternate" href="https://rmhogervorst.nl/cleancode/index.xml" type="application/rss+xml" title="Clean Code (and R-fun)">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/css/syntax.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+  <link rel="stylesheet" href="https://rmhogervorst.nl/cleancode/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://rmhogervorst.nl/cleancode/css/syntax.css" /><link rel="stylesheet" href="https://rmhogervorst.nl/cleancode/css/codeblock.css" />
 
 
 
@@ -97,7 +97,7 @@ Shiny server does already log all it&rsquo;s actions to a file on the server, bu
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Clean Code (and R-fun)</a>
+      <a class="navbar-brand" href="https://rmhogervorst.nl/cleancode">Clean Code (and R-fun)</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -113,8 +113,8 @@ Shiny server does already log all it&rsquo;s actions to a file on the server, bu
     <div class="avatar-container">
       <div class="avatar-img-border">
         
-          <a title="Clean Code (and R-fun)" href="/">
-            <img class="avatar-img" src="/img/avatar-icon.png" alt="Clean Code (and R-fun)" />
+          <a title="Clean Code (and R-fun)" href="https://rmhogervorst.nl/cleancode">
+            <img class="avatar-img" src="https://rmhogervorst.nl/cleancode/img/avatar-icon.png" alt="Clean Code (and R-fun)" />
           </a>
         
       </div>
@@ -241,17 +241,17 @@ or send me a message on <a href="https://twitter.com/RMHoge">twitter</a>.</p>
         
           <div class="blog-tags">
             
-              <a href="//tags/shiny/">shiny</a>&nbsp;
+              <a href="https://rmhogervorst.nl/cleancode/tags/shiny/">shiny</a>&nbsp;
             
-              <a href="//tags/shiny-server/">shiny-server</a>&nbsp;
+              <a href="https://rmhogervorst.nl/cleancode/tags/shiny-server/">shiny-server</a>&nbsp;
             
-              <a href="//tags/logging/">logging</a>&nbsp;
+              <a href="https://rmhogervorst.nl/cleancode/tags/logging/">logging</a>&nbsp;
             
-              <a href="//tags/loggit/">loggit</a>&nbsp;
+              <a href="https://rmhogervorst.nl/cleancode/tags/loggit/">loggit</a>&nbsp;
             
-              <a href="//tags/advanced/">advanced</a>&nbsp;
+              <a href="https://rmhogervorst.nl/cleancode/tags/advanced/">advanced</a>&nbsp;
             
-              <a href="//tags/r6/">R6</a>&nbsp;
+              <a href="https://rmhogervorst.nl/cleancode/tags/r6/">R6</a>&nbsp;
             
           </div>
         
@@ -263,12 +263,12 @@ or send me a message on <a href="https://twitter.com/RMHoge">twitter</a>.</p>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/" data-toggle="tooltip" data-placement="top" title="Setting up a version controlled shiny-server">&larr; Previous Post</a>
+              <a href="https://rmhogervorst.nl/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/" data-toggle="tooltip" data-placement="top" title="Setting up a version controlled shiny-server">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/" data-toggle="tooltip" data-placement="top" title="Cleaning up and combining data, a dataset for practice">Next Post &rarr;</a>
+              <a href="https://rmhogervorst.nl/cleancode/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/" data-toggle="tooltip" data-placement="top" title="Cleaning up and combining data, a dataset for practice">Next Post &rarr;</a>
             </li>
           
         </ul>
@@ -357,7 +357,7 @@ or send me a message on <a href="https://twitter.com/RMHoge">twitter</a>.</p>
           
           <li>
             
-            <a href="/index.xml" title="RSS">
+            <a href="https://rmhogervorst.nl/cleancode/index.xml" title="RSS">
             
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
@@ -379,7 +379,7 @@ or send me a message on <a href="https://twitter.com/RMHoge">twitter</a>.</p>
 
           
             &nbsp;&bull;&nbsp;
-            <a href="/">Clean Code (and R-fun)</a>
+            <a href="https://rmhogervorst.nl/cleancode">Clean Code (and R-fun)</a>
           
         </p>
         
@@ -396,7 +396,7 @@ or send me a message on <a href="https://twitter.com/RMHoge">twitter</a>.</p>
 
 
 
-<a href='https://github.com/RMHogervorst/cleancode/tree/testvar/content/post/2018-02-28-adding-json-logging-to-shiny-app.md'>or edit this page on github.</a>
+<a href='https://github.com/RMHogervorst/cleancode/tree/master/content/post/2018-02-28-adding-json-logging-to-shiny-app.md'>or edit this page on github.</a>
 
 
 
@@ -410,10 +410,10 @@ or send me a message on <a href="https://twitter.com/RMHoge">twitter</a>.</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://rmhogervorst.nl/cleancode/js/main.js"></script><script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
-<script src="/js/load-photoswipe.js"></script>
+<script src="https://rmhogervorst.nl/cleancode/js/load-photoswipe.js"></script>
 
 
 

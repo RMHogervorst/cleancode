@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tidyverse on Clean Code (and R-fun)</title>
-    <link>/tags/tidyverse/</link>
+    <link>https://rmhogervorst.nl/cleancode/tags/tidyverse/</link>
     <description>Recent content in Tidyverse on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 29 May 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://rmhogervorst.nl/cleancode/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sentiment of Security Now! over time</title>
-      <link>/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
       <description>&lt;p&gt;If you believe some people, everything is getting worse&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show &lt;a href=&#34;https://twit.tv/shows/security-now&#34;&gt;Security Now!&lt;/a&gt;. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’. Has the sentiment of the security now! podcast changed over time? It helps that every episode is transcribed into text so we can use natural language processing tools to work through this problem.&lt;/p&gt;
 &lt;div id=&#34;extracting-the-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Extracting the data&lt;/h2&gt;
@@ -84,7 +84,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )+
     scale_y_continuous(trans = &amp;quot;log2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Interestingly my scraper seems to not have detected who said the words on line 45. It was Steve.&lt;/p&gt;
 &lt;p&gt;It might be better to use an average over the episode&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df_sn[664,9][[1]][[1]] %&amp;gt;% 
@@ -102,7 +102,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         x = &amp;quot;&amp;quot;, y = &amp;quot;Number of words (log2 scale)&amp;quot;,
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;links&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Links&lt;/h2&gt;
@@ -209,10 +209,10 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Moving parts of a country over a map</title>
-      <link>/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</link>
       <pubDate>Mon, 29 Jan 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</guid>
       <description>
 
 &lt;p&gt;I love making maps, I also love making gifs.
@@ -340,10 +340,10 @@ image_animate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;frames&lt;span class=&#
     
     <item>
       <title>Turning kindle notes into a tidy data</title>
-      <link>/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
       <pubDate>Mon, 08 May 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
       <description>
 
 &lt;p&gt;It is my dream to do everything with R. And we aRe almost there. We can write blogs in blogdown or bookdown, write reports in RMarkdown (thank you &lt;a href=&#34;https://twitter.com/xieyihui&#34;&gt;Yihui Xie!&lt;/a&gt;) create interactive webpages with Shiny (thank you &lt;a href=&#34;https://twitter.com/winston_chang&#34;&gt;Winston Chang&lt;/a&gt;). Control our lifx lights with &lt;a href=&#34;https://github.com/cboettig/lifxr&#34;&gt;lifxr&lt;/a&gt; (great work &lt;a href=&#34;http://carlboettiger.info/&#34;&gt;Carl!&lt;/a&gt;) and use emoticons everywhere with the emo package.&lt;/p&gt;

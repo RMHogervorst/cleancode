@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rmarkdown on Clean Code (and R-fun)</title>
-    <link>/tags/rmarkdown/</link>
+    <link>https://rmhogervorst.nl/cleancode/tags/rmarkdown/</link>
     <description>Recent content in Rmarkdown on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Wed, 24 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/tags/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://rmhogervorst.nl/cleancode/tags/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>add abbreviations to your rmarkdown doc</title>
-      <link>/blog/2018/01/24/content/post/2018-01-24-add-abbreviations-to-rmarkdown/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2018/01/24/content/post/2018-01-24-add-abbreviations-to-rmarkdown/</link>
       <pubDate>Wed, 24 Jan 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2018/01/24/content/post/2018-01-24-add-abbreviations-to-rmarkdown/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2018/01/24/content/post/2018-01-24-add-abbreviations-to-rmarkdown/</guid>
       <description>&lt;p&gt;Today a small tip for when you write rmarkdown documents. Add a chunk on top with abbreviations.&lt;/p&gt;
 
 &lt;p&gt;in the first chunks you set the options and load the

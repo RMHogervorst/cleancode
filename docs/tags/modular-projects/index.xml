@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Modular Projects on Clean Code (and R-fun)</title>
-    <link>/tags/modular-projects/</link>
+    <link>https://rmhogervorst.nl/cleancode/tags/modular-projects/</link>
     <description>Recent content in Modular Projects on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Sun, 14 Feb 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/tags/modular-projects/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://rmhogervorst.nl/cleancode/tags/modular-projects/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Portioning projects</title>
-      <link>/blog/2016/02/14/content/post/2016-02-14-portioning-projects/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/02/14/content/post/2016-02-14-portioning-projects/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/02/14/content/post/2016-02-14-portioning-projects/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/02/14/content/post/2016-02-14-portioning-projects/</guid>
       <description>
 
 &lt;p&gt;Often we write programs to automate things. The programs range from simple to complex. But in essence, you always do the same thing:&lt;/p&gt;
@@ -46,7 +46,7 @@ This is called modular programming.&lt;/p&gt;
 
 &lt;p&gt;Modular programming also makes it easier to add new functions. You can reuse modules (refactoring) or simply add a new module that extends your program.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/project_philosophy.png&#34; alt=&#34;distinction one script approach and modular approach&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/project_philosophy.png&#34; alt=&#34;distinction one script approach and modular approach&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;planning-your-project&#34;&gt;Planning your project&lt;/h1&gt;
 

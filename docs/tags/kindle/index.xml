@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kindle on Clean Code (and R-fun)</title>
-    <link>/tags/kindle/</link>
+    <link>https://rmhogervorst.nl/cleancode/tags/kindle/</link>
     <description>Recent content in Kindle on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Mon, 08 May 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/tags/kindle/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://rmhogervorst.nl/cleancode/tags/kindle/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Turning kindle notes into a tidy data</title>
-      <link>/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
       <pubDate>Mon, 08 May 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
       <description>
 
 &lt;p&gt;It is my dream to do everything with R. And we aRe almost there. We can write blogs in blogdown or bookdown, write reports in RMarkdown (thank you &lt;a href=&#34;https://twitter.com/xieyihui&#34;&gt;Yihui Xie!&lt;/a&gt;) create interactive webpages with Shiny (thank you &lt;a href=&#34;https://twitter.com/winston_chang&#34;&gt;Winston Chang&lt;/a&gt;). Control our lifx lights with &lt;a href=&#34;https://github.com/cboettig/lifxr&#34;&gt;lifxr&lt;/a&gt; (great work &lt;a href=&#34;http://carlboettiger.info/&#34;&gt;Carl!&lt;/a&gt;) and use emoticons everywhere with the emo package.&lt;/p&gt;

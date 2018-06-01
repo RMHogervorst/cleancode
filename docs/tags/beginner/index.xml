@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Beginner on Clean Code (and R-fun)</title>
-    <link>/tags/beginner/</link>
+    <link>https://rmhogervorst.nl/cleancode/tags/beginner/</link>
     <description>Recent content in Beginner on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 19 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/tags/beginner/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://rmhogervorst.nl/cleancode/tags/beginner/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>If blogging was like academia, we would all be saved, thank you for your edits.</title>
-      <link>/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/</link>
       <pubDate>Tue, 19 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/</guid>
       <description>&lt;p&gt;A month ago I posted a short piece inspired by a  &lt;a href=&#34;http://www.masalmon.eu/2017/11/16/wheretoliveus/&#34;&gt;post by Maële Salmon&lt;/a&gt;
 She actually reached out to me in 10 minutes, telling me I made a weird spelling
 error (no excuses, I really make those a lot). Then a day or two later &lt;a href=&#34;https://github.com/jonspring&#34;&gt;Jon Spring &lt;/a&gt;
@@ -57,10 +57,10 @@ So thank you!&lt;/p&gt;
     
     <item>
       <title>Turning kindle notes into a tidy data</title>
-      <link>/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
       <pubDate>Mon, 08 May 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
       <description>
 
 &lt;p&gt;It is my dream to do everything with R. And we aRe almost there. We can write blogs in blogdown or bookdown, write reports in RMarkdown (thank you &lt;a href=&#34;https://twitter.com/xieyihui&#34;&gt;Yihui Xie!&lt;/a&gt;) create interactive webpages with Shiny (thank you &lt;a href=&#34;https://twitter.com/winston_chang&#34;&gt;Winston Chang&lt;/a&gt;). Control our lifx lights with &lt;a href=&#34;https://github.com/cboettig/lifxr&#34;&gt;lifxr&lt;/a&gt; (great work &lt;a href=&#34;http://carlboettiger.info/&#34;&gt;Carl!&lt;/a&gt;) and use emoticons everywhere with the emo package.&lt;/p&gt;
@@ -432,10 +432,10 @@ finalframe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
     
     <item>
       <title>Introduction to R projects</title>
-      <link>/blog/2016/04/10/content/post/2016-04-10-rproject-start/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</link>
       <pubDate>Sun, 10 Apr 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/04/10/content/post/2016-04-10-rproject-start/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</guid>
       <description>
 
 &lt;p&gt;It often makes sense to separate your projects. And since space is cheap you are probably creating separate folders on your computer. In RStudio you can create different projects that live in their own folder.&lt;/p&gt;
@@ -444,11 +444,11 @@ finalframe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;In my case, for example, I have several projects and the last 10 or so are displayed in the dropdown menu:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-project-dropdown.PNG&#34; alt=&#34;Roel&#39;s last projects image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-project-dropdown.PNG&#34; alt=&#34;Roel&#39;s last projects image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Opening a new project presents you with a screen .&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-create-new-project.PNG&#34; alt=&#34;rstudio new project image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;rstudio new project image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can create a new project in a new location, in an old location or download from &lt;a href=&#34;https://rmhogervorst.github.io/cleancode/blog/2016/03/01/version-control-start.html&#34; title=&#34;See a previous post about version control&#34;&gt;version control&lt;/a&gt;.&lt;/p&gt;
 
@@ -460,13 +460,13 @@ finalframe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;If you click on &lt;code&gt;checkout from version control&lt;/code&gt; this will happen&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-versioncontrol.PNG&#34; alt=&#34;image of checkout from version control&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-versioncontrol.PNG&#34; alt=&#34;image of checkout from version control&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on git&lt;/p&gt;
 
 &lt;p&gt;and fill in some details.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-clone-git.PNG&#34; alt=&#34;image of my repo clone&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-clone-git.PNG&#34; alt=&#34;image of my repo clone&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;in my case I&amp;rsquo;ve dowloaded from my own repository but cloning a project from github is possible from every project.&lt;/p&gt;
 
@@ -474,7 +474,7 @@ finalframe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Here the clone address at a different repository:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/clone-image.PNG&#34; alt=&#34;image of hadley&#39;s ggplot2 repo address&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/clone-image.PNG&#34; alt=&#34;image of hadley&#39;s ggplot2 repo address&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;That is it, a short introduction to projects.&lt;/p&gt;
 
@@ -486,10 +486,10 @@ finalframe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
     
     <item>
       <title>From spss to R, part 4</title>
-      <link>/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</link>
       <pubDate>Mon, 04 Apr 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</guid>
       <description>
 
 &lt;p&gt;This is the second part of working with ggplot. We will combine the
@@ -668,7 +668,7 @@ What happens here:&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s address both color (going stereotype blue and pink) and program.
 After my first plot, I found the lines a bit thin, so I set the size. I also used a manual color scale.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/plot-psypinkblue.png&#34; alt=&#34;plot with different colors only psychology&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/plot-psypinkblue.png&#34; alt=&#34;plot with different colors only psychology&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;One of the odd things about rstudio is that if you click on the zoom button the plot looks good, but if you use ggsave it takes the uglier version in the side viewer. I guess I could change the settings in  the ggsave command&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:9&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:9&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
@@ -727,7 +727,7 @@ To remove parts of a plot we need to modify the theme settings. A theme is used 
         &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Produces the following plot (with &lt;code&gt;ggsave(&amp;quot;psychologystudentscities.png&amp;quot;, scale = 1.5)&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/psychologystudentscities.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/psychologystudentscities.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you find yourself repeating the same theme changes in multiple plots, you are violating the DRY principle (Do not repeat yourself). ggplot changes are just lists in R, so you can save all the changes to a list and apply that list to your plots. for example:&lt;/p&gt;
 
@@ -782,8 +782,8 @@ duo2015_tidy &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;spa
         ggtitle&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Law students in several cities over five years&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
         studytheme&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/lawstudents-clean.png&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;/img/psystudents-clean.png&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/lawstudents-clean.png&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/psystudents-clean.png&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;law and psychology students plots&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -840,10 +840,10 @@ duo2015_tidy &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;spa
     
     <item>
       <title>From spss to R, part 3</title>
-      <link>/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</link>
       <pubDate>Wed, 02 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</guid>
       <description>
 
 &lt;p&gt;In this post we will start with a build-in dataset and some basic ggplot graphics. In the next post we will combine dplyr and ggplot to do awesome stuff with the Dutch University student counts from the previous lessons.&lt;/p&gt;
@@ -871,7 +871,7 @@ coplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mpg &lt;span class=&#34;o&#34;
 
 &lt;p&gt;To make the most of ggplot, &lt;em&gt;and not go insane&lt;/em&gt;, you will need to understand the underlying principles. the gg in ggplot stand for the grammar of graphics. A concept based on the work of Wilkinson and Wills &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, and put into a graphics package by Hadley Wickham &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:this-is-quite-a-good-read&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:this-is-quite-a-good-read&#34;&gt;0&lt;/a&gt;&lt;/sup&gt;.
 The most important thing to realize is this:
-&lt;img src=&#34;/img/graphs-have-layers.png&#34; alt=&#34;ogres have layers image&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/graphs-have-layers.png&#34; alt=&#34;ogres have layers image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Every graph consists of the basic data, some transformations to axes, title information and the representation of the data. In ggplot you have to specify the data, and the aesthetics (some mapping of the position of x, and y, colours and shapes). Furthermore you have to tell ggplot what type of chart you want. Bars, lines, and points are all examples of geometric objects or geoms for short.&lt;/p&gt;
 
@@ -906,7 +906,7 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34
 &lt;span class=&#34;c1&#34;&gt;# you CAN change the order of arguments, but then you WILL need to&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;# explicitly call the arguments:&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;wt&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;mpg &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;gear&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor.png&#34; alt=&#34;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) &#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor.png&#34; alt=&#34;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) &#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Did you check that lines 1 and 11 had the same output?&lt;/li&gt;
@@ -948,8 +948,8 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
  &lt;code&gt;ggplot(data = mtcars, aes(x= mpg, y= wt))&lt;/code&gt;.&lt;/p&gt;
 
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor-andsmoothing.png&#34; alt=&#34;ggplot geom_point and geom smooth method=lm&#34;&gt;
-    &lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png&#34; alt=&#34;ggplot with group= as.factor gear geom_point geom smooth&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor-andsmoothing.png&#34; alt=&#34;ggplot geom_point and geom smooth method=lm&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png&#34; alt=&#34;ggplot with group= as.factor gear geom_point geom smooth&#34;&gt;
     &lt;figcaption&gt;adding:  &#39;group = as.factor(gear)&#39; to aes() of ggplot leads to seperate smoothings per gear&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_smooth&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;method &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; lm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -962,7 +962,7 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
 
 &lt;p&gt;A bargraph has only one aesthetic mapping:
 &lt;code&gt;ggplot(data = mtcars, aes(as.factor(cyl))) + geom_bar(stat =&amp;quot;count&amp;quot;)&lt;/code&gt;
-&lt;img src=&#34;/img/ggplot2-simplebargraph.png&#34; alt=&#34;bargraph mtcars&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simplebargraph.png&#34; alt=&#34;bargraph mtcars&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;only the x aesthetic is specified, the geom is a bar (see &lt;code&gt;?geom_bar&lt;/code&gt;) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = &amp;ldquo;identity&amp;rdquo;). For example&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;dat&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;data.frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
@@ -970,7 +970,7 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
         Frequency &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# a very silly dataframe&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dat&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;Name&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; Frequency&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_bar&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;stat &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;identity&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-simplebargraph-fictionaldata.png&#34; alt=&#34;ggplot(dat, aes(Name, Frequency)) + geom_bar(stat =&amp;quot;identity&amp;quot;)&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-simplebargraph-fictionaldata.png&#34; alt=&#34;ggplot(dat, aes(Name, Frequency)) + geom_bar(stat =&amp;quot;identity&amp;quot;)&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;example-3-boxplots-violingplots-with-points-behind&#34;&gt;Example 3: boxplots, violingplots with points behind&lt;/h2&gt;
 
@@ -979,7 +979,7 @@ By now you now the drill: the data is chickwts, the aes are feed and weight. The
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;str&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-chickwts-violin.png&#34; alt=&#34;ggplot violinplot&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-chickwts-violin.png&#34; alt=&#34;ggplot violinplot&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Boxplots are nice, but you lose information about the middle of the distribution. So let&amp;rsquo;s plot the real distribution. &lt;code&gt;ggplot(chickwts, aes(feed, weight)) + geom_point()&lt;/code&gt; This doesn&amp;rsquo;t really help us, what about all the chicks with the same weight and same feed? The jitter geom helps you out.
 &lt;code&gt;ggplot(chickwts, aes(feed, weight)) + geom_jitter()&lt;/code&gt;&lt;/p&gt;
@@ -989,7 +989,7 @@ let&amp;rsquo;s combine and see what looks best&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_jitter&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_jitter&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-chickwts-violin-points.png&#34; alt=&#34;chickwts violin and points on top&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-chickwts-violin-points.png&#34; alt=&#34;chickwts violin and points on top&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I like the last one best, but for different data different visualizations are better.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;cyl&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
@@ -1013,7 +1013,7 @@ g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_tufte&lt;span class=&#34;p&
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_base&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_excel&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# you will love this, especially the description&lt;/span&gt;
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_fivethirtyeight&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ggplot2-themetufte-mtcars-violin-points-color.png&#34; alt=&#34;ggthemes example with tufte&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/ggplot2-themetufte-mtcars-violin-points-color.png&#34; alt=&#34;ggthemes example with tufte&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So now you know a few graphics and the basics of ggplot use. In the next lesson we will combine dplyr and ggplot to filter, slice and dice through a dataset. Hopefully we will get some insights!&lt;/p&gt;
 
@@ -1048,10 +1048,10 @@ g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_fivethirtyeight&lt;span cla
     
     <item>
       <title>Version control with Git</title>
-      <link>/blog/2016/03/01/content/post/2016-03-01-version-control-start/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/03/01/content/post/2016-03-01-version-control-start/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</guid>
       <description>
 
 &lt;h2 id=&#34;keeping-track-of-versions&#34;&gt;Keeping track of versions&lt;/h2&gt;
@@ -1063,13 +1063,13 @@ That is why keep old versions of your files. That way you can go back if you mes
 &lt;li&gt;Usually that looks like this:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/versioncontrol2.png&#34; alt=&#34;filesystem without version control&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/versioncontrol2.png&#34; alt=&#34;filesystem without version control&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Or you use dropbox or something like it:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/dropboxversion.png&#34; alt=&#34;dropbox versions&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/dropboxversion.png&#34; alt=&#34;dropbox versions&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Other people use email. Emailing to themselves or to collaborators when they finished something.&lt;/li&gt;
@@ -1087,12 +1087,12 @@ However in some cases you might want to go back to a previous version and work f
 &lt;p&gt;So how does Git work? Every time you reach a point in you project that you think is critical, you make a commit. You save a current state of all the files in the directory. And when you make this snapshot of your files, you can (and should) write down what you solved and what you changed since last time. In the future when you look back at your commit history you can read in what state your project was.&lt;/p&gt;
 
 &lt;p&gt;In the next example you can see what changed in the files, without even looking at the files themselves.
-&lt;img src=&#34;/img/commits_example.png&#34; alt=&#34;commits from test_dat, from github&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/commits_example.png&#34; alt=&#34;commits from test_dat, from github&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;branching&#34;&gt;Branching&lt;/h3&gt;
 
 &lt;p&gt;Even better, you can start from any saved point in time and create a new version. And when you like that version better, merge it back into an other version.
-&lt;img src=&#34;/img/branching.png&#34; alt=&#34;branches&#34; /&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/branching.png&#34; alt=&#34;branches&#34; /&gt;
 In the example above, at the second commit I branched (purple line). the third row from below is a commit in the purple branch. Then I changed something in the normal branch and finally I merged the blue and purple line in the second line from the top.&lt;/p&gt;
 
 &lt;p&gt;You don&amp;rsquo;t have to use branching, just saving important points along the way is a great start (It would be the point where you email yourself a version, or save a new version of the file).&lt;/p&gt;
@@ -1120,24 +1120,24 @@ In the example above, at the second commit I branched (purple line). the third r
 &lt;li&gt;If necessary, enter the path for your Git or SVN executable where provided.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/enabling-git-rstudio.PNG&#34; alt=&#34;enabling git in rstudio example&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/enabling-git-rstudio.PNG&#34; alt=&#34;enabling git in rstudio example&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So, how do you use version control within Rstudio?&lt;/p&gt;
 
 &lt;h1 id=&#34;rstudio-project-and-git&#34;&gt;Rstudio project and git.&lt;/h1&gt;
 
 &lt;p&gt;Start a new project
-&lt;img src=&#34;/img/rstudio-create-new-project.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I chose an empty project in a new directory&lt;/p&gt;
 
 &lt;p&gt;and then click &amp;lsquo;Create a git repository&amp;rsquo;
-&lt;img src=&#34;/img/rstudio-new-project-enablegit.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-new-project-enablegit.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The repo and real folder on windows 8.1 look like this.
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-empty-git.PNG&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;/img/folderview-new-git-project.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-empty-git.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/folderview-new-git-project.PNG&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;rstudio and the real folder with hidden folders showing&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 
@@ -1147,7 +1147,7 @@ In the example above, at the second commit I branched (purple line). the third r
 
 &lt;h2 id=&#34;git-version-control-within-rstudio-your-first-commit&#34;&gt;Git version control within Rstudio: your first commit&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-git-first-commit.PNG&#34; alt=&#34;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-git-first-commit.PNG&#34; alt=&#34;&#34; /&gt;
 I have added the second file, the icon changes to a green A (short for: add to repository), the first one shows two yellow questionmarks (short for: not tracked, not changed, I think).&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1156,7 +1156,7 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;A new window will open:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-git-commit-window.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-git-commit-window.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The left part of the screen shows what files are in the commit, the bottom part displays the changes since last commit. Green means added, red means subtracted.&lt;/p&gt;
 
@@ -1168,7 +1168,7 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;a window will open with a description of what happened.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/rstudio-git-commit-message.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-git-commit-message.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;When you return to the main view of rstudio you will see that the git tab has changed a bit, there are no files (because nothing has changed yet since your commit 2 seconds ago) and next to the gear wheel it says: &amp;lsquo;master&amp;rsquo; . This is the branch you are on right now. By default the first branch is master.&lt;/p&gt;
 
@@ -1192,14 +1192,14 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;It will look like this
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-commit1.PNG&#34; alt=&#34;before tracking&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-commit2.PNG&#34; alt=&#34;after tracking&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-commit1.PNG&#34; alt=&#34;before tracking&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-commit2.PNG&#34; alt=&#34;after tracking&#34;&gt;
     &lt;figcaption&gt;rstudio adding files to commit before and after&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look at the history of your commits, click on the clock in the git tab.
 Mine looks like this:
-&lt;img src=&#34;/img/rstudio-commit-history.PNG&#34; alt=&#34;rstudio commit history&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-commit-history.PNG&#34; alt=&#34;rstudio commit history&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note the commit message, it says what the commit adds to the repo. Try to write your messages as if you fulfull a order and discribe the contents. For example: &amp;ldquo;adds count_messages function that counts messages send to the user&amp;rdquo;
 or, &amp;ldquo;fix issue #2 can&amp;rsquo;t work with arrays&amp;rdquo;.&lt;/p&gt;
@@ -1244,10 +1244,10 @@ Do add example csv files or smaller files if you&amp;rsquo;d like to.&lt;/p&gt;
     
     <item>
       <title>Tidying your data</title>
-      <link>/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</link>
       <pubDate>Wed, 24 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</guid>
       <description>
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
@@ -1267,7 +1267,7 @@ make it tidy.&lt;/p&gt;
 &lt;p&gt;Today we will work with the DUO dataset about the number of students per program in the past 5 years &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; which was used in lesson 2 of &lt;a href=&#34;{{ site.github.url }}/blog/2016/02/22/from-spss-to-r-part2.html&#34;&gt;from-spps-to-r&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The raw datafile in r looks like this:
-&lt;img src=&#34;/img/tidy-duo-before.PNG&#34; alt=&#34;messy data duo&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/tidy-duo-before.PNG&#34; alt=&#34;messy data duo&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Which is efficient in space, but not useful for analyses. For many analyses you will need to refer to multiple columns. For example:&lt;/p&gt;
 
@@ -1277,7 +1277,7 @@ make it tidy.&lt;/p&gt;
 
 &lt;p&gt;The format of the raw file is  also called the wide format.&lt;br /&gt;
 What we want is a long format like this:
-&lt;img src=&#34;/img/tidy-duo-endresult.PNG&#34; alt=&#34;tidy data duo&#34; /&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/tidy-duo-endresult.PNG&#34; alt=&#34;tidy data duo&#34; /&gt;
 Where every observation (the number of people in the group) has it&amp;rsquo;s own row.&lt;/p&gt;
 
 &lt;p&gt;What you need to know before we start:&lt;/p&gt;
@@ -1380,10 +1380,10 @@ The third argument is the vector to apply this principle on, the names of the va
     
     <item>
       <title>From spss to R, part 2</title>
-      <link>/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</link>
       <pubDate>Mon, 22 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</guid>
       <description>
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
@@ -1415,7 +1415,7 @@ Consider starting a new &lt;a href=&#34;https://rmhogervorst.github.io/cleancode
 
 &lt;p&gt;You will need the following packages:
 haven, dplyr. Click on install:
-&lt;img src=&#34;/img/installing-packages-rstudio.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/installing-packages-rstudio.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;and fill in the names, or type `install.packages(&amp;ldquo;haven&amp;rdquo;, &amp;ldquo;dplyr&amp;rdquo;).&lt;/p&gt;
 
@@ -1668,16 +1668,16 @@ see you then.&lt;/p&gt;
     
     <item>
       <title>From spss to R, part 1</title>
-      <link>/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</link>
+      <link>https://rmhogervorst.nl/cleancode/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</link>
       <pubDate>Sat, 20 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</guid>
+      <guid>https://rmhogervorst.nl/cleancode/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine.
-&lt;img src=&#34;/img/google_search_spss_r.PNG&#34; alt=&#34;google search results&#34; /&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/google_search_spss_r.PNG&#34; alt=&#34;google search results&#34; /&gt;
 Most of these hits start with the basics and slowly work your way up to more advanced examples.&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -1710,13 +1710,13 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 &lt;p&gt;You have installed Rstudio, congratulations!&lt;/p&gt;
 
 &lt;p&gt;The main screen looks like this:
-&lt;img src=&#34;/img/rstudio-bare.PNG&#34; alt=&#34;Rstudio main&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-bare.PNG&#34; alt=&#34;Rstudio main&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;With&lt;/p&gt;
 
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-packages-files-plots-history-environment.PNG&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;/img/rstudio-new-open.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-packages-files-plots-history-environment.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-new-open.PNG&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;many hidden options right and left&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1725,7 +1725,7 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 &lt;p&gt;You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).&lt;/p&gt;
 
 &lt;figure&gt;
-    &lt;img src=&#34;/img/rstudio-script-console.PNG&#34; &gt;
+    &lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-script-console.PNG&#34; &gt;
     &lt;figcaption&gt; script and console &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1803,7 +1803,7 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 
 &lt;p&gt;To be more specific, use the following format in your search: [r] [package you want to use] [function if any] [&amp;hellip; your problem]
 for example
-&lt;img src=&#34;/img/example_search.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/example_search.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;from-spss-to-r&#34;&gt;From SPSS to R&lt;/h1&gt;
 
