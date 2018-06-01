@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Scraping on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/scraping/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/scraping/</link>
     <description>Recent content in Scraping on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Fri, 08 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/scraping/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/scraping/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Downloading files from a webserver, and failing.</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</guid>
       <description>
 
 &lt;p&gt;Recently I wanted to download all the transcripts of a podcast (600+ episodes).
@@ -30,7 +30,7 @@ not really a big deal. I thought.&lt;/p&gt;
 
 &lt;p&gt;Also here is a &lt;a href=&#34;https://www.flickr.com/photos/32123311@N00/502155430&#34; title=&#34;source: flickr, cc-by 2.0 jbloom&#34;&gt;picture&lt;/a&gt; I found of scraping.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/scraping_a_plate.jpg&#34; alt=&#34;Scraping a plate &#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/scraping_a_plate.jpg&#34; alt=&#34;Scraping a plate &#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;webscraping-general&#34;&gt;Webscraping general&lt;/h3&gt;
 

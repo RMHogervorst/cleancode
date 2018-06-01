@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Intermediate on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/intermediate/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/intermediate/</link>
     <description>Recent content in Intermediate on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 29 May 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/intermediate/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/intermediate/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sentiment of Security Now! over time</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
       <description>&lt;p&gt;If you believe some people, everything is getting worse&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show &lt;a href=&#34;https://twit.tv/shows/security-now&#34;&gt;Security Now!&lt;/a&gt;. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’. Has the sentiment of the security now! podcast changed over time? It helps that every episode is transcribed into text so we can use natural language processing tools to work through this problem.&lt;/p&gt;
 &lt;div id=&#34;extracting-the-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Extracting the data&lt;/h2&gt;
@@ -84,7 +84,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )+
     scale_y_continuous(trans = &amp;quot;log2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Interestingly my scraper seems to not have detected who said the words on line 45. It was Steve.&lt;/p&gt;
 &lt;p&gt;It might be better to use an average over the episode&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df_sn[664,9][[1]][[1]] %&amp;gt;% 
@@ -102,7 +102,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         x = &amp;quot;&amp;quot;, y = &amp;quot;Number of words (log2 scale)&amp;quot;,
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;links&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Links&lt;/h2&gt;
@@ -209,10 +209,10 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Downloading files from a webserver, and failing.</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/</guid>
       <description>
 
 &lt;p&gt;Recently I wanted to download all the transcripts of a podcast (600+ episodes).
@@ -224,7 +224,7 @@ not really a big deal. I thought.&lt;/p&gt;
 
 &lt;p&gt;Also here is a &lt;a href=&#34;https://www.flickr.com/photos/32123311@N00/502155430&#34; title=&#34;source: flickr, cc-by 2.0 jbloom&#34;&gt;picture&lt;/a&gt; I found of scraping.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/scraping_a_plate.jpg&#34; alt=&#34;Scraping a plate &#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/scraping_a_plate.jpg&#34; alt=&#34;Scraping a plate &#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;webscraping-general&#34;&gt;Webscraping general&lt;/h3&gt;
 
@@ -369,10 +369,10 @@ walk&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;p
     
     <item>
       <title>Writing manuscripts in Rstudio, easy citations</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</guid>
       <description>
 
 &lt;h2 id=&#34;intro-and-setup&#34;&gt;Intro and setup&lt;/h2&gt;
@@ -555,10 +555,10 @@ All in all RStudio / R and related tools can become the complete workbench for r
     
     <item>
       <title>Plotting a map with ggplot2, color by tile</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</link>
       <pubDate>Fri, 06 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
@@ -878,10 +878,10 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;final_map&lt;span class=&#34;p
     
     <item>
       <title>Submitting your first package to CRAN, my experience</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</link>
       <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</guid>
       <description>
 
 &lt;p&gt;I recently published my first R package to  The Comprehensive R Archive Network  (CRAN). It was very exciting and also quite easy. Let me walk you through my process.&lt;/p&gt;
@@ -981,10 +981,10 @@ I was very excited and quickly did a resubmission (which is identical to a first
     
     <item>
       <title>Your most valuable collaborator, future-you</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</guid>
       <description>
 
 &lt;p&gt;I was recently at a R users &lt;a href=&#34;http://www.meetup.com/amst-R-dam/&#34; title=&#34;amst-R-dam&#34;&gt;meetup&lt;/a&gt; where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list of data frames and add that list to your data frame. Very cool,  and more useful then I thought, but that is not what I wanted to talk about.&lt;/p&gt;
@@ -1053,14 +1053,14 @@ test_that&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&
 
 &lt;p&gt;Version control lets you record snapshots of previous code, but also lets you comment on what you solved or changed. When you save a new version of the code to version control you will have to be a bit explicit. Otherwise you will find yourself in this situation:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/wrong_commit.PNG&#34; alt=&#34;an example of a less helpful commit message&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/wrong_commit.PNG&#34; alt=&#34;an example of a less helpful commit message&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Version control, if you use meaningful descriptions, can help you find out where you did some actions and what you were trying to do. Describe intent in the commit messages. A quote I really like is:&lt;br /&gt;
 &amp;gt; &amp;ldquo;You mostly collaborate with yourself, and me-from-two-months-ago never responds to email.&amp;rdquo;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;p&gt;My commits have become somewhat better:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/example_better_commit.PNG&#34; alt=&#34;somewhat better commit messages&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/example_better_commit.PNG&#34; alt=&#34;somewhat better commit messages&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You could even use a github-issue-based-workflow where you write down the problems you want to solve in seperate issues and after you solved a particular issue, you push the code to github referencing the issue number.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
@@ -1132,10 +1132,10 @@ Do comment as often as you find necessary. More is better then less. However don
     
     <item>
       <title>Creating a package for your data set</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</link>
       <pubDate>Mon, 07 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</guid>
       <description>
 
 &lt;p&gt;Turning your dataset into a package is very useful for reproducable research. This tutorial is for you, even if you&amp;rsquo;ve never created a package in r.&lt;/p&gt;
@@ -1187,7 +1187,7 @@ This is just a file which contains time stamps whenever I drank coffee. I have s
 
 &lt;p&gt;Create a new project in Rstudio, choose new directory, R package:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-project-package-new.PNG&#34; alt=&#34;image of starting a new project&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-project-package-new.PNG&#34; alt=&#34;image of starting a new project&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;naming-the-package&#34;&gt;Naming the package&lt;/h2&gt;
 
@@ -1209,11 +1209,11 @@ think about the name, dataset21really is not descriptive nor helpful for you in 
 
 &lt;p&gt;I assume that you are now in the rproject you have just started.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-coffeedata-project-empty.PNG&#34; alt=&#34;images of empty project&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-coffeedata-project-empty.PNG&#34; alt=&#34;images of empty project&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Locate the file you want to put in the package. And load it so that it&amp;rsquo;s active in the environment:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-loaded-coffeedata.PNG&#34; alt=&#34;image of loaded coffeedata&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-loaded-coffeedata.PNG&#34; alt=&#34;image of loaded coffeedata&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then do one of the following (replace coffeedata with your data set&amp;rsquo;s name).&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;devtools&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -1225,7 +1225,7 @@ use_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;coffeedata&lt;span class=&#3
 &lt;h1 id=&#34;step-3-create-a-description-file&#34;&gt;Step 3: create a description file&lt;/h1&gt;
 
 &lt;p&gt;When you started the project a description file and an example function was created:
-&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-project-package-prepopulate.PNG&#34; alt=&#34;image of standard rstudio project&#34; /&gt;
+&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-project-package-prepopulate.PNG&#34; alt=&#34;image of standard rstudio project&#34; /&gt;
 Open the description file.&lt;/p&gt;
 
 &lt;p&gt;I just copied this from the excellent package building book &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, please read his website:&lt;/p&gt;
@@ -1236,7 +1236,7 @@ Open the description file.&lt;/p&gt;
 
 &lt;p&gt;The minimal description will vary a bit depending on your settings, but should look something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/package-description.PNG&#34; alt=&#34;image of package description&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/package-description.PNG&#34; alt=&#34;image of package description&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Fill in the meta-data of your package.&lt;/p&gt;
 
@@ -1261,27 +1261,27 @@ For datasets a &lt;a href=&#34;https://creativecommons.org/about/cc0/&#34;&gt;CC
 
 &lt;p&gt;If you look at &lt;code&gt;?mtcars&lt;/code&gt; there is a description of the file. You want to avoid this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/failure-to-describe-package.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/failure-to-describe-package.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The help file is created with&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;devtools::use_package_doc()&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;this creates a file in the folder &lt;code&gt;R/&lt;/code&gt; . Click on the file and add stuff.
-&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/coffeedata-package-r.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/coffeedata-package-r.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;See also this example in &lt;a href=&#34;https://github.com/hadley/babynames/blob/master/R/data.R&#34;&gt;hadley&amp;rsquo;s babyname package&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;step-4-describe-the-package-with-a-vignette&#34;&gt;Step 4: describe the package with a vignette.&lt;/h1&gt;
 
 &lt;p&gt;Use the template from rstudio:
-&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-document-dataset.PNG&#34; alt=&#34;rstudio rdocument window&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-document-dataset.PNG&#34; alt=&#34;rstudio rdocument window&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Give it the name of your dataset&lt;/p&gt;
 
 &lt;p&gt;This is the endresult&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-document-dataset2.PNG&#34; alt=&#34;example rstudio rdocument with coffee filled in&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-document-dataset2.PNG&#34; alt=&#34;example rstudio rdocument with coffee filled in&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;after you changed the files use &lt;code&gt;devtools::document()&lt;/code&gt; to create documents.&lt;/p&gt;
 
@@ -1365,10 +1365,10 @@ in my case my project is in: &lt;code&gt;Projecten\coffeedata&lt;/code&gt; and t
     
     <item>
       <title>Portioning projects</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2016/02/14/content/post/2016-02-14-portioning-projects/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2016/02/14/content/post/2016-02-14-portioning-projects/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2016/02/14/content/post/2016-02-14-portioning-projects/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2016/02/14/content/post/2016-02-14-portioning-projects/</guid>
       <description>
 
 &lt;p&gt;Often we write programs to automate things. The programs range from simple to complex. But in essence, you always do the same thing:&lt;/p&gt;
@@ -1396,7 +1396,7 @@ This is called modular programming.&lt;/p&gt;
 
 &lt;p&gt;Modular programming also makes it easier to add new functions. You can reuse modules (refactoring) or simply add a new module that extends your program.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/project_philosophy.png&#34; alt=&#34;distinction one script approach and modular approach&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/project_philosophy.png&#34; alt=&#34;distinction one script approach and modular approach&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;planning-your-project&#34;&gt;Planning your project&lt;/h1&gt;
 

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Haven on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/haven/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/haven/</link>
     <description>Recent content in Haven on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Mon, 22 Feb 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/haven/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/haven/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>From spss to R, part 2</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</link>
       <pubDate>Mon, 22 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</guid>
       <description>
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
@@ -50,7 +50,7 @@ Consider starting a new &lt;a href=&#34;https://rmhogervorst.github.io/cleancode
 
 &lt;p&gt;You will need the following packages:
 haven, dplyr. Click on install:
-&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/installing-packages-rstudio.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/installing-packages-rstudio.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;and fill in the names, or type `install.packages(&amp;ldquo;haven&amp;rdquo;, &amp;ldquo;dplyr&amp;rdquo;).&lt;/p&gt;
 

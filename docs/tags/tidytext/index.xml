@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tidytext on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/tidytext/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/tidytext/</link>
     <description>Recent content in Tidytext on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 29 May 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/tidytext/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/tidytext/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sentiment of Security Now! over time</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
       <description>&lt;p&gt;If you believe some people, everything is getting worse&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show &lt;a href=&#34;https://twit.tv/shows/security-now&#34;&gt;Security Now!&lt;/a&gt;. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’. Has the sentiment of the security now! podcast changed over time? It helps that every episode is transcribed into text so we can use natural language processing tools to work through this problem.&lt;/p&gt;
 &lt;div id=&#34;extracting-the-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Extracting the data&lt;/h2&gt;
@@ -84,7 +84,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )+
     scale_y_continuous(trans = &amp;quot;log2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Interestingly my scraper seems to not have detected who said the words on line 45. It was Steve.&lt;/p&gt;
 &lt;p&gt;It might be better to use an average over the episode&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df_sn[664,9][[1]][[1]] %&amp;gt;% 
@@ -102,7 +102,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         x = &amp;quot;&amp;quot;, y = &amp;quot;Number of words (log2 scale)&amp;quot;,
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;links&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Links&lt;/h2&gt;
@@ -209,10 +209,10 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Generate text using Markov Chains (sort of)</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/</link>
       <pubDate>Sat, 21 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/</guid>
       <description>
 
 &lt;p&gt;Inspired by the hilarious podcast &lt;a href=&#34;gagh.biz&#34; title=&#34;A podcast by two people who are a little embarrassed to have a podcast about Star Trek the Next Generation&#34;&gt;The Greatest Generation&lt;/a&gt;, I have worked again with all the lines from all the episode scripts of TNG.

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sp on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/sp/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/sp/</link>
     <description>Recent content in Sp on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Fri, 06 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/sp/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/sp/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Plotting a map with ggplot2, color by tile</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</link>
       <pubDate>Fri, 06 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;

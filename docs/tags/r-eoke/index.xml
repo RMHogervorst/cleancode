@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R Eoke on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/r-eoke/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/r-eoke/</link>
     <description>Recent content in R Eoke on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Thu, 27 Jul 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/r-eoke/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/r-eoke/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>UseR Brussels 2017 </title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2017/07/27/content/post/2017-07-27-use-r-2017-roundup/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2017/07/27/content/post/2017-07-27-use-r-2017-roundup/</link>
       <pubDate>Thu, 27 Jul 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2017/07/27/content/post/2017-07-27-use-r-2017-roundup/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2017/07/27/content/post/2017-07-27-use-r-2017-roundup/</guid>
       <description>&lt;p&gt;I went to UseR-2017 in Brussels. It was my first time at an UseR (I have been to the first satRday), AND I LOVED IT!
 There were many interesting talks, I am so going to use Fast Frugal Trees in the future for instance
 and I saw a lot of shiny applications and R professional.&lt;/p&gt;

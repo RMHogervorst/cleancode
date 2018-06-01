@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/</link>
     <description>Recent content in Tags on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,699 +10,699 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Wed, 28 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Advanced</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/advanced/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/advanced/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/advanced/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/advanced/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Badgecreatr</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/badgecreatr/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/badgecreatr/</link>
       <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/badgecreatr/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/badgecreatr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Banana</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/banana/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/banana/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/banana/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/banana/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Beginner</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/beginner/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/beginner/</link>
       <pubDate>Tue, 19 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/beginner/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/beginner/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Bibtex</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/bibtex/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/bibtex/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/bibtex/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/bibtex/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Bot</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/bot/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/bot/</link>
       <pubDate>Sat, 21 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/bot/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/bot/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Brussels</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/brussels/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/brussels/</link>
       <pubDate>Thu, 27 Jul 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/brussels/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/brussels/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Chickwts</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/chickwts/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/chickwts/</link>
       <pubDate>Wed, 02 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/chickwts/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/chickwts/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Citations</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/citations/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/citations/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/citations/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/citations/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Coffeedata</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/coffeedata/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/coffeedata/</link>
       <pubDate>Mon, 07 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/coffeedata/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/coffeedata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Curl</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/curl/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/curl/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/curl/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/curl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dirty Data</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/dirty-data/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/dirty-data/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/dirty-data/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/dirty-data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Do One Thing Well</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/do-one-thing-well/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/do-one-thing-well/</link>
       <pubDate>Mon, 08 May 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/do-one-thing-well/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/do-one-thing-well/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dplyr</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/dplyr/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/dplyr/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/dplyr/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/dplyr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Duo2015</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/duo2015/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/duo2015/</link>
       <pubDate>Mon, 13 Jun 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/duo2015/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/duo2015/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Example_function</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/example_function/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/example_function/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/example_function/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/example_function/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Exercise</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/exercise/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/exercise/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/exercise/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/exercise/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Functional Programming</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/functional-programming/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/functional-programming/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/functional-programming/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/functional-programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ggplot2</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/ggplot2/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/ggplot2/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/ggplot2/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/ggplot2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Gif</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/gif/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/gif/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/gif/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/gif/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Git</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/git/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/git/</link>
       <pubDate>Tue, 06 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/git/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Githook</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/githook/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/githook/</link>
       <pubDate>Tue, 06 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/githook/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/githook/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hack</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/hack/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/hack/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/hack/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/hack/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Haven</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/haven/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/haven/</link>
       <pubDate>Mon, 22 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/haven/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/haven/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Humidex</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/humidex/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/humidex/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/humidex/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/humidex/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Intermediate</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/intermediate/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/intermediate/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/intermediate/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/intermediate/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kindle</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/kindle/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/kindle/</link>
       <pubDate>Mon, 08 May 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/kindle/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/kindle/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lazyeval</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/lazyeval/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/lazyeval/</link>
       <pubDate>Mon, 13 Jun 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/lazyeval/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/lazyeval/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Logging</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/logging/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/logging/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/logging/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/logging/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Loggit</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/loggit/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/loggit/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/loggit/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/loggit/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Magick</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/magick/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/magick/</link>
       <pubDate>Mon, 29 Jan 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/magick/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/magick/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Maps</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/maps/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/maps/</link>
       <pubDate>Mon, 29 Jan 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/maps/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/maps/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Markov</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/markov/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/markov/</link>
       <pubDate>Sat, 21 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/markov/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/markov/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Modular Projects</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/modular-projects/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/modular-projects/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/modular-projects/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/modular-projects/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mtcars</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/mtcars/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/mtcars/</link>
       <pubDate>Wed, 02 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/mtcars/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/mtcars/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Munging</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/munging/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/munging/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/munging/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/munging/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Netherlands</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/netherlands/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/netherlands/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/netherlands/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/netherlands/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nse</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/nse/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/nse/</link>
       <pubDate>Mon, 13 Jun 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/nse/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/nse/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Optimize Your Code</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/optimize-your-code/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/optimize-your-code/</link>
       <pubDate>Mon, 13 Jun 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/optimize-your-code/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/optimize-your-code/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Package</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/package/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/package/</link>
       <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/package/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/package/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Philosophy</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/philosophy/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/philosophy/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/philosophy/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/philosophy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Purrr</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/purrr/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/purrr/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/purrr/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/purrr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quickthoughts</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/quickthoughts/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/quickthoughts/</link>
       <pubDate>Thu, 27 Jul 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/quickthoughts/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/quickthoughts/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Eoke</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/r-eoke/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/r-eoke/</link>
       <pubDate>Thu, 27 Jul 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/r-eoke/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/r-eoke/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R6</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/r6/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/r6/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/r6/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/r6/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Readme</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/readme/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/readme/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/readme/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/readme/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Readr</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/readr/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/readr/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/readr/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/readr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Readxl</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/readxl/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/readxl/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/readxl/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/readxl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reminder</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/reminder/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/reminder/</link>
       <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/reminder/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/reminder/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reproducible</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/reproducible/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/reproducible/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/reproducible/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/reproducible/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rmarkdown</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/rmarkdown/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/rmarkdown/</link>
       <pubDate>Wed, 24 Jan 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/rmarkdown/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/rmarkdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rproject</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/rproject/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/rproject/</link>
       <pubDate>Sun, 10 Apr 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/rproject/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/rproject/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Scraping</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/scraping/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/scraping/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/scraping/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/scraping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Security Now</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/security-now/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/security-now/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/security-now/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/security-now/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sentiment</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/sentiment/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/sentiment/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/sentiment/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/sentiment/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sf</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/sf/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/sf/</link>
       <pubDate>Mon, 29 Jan 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/sf/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/sf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Shiny</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/shiny/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/shiny/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/shiny/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/shiny/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Shiny Server</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/shiny-server/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/shiny-server/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/shiny-server/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/shiny-server/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sp</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/sp/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/sp/</link>
       <pubDate>Fri, 06 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/sp/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/sp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Spps to R</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/spps-to-r/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/spps-to-r/</link>
       <pubDate>Mon, 04 Apr 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/spps-to-r/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/spps-to-r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Stringr</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/stringr/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/stringr/</link>
       <pubDate>Mon, 08 May 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/stringr/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/stringr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tdd</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/tdd/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/tdd/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/tdd/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/tdd/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tibble</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/tibble/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/tibble/</link>
       <pubDate>Wed, 24 Jan 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/tibble/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/tibble/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tidyr</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/tidyr/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/tidyr/</link>
       <pubDate>Wed, 24 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/tidyr/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/tidyr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tidytext</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/tidytext/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/tidytext/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/tidytext/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/tidytext/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tidyverse</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/tidyverse/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/tidyverse/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/tidyverse/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/tidyverse/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tng</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/tng/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/tng/</link>
       <pubDate>Sat, 21 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/tng/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/tng/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tutorial</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/tutorial/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/tutorial/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/tutorial/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/tutorial/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Unicorns</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/unicorns/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/unicorns/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/unicorns/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/unicorns/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Unicycles</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/unicycles/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/unicycles/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/unicycles/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/unicycles/</guid>
       <description></description>
     </item>
     
     <item>
       <title>User2017</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/user2017/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/user2017/</link>
       <pubDate>Thu, 27 Jul 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/user2017/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/user2017/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Version Control</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/version-control/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/version-control/</link>
       <pubDate>Tue, 19 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/version-control/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/version-control/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Weather</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/weather/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/weather/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/weather/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/weather/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Widyr</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/widyr/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/widyr/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/widyr/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/widyr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Workflow</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/workflow/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/workflow/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/workflow/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/workflow/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Writing</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/writing/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/writing/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/writing/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/writing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Xkcd</title>
-      <link>https://rmhogervorst.nl/cleancode/tags/xkcd/</link>
+      <link>http://rmhogervorst.nl/cleancode/tags/xkcd/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/tags/xkcd/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/tags/xkcd/</guid>
       <description></description>
     </item>
     

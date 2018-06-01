@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Markov on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/markov/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/markov/</link>
     <description>Recent content in Markov on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Sat, 21 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/markov/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/markov/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Generate text using Markov Chains (sort of)</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/</link>
       <pubDate>Sat, 21 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2017/01/21/content/post/2017-01-21-markov-chain/</guid>
       <description>
 
 &lt;p&gt;Inspired by the hilarious podcast &lt;a href=&#34;gagh.biz&#34; title=&#34;A podcast by two people who are a little embarrassed to have a podcast about Star Trek the Next Generation&#34;&gt;The Greatest Generation&lt;/a&gt;, I have worked again with all the lines from all the episode scripts of TNG.

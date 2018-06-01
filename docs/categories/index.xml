@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/categories/</link>
+    <link>http://rmhogervorst.nl/cleancode/categories/</link>
     <description>Recent content in Categories on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 29 May 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/categories/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Blog</title>
-      <link>https://rmhogervorst.nl/cleancode/categories/blog/</link>
+      <link>http://rmhogervorst.nl/cleancode/categories/blog/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/categories/blog/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/categories/blog/</guid>
       <description></description>
     </item>
     

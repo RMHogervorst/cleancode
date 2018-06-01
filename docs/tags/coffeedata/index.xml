@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Coffeedata on Clean Code (and R-fun)</title>
-    <link>https://rmhogervorst.nl/cleancode/tags/coffeedata/</link>
+    <link>http://rmhogervorst.nl/cleancode/tags/coffeedata/</link>
     <description>Recent content in Coffeedata on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Mon, 07 Mar 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://rmhogervorst.nl/cleancode/tags/coffeedata/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://rmhogervorst.nl/cleancode/tags/coffeedata/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Creating a package for your data set</title>
-      <link>https://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</link>
+      <link>http://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</link>
       <pubDate>Mon, 07 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>https://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</guid>
+      <guid>http://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</guid>
       <description>
 
 &lt;p&gt;Turning your dataset into a package is very useful for reproducable research. This tutorial is for you, even if you&amp;rsquo;ve never created a package in r.&lt;/p&gt;
@@ -70,7 +70,7 @@ This is just a file which contains time stamps whenever I drank coffee. I have s
 
 &lt;p&gt;Create a new project in Rstudio, choose new directory, R package:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-project-package-new.PNG&#34; alt=&#34;image of starting a new project&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-project-package-new.PNG&#34; alt=&#34;image of starting a new project&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;naming-the-package&#34;&gt;Naming the package&lt;/h2&gt;
 
@@ -92,11 +92,11 @@ think about the name, dataset21really is not descriptive nor helpful for you in 
 
 &lt;p&gt;I assume that you are now in the rproject you have just started.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-coffeedata-project-empty.PNG&#34; alt=&#34;images of empty project&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-coffeedata-project-empty.PNG&#34; alt=&#34;images of empty project&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Locate the file you want to put in the package. And load it so that it&amp;rsquo;s active in the environment:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-loaded-coffeedata.PNG&#34; alt=&#34;image of loaded coffeedata&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-loaded-coffeedata.PNG&#34; alt=&#34;image of loaded coffeedata&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then do one of the following (replace coffeedata with your data set&amp;rsquo;s name).&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;devtools&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -108,7 +108,7 @@ use_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;coffeedata&lt;span class=&#3
 &lt;h1 id=&#34;step-3-create-a-description-file&#34;&gt;Step 3: create a description file&lt;/h1&gt;
 
 &lt;p&gt;When you started the project a description file and an example function was created:
-&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-project-package-prepopulate.PNG&#34; alt=&#34;image of standard rstudio project&#34; /&gt;
+&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-project-package-prepopulate.PNG&#34; alt=&#34;image of standard rstudio project&#34; /&gt;
 Open the description file.&lt;/p&gt;
 
 &lt;p&gt;I just copied this from the excellent package building book &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, please read his website:&lt;/p&gt;
@@ -119,7 +119,7 @@ Open the description file.&lt;/p&gt;
 
 &lt;p&gt;The minimal description will vary a bit depending on your settings, but should look something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/package-description.PNG&#34; alt=&#34;image of package description&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/package-description.PNG&#34; alt=&#34;image of package description&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Fill in the meta-data of your package.&lt;/p&gt;
 
@@ -144,27 +144,27 @@ For datasets a &lt;a href=&#34;https://creativecommons.org/about/cc0/&#34;&gt;CC
 
 &lt;p&gt;If you look at &lt;code&gt;?mtcars&lt;/code&gt; there is a description of the file. You want to avoid this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/failure-to-describe-package.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/failure-to-describe-package.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The help file is created with&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;devtools::use_package_doc()&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;this creates a file in the folder &lt;code&gt;R/&lt;/code&gt; . Click on the file and add stuff.
-&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/coffeedata-package-r.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/coffeedata-package-r.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;See also this example in &lt;a href=&#34;https://github.com/hadley/babynames/blob/master/R/data.R&#34;&gt;hadley&amp;rsquo;s babyname package&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;step-4-describe-the-package-with-a-vignette&#34;&gt;Step 4: describe the package with a vignette.&lt;/h1&gt;
 
 &lt;p&gt;Use the template from rstudio:
-&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-document-dataset.PNG&#34; alt=&#34;rstudio rdocument window&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-document-dataset.PNG&#34; alt=&#34;rstudio rdocument window&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Give it the name of your dataset&lt;/p&gt;
 
 &lt;p&gt;This is the endresult&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://rmhogervorst.nl/cleancode/img/rstudio-document-dataset2.PNG&#34; alt=&#34;example rstudio rdocument with coffee filled in&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-document-dataset2.PNG&#34; alt=&#34;example rstudio rdocument with coffee filled in&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;after you changed the files use &lt;code&gt;devtools::document()&lt;/code&gt; to create documents.&lt;/p&gt;
 

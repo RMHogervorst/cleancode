@@ -1,5 +1,5 @@
 theme = "beautifulhugo"
-baseURL = "https://rmhogervorst.nl/cleancode"
+baseURL = "http://rmhogervorst.nl/cleancode"
 languageCode = "en-us"
 title = "Clean Code (and R-fun)"
 pygmentsCodeFences = true
