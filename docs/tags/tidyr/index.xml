@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tidyr on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/tidyr/</link>
+    <link>/cleancode/tags/tidyr/</link>
     <description>Recent content in Tidyr on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Wed, 24 Feb 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/tidyr/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/tidyr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Tidying your data</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</link>
+      <link>/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</link>
       <pubDate>Wed, 24 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</guid>
+      <guid>/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</guid>
       <description>
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
@@ -38,7 +38,7 @@ make it tidy.&lt;/p&gt;
 &lt;p&gt;Today we will work with the DUO dataset about the number of students per program in the past 5 years &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; which was used in lesson 2 of &lt;a href=&#34;{{ site.github.url }}/blog/2016/02/22/from-spss-to-r-part2.html&#34;&gt;from-spps-to-r&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The raw datafile in r looks like this:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/tidy-duo-before.PNG&#34; alt=&#34;messy data duo&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/tidy-duo-before.PNG&#34; alt=&#34;messy data duo&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Which is efficient in space, but not useful for analyses. For many analyses you will need to refer to multiple columns. For example:&lt;/p&gt;
 
@@ -48,7 +48,7 @@ make it tidy.&lt;/p&gt;
 
 &lt;p&gt;The format of the raw file is  also called the wide format.&lt;br /&gt;
 What we want is a long format like this:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/tidy-duo-endresult.PNG&#34; alt=&#34;tidy data duo&#34; /&gt;
+&lt;img src=&#34;/cleancode/img/tidy-duo-endresult.PNG&#34; alt=&#34;tidy data duo&#34; /&gt;
 Where every observation (the number of people in the group) has it&amp;rsquo;s own row.&lt;/p&gt;
 
 &lt;p&gt;What you need to know before we start:&lt;/p&gt;

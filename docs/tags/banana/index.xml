@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Banana on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/banana/</link>
+    <link>/cleancode/tags/banana/</link>
     <description>Recent content in Banana on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Fri, 29 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/banana/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/banana/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Adding bananas from the commandline (extending the oomsifier)</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2017/12/29/content/post/2017-12-29-extending-the-oomsifyer-cmdline/</link>
+      <link>/cleancode/blog/2017/12/29/content/post/2017-12-29-extending-the-oomsifyer-cmdline/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2017/12/29/content/post/2017-12-29-extending-the-oomsifyer-cmdline/</guid>
+      <guid>/cleancode/blog/2017/12/29/content/post/2017-12-29-extending-the-oomsifyer-cmdline/</guid>
       <description>
 
 &lt;p&gt;Sometimes you just want to add bananas from the commandline. &lt;a href=&#34;http://rmhogervorst.nl/cleancode/blog/2017/11/28/building-the-oomsifier.html&#34;&gt;Previously&lt;/a&gt;
@@ -26,7 +26,7 @@ I created a small script that takes an image and adds a dancing banana to the bo
 
 &lt;p&gt;With the excellent explanation in &lt;a href=&#34;http://blog.sellorm.com/2017/12/18/learn-to-write-command-line-utilities-in-r/&#34;&gt;Mark Sellors&amp;rsquo; guide&lt;/a&gt; I have now created a cmdline thingy in very few steps.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/r-pkg.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/r-pkg.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I can now add bananas from the commandline with:&lt;/p&gt;
 
@@ -114,10 +114,10 @@ image_write(image = result, path = args[[2]])
     
     <item>
       <title>Building the oomsifyer</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2017/11/28/content/post/2017-11-28-building-the-oomsifier/</link>
+      <link>/cleancode/blog/2017/11/28/content/post/2017-11-28-building-the-oomsifier/</link>
       <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2017/11/28/content/post/2017-11-28-building-the-oomsifier/</guid>
+      <guid>/cleancode/blog/2017/11/28/content/post/2017-11-28-building-the-oomsifier/</guid>
       <description>
 
 &lt;p&gt;Today I will show you a quick hack (OK it took me like 4 hours during my travels today yesterday and today),
@@ -126,7 +126,7 @@ on how to add a dancing banana to any picture.&lt;/p&gt;
 &lt;p&gt;Now, you might be thinking&amp;hellip; Really, why would you add a dancing banana to
 a picture, but I don&amp;rsquo;t have time for that kind of negativity in my life.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/r-pkg.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/r-pkg.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;why-oomsifier&#34;&gt;Why oomsifier?&lt;/h2&gt;
 
@@ -178,7 +178,7 @@ add_banana &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&
 
 &lt;p&gt;This function takes an image, f.i. a ggplot2 image that you saved to disk, and adds the dancing banana gif to the bottom right corner.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot.gif&#34; alt=&#34;ggplot with banana example&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/ggplot.gif&#34; alt=&#34;ggplot with banana example&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I had to combine information from the magick &lt;a href=&#34;https://cran.r-project.org/web/packages/magick/vignettes/intro.html#animation&#34;&gt;vignette&lt;/a&gt;  and an earlier &lt;a href=&#34;https://ropensci.org/blog/2016/08/23/z-magick-release/&#34;&gt;blogpost&lt;/a&gt; about magick in R.&lt;/p&gt;
 
@@ -194,7 +194,7 @@ add_banana &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&
 &lt;li&gt;&lt;a href=&#34;https://twitter.com/ThePracticalDev&#34;&gt;the practical dev&lt;/a&gt; has many silly o-reilly like book covers that I find hilarious&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/spss.gif&#34; alt=&#34;spss picture&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/spss.gif&#34; alt=&#34;spss picture&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;In a the following posts I might turn this function into an API, stay tuned!&lt;/p&gt;
 </description>

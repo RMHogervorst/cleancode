@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Weather on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/weather/</link>
+    <link>/cleancode/tags/weather/</link>
     <description>Recent content in Weather on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,22 +10,22 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Mon, 20 Nov 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/weather/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/weather/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Where to live in the Netherlands based on temperature XKCD style</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</link>
+      <link>/cleancode/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</guid>
+      <guid>/cleancode/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</guid>
       <description>
 
 &lt;p&gt;After seeing a plot of best places to live in Spain and the USA based on the weather, I had to
 chime in and do the same thing for the Netherlands. The idea is simple, determine where you want to live based on your temperature preferences.&lt;/p&gt;
 
 &lt;p&gt;First the end result:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;How to read this plot?&lt;/p&gt;
 
@@ -82,7 +82,7 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;p&#3
            yrange &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; yrange&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
   theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
   theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/temperatureranges-in-the-netherlands-1.png&#34; alt=&#34;temperature ranges in the Netherlands alone&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/temperatureranges-in-the-netherlands-1.png&#34; alt=&#34;temperature ranges in the Netherlands alone&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;But what does that mean, in the grand scheme of things? As you might notice the range is very small. It would be interesting to add some US cities and perhaps some Spanisch cities to compare against. For fun I also added the Dutch Caribean islands.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;xrange2 &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# modified these by hand to increase the margins&lt;/span&gt;
@@ -132,7 +132,7 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;p&#3
            yrange &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; yrange2&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
   theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
   theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Finally we can compare the wintertemperature and summer humidex in The Netherlands by placing the points on a map using the coordinates of the measure stations.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;NL &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; map_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;map &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;world&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;region &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Netherlands&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -164,8 +164,8 @@ result &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
     theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
     theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
     scale_color_continuous&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;low &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;white&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; high &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;red&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/humidex_NL.png&#34; alt=&#34;Netherlands, humidex, gps&#34; /&gt;
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/wintertemp_NL.png&#34; alt=&#34;Netherlands, wintertemp, gps&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/humidex_NL.png&#34; alt=&#34;Netherlands, humidex, gps&#34; /&gt;
+&lt;img src=&#34;/cleancode/img/wintertemp_NL.png&#34; alt=&#34;Netherlands, wintertemp, gps&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now show us what your country looks like!&lt;/p&gt;
 </description>

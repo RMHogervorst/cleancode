@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reminder on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/reminder/</link>
+    <link>/cleancode/tags/reminder/</link>
     <description>Recent content in Reminder on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Sat, 09 Jul 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/reminder/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/reminder/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Submitting your first package to CRAN, my experience</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</link>
+      <link>/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</link>
       <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</guid>
+      <guid>/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</guid>
       <description>
 
 &lt;p&gt;I recently published my first R package to  The Comprehensive R Archive Network  (CRAN). It was very exciting and also quite easy. Let me walk you through my process.&lt;/p&gt;
@@ -118,10 +118,10 @@ I was very excited and quickly did a resubmission (which is identical to a first
     
     <item>
       <title>Non-standard-evaluation and standard evaluation in dplyr</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</link>
+      <link>/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</link>
       <pubDate>Mon, 13 Jun 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</guid>
+      <guid>/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</guid>
       <description>
 
 &lt;p&gt;THIS POST IS NO LONGER ENTIRELY RELEVANT. DPLYR 0.7 HAS A SLIGHTLY DIFFERENT (AND SLIGHTLY MORE INTUITIVE) WAY OF WORKING WITH NON-STANDARD EVALUATION.&lt;/p&gt;

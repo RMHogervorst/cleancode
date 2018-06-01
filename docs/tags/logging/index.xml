@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Logging on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/logging/</link>
+    <link>/cleancode/tags/logging/</link>
     <description>Recent content in Logging on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Wed, 28 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/logging/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/logging/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Adding logging to a shiny app with loggit</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/</link>
+      <link>/cleancode/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/</guid>
+      <guid>/cleancode/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;This is a very short post with example code&lt;/em&gt;

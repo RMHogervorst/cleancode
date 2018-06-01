@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sf on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/sf/</link>
+    <link>/cleancode/tags/sf/</link>
     <description>Recent content in Sf on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Mon, 29 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/sf/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/sf/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Moving parts of a country over a map</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</link>
+      <link>/cleancode/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</link>
       <pubDate>Mon, 29 Jan 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</guid>
+      <guid>/cleancode/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</guid>
       <description>
 
 &lt;p&gt;I love making maps, I also love making gifs.

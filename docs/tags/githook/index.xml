@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Githook on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/githook/</link>
+    <link>/cleancode/tags/githook/</link>
     <description>Recent content in Githook on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 06 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/githook/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/githook/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Setting up a version controlled shiny-server</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</link>
+      <link>/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</link>
       <pubDate>Tue, 06 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</guid>
+      <guid>/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</guid>
       <description>
 
 &lt;p&gt;Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.&lt;/p&gt;

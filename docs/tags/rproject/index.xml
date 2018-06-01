@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rproject on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/rproject/</link>
+    <link>/cleancode/tags/rproject/</link>
     <description>Recent content in Rproject on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Sun, 10 Apr 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/rproject/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/rproject/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Introduction to R projects</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</link>
+      <link>/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</link>
       <pubDate>Sun, 10 Apr 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</guid>
+      <guid>/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</guid>
       <description>
 
 &lt;p&gt;It often makes sense to separate your projects. And since space is cheap you are probably creating separate folders on your computer. In RStudio you can create different projects that live in their own folder.&lt;/p&gt;
@@ -27,11 +27,11 @@
 
 &lt;p&gt;In my case, for example, I have several projects and the last 10 or so are displayed in the dropdown menu:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-project-dropdown.PNG&#34; alt=&#34;Roel&#39;s last projects image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-project-dropdown.PNG&#34; alt=&#34;Roel&#39;s last projects image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Opening a new project presents you with a screen .&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;rstudio new project image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;rstudio new project image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can create a new project in a new location, in an old location or download from &lt;a href=&#34;https://rmhogervorst.github.io/cleancode/blog/2016/03/01/version-control-start.html&#34; title=&#34;See a previous post about version control&#34;&gt;version control&lt;/a&gt;.&lt;/p&gt;
 
@@ -43,13 +43,13 @@
 
 &lt;p&gt;If you click on &lt;code&gt;checkout from version control&lt;/code&gt; this will happen&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-versioncontrol.PNG&#34; alt=&#34;image of checkout from version control&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-versioncontrol.PNG&#34; alt=&#34;image of checkout from version control&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on git&lt;/p&gt;
 
 &lt;p&gt;and fill in some details.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-clone-git.PNG&#34; alt=&#34;image of my repo clone&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-clone-git.PNG&#34; alt=&#34;image of my repo clone&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;in my case I&amp;rsquo;ve dowloaded from my own repository but cloning a project from github is possible from every project.&lt;/p&gt;
 
@@ -57,7 +57,7 @@
 
 &lt;p&gt;Here the clone address at a different repository:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/clone-image.PNG&#34; alt=&#34;image of hadley&#39;s ggplot2 repo address&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/clone-image.PNG&#34; alt=&#34;image of hadley&#39;s ggplot2 repo address&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;That is it, a short introduction to projects.&lt;/p&gt;
 

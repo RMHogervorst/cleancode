@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bibtex on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/bibtex/</link>
+    <link>/cleancode/tags/bibtex/</link>
     <description>Recent content in Bibtex on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 14 Mar 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/bibtex/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/bibtex/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Writing manuscripts in Rstudio, easy citations</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</link>
+      <link>/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</guid>
+      <guid>/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</guid>
       <description>
 
 &lt;h2 id=&#34;intro-and-setup&#34;&gt;Intro and setup&lt;/h2&gt;

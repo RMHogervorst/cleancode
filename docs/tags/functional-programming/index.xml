@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Functional Programming on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/functional-programming/</link>
+    <link>/cleancode/tags/functional-programming/</link>
     <description>Recent content in Functional Programming on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Thu, 26 May 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Your most valuable collaborator, future-you</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</link>
+      <link>/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</guid>
+      <guid>/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/</guid>
       <description>
 
 &lt;p&gt;I was recently at a R users &lt;a href=&#34;http://www.meetup.com/amst-R-dam/&#34; title=&#34;amst-R-dam&#34;&gt;meetup&lt;/a&gt; where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list of data frames and add that list to your data frame. Very cool,  and more useful then I thought, but that is not what I wanted to talk about.&lt;/p&gt;
@@ -87,14 +87,14 @@ test_that&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&
 
 &lt;p&gt;Version control lets you record snapshots of previous code, but also lets you comment on what you solved or changed. When you save a new version of the code to version control you will have to be a bit explicit. Otherwise you will find yourself in this situation:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/wrong_commit.PNG&#34; alt=&#34;an example of a less helpful commit message&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/wrong_commit.PNG&#34; alt=&#34;an example of a less helpful commit message&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Version control, if you use meaningful descriptions, can help you find out where you did some actions and what you were trying to do. Describe intent in the commit messages. A quote I really like is:&lt;br /&gt;
 &amp;gt; &amp;ldquo;You mostly collaborate with yourself, and me-from-two-months-ago never responds to email.&amp;rdquo;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;p&gt;My commits have become somewhat better:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/example_better_commit.PNG&#34; alt=&#34;somewhat better commit messages&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/example_better_commit.PNG&#34; alt=&#34;somewhat better commit messages&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You could even use a github-issue-based-workflow where you write down the problems you want to solve in seperate issues and after you solved a particular issue, you push the code to github referencing the issue number.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 

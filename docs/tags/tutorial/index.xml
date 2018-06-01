@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tutorial on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/tutorial/</link>
+    <link>/cleancode/tags/tutorial/</link>
     <description>Recent content in Tutorial on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 29 May 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sentiment of Security Now! over time</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
+      <link>/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
+      <guid>/cleancode/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
       <description>&lt;p&gt;If you believe some people, everything is getting worse&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show &lt;a href=&#34;https://twit.tv/shows/security-now&#34;&gt;Security Now!&lt;/a&gt;. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’. Has the sentiment of the security now! podcast changed over time? It helps that every episode is transcribed into text so we can use natural language processing tools to work through this problem.&lt;/p&gt;
 &lt;div id=&#34;extracting-the-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Extracting the data&lt;/h2&gt;
@@ -84,7 +84,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )+
     scale_y_continuous(trans = &amp;quot;log2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/cleancode/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Interestingly my scraper seems to not have detected who said the words on line 45. It was Steve.&lt;/p&gt;
 &lt;p&gt;It might be better to use an average over the episode&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df_sn[664,9][[1]][[1]] %&amp;gt;% 
@@ -102,7 +102,7 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
         x = &amp;quot;&amp;quot;, y = &amp;quot;Number of words (log2 scale)&amp;quot;,
         caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
     )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/cleancodepost/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/cleancode/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;links&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Links&lt;/h2&gt;
@@ -209,10 +209,10 @@ tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Turning kindle notes into a tidy data</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
+      <link>/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
       <pubDate>Mon, 08 May 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
+      <guid>/cleancode/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
       <description>
 
 &lt;p&gt;It is my dream to do everything with R. And we aRe almost there. We can write blogs in blogdown or bookdown, write reports in RMarkdown (thank you &lt;a href=&#34;https://twitter.com/xieyihui&#34;&gt;Yihui Xie!&lt;/a&gt;) create interactive webpages with Shiny (thank you &lt;a href=&#34;https://twitter.com/winston_chang&#34;&gt;Winston Chang&lt;/a&gt;). Control our lifx lights with &lt;a href=&#34;https://github.com/cboettig/lifxr&#34;&gt;lifxr&lt;/a&gt; (great work &lt;a href=&#34;http://carlboettiger.info/&#34;&gt;Carl!&lt;/a&gt;) and use emoticons everywhere with the emo package.&lt;/p&gt;
@@ -584,10 +584,10 @@ finalframe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
     
     <item>
       <title>Writing manuscripts in Rstudio, easy citations</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</link>
+      <link>/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</guid>
+      <guid>/cleancode/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</guid>
       <description>
 
 &lt;h2 id=&#34;intro-and-setup&#34;&gt;Intro and setup&lt;/h2&gt;
@@ -770,10 +770,10 @@ All in all RStudio / R and related tools can become the complete workbench for r
     
     <item>
       <title>Plotting a map with ggplot2, color by tile</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</link>
+      <link>/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</link>
       <pubDate>Fri, 06 Jan 2017 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</guid>
+      <guid>/cleancode/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
@@ -1093,10 +1093,10 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;final_map&lt;span class=&#34;p
     
     <item>
       <title>From spss to R, part 4</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</link>
+      <link>/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</link>
       <pubDate>Mon, 04 Apr 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</guid>
+      <guid>/cleancode/blog/2016/04/04/content/post/2016-04-04--from-spss-to-r-part4/</guid>
       <description>
 
 &lt;p&gt;This is the second part of working with ggplot. We will combine the
@@ -1275,7 +1275,7 @@ What happens here:&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s address both color (going stereotype blue and pink) and program.
 After my first plot, I found the lines a bit thin, so I set the size. I also used a manual color scale.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/plot-psypinkblue.png&#34; alt=&#34;plot with different colors only psychology&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/plot-psypinkblue.png&#34; alt=&#34;plot with different colors only psychology&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;One of the odd things about rstudio is that if you click on the zoom button the plot looks good, but if you use ggsave it takes the uglier version in the side viewer. I guess I could change the settings in  the ggsave command&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:9&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:9&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
@@ -1334,7 +1334,7 @@ To remove parts of a plot we need to modify the theme settings. A theme is used 
         &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Produces the following plot (with &lt;code&gt;ggsave(&amp;quot;psychologystudentscities.png&amp;quot;, scale = 1.5)&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/psychologystudentscities.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/psychologystudentscities.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you find yourself repeating the same theme changes in multiple plots, you are violating the DRY principle (Do not repeat yourself). ggplot changes are just lists in R, so you can save all the changes to a list and apply that list to your plots. for example:&lt;/p&gt;
 
@@ -1389,8 +1389,8 @@ duo2015_tidy &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;spa
         ggtitle&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Law students in several cities over five years&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
         studytheme&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/lawstudents-clean.png&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/psystudents-clean.png&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/lawstudents-clean.png&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/psystudents-clean.png&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;law and psychology students plots&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1447,10 +1447,10 @@ duo2015_tidy &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;spa
     
     <item>
       <title>Creating a package for your data set</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</link>
+      <link>/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</link>
       <pubDate>Mon, 07 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</guid>
+      <guid>/cleancode/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</guid>
       <description>
 
 &lt;p&gt;Turning your dataset into a package is very useful for reproducable research. This tutorial is for you, even if you&amp;rsquo;ve never created a package in r.&lt;/p&gt;
@@ -1502,7 +1502,7 @@ This is just a file which contains time stamps whenever I drank coffee. I have s
 
 &lt;p&gt;Create a new project in Rstudio, choose new directory, R package:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-project-package-new.PNG&#34; alt=&#34;image of starting a new project&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-project-package-new.PNG&#34; alt=&#34;image of starting a new project&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;naming-the-package&#34;&gt;Naming the package&lt;/h2&gt;
 
@@ -1524,11 +1524,11 @@ think about the name, dataset21really is not descriptive nor helpful for you in 
 
 &lt;p&gt;I assume that you are now in the rproject you have just started.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-coffeedata-project-empty.PNG&#34; alt=&#34;images of empty project&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-coffeedata-project-empty.PNG&#34; alt=&#34;images of empty project&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Locate the file you want to put in the package. And load it so that it&amp;rsquo;s active in the environment:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-loaded-coffeedata.PNG&#34; alt=&#34;image of loaded coffeedata&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-loaded-coffeedata.PNG&#34; alt=&#34;image of loaded coffeedata&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then do one of the following (replace coffeedata with your data set&amp;rsquo;s name).&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;devtools&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -1540,7 +1540,7 @@ use_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;coffeedata&lt;span class=&#3
 &lt;h1 id=&#34;step-3-create-a-description-file&#34;&gt;Step 3: create a description file&lt;/h1&gt;
 
 &lt;p&gt;When you started the project a description file and an example function was created:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-project-package-prepopulate.PNG&#34; alt=&#34;image of standard rstudio project&#34; /&gt;
+&lt;img src=&#34;/cleancode/img/rstudio-project-package-prepopulate.PNG&#34; alt=&#34;image of standard rstudio project&#34; /&gt;
 Open the description file.&lt;/p&gt;
 
 &lt;p&gt;I just copied this from the excellent package building book &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, please read his website:&lt;/p&gt;
@@ -1551,7 +1551,7 @@ Open the description file.&lt;/p&gt;
 
 &lt;p&gt;The minimal description will vary a bit depending on your settings, but should look something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/package-description.PNG&#34; alt=&#34;image of package description&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/package-description.PNG&#34; alt=&#34;image of package description&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Fill in the meta-data of your package.&lt;/p&gt;
 
@@ -1576,27 +1576,27 @@ For datasets a &lt;a href=&#34;https://creativecommons.org/about/cc0/&#34;&gt;CC
 
 &lt;p&gt;If you look at &lt;code&gt;?mtcars&lt;/code&gt; there is a description of the file. You want to avoid this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/failure-to-describe-package.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/failure-to-describe-package.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The help file is created with&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;devtools::use_package_doc()&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;this creates a file in the folder &lt;code&gt;R/&lt;/code&gt; . Click on the file and add stuff.
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/coffeedata-package-r.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/coffeedata-package-r.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;See also this example in &lt;a href=&#34;https://github.com/hadley/babynames/blob/master/R/data.R&#34;&gt;hadley&amp;rsquo;s babyname package&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;step-4-describe-the-package-with-a-vignette&#34;&gt;Step 4: describe the package with a vignette.&lt;/h1&gt;
 
 &lt;p&gt;Use the template from rstudio:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-document-dataset.PNG&#34; alt=&#34;rstudio rdocument window&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/rstudio-document-dataset.PNG&#34; alt=&#34;rstudio rdocument window&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Give it the name of your dataset&lt;/p&gt;
 
 &lt;p&gt;This is the endresult&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-document-dataset2.PNG&#34; alt=&#34;example rstudio rdocument with coffee filled in&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-document-dataset2.PNG&#34; alt=&#34;example rstudio rdocument with coffee filled in&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;after you changed the files use &lt;code&gt;devtools::document()&lt;/code&gt; to create documents.&lt;/p&gt;
 
@@ -1680,10 +1680,10 @@ in my case my project is in: &lt;code&gt;Projecten\coffeedata&lt;/code&gt; and t
     
     <item>
       <title>From spss to R, part 3</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</link>
+      <link>/cleancode/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</link>
       <pubDate>Wed, 02 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</guid>
+      <guid>/cleancode/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</guid>
       <description>
 
 &lt;p&gt;In this post we will start with a build-in dataset and some basic ggplot graphics. In the next post we will combine dplyr and ggplot to do awesome stuff with the Dutch University student counts from the previous lessons.&lt;/p&gt;
@@ -1711,7 +1711,7 @@ coplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mpg &lt;span class=&#34;o&#34;
 
 &lt;p&gt;To make the most of ggplot, &lt;em&gt;and not go insane&lt;/em&gt;, you will need to understand the underlying principles. the gg in ggplot stand for the grammar of graphics. A concept based on the work of Wilkinson and Wills &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, and put into a graphics package by Hadley Wickham &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:this-is-quite-a-good-read&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:this-is-quite-a-good-read&#34;&gt;0&lt;/a&gt;&lt;/sup&gt;.
 The most important thing to realize is this:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/graphs-have-layers.png&#34; alt=&#34;ogres have layers image&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/graphs-have-layers.png&#34; alt=&#34;ogres have layers image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Every graph consists of the basic data, some transformations to axes, title information and the representation of the data. In ggplot you have to specify the data, and the aesthetics (some mapping of the position of x, and y, colours and shapes). Furthermore you have to tell ggplot what type of chart you want. Bars, lines, and points are all examples of geometric objects or geoms for short.&lt;/p&gt;
 
@@ -1746,7 +1746,7 @@ ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34
 &lt;span class=&#34;c1&#34;&gt;# you CAN change the order of arguments, but then you WILL need to&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;# explicitly call the arguments:&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;wt&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;mpg &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;gear&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor.png&#34; alt=&#34;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) &#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/ggplot2-simple-scatterplot-with-factor.png&#34; alt=&#34;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) &#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Did you check that lines 1 and 11 had the same output?&lt;/li&gt;
@@ -1788,8 +1788,8 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
  &lt;code&gt;ggplot(data = mtcars, aes(x= mpg, y= wt))&lt;/code&gt;.&lt;/p&gt;
 
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor-andsmoothing.png&#34; alt=&#34;ggplot geom_point and geom smooth method=lm&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png&#34; alt=&#34;ggplot with group= as.factor gear geom_point geom smooth&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/ggplot2-simple-scatterplot-with-factor-andsmoothing.png&#34; alt=&#34;ggplot geom_point and geom smooth method=lm&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png&#34; alt=&#34;ggplot with group= as.factor gear geom_point geom smooth&#34;&gt;
     &lt;figcaption&gt;adding:  &#39;group = as.factor(gear)&#39; to aes() of ggplot leads to seperate smoothings per gear&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_smooth&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;method &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; lm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1802,7 +1802,7 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
 
 &lt;p&gt;A bargraph has only one aesthetic mapping:
 &lt;code&gt;ggplot(data = mtcars, aes(as.factor(cyl))) + geom_bar(stat =&amp;quot;count&amp;quot;)&lt;/code&gt;
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot2-simplebargraph.png&#34; alt=&#34;bargraph mtcars&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/ggplot2-simplebargraph.png&#34; alt=&#34;bargraph mtcars&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;only the x aesthetic is specified, the geom is a bar (see &lt;code&gt;?geom_bar&lt;/code&gt;) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = &amp;ldquo;identity&amp;rdquo;). For example&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;dat&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;data.frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
@@ -1810,7 +1810,7 @@ In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ 
         Frequency &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# a very silly dataframe&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dat&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;Name&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; Frequency&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_bar&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;stat &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;identity&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot2-simplebargraph-fictionaldata.png&#34; alt=&#34;ggplot(dat, aes(Name, Frequency)) + geom_bar(stat =&amp;quot;identity&amp;quot;)&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/ggplot2-simplebargraph-fictionaldata.png&#34; alt=&#34;ggplot(dat, aes(Name, Frequency)) + geom_bar(stat =&amp;quot;identity&amp;quot;)&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;example-3-boxplots-violingplots-with-points-behind&#34;&gt;Example 3: boxplots, violingplots with points behind&lt;/h2&gt;
 
@@ -1819,7 +1819,7 @@ By now you now the drill: the data is chickwts, the aes are feed and weight. The
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;str&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot2-chickwts-violin.png&#34; alt=&#34;ggplot violinplot&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/ggplot2-chickwts-violin.png&#34; alt=&#34;ggplot violinplot&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Boxplots are nice, but you lose information about the middle of the distribution. So let&amp;rsquo;s plot the real distribution. &lt;code&gt;ggplot(chickwts, aes(feed, weight)) + geom_point()&lt;/code&gt; This doesn&amp;rsquo;t really help us, what about all the chicks with the same weight and same feed? The jitter geom helps you out.
 &lt;code&gt;ggplot(chickwts, aes(feed, weight)) + geom_jitter()&lt;/code&gt;&lt;/p&gt;
@@ -1829,7 +1829,7 @@ let&amp;rsquo;s combine and see what looks best&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_jitter&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_jitter&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot2-chickwts-violin-points.png&#34; alt=&#34;chickwts violin and points on top&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/ggplot2-chickwts-violin-points.png&#34; alt=&#34;chickwts violin and points on top&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I like the last one best, but for different data different visualizations are better.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;cyl&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
@@ -1853,7 +1853,7 @@ g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_tufte&lt;span class=&#34;p&
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_base&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_excel&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# you will love this, especially the description&lt;/span&gt;
 g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_fivethirtyeight&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/ggplot2-themetufte-mtcars-violin-points-color.png&#34; alt=&#34;ggthemes example with tufte&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/ggplot2-themetufte-mtcars-violin-points-color.png&#34; alt=&#34;ggthemes example with tufte&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So now you know a few graphics and the basics of ggplot use. In the next lesson we will combine dplyr and ggplot to filter, slice and dice through a dataset. Hopefully we will get some insights!&lt;/p&gt;
 
@@ -1888,10 +1888,10 @@ g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_fivethirtyeight&lt;span cla
     
     <item>
       <title>Tidying your data</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</link>
+      <link>/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</link>
       <pubDate>Wed, 24 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</guid>
+      <guid>/cleancode/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/</guid>
       <description>
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
@@ -1911,7 +1911,7 @@ make it tidy.&lt;/p&gt;
 &lt;p&gt;Today we will work with the DUO dataset about the number of students per program in the past 5 years &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; which was used in lesson 2 of &lt;a href=&#34;{{ site.github.url }}/blog/2016/02/22/from-spss-to-r-part2.html&#34;&gt;from-spps-to-r&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The raw datafile in r looks like this:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/tidy-duo-before.PNG&#34; alt=&#34;messy data duo&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/tidy-duo-before.PNG&#34; alt=&#34;messy data duo&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Which is efficient in space, but not useful for analyses. For many analyses you will need to refer to multiple columns. For example:&lt;/p&gt;
 
@@ -1921,7 +1921,7 @@ make it tidy.&lt;/p&gt;
 
 &lt;p&gt;The format of the raw file is  also called the wide format.&lt;br /&gt;
 What we want is a long format like this:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/tidy-duo-endresult.PNG&#34; alt=&#34;tidy data duo&#34; /&gt;
+&lt;img src=&#34;/cleancode/img/tidy-duo-endresult.PNG&#34; alt=&#34;tidy data duo&#34; /&gt;
 Where every observation (the number of people in the group) has it&amp;rsquo;s own row.&lt;/p&gt;
 
 &lt;p&gt;What you need to know before we start:&lt;/p&gt;
@@ -2024,10 +2024,10 @@ The third argument is the vector to apply this principle on, the names of the va
     
     <item>
       <title>From spss to R, part 2</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</link>
+      <link>/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</link>
       <pubDate>Mon, 22 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</guid>
+      <guid>/cleancode/blog/2016/02/22/content/post/2016-02-22-from-spss-to-r-part2/</guid>
       <description>
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
@@ -2059,7 +2059,7 @@ Consider starting a new &lt;a href=&#34;https://rmhogervorst.github.io/cleancode
 
 &lt;p&gt;You will need the following packages:
 haven, dplyr. Click on install:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/installing-packages-rstudio.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/installing-packages-rstudio.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;and fill in the names, or type `install.packages(&amp;ldquo;haven&amp;rdquo;, &amp;ldquo;dplyr&amp;rdquo;).&lt;/p&gt;
 
@@ -2312,16 +2312,16 @@ see you then.&lt;/p&gt;
     
     <item>
       <title>From spss to R, part 1</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</link>
+      <link>/cleancode/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</link>
       <pubDate>Sat, 20 Feb 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</guid>
+      <guid>/cleancode/blog/2016/02/20/content/post/2016-02-22-from-spss-to-r-part1/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine.
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/google_search_spss_r.PNG&#34; alt=&#34;google search results&#34; /&gt;
+&lt;img src=&#34;/cleancode/img/google_search_spss_r.PNG&#34; alt=&#34;google search results&#34; /&gt;
 Most of these hits start with the basics and slowly work your way up to more advanced examples.&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -2354,13 +2354,13 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 &lt;p&gt;You have installed Rstudio, congratulations!&lt;/p&gt;
 
 &lt;p&gt;The main screen looks like this:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-bare.PNG&#34; alt=&#34;Rstudio main&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/rstudio-bare.PNG&#34; alt=&#34;Rstudio main&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;With&lt;/p&gt;
 
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-packages-files-plots-history-environment.PNG&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-new-open.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-packages-files-plots-history-environment.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-new-open.PNG&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;many hidden options right and left&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2369,7 +2369,7 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 &lt;p&gt;You can work interactively in the console (the bottom part in the next picture) and you can work with scripts (in the top part).&lt;/p&gt;
 
 &lt;figure&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-script-console.PNG&#34; &gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-script-console.PNG&#34; &gt;
     &lt;figcaption&gt; script and console &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2447,7 +2447,7 @@ Datamanipulation takes place in &lt;a href=&#34;{{site.github.url}}/blog/2016/02
 
 &lt;p&gt;To be more specific, use the following format in your search: [r] [package you want to use] [function if any] [&amp;hellip; your problem]
 for example
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/example_search.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/example_search.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;from-spss-to-r&#34;&gt;From SPSS to R&lt;/h1&gt;
 

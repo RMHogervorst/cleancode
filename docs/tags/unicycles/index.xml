@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Unicycles on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/unicycles/</link>
+    <link>/cleancode/tags/unicycles/</link>
     <description>Recent content in Unicycles on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Mon, 12 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/unicycles/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/unicycles/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Cleaning up and combining data, a dataset for practice</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/</link>
+      <link>/cleancode/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/</guid>
+      <guid>/cleancode/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/</guid>
       <description>
 
 &lt;p&gt;tldr: I created an open dataset for the explicit practice of data munging.

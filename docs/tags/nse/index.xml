@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nse on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/nse/</link>
+    <link>/cleancode/tags/nse/</link>
     <description>Recent content in Nse on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Mon, 13 Jun 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/nse/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/nse/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Non-standard-evaluation and standard evaluation in dplyr</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</link>
+      <link>/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</link>
       <pubDate>Mon, 13 Jun 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</guid>
+      <guid>/cleancode/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/</guid>
       <description>
 
 &lt;p&gt;THIS POST IS NO LONGER ENTIRELY RELEVANT. DPLYR 0.7 HAS A SLIGHTLY DIFFERENT (AND SLIGHTLY MORE INTUITIVE) WAY OF WORKING WITH NON-STANDARD EVALUATION.&lt;/p&gt;

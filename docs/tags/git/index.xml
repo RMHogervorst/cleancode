@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on Clean Code (and R-fun)</title>
-    <link>http://rmhogervorst.nl/cleancode/tags/git/</link>
+    <link>/cleancode/tags/git/</link>
     <description>Recent content in Git on Clean Code (and R-fun)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
     <lastBuildDate>Tue, 06 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="http://rmhogervorst.nl/cleancode/tags/git/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/cleancode/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Setting up a version controlled shiny-server</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</link>
+      <link>/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</link>
       <pubDate>Tue, 06 Feb 2018 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</guid>
+      <guid>/cleancode/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/</guid>
       <description>
 
 &lt;p&gt;Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.&lt;/p&gt;
@@ -100,10 +100,10 @@ GIT_WORK_TREE = /srv/shiny-server git checkout -f
     
     <item>
       <title>Introduction to R projects</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</link>
+      <link>/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</link>
       <pubDate>Sun, 10 Apr 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</guid>
+      <guid>/cleancode/blog/2016/04/10/content/post/2016-04-10-rproject-start/</guid>
       <description>
 
 &lt;p&gt;It often makes sense to separate your projects. And since space is cheap you are probably creating separate folders on your computer. In RStudio you can create different projects that live in their own folder.&lt;/p&gt;
@@ -112,11 +112,11 @@ GIT_WORK_TREE = /srv/shiny-server git checkout -f
 
 &lt;p&gt;In my case, for example, I have several projects and the last 10 or so are displayed in the dropdown menu:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-project-dropdown.PNG&#34; alt=&#34;Roel&#39;s last projects image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-project-dropdown.PNG&#34; alt=&#34;Roel&#39;s last projects image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Opening a new project presents you with a screen .&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;rstudio new project image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;rstudio new project image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can create a new project in a new location, in an old location or download from &lt;a href=&#34;https://rmhogervorst.github.io/cleancode/blog/2016/03/01/version-control-start.html&#34; title=&#34;See a previous post about version control&#34;&gt;version control&lt;/a&gt;.&lt;/p&gt;
 
@@ -128,13 +128,13 @@ GIT_WORK_TREE = /srv/shiny-server git checkout -f
 
 &lt;p&gt;If you click on &lt;code&gt;checkout from version control&lt;/code&gt; this will happen&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-versioncontrol.PNG&#34; alt=&#34;image of checkout from version control&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-versioncontrol.PNG&#34; alt=&#34;image of checkout from version control&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on git&lt;/p&gt;
 
 &lt;p&gt;and fill in some details.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-clone-git.PNG&#34; alt=&#34;image of my repo clone&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-clone-git.PNG&#34; alt=&#34;image of my repo clone&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;in my case I&amp;rsquo;ve dowloaded from my own repository but cloning a project from github is possible from every project.&lt;/p&gt;
 
@@ -142,7 +142,7 @@ GIT_WORK_TREE = /srv/shiny-server git checkout -f
 
 &lt;p&gt;Here the clone address at a different repository:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/clone-image.PNG&#34; alt=&#34;image of hadley&#39;s ggplot2 repo address&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/clone-image.PNG&#34; alt=&#34;image of hadley&#39;s ggplot2 repo address&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;That is it, a short introduction to projects.&lt;/p&gt;
 
@@ -154,10 +154,10 @@ GIT_WORK_TREE = /srv/shiny-server git checkout -f
     
     <item>
       <title>Version control with Git</title>
-      <link>http://rmhogervorst.nl/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</link>
+      <link>/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
       <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
-      <guid>http://rmhogervorst.nl/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</guid>
+      <guid>/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/</guid>
       <description>
 
 &lt;h2 id=&#34;keeping-track-of-versions&#34;&gt;Keeping track of versions&lt;/h2&gt;
@@ -169,13 +169,13 @@ That is why keep old versions of your files. That way you can go back if you mes
 &lt;li&gt;Usually that looks like this:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/versioncontrol2.png&#34; alt=&#34;filesystem without version control&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/versioncontrol2.png&#34; alt=&#34;filesystem without version control&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Or you use dropbox or something like it:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/dropboxversion.png&#34; alt=&#34;dropbox versions&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/dropboxversion.png&#34; alt=&#34;dropbox versions&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Other people use email. Emailing to themselves or to collaborators when they finished something.&lt;/li&gt;
@@ -193,12 +193,12 @@ However in some cases you might want to go back to a previous version and work f
 &lt;p&gt;So how does Git work? Every time you reach a point in you project that you think is critical, you make a commit. You save a current state of all the files in the directory. And when you make this snapshot of your files, you can (and should) write down what you solved and what you changed since last time. In the future when you look back at your commit history you can read in what state your project was.&lt;/p&gt;
 
 &lt;p&gt;In the next example you can see what changed in the files, without even looking at the files themselves.
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/commits_example.png&#34; alt=&#34;commits from test_dat, from github&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/commits_example.png&#34; alt=&#34;commits from test_dat, from github&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;branching&#34;&gt;Branching&lt;/h3&gt;
 
 &lt;p&gt;Even better, you can start from any saved point in time and create a new version. And when you like that version better, merge it back into an other version.
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/branching.png&#34; alt=&#34;branches&#34; /&gt;
+&lt;img src=&#34;/cleancode/img/branching.png&#34; alt=&#34;branches&#34; /&gt;
 In the example above, at the second commit I branched (purple line). the third row from below is a commit in the purple branch. Then I changed something in the normal branch and finally I merged the blue and purple line in the second line from the top.&lt;/p&gt;
 
 &lt;p&gt;You don&amp;rsquo;t have to use branching, just saving important points along the way is a great start (It would be the point where you email yourself a version, or save a new version of the file).&lt;/p&gt;
@@ -226,24 +226,24 @@ In the example above, at the second commit I branched (purple line). the third r
 &lt;li&gt;If necessary, enter the path for your Git or SVN executable where provided.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/enabling-git-rstudio.PNG&#34; alt=&#34;enabling git in rstudio example&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/enabling-git-rstudio.PNG&#34; alt=&#34;enabling git in rstudio example&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So, how do you use version control within Rstudio?&lt;/p&gt;
 
 &lt;h1 id=&#34;rstudio-project-and-git&#34;&gt;Rstudio project and git.&lt;/h1&gt;
 
 &lt;p&gt;Start a new project
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/rstudio-create-new-project.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I chose an empty project in a new directory&lt;/p&gt;
 
 &lt;p&gt;and then click &amp;lsquo;Create a git repository&amp;rsquo;
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-new-project-enablegit.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/rstudio-new-project-enablegit.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The repo and real folder on windows 8.1 look like this.
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-empty-git.PNG&#34; alt=&#34;image&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/folderview-new-git-project.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-empty-git.PNG&#34; alt=&#34;image&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/folderview-new-git-project.PNG&#34; alt=&#34;image&#34;&gt;
     &lt;figcaption&gt;rstudio and the real folder with hidden folders showing&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 
@@ -253,7 +253,7 @@ In the example above, at the second commit I branched (purple line). the third r
 
 &lt;h2 id=&#34;git-version-control-within-rstudio-your-first-commit&#34;&gt;Git version control within Rstudio: your first commit&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-git-first-commit.PNG&#34; alt=&#34;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-git-first-commit.PNG&#34; alt=&#34;&#34; /&gt;
 I have added the second file, the icon changes to a green A (short for: add to repository), the first one shows two yellow questionmarks (short for: not tracked, not changed, I think).&lt;/p&gt;
 
 &lt;ul&gt;
@@ -262,7 +262,7 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;A new window will open:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-git-commit-window.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-git-commit-window.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The left part of the screen shows what files are in the commit, the bottom part displays the changes since last commit. Green means added, red means subtracted.&lt;/p&gt;
 
@@ -274,7 +274,7 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;a window will open with a description of what happened.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-git-commit-message.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/cleancode/img/rstudio-git-commit-message.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;When you return to the main view of rstudio you will see that the git tab has changed a bit, there are no files (because nothing has changed yet since your commit 2 seconds ago) and next to the gear wheel it says: &amp;lsquo;master&amp;rsquo; . This is the branch you are on right now. By default the first branch is master.&lt;/p&gt;
 
@@ -298,14 +298,14 @@ I have added the second file, the icon changes to a green A (short for: add to r
 
 &lt;p&gt;It will look like this
 &lt;figure class=&#34;half&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-commit1.PNG&#34; alt=&#34;before tracking&#34;&gt;
-    &lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-commit2.PNG&#34; alt=&#34;after tracking&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-commit1.PNG&#34; alt=&#34;before tracking&#34;&gt;
+    &lt;img src=&#34;/cleancode/img/rstudio-commit2.PNG&#34; alt=&#34;after tracking&#34;&gt;
     &lt;figcaption&gt;rstudio adding files to commit before and after&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look at the history of your commits, click on the clock in the git tab.
 Mine looks like this:
-&lt;img src=&#34;http://rmhogervorst.nl/cleancode/img/rstudio-commit-history.PNG&#34; alt=&#34;rstudio commit history&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/cleancode/img/rstudio-commit-history.PNG&#34; alt=&#34;rstudio commit history&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note the commit message, it says what the commit adds to the repo. Try to write your messages as if you fulfull a order and discribe the contents. For example: &amp;ldquo;adds count_messages function that counts messages send to the user&amp;rdquo;
 or, &amp;ldquo;fix issue #2 can&amp;rsquo;t work with arrays&amp;rdquo;.&lt;/p&gt;
