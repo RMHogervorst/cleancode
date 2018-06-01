@@ -1,5 +1,5 @@
 theme = "beautifulhugo"
-baseURL = "https://test.rmhogervorst.nl/"
+baseURL = "https://rmhogervorst.nl/cleancode"
 languageCode = "en-us"
 title = "Clean Code (and R-fun)"
 pygmentsCodeFences = true
@@ -20,7 +20,7 @@ publishDir = "docs"
   comments = true
   readingTime = true
   modifyLink = true
-  GithubEdit = "https://github.com/RMHogervorst/cleancode/tree/testvar/content/"
+  GithubEdit = "https://github.com/RMHogervorst/cleancode/tree/master/content/"
 
 
 [Author]
