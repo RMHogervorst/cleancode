@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" /> 
+
+  <title>From spss to R, part 3</title>
+  <meta property="og:title" content="From spss to R, part 3" />
+  <meta name="twitter:title" content="From spss to R, part 3" />
+  <meta name="description" content="In this post we will start with a build-in dataset and some basic ggplot graphics. In the next post we will combine dplyr and ggplot to do awesome stuff with the Dutch University student counts from the previous lessons.
+We will work with the build-in dataset mtcars.
+There are many datasets in r library(help = &quot;datasets&quot;) but in many examples online you will see the iris and mtcars examples. Find more information about the dataset with ?">
+  <meta property="og:description" content="In this post we will start with a build-in dataset and some basic ggplot graphics. In the next post we will combine dplyr and ggplot to do awesome stuff with the Dutch University student counts from the previous lessons.
+We will work with the build-in dataset mtcars.
+There are many datasets in r library(help = &quot;datasets&quot;) but in many examples online you will see the iris and mtcars examples. Find more information about the dataset with ?">
+  <meta name="twitter:description" content="In this post we will start with a build-in dataset and some basic ggplot graphics. In the next post we will combine dplyr and ggplot to do awesome stuff with the Dutch University student counts from …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code (and R-fun)" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Clean Code (and R-fun)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/css/syntax.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Clean Code (and R-fun)</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code (and R-fun)" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Clean Code (and R-fun)" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>From spss to R, part 3</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 2, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 9 minutes (1716 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>In this post we will start with a build-in dataset and some basic ggplot graphics. In the next post we will combine dplyr and ggplot to do awesome stuff with the Dutch University student counts from the previous lessons.</p>
+
+<p>We will work with the build-in dataset mtcars.</p>
+
+<p>There are many datasets in r <code>library(help = &quot;datasets&quot;)</code> but in many examples online you will see the iris and mtcars examples. Find more information about the dataset with <code>?iris</code>. As you can see it&rsquo;s possible to include metadata about datasets in a package, so in the future you might want to share your data in the form of a package with all your code included.</p>
+
+<p>But first back to the mtcars dataset and then to graphing <em>(is that a word?)</em>.</p>
+
+<h2 id="the-mtcars-dataset">The mtcars dataset</h2>
+
+<p>According to <code>?mtcars</code>: &ldquo;The data was extracted from the 1974
+Motor Trend US magazine, and comprises fuel consumption and 10 aspects of
+automobile design and performance for 32 automobiles (1973–74 models).&rdquo;</p>
+
+<p>The mtcars documentation gives us an example of displaying the mtcars information:</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">pairs<span class="p">(</span>mtcars<span class="p">,</span> main <span class="o">=</span> <span class="s">&#34;mtcars data&#34;</span><span class="p">)</span>
+<span class="c1"># this is one plot next is an other</span>
+coplot<span class="p">(</span>mpg <span class="o">~</span> disp <span class="o">|</span> <span class="kp">as.factor</span><span class="p">(</span>cyl<span class="p">),</span> data <span class="o">=</span> mtcars<span class="p">,</span>
+       panel <span class="o">=</span> panel.smooth<span class="p">,</span> rows <span class="o">=</span> <span class="m">1</span><span class="p">)</span></code></pre></div>
+<h2 id="plotting-graphs-in-r">Plotting graphs in R</h2>
+
+<p>R has three plotting systems, each based on different ideas. The base plot system is very fast and is very useful for quick views of your data. But you need to tinker a lot to make plots nicer.  Then there is the lattice system <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. Which is probably very useful, but I mostly use ggplot. For you ggplot might be THE reason to come to R.</p>
+
+<p>To make the most of ggplot, <em>and not go insane</em>, you will need to understand the underlying principles. the gg in ggplot stand for the grammar of graphics. A concept based on the work of Wilkinson and Wills <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>, and put into a graphics package by Hadley Wickham <sup class="footnote-ref" id="fnref:this-is-quite-a-good-read"><a rel="footnote" href="#fn:this-is-quite-a-good-read">0</a></sup>.
+The most important thing to realize is this:
+<img src="/img/graphs-have-layers.png" alt="ogres have layers image" /></p>
+
+<p>Every graph consists of the basic data, some transformations to axes, title information and the representation of the data. In ggplot you have to specify the data, and the aesthetics (some mapping of the position of x, and y, colours and shapes). Furthermore you have to tell ggplot what type of chart you want. Bars, lines, and points are all examples of geometric objects or geoms for short.</p>
+
+<h2 id="example-a-basic-scatter-plot-in-ggplot">Example: a basic scatter plot in ggplot</h2>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+str<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># just to show you the variables in mtcars.</span>
+ggplot<span class="p">(</span>data <span class="o">=</span> mtcars<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span> mpg<span class="p">,</span> y<span class="o">=</span> wt<span class="p">)</span> <span class="p">)</span> <span class="o">+</span> geom_point<span class="p">()</span></code></pre></div>
+<p>Which will look like this:</p>
+
+<p><img src="{{ site.github.url}} /images/ggplot2-simple-scatterplot.png" alt="ggplot(data = mtcars, aes(x= mpg, y= wt) ) + geom_point()" /></p>
+
+<p>We called a ggplot element, specified the data, then the aesthetics so that miles per gallon (mpg) is on the x axis and weight (wt) on the Y axis.</p>
+
+<ul>
+<li>select the first part ggplot(data = mtcars, aes(x= mpg, y= wt) ) and execute ctrl/cmd-r</li>
+<li>what happens?</li>
+</ul>
+
+<p>We need to tell ggplot what kind of layer to put on top. In this case we&rsquo;ve added points. Also note the + sign. In dplyr we used a pipe (%&gt;%) operator to link stuff together, within ggplot we literally add layers together with the + sign.</p>
+
+<p>Now we add some color</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">(</span>data <span class="o">=</span> mtcars<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span> mpg<span class="p">,</span> y<span class="o">=</span> wt <span class="p">))</span> <span class="o">+</span> geom_point<span class="p">(</span> color <span class="o">=</span> <span class="s">&#34;red&#34;</span> <span class="p">)</span></code></pre></div>
+<p>We&rsquo;ve specified a color in the point layer. But much more effective is to use color as an extra dimension in your plots.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">(</span>data <span class="o">=</span> mtcars<span class="p">,</span> aes<span class="p">(</span>mpg<span class="p">,</span>  wt <span class="p">))</span> <span class="o">+</span> geom_point<span class="p">(</span>aes<span class="p">(</span>color <span class="o">=</span> <span class="kp">as.factor</span><span class="p">(</span>gear<span class="p">)))</span> 
+<span class="c1"># note that we don&#39;t have to tell arguments in functions what they are.</span>
+<span class="c1"># according to ?ggplot    :</span>
+<span class="c1"># ggplot(data = NULL, mapping = aes(), ..., environment = parent.frame())</span>
+<span class="c1"># the first argument is data, then follows the mapping with aes</span>
+<span class="c1"># ?aes</span>
+<span class="c1"># aes(x, y, ...)</span>
+<span class="c1"># and the first argument of aes is always x and the second is y.</span>
+<span class="c1"># you CAN change the order of arguments, but then you WILL need to</span>
+<span class="c1"># explicitly call the arguments:</span>
+ggplot<span class="p">(</span>aes<span class="p">(</span>y<span class="o">=</span>wt<span class="p">,</span> x<span class="o">=</span>mpg <span class="p">),</span> data <span class="o">=</span> mtcars<span class="p">,</span> <span class="p">)</span> <span class="o">+</span> geom_point<span class="p">(</span>aes<span class="p">(</span>color <span class="o">=</span> <span class="kp">as.factor</span><span class="p">(</span>gear<span class="p">)))</span> </code></pre></div>
+<p><img src="/img/ggplot2-simple-scatterplot-with-factor.png" alt="ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) " /></p>
+
+<ul>
+<li>Did you check that lines 1 and 11 had the same output?</li>
+</ul>
+
+<p>Now I told ggplot that gear was a factor. If your dataset is clean and nicely formatted you don&rsquo;t have to do this. However this dataset has only numeric values, while some columns  are actually factors.</p>
+
+<ul>
+<li>repeat the call from line 1 but change the geom_point with: geom_point(aes(color = gear))</li>
+<li>What did just happen?</li>
+</ul>
+
+<p>For numeric variables, ggplot takes one color and changes the gradient from lowest to highest level of that variable. The colors for factor variables are maximaly distinct so you can identify groups easier.</p>
+
+<ul>
+<li><p>Try the following code
+<code>ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(color = gear)</code>
+and compare with:
+<code>ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = gear))</code></p></li>
+
+<li><p>What happened? Why didn&rsquo;t the first work?</p></li>
+
+<li><p>but this one does:</p></li>
+
+<li><p><code>ggplot(data = mtcars, aes(x= mpg, y= wt )) + geom_point( color = &quot;red&quot; )</code></p></li>
+</ul>
+
+<p>You will have to think about the aes() command as something that depends on you data. A way to transform the variables from your data into graphic elements. But if you want to add a color or change the size of things that do not depend on your data, you must tell it seperately to the geom.</p>
+
+<p>So I said layers. let&rsquo;s add layers.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">(</span>data <span class="o">=</span> mtcars<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span> mpg<span class="p">,</span> y<span class="o">=</span> wt<span class="p">))</span> <span class="o">+</span> 
+        geom_point<span class="p">(</span>aes<span class="p">(</span> color <span class="o">=</span> <span class="kp">as.factor</span><span class="p">(</span>gear<span class="p">)</span> <span class="p">))</span> <span class="o">+</span>
+        geom_smooth<span class="p">(</span>method <span class="o">=</span> lm<span class="p">)</span> <span class="c1"># a linear model Y ~ x smoothing</span></code></pre></div>
+<p>In this example there are three layers, a base layer, points and a smoothing
+on top of the points.
+As you add layers, each layer has their elements specified by you
+or inherits them from the base element <code>ggplot()</code>.
+In the above example <code>geom_smooth()</code> inherits the part [ aes(x, y) ] from
+ <code>ggplot(data = mtcars, aes(x= mpg, y= wt))</code>.</p>
+
+<figure class="half">
+    <img src="/img/ggplot2-simple-scatterplot-with-factor-andsmoothing.png" alt="ggplot geom_point and geom smooth method=lm">
+    <img src="/img/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png" alt="ggplot with group= as.factor gear geom_point geom smooth">
+    <figcaption>adding:  'group = as.factor(gear)' to aes() of ggplot leads to seperate smoothings per gear</figcaption>
+</figure>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">()</span><span class="o">+</span>geom_point<span class="p">(</span>data <span class="o">=</span> mtcars<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span> mpg<span class="p">,</span> y<span class="o">=</span> wt<span class="p">))</span> <span class="o">+</span>geom_smooth<span class="p">(</span>method <span class="o">=</span> lm<span class="p">)</span></code></pre></div>
+<p>This doesn&rsquo;t work, because the smoothing geom doesn&rsquo;t know what data or aes to use. But if we specify them, it will work.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">()</span><span class="o">+</span>geom_point<span class="p">(</span>data <span class="o">=</span> mtcars<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span> mpg<span class="p">,</span> y<span class="o">=</span> wt<span class="p">))</span> <span class="o">+</span>
+        geom_smooth<span class="p">(</span>data <span class="o">=</span> mtcars<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span> mpg<span class="p">,</span> y<span class="o">=</span> wt<span class="p">),</span> method <span class="o">=</span> lm<span class="p">)</span></code></pre></div>
+<p>We will work through a few more examples, but see Further reading for more examples of graph types and resources with lists and lists of plots and how to make them.</p>
+
+<h2 id="example-2-a-bargraph">Example 2: a bargraph</h2>
+
+<p>A bargraph has only one aesthetic mapping:
+<code>ggplot(data = mtcars, aes(as.factor(cyl))) + geom_bar(stat =&quot;count&quot;)</code>
+<img src="/img/ggplot2-simplebargraph.png" alt="bargraph mtcars" /></p>
+
+<p>only the x aesthetic is specified, the geom is a bar (see <code>?geom_bar</code>) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = &ldquo;identity&rdquo;). For example</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">dat<span class="o">&lt;-</span><span class="kt">data.frame</span><span class="p">(</span>
+        Name <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#34;hork&#34;</span><span class="p">,</span> <span class="s">&#34;dork&#34;</span><span class="p">,</span> <span class="s">&#34;bork&#34;</span><span class="p">),</span>
+        Frequency <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span><span class="m">12</span><span class="p">)</span>
+<span class="p">)</span> <span class="c1"># a very silly dataframe</span>
+ggplot<span class="p">(</span>dat<span class="p">,</span> aes<span class="p">(</span>Name<span class="p">,</span> Frequency<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat <span class="o">=</span><span class="s">&#34;identity&#34;</span><span class="p">)</span></code></pre></div>
+<p><img src="/img/ggplot2-simplebargraph-fictionaldata.png" alt="ggplot(dat, aes(Name, Frequency)) + geom_bar(stat =&quot;identity&quot;)" /></p>
+
+<h2 id="example-3-boxplots-violingplots-with-points-behind">Example 3: boxplots, violingplots with points behind</h2>
+
+<p>Now a violinplot. The chickwts dataset is a small dataset of weights of chicks (baby chickens, not human ladies), with the diet they received.<br />
+By now you now the drill: the data is chickwts, the aes are feed and weight. Then we add a boxplot geom. See <code>?geom_boxplot</code> for more info about changing parameters. I have displayed a violin plot, which displays more information about the underlying distribution.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">str<span class="p">(</span>chickwts<span class="p">)</span>
+ggplot<span class="p">(</span>chickwts<span class="p">,</span> aes<span class="p">(</span>feed<span class="p">,</span> weight<span class="p">))</span> <span class="o">+</span> geom_boxplot<span class="p">()</span>
+ggplot<span class="p">(</span>chickwts<span class="p">,</span> aes<span class="p">(</span>feed<span class="p">,</span> weight<span class="p">))</span> <span class="o">+</span> geom_violin<span class="p">()</span></code></pre></div>
+<p><img src="/img/ggplot2-chickwts-violin.png" alt="ggplot violinplot" /></p>
+
+<p>Boxplots are nice, but you lose information about the middle of the distribution. So let&rsquo;s plot the real distribution. <code>ggplot(chickwts, aes(feed, weight)) + geom_point()</code> This doesn&rsquo;t really help us, what about all the chicks with the same weight and same feed? The jitter geom helps you out.
+<code>ggplot(chickwts, aes(feed, weight)) + geom_jitter()</code></p>
+
+<p>The jitter function adds some noise to points to separate the individual points.
+let&rsquo;s combine and see what looks best</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">(</span>chickwts<span class="p">,</span> aes<span class="p">(</span>feed<span class="p">,</span> weight<span class="p">))</span> <span class="o">+</span> geom_boxplot<span class="p">()</span> <span class="o">+</span> geom_jitter<span class="p">()</span>
+ggplot<span class="p">(</span>chickwts<span class="p">,</span> aes<span class="p">(</span>feed<span class="p">,</span> weight<span class="p">))</span> <span class="o">+</span> geom_boxplot<span class="p">()</span> <span class="o">+</span> geom_point<span class="p">()</span>
+ggplot<span class="p">(</span>chickwts<span class="p">,</span> aes<span class="p">(</span>feed<span class="p">,</span> weight<span class="p">))</span> <span class="o">+</span> geom_violin<span class="p">()</span> <span class="o">+</span> geom_jitter<span class="p">()</span></code></pre></div>
+<p><img src="/img/ggplot2-chickwts-violin-points.png" alt="chickwts violin and points on top" /></p>
+
+<p>I like the last one best, but for different data different visualizations are better.</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">ggplot<span class="p">(</span>mtcars<span class="p">,</span> aes<span class="p">(</span><span class="kp">as.factor</span><span class="p">(</span>cyl<span class="p">),</span> mpg<span class="p">))</span> <span class="o">+</span>geom_boxplot<span class="p">()</span> <span class="o">+</span>geom_point<span class="p">()</span>
+ggplot<span class="p">(</span>mtcars<span class="p">,</span> aes<span class="p">(</span><span class="kp">as.factor</span><span class="p">(</span>cyl<span class="p">),</span> mpg<span class="p">))</span> <span class="o">+</span>geom_violin<span class="p">()</span> <span class="o">+</span>geom_jitter<span class="p">(</span> aes<span class="p">(</span>color <span class="o">=</span> <span class="kp">as.factor</span><span class="p">(</span>am<span class="p">)))</span></code></pre></div>
+<h2 id="customization">Customization</h2>
+
+<p>Most simple plots in ggplot2 look quite good from the start, it&rsquo;s a credit to Hadley Wickham that he chose ggplot2&rsquo;s defaults so well. However, there are many ways to custimize your plots. Every element can change colour<sup class="footnote-ref" id="fnref:4"><a rel="footnote" href="#fn:4">3</a></sup>, shape, etc. But if you like to change things in multiple plots you should try to change the theme. Themes change multiple things at once. For instance:</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">g <span class="o">&lt;-</span> ggplot<span class="p">(</span>mtcars<span class="p">,</span> aes<span class="p">(</span><span class="kp">as.factor</span><span class="p">(</span>cyl<span class="p">),</span> mpg<span class="p">))</span> <span class="o">+</span>geom_violin<span class="p">()</span> <span class="o">+</span>geom_jitter<span class="p">(</span> aes<span class="p">(</span>color <span class="o">=</span> <span class="kp">as.factor</span><span class="p">(</span>am<span class="p">)))</span> 
+<span class="c1"># I saved the entire thing to a variable.</span>
+<span class="c1"># if you select the g and press ctrl/cmd r it will display the plot again.</span>
+<span class="c1"># even better the saved object behaves just as before. We can add things to it.</span>
+<span class="c1"># try the following things</span>
+g <span class="o">+</span> theme_bw<span class="p">()</span>
+g <span class="o">+</span> theme_dark<span class="p">()</span>  <span class="c1"># the addition doesn&#39;t stick untill you save it to a variable</span>
+g <span class="o">+</span> theme_void<span class="p">()</span></code></pre></div>
+<p>It is relatively easy to change parts of themes, or to create a whole new theme. But quite easy is also the ggtheme package, see their website [5].</p>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&#34;ggthemes&#34;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>ggthemes<span class="p">)</span>
+g <span class="o">+</span> theme_wsj<span class="p">()</span>
+g <span class="o">+</span> theme_tufte<span class="p">()</span>  <span class="c1"># very clean theme based on edward tufte &#39;s ideas about graphs</span>
+g <span class="o">+</span> theme_base<span class="p">()</span>
+g <span class="o">+</span> theme_excel<span class="p">()</span>  <span class="c1"># you will love this, especially the description</span>
+g <span class="o">+</span> theme_fivethirtyeight<span class="p">()</span></code></pre></div>
+<p><img src="/img/ggplot2-themetufte-mtcars-violin-points-color.png" alt="ggthemes example with tufte" /></p>
+
+<p>So now you know a few graphics and the basics of ggplot use. In the next lesson we will combine dplyr and ggplot to filter, slice and dice through a dataset. Hopefully we will get some insights!</p>
+
+<h3 id="further-reading">Further reading</h3>
+
+<ul>
+<li><a href="http://www.stat.ubc.ca/~jenny/STAT545A/block90_baseLatticeGgplot2.html">Overview of r graphics on stat.ubc.ca, with tons of resources</a></li>
+<li><a href="http://lmgtfy.com/?q=r+lattice+base+ggplot2">a google search with &ldquo;r lattice base ggplot2&rdquo; gives me 26900 results</a></li>
+<li><a href="http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_%28ggplot2%29/"> If you ever need to know any sort of plot, use the cookbook. bookmark it </a></li>
+<li><a href="http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/">beautiful graphs cheatcheat</a></li>
+<li><a href="http://shiny.stat.ubc.ca/r-graph-catalog/">R graph catalog an interactive display of graphs including the code in ggplot2</a></li>
+</ul>
+
+<h3 id="references">References</h3>
+
+<p>[5]: ggthemes website <a href="https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html">https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html</a></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Explanation of lattice system and trellisplots on statmethods.net <a href="http://www.statmethods.net/advgraphs/trellis.html">http://www.statmethods.net/advgraphs/trellis.html</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">Wilkinson, Leland, and Graham Wills. The Grammar of Graphics. 2nd ed. Statistics and Computing. New York: Springer, 2005.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:4">Did you notice that both color and colour are allowed in ggplot? In  the dplyr package both summarize and summarise work.
+ <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="//tags/beginner/">beginner</a>&nbsp;
+            
+              <a href="//tags/ggplot2/">ggplot2</a>&nbsp;
+            
+              <a href="//tags/spps-to-r/">spps-to-r</a>&nbsp;
+            
+              <a href="//tags/mtcars/">mtcars</a>&nbsp;
+            
+              <a href="//tags/chickwts/">chickwts</a>&nbsp;
+            
+              <a href="//tags/tutorial/">tutorial</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/blog/2016/03/01/content/post/2016-03-01-version-control-start/" data-toggle="tooltip" data-placement="top" title="Version control with Git">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/" data-toggle="tooltip" data-placement="top" title="Creating a package for your data set">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="find me on GitHub (main stuff)">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="I have some stale stuff on GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="I probably have something on Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Yes! I am active on Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="My LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="There is some stuff on StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Clean Code (and R-fun)</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a> <br>
+            
+
+
+
+
+  
+
+
+
+<a href='https://github.com/RMHogervorst/cleancode/tree/testvar/content/post/2016-03-02-from-spss-to-r-part3.md'>or edit this page on github.</a>
+
+
+
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

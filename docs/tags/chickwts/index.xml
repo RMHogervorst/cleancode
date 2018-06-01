@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chickwts on Clean Code (and R-fun)</title>
+    <link>/tags/chickwts/</link>
+    <description>Recent content in Chickwts on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Wed, 02 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/chickwts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>From spss to R, part 3</title>
+      <link>/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</link>
+      <pubDate>Wed, 02 Mar 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/</guid>
+      <description>
+
+&lt;p&gt;In this post we will start with a build-in dataset and some basic ggplot graphics. In the next post we will combine dplyr and ggplot to do awesome stuff with the Dutch University student counts from the previous lessons.&lt;/p&gt;
+
+&lt;p&gt;We will work with the build-in dataset mtcars.&lt;/p&gt;
+
+&lt;p&gt;There are many datasets in r &lt;code&gt;library(help = &amp;quot;datasets&amp;quot;)&lt;/code&gt; but in many examples online you will see the iris and mtcars examples. Find more information about the dataset with &lt;code&gt;?iris&lt;/code&gt;. As you can see it&amp;rsquo;s possible to include metadata about datasets in a package, so in the future you might want to share your data in the form of a package with all your code included.&lt;/p&gt;
+
+&lt;p&gt;But first back to the mtcars dataset and then to graphing &lt;em&gt;(is that a word?)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-mtcars-dataset&#34;&gt;The mtcars dataset&lt;/h2&gt;
+
+&lt;p&gt;According to &lt;code&gt;?mtcars&lt;/code&gt;: &amp;ldquo;The data was extracted from the 1974
+Motor Trend US magazine, and comprises fuel consumption and 10 aspects of
+automobile design and performance for 32 automobiles (1973–74 models).&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;The mtcars documentation gives us an example of displaying the mtcars information:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;pairs&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; main &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;mtcars data&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# this is one plot next is an other&lt;/span&gt;
+coplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mpg &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt; disp &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;cyl&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+       panel &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; panel.smooth&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; rows &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;plotting-graphs-in-r&#34;&gt;Plotting graphs in R&lt;/h2&gt;
+
+&lt;p&gt;R has three plotting systems, each based on different ideas. The base plot system is very fast and is very useful for quick views of your data. But you need to tinker a lot to make plots nicer.  Then there is the lattice system &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. Which is probably very useful, but I mostly use ggplot. For you ggplot might be THE reason to come to R.&lt;/p&gt;
+
+&lt;p&gt;To make the most of ggplot, &lt;em&gt;and not go insane&lt;/em&gt;, you will need to understand the underlying principles. the gg in ggplot stand for the grammar of graphics. A concept based on the work of Wilkinson and Wills &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, and put into a graphics package by Hadley Wickham &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:this-is-quite-a-good-read&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:this-is-quite-a-good-read&#34;&gt;0&lt;/a&gt;&lt;/sup&gt;.
+The most important thing to realize is this:
+&lt;img src=&#34;/img/graphs-have-layers.png&#34; alt=&#34;ogres have layers image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Every graph consists of the basic data, some transformations to axes, title information and the representation of the data. In ggplot you have to specify the data, and the aesthetics (some mapping of the position of x, and y, colours and shapes). Furthermore you have to tell ggplot what type of chart you want. Bars, lines, and points are all examples of geometric objects or geoms for short.&lt;/p&gt;
+
+&lt;h2 id=&#34;example-a-basic-scatter-plot-in-ggplot&#34;&gt;Example: a basic scatter plot in ggplot&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;ggplot2&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+str&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mtcars&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# just to show you the variables in mtcars.&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which will look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;{{ site.github.url}} /images/ggplot2-simple-scatterplot.png&#34; alt=&#34;ggplot(data = mtcars, aes(x= mpg, y= wt) ) + geom_point()&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We called a ggplot element, specified the data, then the aesthetics so that miles per gallon (mpg) is on the x axis and weight (wt) on the Y axis.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;select the first part ggplot(data = mtcars, aes(x= mpg, y= wt) ) and execute ctrl/cmd-r&lt;/li&gt;
+&lt;li&gt;what happens?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We need to tell ggplot what kind of layer to put on top. In this case we&amp;rsquo;ve added points. Also note the + sign. In dplyr we used a pipe (%&amp;gt;%) operator to link stuff together, within ggplot we literally add layers together with the + sign.&lt;/p&gt;
+
+&lt;p&gt;Now we add some color&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt &lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;red&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We&amp;rsquo;ve specified a color in the point layer. But much more effective is to use color as an extra dimension in your plots.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;  wt &lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;gear&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; 
+&lt;span class=&#34;c1&#34;&gt;# note that we don&amp;#39;t have to tell arguments in functions what they are.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# according to ?ggplot    :&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# ggplot(data = NULL, mapping = aes(), ..., environment = parent.frame())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# the first argument is data, then follows the mapping with aes&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# ?aes&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# aes(x, y, ...)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# and the first argument of aes is always x and the second is y.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# you CAN change the order of arguments, but then you WILL need to&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# explicitly call the arguments:&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;wt&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;mpg &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;gear&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor.png&#34; alt=&#34;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = as.factor(gear))) &#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Did you check that lines 1 and 11 had the same output?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now I told ggplot that gear was a factor. If your dataset is clean and nicely formatted you don&amp;rsquo;t have to do this. However this dataset has only numeric values, while some columns  are actually factors.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;repeat the call from line 1 but change the geom_point with: geom_point(aes(color = gear))&lt;/li&gt;
+&lt;li&gt;What did just happen?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For numeric variables, ggplot takes one color and changes the gradient from lowest to highest level of that variable. The colors for factor variables are maximaly distinct so you can identify groups easier.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Try the following code
+&lt;code&gt;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(color = gear)&lt;/code&gt;
+and compare with:
+&lt;code&gt;ggplot(data = mtcars, aes(mpg,  wt )) + geom_point(aes(color = gear))&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;What happened? Why didn&amp;rsquo;t the first work?&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;but this one does:&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;ggplot(data = mtcars, aes(x= mpg, y= wt )) + geom_point( color = &amp;quot;red&amp;quot; )&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You will have to think about the aes() command as something that depends on you data. A way to transform the variables from your data into graphic elements. But if you want to add a color or change the size of things that do not depend on your data, you must tell it seperately to the geom.&lt;/p&gt;
+
+&lt;p&gt;So I said layers. let&amp;rsquo;s add layers.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; 
+        geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;gear&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+        geom_smooth&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;method &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; lm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# a linear model Y ~ x smoothing&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this example there are three layers, a base layer, points and a smoothing
+on top of the points.
+As you add layers, each layer has their elements specified by you
+or inherits them from the base element &lt;code&gt;ggplot()&lt;/code&gt;.
+In the above example &lt;code&gt;geom_smooth()&lt;/code&gt; inherits the part [ aes(x, y) ] from
+ &lt;code&gt;ggplot(data = mtcars, aes(x= mpg, y= wt))&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&#34;half&#34;&gt;
+    &lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor-andsmoothing.png&#34; alt=&#34;ggplot geom_point and geom smooth method=lm&#34;&gt;
+    &lt;img src=&#34;/img/ggplot2-simple-scatterplot-with-factor-andsmoothing-geargroups.png&#34; alt=&#34;ggplot with group= as.factor gear geom_point geom smooth&#34;&gt;
+    &lt;figcaption&gt;adding:  &#39;group = as.factor(gear)&#39; to aes() of ggplot leads to seperate smoothings per gear&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_smooth&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;method &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; lm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This doesn&amp;rsquo;t work, because the smoothing geom doesn&amp;rsquo;t know what data or aes to use. But if we specify them, it will work.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+        geom_smooth&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wt&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; method &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; lm&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We will work through a few more examples, but see Further reading for more examples of graph types and resources with lists and lists of plots and how to make them.&lt;/p&gt;
+
+&lt;h2 id=&#34;example-2-a-bargraph&#34;&gt;Example 2: a bargraph&lt;/h2&gt;
+
+&lt;p&gt;A bargraph has only one aesthetic mapping:
+&lt;code&gt;ggplot(data = mtcars, aes(as.factor(cyl))) + geom_bar(stat =&amp;quot;count&amp;quot;)&lt;/code&gt;
+&lt;img src=&#34;/img/ggplot2-simplebargraph.png&#34; alt=&#34;bargraph mtcars&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;only the x aesthetic is specified, the geom is a bar (see &lt;code&gt;?geom_bar&lt;/code&gt;) and we specified that it should perform a statistic on the data. In this case it just counts the number of occurrences. But if your data is already in frequency you could use `geom_bar(stat = &amp;ldquo;identity&amp;rdquo;). For example&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;dat&lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;data.frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+        Name &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hork&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;dork&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;bork&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+        Frequency &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# a very silly dataframe&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dat&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;Name&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; Frequency&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_bar&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;stat &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;identity&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/img/ggplot2-simplebargraph-fictionaldata.png&#34; alt=&#34;ggplot(dat, aes(Name, Frequency)) + geom_bar(stat =&amp;quot;identity&amp;quot;)&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;example-3-boxplots-violingplots-with-points-behind&#34;&gt;Example 3: boxplots, violingplots with points behind&lt;/h2&gt;
+
+&lt;p&gt;Now a violinplot. The chickwts dataset is a small dataset of weights of chicks (baby chickens, not human ladies), with the diet they received.&lt;br /&gt;
+By now you now the drill: the data is chickwts, the aes are feed and weight. Then we add a boxplot geom. See &lt;code&gt;?geom_boxplot&lt;/code&gt; for more info about changing parameters. I have displayed a violin plot, which displays more information about the underlying distribution.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;str&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/img/ggplot2-chickwts-violin.png&#34; alt=&#34;ggplot violinplot&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Boxplots are nice, but you lose information about the middle of the distribution. So let&amp;rsquo;s plot the real distribution. &lt;code&gt;ggplot(chickwts, aes(feed, weight)) + geom_point()&lt;/code&gt; This doesn&amp;rsquo;t really help us, what about all the chicks with the same weight and same feed? The jitter geom helps you out.
+&lt;code&gt;ggplot(chickwts, aes(feed, weight)) + geom_jitter()&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The jitter function adds some noise to points to separate the individual points.
+let&amp;rsquo;s combine and see what looks best&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_jitter&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chickwts&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;feed&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; weight&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; geom_jitter&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/img/ggplot2-chickwts-violin-points.png&#34; alt=&#34;chickwts violin and points on top&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I like the last one best, but for different data different visualizations are better.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;cyl&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_boxplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;cyl&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_jitter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;am&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;customization&#34;&gt;Customization&lt;/h2&gt;
+
+&lt;p&gt;Most simple plots in ggplot2 look quite good from the start, it&amp;rsquo;s a credit to Hadley Wickham that he chose ggplot2&amp;rsquo;s defaults so well. However, there are many ways to custimize your plots. Every element can change colour&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, shape, etc. But if you like to change things in multiple plots you should try to change the theme. Themes change multiple things at once. For instance:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;g &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;mtcars&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;cyl&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; mpg&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_violin&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;geom_jitter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;as.factor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;am&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt; 
+&lt;span class=&#34;c1&#34;&gt;# I saved the entire thing to a variable.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# if you select the g and press ctrl/cmd r it will display the plot again.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# even better the saved object behaves just as before. We can add things to it.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# try the following things&lt;/span&gt;
+g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_bw&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_dark&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# the addition doesn&amp;#39;t stick untill you save it to a variable&lt;/span&gt;
+g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_void&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is relatively easy to change parts of themes, or to create a whole new theme. But quite easy is also the ggtheme package, see their website [5].&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;install.packages&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;ggthemes&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;ggthemes&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_wsj&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_tufte&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# very clean theme based on edward tufte &amp;#39;s ideas about graphs&lt;/span&gt;
+g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_base&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_excel&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# you will love this, especially the description&lt;/span&gt;
+g &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; theme_fivethirtyeight&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/img/ggplot2-themetufte-mtcars-violin-points-color.png&#34; alt=&#34;ggthemes example with tufte&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So now you know a few graphics and the basics of ggplot use. In the next lesson we will combine dplyr and ggplot to filter, slice and dice through a dataset. Hopefully we will get some insights!&lt;/p&gt;
+
+&lt;h3 id=&#34;further-reading&#34;&gt;Further reading&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.stat.ubc.ca/~jenny/STAT545A/block90_baseLatticeGgplot2.html&#34;&gt;Overview of r graphics on stat.ubc.ca, with tons of resources&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://lmgtfy.com/?q=r+lattice+base+ggplot2&#34;&gt;a google search with &amp;ldquo;r lattice base ggplot2&amp;rdquo; gives me 26900 results&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_%28ggplot2%29/&#34;&gt; If you ever need to know any sort of plot, use the cookbook. bookmark it &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/&#34;&gt;beautiful graphs cheatcheat&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://shiny.stat.ubc.ca/r-graph-catalog/&#34;&gt;R graph catalog an interactive display of graphs including the code in ggplot2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+
+&lt;p&gt;[5]: ggthemes website &lt;a href=&#34;https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html&#34;&gt;https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Explanation of lattice system and trellisplots on statmethods.net &lt;a href=&#34;http://www.statmethods.net/advgraphs/trellis.html&#34;&gt;http://www.statmethods.net/advgraphs/trellis.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;Wilkinson, Leland, and Graham Wills. The Grammar of Graphics. 2nd ed. Statistics and Computing. New York: Springer, 2005.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;Did you notice that both color and colour are allowed in ggplot? In  the dplyr package both summarize and summarise work.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

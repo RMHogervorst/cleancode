@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidyverse on Clean Code (and R-fun)</title>
+    <link>/tags/tidyverse/</link>
+    <description>Recent content in Tidyverse on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Tue, 29 May 2018 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sentiment of Security Now! over time</title>
+      <link>/blog/2018/05/29/sentiment-of-security-now-over-time/</link>
+      <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2018/05/29/sentiment-of-security-now-over-time/</guid>
+      <description>&lt;p&gt;If you believe some people, everything is getting worse&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show &lt;a href=&#34;https://twit.tv/shows/security-now&#34;&gt;Security Now!&lt;/a&gt;. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’. Has the sentiment of the security now! podcast changed over time? It helps that every episode is transcribed into text so we can use natural language processing tools to work through this problem.&lt;/p&gt;
+&lt;div id=&#34;extracting-the-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Extracting the data&lt;/h2&gt;
+&lt;p&gt;To gather and extract the relevant information from the transcripts I point you kindly to a seperate github page where I explain how I downloaded every episode and extracted the structure. &lt;a href=&#34;https://github.com/RMHogervorst/NLP_SN&#34; class=&#34;uri&#34;&gt;https://github.com/RMHogervorst/NLP_SN&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I asked permission to scrape all the transcripts but I’m not entirely sure if I can share the content. In any case I’d guide you to the links at the bottom of this page with all the archive. I might share the rda file with the episode information and transcripts into 1 dataframe.&lt;/p&gt;
+&lt;p&gt;What I ended up with is a dataframe with 664 rows (the number of episodes today) and 9 columns.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidytext)
+library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.5     
+## ✔ tibble  1.4.2          ✔ dplyr   0.7.5     
+## ✔ tidyr   0.8.1          ✔ stringr 1.3.1     
+## ✔ readr   1.1.1          ✔ forcats 0.3.0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(widyr) 
+if(!file.exists(&amp;quot;df_sn.RDS&amp;quot;)){
+    download.file(
+        url = &amp;quot;https://github.com/RMHogervorst/NLP_SN/raw/master/df_sn.RDS&amp;quot;,
+        destfile =  &amp;quot;df_sn.RDS&amp;quot;,cacheOK = TRUE)    
+}
+
+df_sn &amp;lt;- read_rds(&amp;quot;df_sn.RDS&amp;quot;)  
+#df_sn &amp;lt;- read_rds(&amp;quot;../NLP_SN/df_sn.RDS&amp;quot;) # when working locally
+# 
+# Every week / or once a month at least I will update the file with new transcript(s) so your data could be newer than this post.
+#dim_desc(df_sn)
+tail(df_sn,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 9
+##   path             source date  description ep_nr hosts teaser title text 
+##   &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;int&amp;gt; &amp;lt;lis&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;lis&amp;gt;
+## 1 data//sn-663.txt https… May … This week …   663 &amp;lt;lis… It&amp;#39;s … Ultr… &amp;lt;tib…
+## 2 data//sn-664.txt https… May … This week …   664 &amp;lt;lis… It&amp;#39;s … Spec… &amp;lt;tib…&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The text column contains a tibble with a row for everytime anyone speaks untill the other takes over. The length&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df_sn[664,9][[1]][[1]]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 139 x 3
+##    linenr text                                                     speaker
+##     &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;                                                    &amp;lt;chr&amp;gt;  
+##  1      1 This is Security Now! with Steve Gibson, Episode 664, r… LEO    
+##  2      2 Yay, Leo, great to be with you again, as always.         STEVE  
+##  3      3 Always a pleasure.                                       LEO    
+##  4      4 Yeah, we scrambled here a little bit at the end because… STEVE  
+##  5      5 [Crosstalk] half an hour ago.  No, but I also figured y… LEO    
+##  6      6 &amp;quot;Well, yeah.  Two weeks ago the news leaked through Hei… STEVE  
+##  7      7 They were presumably waiting to disclose until companie… LEO    
+##  8      8 Yes.  And even so, I mean, this is - what we heard was … STEVE  
+##  9      9 Right.                                                   LEO    
+## 10     10 I can&amp;#39;t square that with the news of two because all we… STEVE  
+## # ... with 129 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Steve talks a lot more then Leo, and we see that in the number of words per line of a single episode:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df_sn[664,9][[1]][[1]] %&amp;gt;% 
+    mutate(
+        nr_char = str_length(text),
+        N_words = str_count(text, &amp;quot;\\w+&amp;quot;)
+        ) %&amp;gt;% 
+    ggplot(aes(linenr, N_words, fill = speaker))+
+    geom_col()+
+    labs(
+        title = &amp;quot;Number of words in every line in episode 664&amp;quot;,
+        subtitle = &amp;quot;Steve talks a lot more than Leo (not surprising)&amp;quot;,
+        x = &amp;quot;line number&amp;quot;, y = &amp;quot;Number of words (log2 scale)&amp;quot;,
+        caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
+    )+
+    scale_y_continuous(trans = &amp;quot;log2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Interestingly my scraper seems to not have detected who said the words on line 45. It was Steve.&lt;/p&gt;
+&lt;p&gt;It might be better to use an average over the episode&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df_sn[664,9][[1]][[1]] %&amp;gt;% 
+    mutate(
+        N_words = str_count(text, &amp;quot;\\w+&amp;quot;),
+        speaker = ifelse(is.na(speaker), &amp;quot;STEVE&amp;quot;, speaker)
+        ) %&amp;gt;% 
+    ggplot(aes(speaker, N_words, fill = speaker))+
+    geom_violin()+
+    geom_jitter(height = 0,width = .2, alpha  = 2/3)+
+    scale_y_continuous(trans = &amp;quot;log2&amp;quot;)+
+    labs(
+        title = &amp;quot;Number of words in every line in episode 664&amp;quot;,
+        subtitle = &amp;quot;Steve has a few more long pieces&amp;quot;,
+        x = &amp;quot;&amp;quot;, y = &amp;quot;Number of words (log2 scale)&amp;quot;,
+        caption = &amp;quot;Transcripts Security Now! - 664&amp;quot;
+    )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-05-29-sentiment-of-security-now-over-time_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;links&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.grc.com/securitynow.htm&#34;&gt;Archive of transcripts and audio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;state-of-the-machine&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;State of the machine&lt;/h5&gt;
+&lt;p&gt;&lt;details&gt; &lt;summary&gt; At the moment of creation (when I knitted this document ) this was the state of my machine: &lt;click&gt; &lt;/summary&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sessioninfo::session_info()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ─ Session info ──────────────────────────────────────────────────────────
+##  setting  value                       
+##  version  R version 3.4.4 (2018-03-15)
+##  os       Ubuntu 18.04 LTS            
+##  system   x86_64, linux-gnu           
+##  ui       X11                         
+##  language (EN)                        
+##  collate  en_US.UTF-8                 
+##  tz       Europe/Amsterdam            
+##  date     2018-06-01                  
+## 
+## ─ Packages ──────────────────────────────────────────────────────────────
+##  package     * version    date       source                            
+##  assertthat    0.2.0      2017-04-11 CRAN (R 3.4.3)                    
+##  backports     1.1.2      2017-12-13 CRAN (R 3.4.3)                    
+##  bindr         0.1.1      2018-03-13 CRAN (R 3.4.4)                    
+##  bindrcpp    * 0.2.2      2018-03-29 CRAN (R 3.4.4)                    
+##  blogdown      0.6        2018-04-18 CRAN (R 3.4.4)                    
+##  bookdown      0.7        2018-02-18 CRAN (R 3.4.3)                    
+##  broom         0.4.4      2018-03-29 CRAN (R 3.4.4)                    
+##  cellranger    1.1.0      2016-07-27 CRAN (R 3.4.3)                    
+##  cli           1.0.0      2017-11-05 CRAN (R 3.4.3)                    
+##  clisymbols    1.2.0      2017-05-21 cran (@1.2.0)                     
+##  colorspace    1.3-2      2016-12-14 CRAN (R 3.4.3)                    
+##  crayon        1.3.4      2017-09-16 CRAN (R 3.4.3)                    
+##  digest        0.6.15     2018-01-28 CRAN (R 3.4.3)                    
+##  dplyr       * 0.7.5      2018-05-19 cran (@0.7.5)                     
+##  evaluate      0.10.1     2017-06-24 CRAN (R 3.4.3)                    
+##  forcats     * 0.3.0      2018-02-19 CRAN (R 3.4.3)                    
+##  foreign       0.8-69     2017-06-21 CRAN (R 3.4.2)                    
+##  ggplot2     * 2.2.1.9000 2018-02-22 Github (tidyverse/ggplot2@39e4a3b)
+##  glue          1.2.0.9000 2018-05-21 Github (tidyverse/glue@7230ed2)   
+##  gtable        0.2.0      2016-02-26 CRAN (R 3.4.3)                    
+##  haven         1.1.1      2018-01-18 CRAN (R 3.4.3)                    
+##  hms           0.4.2      2018-03-10 CRAN (R 3.4.4)                    
+##  htmltools     0.3.6      2017-04-28 CRAN (R 3.4.3)                    
+##  httr          1.3.1      2017-08-20 CRAN (R 3.4.3)                    
+##  janeaustenr   0.1.5      2017-06-10 CRAN (R 3.4.3)                    
+##  jsonlite      1.5        2017-06-01 CRAN (R 3.4.3)                    
+##  knitr         1.20       2018-02-20 CRAN (R 3.4.3)                    
+##  labeling      0.3        2014-08-23 CRAN (R 3.4.3)                    
+##  lattice       0.20-35    2017-03-25 CRAN (R 3.4.2)                    
+##  lazyeval      0.2.1      2017-10-29 CRAN (R 3.4.3)                    
+##  lubridate     1.7.4      2018-04-11 CRAN (R 3.4.4)                    
+##  magrittr      1.5        2014-11-22 CRAN (R 3.4.3)                    
+##  Matrix        1.2-14     2018-04-09 CRAN (R 3.4.4)                    
+##  mnormt        1.5-5      2016-10-15 CRAN (R 3.4.3)                    
+##  modelr        0.1.2      2018-05-11 CRAN (R 3.4.4)                    
+##  munsell       0.4.3      2016-02-13 CRAN (R 3.4.3)                    
+##  nlme          3.1-137    2018-04-07 CRAN (R 3.4.4)                    
+##  pillar        1.2.2      2018-04-26 CRAN (R 3.4.4)                    
+##  pkgconfig     2.0.1      2017-03-21 CRAN (R 3.4.3)                    
+##  plyr          1.8.4      2016-06-08 CRAN (R 3.4.3)                    
+##  psych         1.8.4      2018-05-06 CRAN (R 3.4.4)                    
+##  purrr       * 0.2.5      2018-05-29 cran (@0.2.5)                     
+##  R6            2.2.2      2017-06-17 CRAN (R 3.4.3)                    
+##  Rcpp          0.12.17    2018-05-18 cran (@0.12.17)                   
+##  readr       * 1.1.1      2017-05-16 CRAN (R 3.4.3)                    
+##  readxl        1.1.0      2018-04-20 CRAN (R 3.4.4)                    
+##  reshape2      1.4.3      2017-12-11 CRAN (R 3.4.3)                    
+##  rlang         0.2.0.9001 2018-05-31 Github (tidyverse/rlang@4e7e8f7)  
+##  rmarkdown     1.9        2018-03-01 CRAN (R 3.4.3)                    
+##  rprojroot     1.3-2      2018-01-03 CRAN (R 3.4.3)                    
+##  rstudioapi    0.7        2017-09-07 CRAN (R 3.4.3)                    
+##  rvest         0.3.2      2016-06-17 CRAN (R 3.4.3)                    
+##  scales        0.5.0.9000 2018-05-03 Github (hadley/scales@d767915)    
+##  sessioninfo   1.0.0      2017-06-21 cran (@1.0.0)                     
+##  SnowballC     0.5.1      2014-08-09 CRAN (R 3.4.3)                    
+##  stringi       1.2.2      2018-05-02 CRAN (R 3.4.4)                    
+##  stringr     * 1.3.1      2018-05-10 CRAN (R 3.4.4)                    
+##  tibble      * 1.4.2      2018-01-22 CRAN (R 3.4.3)                    
+##  tidyr       * 0.8.1      2018-05-18 CRAN (R 3.4.4)                    
+##  tidyselect    0.2.4      2018-02-26 CRAN (R 3.4.3)                    
+##  tidytext    * 0.1.8      2018-03-21 CRAN (R 3.4.4)                    
+##  tidyverse   * 1.2.1      2017-11-14 CRAN (R 3.4.3)                    
+##  tokenizers    0.2.1      2018-03-29 CRAN (R 3.4.4)                    
+##  utf8          1.1.4      2018-05-24 CRAN (R 3.4.4)                    
+##  widyr       * 0.1.1      2018-03-11 CRAN (R 3.4.4)                    
+##  withr         2.1.2      2018-03-15 CRAN (R 3.4.4)                    
+##  xfun          0.1        2018-01-22 CRAN (R 3.4.3)                    
+##  xml2          1.2.0      2018-01-24 CRAN (R 3.4.3)                    
+##  yaml          2.1.19     2018-05-01 cran (@2.1.19)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;/details&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Not if we learn from Hans Rosling but that is a story for an other time&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Moving parts of a country over a map</title>
+      <link>/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</link>
+      <pubDate>Mon, 29 Jan 2018 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/</guid>
+      <description>
+
+&lt;p&gt;I love making maps, I also love making gifs.
+In this short post I make an animated gif of parts of a map moving. In this case the parts of the map only move in the xy direction, but &lt;a href=&#34;https://r-spatial.github.io/sf/articles/sf3.html#affine-transformations&#34;&gt;you can also turn them, and make them bigger or smaller&lt;/a&gt;.
+Today I show you how I made a part of the Netherlands &amp;lsquo;float away&amp;rsquo;. It is part of a larger nonsense project (I have many silly projects), and mostly just to document my path to learning about spatial analytics.&lt;/p&gt;
+
+&lt;p&gt;End result :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cdn.rawgit.com/RMHogervorst/floating_friesland/44f7adfd/friesland.gif&#34; alt=&#34; &#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;general-principles&#34;&gt;General principles&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;make small functions that do one thing well (not that small in this case)&lt;/li&gt;
+&lt;li&gt;combine those&lt;/li&gt;
+&lt;li&gt;make imagemagick canvas&lt;/li&gt;
+&lt;li&gt;write to the canvas&lt;/li&gt;
+&lt;li&gt;animate the canvas&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;loading-libraries-and-data&#34;&gt;loading libraries and data&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kp&#34;&gt;suppressMessages&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;tidyverse&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# ggplot2, dplyr, purrr, etc.&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;magick&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;sf&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;paletti&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# thanks @edwinthoen&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# colorscheme&lt;/span&gt;
+dutchmasters_fill &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; get_scale_fill&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;get_pal&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;dutchmasters&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# the data&lt;/span&gt;
+NLD &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; read_sf&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data/NLD_adm1.shp&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# I cannot redistribute the data from GADM, but you can download and use it for your projects&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;basic-functions&#34;&gt;basic functions&lt;/h3&gt;
+
+&lt;p&gt;I created a function that takes a name, uses that to filter the data and apply a transformation on that part only. (a mutate_if() could also work, but I didn&amp;rsquo;t know how). And also one that uses that function to plot. The final function takes a matrix of xy values and sequentially applies every row to the plotting function.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;modify data&lt;/li&gt;
+&lt;li&gt;plot a single ggplot version&lt;/li&gt;
+&lt;li&gt;loop or apply over range&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# basic function that moves an a province&lt;/span&gt;
+move_province &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;provincename&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; movement&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    mov &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; quo&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;movement&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    rest &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; NLD &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;NAME_1 &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!!&lt;/span&gt;provincename&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;TYPE_1 &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Water body&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;#rest %&amp;gt;% st_centroid() %&amp;gt;% st_as_text()&lt;/span&gt;
+    province &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; NLD &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;NAME_1 &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!!&lt;/span&gt;provincename&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;geometry &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; geometry &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!!&lt;/span&gt;mov&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        st_set_crs&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;+proj=longlat +datum=WGS84 +no_defs&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    data1 &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;
+        &lt;span class=&#34;kp&#34;&gt;rbind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;province&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; rest&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    centroids &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;
+        data1 &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; st_centroid&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; st_coordinates&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    &lt;span class=&#34;kp&#34;&gt;cbind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data1&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; centroids&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# make function to create plot&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# using the previous function to move the province&lt;/span&gt;
+plot_netherlands &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;province&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; movement&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    plotunit &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; move_province&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;provincename &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; province&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; movement &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; movement&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+            ggplot&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+            geom_sf&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;fill &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME_1&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;grey50&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; alpha &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+            geom_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;X&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;Y&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; label &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME_1&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+            lims&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3.2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;7.1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; y &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;50.8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;55&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+            labs&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; caption &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;shapefiles from www.gadm.org&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; title &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Floating Friesland&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+            dutchmasters_fill&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;little_street&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+            theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; legend.position &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;empty&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# we already labeled the provinces&lt;/span&gt;
+                   panel.grid.major &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_line&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;colour &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;grey80&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+    &lt;span class=&#34;kp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;plotunit&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# you have to explicitly tell it to print so the image is captured&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# go over every frame and print&lt;/span&gt;
+plot_province_over_range &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt;
+     &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;offset_matrix&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; province &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Friesland&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; debug &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;FALSE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+
+    &lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;any&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;is.na&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;offset_matrix&lt;span class=&#34;p&#34;&gt;))){&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;stop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;I cannot handle empty movements, there are NA&amp;#39;s in movement_matrix&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)}&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;NCOL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;offset_matrix&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;stop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;movement_matrix needs to have exactly 2 columns&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    actionsframe &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;data_frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; offset_matrix&lt;span class=&#34;p&#34;&gt;[,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; y &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; offset_matrix&lt;span class=&#34;p&#34;&gt;[,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        mutate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;rownumber &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; row_number&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+    actionsframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;name &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;paste0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;formatC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;actionsframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;rownumber&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; flag &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;width &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+
+    pb &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; progress_estimated&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;NROW&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;actionsframe&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+
+    walk&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;actionsframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;name&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+
+        pb&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;tick&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+        vars &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; filter&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;actionsframe&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; name &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;x&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;debug&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+            &lt;span class=&#34;kp&#34;&gt;message&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;using values from: &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;vars&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+        plot_netherlands&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;province &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; province&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;movement &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;vars&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;x&lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]],&lt;/span&gt; vars&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;y&lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]))&lt;/span&gt;
+
+        &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# ends the walk action&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;the-plotting-and-saving&#34;&gt;The plotting and saving&lt;/h3&gt;
+
+&lt;p&gt;Nothing happened before the next step (except loading data). All the action and calculation happens here.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;## then the creation starts with the movement&lt;/span&gt;
+Friesland_moves &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;rbind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;kt&#34;&gt;matrix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-.1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-.2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-.2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-.3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.03&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.05&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;.15&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;ncol &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;kt&#34;&gt;matrix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;seq&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;from &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;-.3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; by &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;-.1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; length.out &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;seq&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;from &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;.2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; by &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; length.out &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt; ncol &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# set up print location&lt;/span&gt;
+frames &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; image_graph&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;width &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1500&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; height &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2500&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; res &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;300&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; pointsize &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+
+plot_province_over_range&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;offset_matrix &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; Friesland_moves&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; province &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Friesland&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# animate&lt;/span&gt;
+image_animate&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;frames&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+    image_write&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;path &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;friesland.gif&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;notes&#34;&gt;Notes&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/RMHogervorst/floating_friesland/blob/master/R/directly_to_imagemagick.R&#34;&gt;code for gif 2 imagemagick&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/RMHogervorst/floating_friesland/&#34;&gt;larger githubproject - floating friesland&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/48344609/pipe-ggplot2-result-into-1-magick-object&#34;&gt;stackoverflow answer that helped me make the gif &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://edwinth.github.io/blog/paletti&#34;&gt;palleti package: making your own color pallete&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I tried to edit this post on github on my mobile phone, boy, that does not work at all!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Turning kindle notes into a tidy data</title>
+      <link>/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</link>
+      <pubDate>Mon, 08 May 2017 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/</guid>
+      <description>
+
+&lt;p&gt;It is my dream to do everything with R. And we aRe almost there. We can write blogs in blogdown or bookdown, write reports in RMarkdown (thank you &lt;a href=&#34;https://twitter.com/xieyihui&#34;&gt;Yihui Xie!&lt;/a&gt;) create interactive webpages with Shiny (thank you &lt;a href=&#34;https://twitter.com/winston_chang&#34;&gt;Winston Chang&lt;/a&gt;). Control our lifx lights with &lt;a href=&#34;https://github.com/cboettig/lifxr&#34;&gt;lifxr&lt;/a&gt; (great work &lt;a href=&#34;http://carlboettiger.info/&#34;&gt;Carl!&lt;/a&gt;) and use emoticons everywhere with the emo package.&lt;/p&gt;
+
+&lt;p&gt;There is even a novel of my vision! I recently found chapter 40 of &lt;a href=&#34;http://www.psi-chology.com/the-day-the-priming-stopped/&#34;&gt;A Dr. Primestein Adventure™ The Day the Priming Stopped&lt;/a&gt;. There is a scene in there which says:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;“This Fortress is a monumental technological achievement,” explained Professor Power. “Every aspect of the Fortress’s security is run by R.” As they arrived at the metal doors, the Professor pressed a small button on the wall to the right. “This is an elevatoR, run by its own R package.” They waited for the doors to open, but nothing happened. After a few minutes of alternately waiting and then mashing the elevatoR button, Professor Power called someone on his mobile phone. “The elevatoR is not working&amp;hellip;what? Why would they do that?&amp;hellip;call Hadley Wickham!&amp;hellip;doesn’t anyone around here check packages against the development version of R before upgrading?&amp;hellip;yes, we’ll wait.” “Someone upgraded R without permission. Should be fixed soon,” Professor Power explained.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;But enough about jokeRs and jesteRs. As it is my life long mission to do everything in R and preferably in the &lt;a href=&#34;http://tidyverse.org/&#34;&gt;tidyverse&lt;/a&gt;, I found something that wasn&amp;rsquo;t tidy 😞 !!! Kindle notes!&lt;/p&gt;
+
+&lt;h1 id=&#34;kindle-notes-and-highlights&#34;&gt;kindle notes and highlights.&lt;/h1&gt;
+
+&lt;p&gt;I have a 2010 kindle to read E-books on and once in a while I write a note or highlight some text in the book. If you connect your kindle to the computer you can extract the highlights by copying the file `My Clippings.txt&amp;rsquo; to your computer.&lt;/p&gt;
+
+&lt;p&gt;This is great, it&amp;rsquo;s a text file which means you can open it on every computer and search throug the contents. However&amp;hellip;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;It&amp;rsquo;s not tidy.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let&amp;rsquo;s change that. The general procedure is thus:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a new project in Rstudio&lt;/li&gt;
+&lt;li&gt;Create a new folder called &lt;code&gt;data&lt;/code&gt; (or don&amp;rsquo;t but really this is neat isn&amp;rsquo;t it?)&lt;/li&gt;
+&lt;li&gt;Copy the &lt;code&gt;My Clippings.txt&lt;/code&gt; file to that &lt;code&gt;data&lt;/code&gt;-folder&lt;/li&gt;
+&lt;li&gt;Load the tidyverse `library(tidyverse)&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;Hammer away untill the txt file is a data frame.&lt;/li&gt;
+&lt;li&gt;profit?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;what-is-in-this-text-file&#34;&gt;What is in this text file?&lt;/h3&gt;
+
+&lt;p&gt;First we do some exploratory work on the file. I&amp;rsquo;ve found that the text file is structured in a particular way:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;title  (author)
+- Highlight on Page 128 | Loc. 1962-68  | Added on Sunday, December 27, 2015, 03:09 PM
+&amp;lt;empty line&amp;gt;
+highlighted text
+==========
+title of the next highlighted book (author)
+etc.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;So how do we force this into a data frame?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Recognize the structure ( we will create functions for that)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Chunks end with the ten ===== signs, we can split on that&lt;/li&gt;
+&lt;li&gt;first line is the title and (author)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;we can seperate the author and the title&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;next line of information is devided by &amp;lsquo;|&amp;rsquo; signs.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;type, page, location, added date and time (in american time of course&amp;hellip;)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;highlighted text (or if it is a bookmark, nothing)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;tidyverse&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## Loading tidyverse: ggplot2
+## Loading tidyverse: tibble
+## Loading tidyverse: tidyr
+## Loading tidyverse: readr
+## Loading tidyverse: purrr
+## Loading tidyverse: dplyr
+
+## Conflicts with tidy packages ----------------------------------------------
+
+## filter(): dplyr, stats
+## lag():    dplyr, stats
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;raw_text &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; read_file&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data/My Clippings.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# read in the text file&lt;/span&gt;
+per_chunk &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;unlist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;strsplit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;raw_text&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;==========&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# seperate into chunks&lt;/span&gt;
+per_chunk&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;\r\nThe Clean Coder_ A Code of Conduct For Professional Programmers - Robert C. Martin (Robert C. Martin)\r\n- Highlight on Page 90 | Added on Monday, January 25, 2016, 04:06 PM\r\n\r\nK ATA In martial arts, a kata is a precise set of choreographed movements that simulates one side of a combat. The goal, which is asymptotically approached, is perfection. The artist strives to teach his body to make each movement perfectly and to assemble those movements into fluid enactment. Well-executed kata are beautiful to watch. Beautiful though they are, the purpose of learning a kata is not to perform it on stage. The purpose is to train your mind and body how to react in a particular combat situation. The goal is to make the perfected movements automatic and instinctive so that they are there when you need them. A programming kata is a precise set of choreographed keystrokes and mouse movements that simulates the solving of some programming problem. You arent actually solving the problem because you already know the solution. Rather, you are practicing the movements and decisions involved in solving the problem.\r\n&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Above I have created seperate chunks that represent seperate highlights. And a example so you can see what I see.&lt;/p&gt;
+
+&lt;p&gt;Now for extracting the seperate elements. I create functions that do one thing.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# This function takes a chunk of character information&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# and seperates it into lines. &lt;/span&gt;
+seperate_into_lines &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chunk&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    result &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_split&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;chunk&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;\r\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;kp&#34;&gt;unlist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# result &amp;lt;- seperate_into_lines(per_chunk[100])  # testing if this works &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;## you should put this into formal test frameworks such as testhat if you&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;## build a package. &lt;/span&gt;
+
+
+
+&lt;span class=&#34;c1&#34;&gt;# Extract title sentance and remove author&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# This function presumes that you already extracted the raw data into&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# character chunks.&lt;/span&gt;
+extract_title &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;linechunk&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;# search for second line&lt;/span&gt;
+    titleline &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; linechunk&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;gsub&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;\\(.*\\)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; titleline&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# it took me some &lt;/span&gt;
+            &lt;span class=&#34;c1&#34;&gt;#time to work this regular expression out.&lt;/span&gt;
+    stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_trim&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; side &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;both&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# remove whitespace at ends&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#extract_title(result) # testcase to see if it works for me.&lt;/span&gt;
+
+
+&lt;span class=&#34;c1&#34;&gt;# Extract the author from chunk, this function looks &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# very much like the one above, it uses the same logic.&lt;/span&gt;
+extract_author &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;linechunk&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;# search for second line&lt;/span&gt;
+    titleline &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; linechunk&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# identical&lt;/span&gt;
+    author &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_extract&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;titleline&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;\\(.*\\)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# extract piece&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;gsub&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;\\(|\\)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; author&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# &lt;/span&gt;
+    stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_trim&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; side &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;both&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# extract_author(result)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let&amp;rsquo;s see if this works on a subset of the data. I usually take multiple notes in one book before I open another, so in this case the first 20 notes are really boring and all from the same book. To spice this up I take a random subset of rows. I will use a simple for-loop here, but I will use functional programming in the end-result. It works kind of the same, but is more explicit.&lt;/p&gt;
+
+&lt;p&gt;Some people will tell you that for-loops are slow in R, or that &amp;lsquo;loops are bad&amp;rsquo; but they don&amp;rsquo;t know what they are talking about.[1]&lt;/p&gt;
+
+&lt;p&gt;I first create a data_frame [2] and pre-populate it.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# testset &amp;lt;- per_chunk[1:20]  # You would use this if you want the first 20 pieces.&lt;/span&gt;
+&lt;span class=&#34;kp&#34;&gt;set.seed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;4579&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# if you do random stuff, it is wise to &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# set the seed so that others can reproduce your work.&lt;/span&gt;
+testset &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; per_chunk&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;base&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;sample&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;per_chunk&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt; 
+&lt;span class=&#34;c1&#34;&gt;# unfortunately dplyr also has a function called sample. to specify that&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# we want the &amp;#39;normal&amp;#39; one I specify the name of the package followed by&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# two &amp;#39;:&amp;#39;. &lt;/span&gt;
+testingframe &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;data_frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+    author &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;character&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;length &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt;
+    title &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;character&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; i &lt;span class=&#34;kr&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;seq_along&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)){&lt;/span&gt;
+    hold &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; testset&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; seperate_into_lines&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    testingframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;author&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; hold &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_author&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    testingframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;title &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; hold &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_title&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+testingframe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 20 × 2
+##                                     author
+##                                      &amp;lt;chr&amp;gt;
+## 1             Andrew Hunt and David Thomas
+## 2             Andrew Hunt and David Thomas
+## 3                            Alex Reinhart
+## 4                              David Price
+## 5            City Watch #1 Terry Pratchett
+## 6            City Watch #1 Terry Pratchett
+## 7                              Mark Manson
+## 8                     Kim Stanley Robinson
+## 9                     Kim Stanley Robinson
+## 10                    Kim Stanley Robinson
+## 11         Douglas DeCarlo, James P. Lewis
+## 12                             David Price
+## 13           City Watch #2 Terry Pratchett
+## 14 Kenneth Knoblauch &amp;amp; Laurence T. Maloney
+## 15                           Alex Reinhart
+## 16            Andrew Hunt and David Thomas
+## 17                        Robert C. Martin
+## 18            Andrew Hunt and David Thomas
+## 19            Andrew Hunt and David Thomas
+## 20                             David Price
+## # ... with 1 more variables: title &amp;lt;chr&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The author and title functions seem to work, let&amp;rsquo;s extract some more information. The third row contained multiple pieces of information&lt;/p&gt;
+
+&lt;p&gt;example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- Highlight on Page 132 | Loc. 2017-20  | Added on Saturday, August 20, 2016, 09:37 AM
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Like the first functions we first select the correct row [3] and than apply some magic.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# this function extracts all the pieces&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# and subsequent functions will deal with the seperate stuff.&lt;/span&gt;
+extract_type_location_date &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;linechunk&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    meta_row &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; linechunk&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    pieces &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_split&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;meta_row&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;\\|&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# the literal character, &lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;# the &amp;#39;|&amp;#39; has a special meaning in regexp.&lt;/span&gt;
+    &lt;span class=&#34;kp&#34;&gt;unlist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;pieces&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# extract_type_location_date(result) # test function&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# extract type from combined result.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Here the use of the pipe `%&amp;gt;%` operator &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# makes the steps clear.&lt;/span&gt;
+extract_type &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;pieces&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    pieces&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# select the first row&lt;/span&gt;
+        stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_extract&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;- [[:alnum:]]{1,} &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# extract at least one character.&lt;/span&gt;
+        &lt;span class=&#34;kp&#34;&gt;gsub&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# replace - with nothing, removing it&lt;/span&gt;
+        stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_trim&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; side &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;both&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# remove whitespace at both sides&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# extract_type_location_date(result) %&amp;gt;% &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#     extract_type()&lt;/span&gt;
+
+
+&lt;span class=&#34;c1&#34;&gt;# extract page number by selecting first piece,&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# trimming off of whitespace&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# selecting a number, at least 1 times, followed by end of line.&lt;/span&gt;
+extract_pagenumber &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;pieces&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    pieces&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt;
+        stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_trim&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; side &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;right&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# remove right end&lt;/span&gt;
+        stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_extract&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;[0-9]{1,}$&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        &lt;span class=&#34;kp&#34;&gt;as.numeric&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# extract_type_location_date(result) %&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#     extract_pagenumber()&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Extract locations. Just like above.&lt;/span&gt;
+extract_locations &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;pieces&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    pieces&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_trim&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; side &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;both&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_extract&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;[0-9]{1,}-[0-9]{1,}$&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# extract_type_location_date(result) %&amp;gt;% &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#     extract_locations()&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Extract date and convert to standard time, not US centric.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# I use the strptime from the base package here. The time is &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# US-centric, but structured, so we can use the formatting from strptime.&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# For example: %B is Full month name in the current locale&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# and %I:%M %p means hours, minutes, am/pm. &lt;/span&gt;
+extract_date &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;pieces&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    pieces&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_trim&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; side &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;both&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        stringr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;str_extract&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;[A-z]{3,} [0-9]{1,2}, [0-9]{4}, [0-9]{2}:[0-9]{2} [A-Z]{2}&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+        &lt;span class=&#34;kp&#34;&gt;strptime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;format &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;%B %e, %Y, %I:%M %p&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Extract the highlight part.&lt;/span&gt;
+extract_highlights &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;linechunk&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    linechunk&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# extract_highlights(result)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In general:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Split into chunks (already did that: per_chunk)&lt;/li&gt;
+&lt;li&gt;Create a data frame&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Apply extractors per chunk into data_frame&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I would really love it if someone showed me how to do this with purrr&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;finalframe &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;data_frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+    author &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;character&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;length &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt;
+    title &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;character&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt;
+    location &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;character&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt;
+    pagenr &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;numeric&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt;
+    type &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;character&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)),&lt;/span&gt;
+    highlight &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;character&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kp&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# loop through all values &lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; i &lt;span class=&#34;kr&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;seq_along&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;testset&lt;span class=&#34;p&#34;&gt;)){&lt;/span&gt;
+    hold &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; testset&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; seperate_into_lines&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    finalframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;author&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; hold &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_author&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    finalframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;title&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; hold &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_title&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    finalframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;location&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; hold &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_type_location_date&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_locations&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    finalframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;pagenr&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; hold &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_type_location_date&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_pagenumber&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    finalframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;type&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; hold &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_type_location_date&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_type&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    finalframe&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;highlight&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; hold &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; extract_highlights&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+finalframe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 20 × 6
+##                                     author
+##                                      &amp;lt;chr&amp;gt;
+## 1             Andrew Hunt and David Thomas
+## 2             Andrew Hunt and David Thomas
+## 3                            Alex Reinhart
+## 4                              David Price
+## 5            City Watch #1 Terry Pratchett
+## 6            City Watch #1 Terry Pratchett
+## 7                              Mark Manson
+## 8                     Kim Stanley Robinson
+## 9                     Kim Stanley Robinson
+## 10                    Kim Stanley Robinson
+## 11         Douglas DeCarlo, James P. Lewis
+## 12                             David Price
+## 13           City Watch #2 Terry Pratchett
+## 14 Kenneth Knoblauch &amp;amp; Laurence T. Maloney
+## 15                           Alex Reinhart
+## 16            Andrew Hunt and David Thomas
+## 17                        Robert C. Martin
+## 18            Andrew Hunt and David Thomas
+## 19            Andrew Hunt and David Thomas
+## 20                             David Price
+## # ... with 5 more variables: title &amp;lt;chr&amp;gt;, location &amp;lt;chr&amp;gt;, pagenr &amp;lt;dbl&amp;gt;,
+## #   type &amp;lt;chr&amp;gt;, highlight &amp;lt;chr&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cool right?  Find this specific project on my &lt;a href=&#34;https://github.com/RMHogervorst/kindle_notes&#34;&gt;github page&lt;/a&gt;. (I will also add a script only version shortly)&lt;/p&gt;
+
+&lt;h3 id=&#34;state-of-machine&#34;&gt;state of machine&lt;/h3&gt;
+
+&lt;p&gt;&lt;details&gt; &lt;summary&gt; click to expand to see machine info&lt;/summary&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;sessioninfo&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;session_info&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## - Session info ----------------------------------------------------------
+##  setting  value                       
+##  version  R version 3.3.3 (2017-03-06)
+##  os       Windows 10 x64              
+##  system   x86_64, mingw32             
+##  ui       RTerm                       
+##  language (EN)                        
+##  collate  Dutch_Netherlands.1252      
+##  tz       Europe/Berlin               
+##  date     2017-05-08                  
+## 
+## - Packages --------------------------------------------------------------
+##  package     * version    date       source                             
+##  assertthat    0.1        2013-12-06 CRAN (R 3.3.0)                     
+##  backports     1.0.5      2017-01-18 CRAN (R 3.3.2)                     
+##  broom         0.4.2      2017-02-13 CRAN (R 3.3.2)                     
+##  clisymbols    1.1.0      2017-01-27 CRAN (R 3.3.3)                     
+##  colorspace    1.3-2      2016-12-14 CRAN (R 3.3.2)                     
+##  DBI           0.6-1      2017-04-01 CRAN (R 3.3.3)                     
+##  digest        0.6.12     2017-01-27 CRAN (R 3.3.3)                     
+##  dplyr       * 0.5.0      2016-06-24 CRAN (R 3.3.1)                     
+##  emo           0.0.0.9000 2017-04-27 Github (hadley/emo@97754fd)        
+##  evaluate      0.10       2016-10-11 CRAN (R 3.3.3)                     
+##  forcats       0.2.0      2017-01-23 CRAN (R 3.3.2)                     
+##  foreign       0.8-67     2016-09-13 CRAN (R 3.3.3)                     
+##  ggplot2     * 2.2.1      2016-12-30 CRAN (R 3.3.2)                     
+##  gtable        0.2.0      2016-02-26 CRAN (R 3.3.0)                     
+##  haven         1.0.0      2016-09-23 CRAN (R 3.3.1)                     
+##  hms           0.3        2016-11-22 CRAN (R 3.3.2)                     
+##  htmltools     0.3.5      2016-03-21 CRAN (R 3.3.0)                     
+##  httr          1.2.1      2016-07-03 CRAN (R 3.3.1)                     
+##  jsonlite      1.3        2017-02-28 CRAN (R 3.3.3)                     
+##  knitr         1.15.1     2016-11-22 CRAN (R 3.3.2)                     
+##  lattice       0.20-35    2017-03-25 CRAN (R 3.3.3)                     
+##  lazyeval      0.2.0      2016-06-12 CRAN (R 3.3.0)                     
+##  lubridate     1.6.0      2016-09-13 CRAN (R 3.3.1)                     
+##  magrittr      1.5        2014-11-22 CRAN (R 3.3.0)                     
+##  mnormt        1.5-5      2016-10-15 CRAN (R 3.3.2)                     
+##  modelr        0.1.0      2016-08-31 CRAN (R 3.3.2)                     
+##  munsell       0.4.3      2016-02-13 CRAN (R 3.3.0)                     
+##  nlme          3.1-131    2017-02-06 CRAN (R 3.3.3)                     
+##  plyr          1.8.4      2016-06-08 CRAN (R 3.3.0)                     
+##  psych         1.7.3.21   2017-03-22 CRAN (R 3.3.3)                     
+##  purrr       * 0.2.2      2016-06-18 CRAN (R 3.3.1)                     
+##  R6            2.2.0      2016-10-05 CRAN (R 3.3.1)                     
+##  Rcpp          0.12.10    2017-03-19 CRAN (R 3.3.3)                     
+##  readr       * 1.1.0      2017-03-22 CRAN (R 3.3.3)                     
+##  readxl        0.1.1      2016-03-28 CRAN (R 3.3.0)                     
+##  reshape2      1.4.2      2016-10-22 CRAN (R 3.3.2)                     
+##  rmarkdown     1.4        2017-03-24 CRAN (R 3.3.3)                     
+##  rprojroot     1.2        2017-01-16 CRAN (R 3.3.2)                     
+##  rvest         0.3.2      2016-06-17 CRAN (R 3.3.1)                     
+##  scales        0.4.1      2016-11-09 CRAN (R 3.3.2)                     
+##  sessioninfo   0.0.0.9000 2017-04-25 Github (r-pkgs/sessioninfo@0a5b58f)
+##  stringi       1.1.5      2017-04-07 CRAN (R 3.3.3)                     
+##  stringr       1.2.0      2017-02-18 CRAN (R 3.3.3)                     
+##  tibble      * 1.3.0      2017-04-01 CRAN (R 3.3.3)                     
+##  tidyr       * 0.6.1      2017-01-10 CRAN (R 3.3.2)                     
+##  tidyverse   * 1.1.1      2017-01-27 CRAN (R 3.3.2)                     
+##  withr         1.0.2      2016-06-20 CRAN (R 3.3.1)                     
+##  xml2          1.1.1      2017-01-24 CRAN (R 3.3.2)                     
+##  yaml          2.1.14     2016-11-12 CRAN (R 3.3.2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/details&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+
+&lt;p&gt;[1] ^1&lt;/p&gt;
+
+&lt;p&gt;[2] I use the tidyverse form of a data.frame called tibble or data_frame, it is like a data.frame but it never converts character to factor and never adds rownames . See more at &lt;code&gt;?tibble::tibble&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;[3] This is absolutely not a robust way of programming, if the format ever changes, all my functions are screwed.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

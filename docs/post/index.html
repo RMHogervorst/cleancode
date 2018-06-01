@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" /> 
+
+  <title>Posts</title>
+  <meta property="og:title" content="Posts" />
+  <meta name="twitter:title" content="Posts" />
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/post/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code (and R-fun)" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/post/" />
+  <link rel="alternate" href="/post/index.xml" type="application/rss+xml" title="Clean Code (and R-fun)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/css/syntax.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Clean Code (and R-fun)</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code (and R-fun)" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Clean Code (and R-fun)" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  <header class="header-section ">
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>Posts</h1>
+              <hr class="small">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="/blog/2018/05/29/sentiment-of-security-now-over-time/">
+                <h2 class="post-title">Sentiment of Security Now! over time</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on May 29, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 7 minutes (1332 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  If you believe some people, everything is getting worse1. More so in infosec. For the past few years I listened to many many hours of podcasts, many hours where spent on the weekly show Security Now!. The hosts Steven Gibson and Leo Laporte have been talking about security related news every week over 13 years. Although the content has changed over time, there used to be more explanations but the majority of time is now filled with news, we could use the sentiment in the episodes to see if ‘everything is getting worse’.
+                  <a href="/blog/2018/05/29/sentiment-of-security-now-over-time/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/sentiment/">sentiment</a>&nbsp;
+                  
+                    <a href="//tags/security-now/">security-now</a>&nbsp;
+                  
+                    <a href="//tags/tutorial/">tutorial</a>&nbsp;
+                  
+                    <a href="//tags/tidytext/">tidytext</a>&nbsp;
+                  
+                    <a href="//tags/tidyverse/">tidyverse</a>&nbsp;
+                  
+                    <a href="//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="//tags/ggplot2/">ggplot2</a>&nbsp;
+                  
+                    <a href="//tags/intermediate/">intermediate</a>&nbsp;
+                  
+                    <a href="//tags/widyr/">widyr</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/">
+                <h2 class="post-title">Cleaning up and combining data, a dataset for practice</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 12, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (564 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  tldr: I created an open dataset for the explicit practice of data munging. Feel free to use it in assignments, but do mention where you got it from (CC-by-4.0). Also unicorns are awesome.
+Find the dataset at: https://github.com/RMHogervorst/unicorns_on_unicycles
+Data munging / cleaning / engineering At work I was working with a two excel files that were slightly different but could be combined into 1 dataset. This is very typical for day to day cleaning operations that analysts and data scientists do (statisticians too).
+                  <a href="/blog/2018/03/12/content/post/2018-03-12-a-dirty-dataset-for-you-to-clean/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/dirty-data/">dirty data</a>&nbsp;
+                  
+                    <a href="//tags/munging/">munging</a>&nbsp;
+                  
+                    <a href="//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="//tags/readxl/">readxl</a>&nbsp;
+                  
+                    <a href="//tags/unicorns/">unicorns</a>&nbsp;
+                  
+                    <a href="//tags/unicycles/">unicycles</a>&nbsp;
+                  
+                    <a href="//tags/exercise/">exercise</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/">
+                <h2 class="post-title">Adding logging to a shiny app with loggit</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on February 28, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 2 minutes (371 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  This is a very short post with example code Over time when you move your shiny app from your computer to a server, you want to add some logging. Generally logging is defined in levels : INFO (everything you want to print), WARNING (it does not stop the application, but it could be a problem), and ERROR (fatal things).
+Shiny server does already log all it&rsquo;s actions to a file on the server, but that file can be hard to access.
+                  <a href="/blog/2018/02/28/content/post/2018-02-28-adding-json-logging-to-shiny-app/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/shiny/">shiny</a>&nbsp;
+                  
+                    <a href="//tags/shiny-server/">shiny-server</a>&nbsp;
+                  
+                    <a href="//tags/logging/">logging</a>&nbsp;
+                  
+                    <a href="//tags/loggit/">loggit</a>&nbsp;
+                  
+                    <a href="//tags/advanced/">advanced</a>&nbsp;
+                  
+                    <a href="//tags/r6/">R6</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/">
+                <h2 class="post-title">Setting up a version controlled shiny-server</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on February 6, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (612 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Last week I set up a shiny server, it was relatively easy! But I wanted something more, a way to make changes on my local computer and push it to the server.
+Shiny server (I used the open source version) has multiple installers provided by RStudio.
+The installers for shiny-server create a user shiny and installs all the services needed.
+I used a guide specific for my version of linux to install shiny-server and combined it with two other guides to make it version controlled.
+                  <a href="/blog/2018/02/06/content/post/2018-02-06-setting-up-a-version-controlled-shiny-server/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/shiny/">shiny</a>&nbsp;
+                  
+                    <a href="//tags/shiny-server/">shiny-server</a>&nbsp;
+                  
+                    <a href="//tags/git/">git</a>&nbsp;
+                  
+                    <a href="//tags/githook/">githook</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/">
+                <h2 class="post-title">Moving parts of a country over a map</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 29, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (618 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  I love making maps, I also love making gifs. In this short post I make an animated gif of parts of a map moving. In this case the parts of the map only move in the xy direction, but you can also turn them, and make them bigger or smaller. Today I show you how I made a part of the Netherlands &lsquo;float away&rsquo;. It is part of a larger nonsense project (I have many silly projects), and mostly just to document my path to learning about spatial analytics.
+                  <a href="/blog/2018/01/29/content/post/2018-01-29-moving-parts-of-a-map-in-a-gif/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/tidyverse/">tidyverse</a>&nbsp;
+                  
+                    <a href="//tags/sf/">sf</a>&nbsp;
+                  
+                    <a href="//tags/magick/">magick</a>&nbsp;
+                  
+                    <a href="//tags/maps/">maps</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2018/01/24/content/post/2018-01-24-add-abbreviations-to-rmarkdown/">
+                <h2 class="post-title">add abbreviations to your rmarkdown doc</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 24, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 2 minutes (238 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Today a small tip for when you write rmarkdown documents. Add a chunk on top with abbreviations.
+in the first chunks you set the options and load the packages. Next create abbreviations, you don&rsquo;t have to care about the ordering, just put them down as you realize you are creating them.
+The first step makes a dataframe (a tibble, rowwise), and the second step orders them.
+tribble( ~Abbreviation, ~ Explanation, &quot;CIA&quot;, &quot;Central Intelligence Agency&quot;, &quot;dplyr&quot;, &quot;data.
+                  <a href="/blog/2018/01/24/content/post/2018-01-24-add-abbreviations-to-rmarkdown/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/rmarkdown/">rmarkdown</a>&nbsp;
+                  
+                    <a href="//tags/tibble/">tibble</a>&nbsp;
+                  
+                    <a href="//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/12/29/content/post/2017-12-29-extending-the-oomsifyer-cmdline/">
+                <h2 class="post-title">Adding bananas from the commandline (extending the oomsifier)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 29, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (581 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Sometimes you just want to add bananas from the commandline. Previously I created a small script that takes an image and adds a dancing banana to the bottom left of the image. I wanted to make an API too, but that will have to wait till next year. Today we will create a commandline script that will do the same thing.
+With the excellent explanation in Mark Sellors&rsquo; guide I have now created a cmdline thingy in very few steps.
+                  <a href="/blog/2017/12/29/content/post/2017-12-29-extending-the-oomsifyer-cmdline/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/magick/">magick</a>&nbsp;
+                  
+                    <a href="//tags/example_function/">example_function</a>&nbsp;
+                  
+                    <a href="//tags/hack/">hack</a>&nbsp;
+                  
+                    <a href="//tags/banana/">banana</a>&nbsp;
+                  
+                    <a href="//tags/gif/">gif</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/">
+                <h2 class="post-title">If blogging was like academia, we would all be saved, thank you for your edits.</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 19, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 2 minutes (293 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  A month ago I posted a short piece inspired by a post by Maële Salmon She actually reached out to me in 10 minutes, telling me I made a weird spelling error (no excuses, I really make those a lot). Then a day or two later Jon Spring  walked through the code and realized that I switched two outcomes in the code.
+Just about 10 days ago I posted about downloading multiple files and Mara Avarick noticed a weird &lsquo;&lt;&lt;&lt;&lt;&lt;&lt;&rsquo; sign on my website.
+                  <a href="/blog/2017/12/19/content/post/2017-12-19-if-blogging-was-like-academia/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/beginner/">beginner</a>&nbsp;
+                  
+                    <a href="//tags/version-control/">version-control</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/">
+                <h2 class="post-title">Downloading files from a webserver, and failing.</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 8, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 5 minutes (979 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Recently I wanted to download all the transcripts of a podcast (600+ episodes). The transcripts are simple txt files so in a way I am not even &lsquo;web&rsquo;-scraping but just reading in 600 or so text files which is not really a big deal. I thought.
+This post shows you where I went wrong
+Also here is a picture I found of scraping.
+Webscraping general For every download you ask the server for a file and it returns the file (this is also how you normally browse the web btw, your browser requests the pages).
+                  <a href="/blog/2017/12/08/content/post/2017-12-08-downloading-multiple-files-and-failing/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/hack/">hack</a>&nbsp;
+                  
+                    <a href="//tags/curl/">curl</a>&nbsp;
+                  
+                    <a href="//tags/purrr/">purrr</a>&nbsp;
+                  
+                    <a href="//tags/scraping/">scraping</a>&nbsp;
+                  
+                    <a href="//tags/intermediate/">intermediate</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/11/28/content/post/2017-11-28-building-the-oomsifier/">
+                <h2 class="post-title">Building the oomsifyer</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on November 28, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (542 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Today I will show you a quick hack (OK it took me like 4 hours during my travels today yesterday and today), on how to add a dancing banana to any picture.
+Now, you might be thinking&hellip; Really, why would you add a dancing banana to a picture, but I don&rsquo;t have time for that kind of negativity in my life.
+Why oomsifier? Jeroen Ooms is one of those crazy productive people in the R world.
+                  <a href="/blog/2017/11/28/content/post/2017-11-28-building-the-oomsifier/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/magick/">magick</a>&nbsp;
+                  
+                    <a href="//tags/example_function/">example_function</a>&nbsp;
+                  
+                    <a href="//tags/hack/">hack</a>&nbsp;
+                  
+                    <a href="//tags/banana/">banana</a>&nbsp;
+                  
+                    <a href="//tags/gif/">gif</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+        </div>
+        
+          <ul class="pager main-pager">
+            
+            
+              <li class="next">
+                <a href="/post/page/2/">Older Posts &rarr;</a>
+              </li>
+            
+          </ul>
+        
+      </div>
+    </div>
+  </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="find me on GitHub (main stuff)">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="I have some stale stuff on GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="I probably have something on Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Yes! I am active on Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="My LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="There is some stuff on StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/post/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Clean Code (and R-fun)</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a> <br>
+            
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

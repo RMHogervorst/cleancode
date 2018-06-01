@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Package on Clean Code (and R-fun)</title>
+    <link>/tags/package/</link>
+    <description>Recent content in Package on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Sat, 09 Jul 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/package/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Submitting your first package to CRAN, my experience</title>
+      <link>/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</link>
+      <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/</guid>
+      <description>
+
+&lt;p&gt;I recently published my first R package to  The Comprehensive R Archive Network  (CRAN). It was very exciting and also quite easy. Let me walk you through my process.&lt;/p&gt;
+
+&lt;p&gt;First a description of my brand new package: badgecreatr, then a description of steps to take for submission.&lt;/p&gt;
+
+&lt;h1 id=&#34;package-description&#34;&gt;Package description&lt;/h1&gt;
+
+&lt;p&gt;When you go around github looking at projects you often see these interesting images in the readme
+&lt;a href=&#34;https://travis-ci.org/hadley/ggplot2&#34;&gt;&lt;img src=&#34;https://travis-ci.org/hadley/ggplot2.svg?branch=master&#34; alt=&#34;Build Status&#34; /&gt;&lt;/a&gt;
+&lt;a href=&#34;http://cran.r-project.org/package=ggplot2&#34;&gt;&lt;img src=&#34;http://www.r-pkg.org/badges/version/ggplot2&#34; alt=&#34;CRAN_Status_Badge&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The ones you see above are from &lt;a href=&#34;https://github.com/hadley/ggplot2&#34;&gt;ggplot2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;What are these? These are what we call badges or shields and they are often actively generated to indicate if software is actually working or not.&lt;/p&gt;
+
+&lt;p&gt;Travis-ci, a continous integration service, creates the first one: the one that says build | passing. Everytime a new commit is pushed to Github a new version of the package will be build and tested. Of that test passes without problem the badge will remain green, but if the latest build fails, the green part will turn red like so &lt;a href=&#34;https://travis-ci.org/RMHogervorst/badgecreatr&#34;&gt;&lt;img src=&#34;https://travis-ci.org/RMHogervorst/badgecreatr.svg?branch=develop&#34; alt=&#34;Build Status&#34; /&gt;&lt;/a&gt; &amp;lt;- this is my develop branch of badgecreatr that fails while I write this. It could turn green if your read this later on.&lt;/p&gt;
+
+&lt;p&gt;The point of these badges is that they quickly signal some quality aspects of your package to new users. I think these badges are incredibly useful, but I found it tedious to copy them to every new project I had, with some small tweaks for different packages &lt;em&gt;(I&amp;rsquo;m making this a big deal but I have only build 3 packages)&lt;/em&gt;. Since you will use almost the same badges for many projects  I thought it would be interesting to create a package that would copy them in your readme file with one command.
+I was not the first one with this idea, someone created the briljant badgerbadgerbadger which does the same thing for ruby on rails projects.&lt;/p&gt;
+
+&lt;p&gt;After some thoughts I decided to submit it to CRAN so that people can download it from within R without the use of devtools. So that was the why.&lt;/p&gt;
+
+&lt;h1 id=&#34;why-would-you-submit-a-package-to-cran&#34;&gt;Why would you submit a package to CRAN?&lt;/h1&gt;
+
+&lt;p&gt;The main advantage to getting your package on CRAN is that it will be easier for users to install (with install.packages). Your package will also be tested daily on multiple systems &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;how-do-you-submit-a-package-to-cran&#34;&gt;How do you submit a package to CRAN?&lt;/h1&gt;
+
+&lt;p&gt;Well, the good people of CRAN have put it on the bottom of their &lt;a href=&#34;https://cran.r-project.org/&#34;&gt;main page&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;To “submit” a package to CRAN, check that your submission meets the CRAN Repository Policy and then use the web form.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Mainly you need to run r cmd-check on your package and make sure there are no warnings, and no notes. Or if there are notes, you have to explain them to the people of CRAN. So what does r-cmd-check actually do? It checks if your package can be build and installed and removed without problems, it checks for common problems in naming and if accurate documentation is provided. In other words, it checks if your package will play nice with R and possible other packages, and if people can actually read what you said about your functions in the package. r-cmd-check also checks if your DESCRIPTION and NAMESPACE files are correctly formatted.&lt;/p&gt;
+
+&lt;p&gt;You also have to do some effort to check if your package will work on other systems (solaris,  FreeBSD, Linux, Windows, MacOS, more?). Since I work on a windows computer, I know it works on my computer. But since I push all my code to Github, and I use Travis-CI, after each commit the entire package is checked on linux (or more, I could even put several mac OS versions in the test I believe).&lt;/p&gt;
+
+&lt;p&gt;Furthermore I checked the functionality of most of the code with unit tests. So I was pretty sure it worked on all systems, also because I haven&amp;rsquo;t used complicated programs that could differ in systems.&lt;/p&gt;
+
+&lt;p&gt;The submission process is quite easy, you have to give your name, your email and then you can add your package (the tarball). It is a simple point and click form.&lt;/p&gt;
+
+&lt;p&gt;The website reads a part of your package, you have to check if the information is correct. Then you have to promise that you read the information and you hit submit.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-happens-after-i-submit-a-package&#34;&gt;What happens after I submit a package?&lt;/h1&gt;
+
+&lt;p&gt;You receive a confirmation mail with everything you typed in the website.
+And someone looks over the submission to see if you missed something and if the package works.&lt;/p&gt;
+
+&lt;p&gt;I recieved an e-mail back (really fast!), to tell me that I mistyped some things (too bad that devtools or R-cmd-check doesn&amp;rsquo;t check for these things).
+I was very excited and quickly did a resubmission (which is identical to a first submission, but I explained what I changed according to their comments )&lt;/p&gt;
+
+&lt;p&gt;Things that I should have done that I forgot or didn&amp;rsquo;t notice:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;single quote software names so &amp;lsquo;Windows 8.1&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;write R and CRAN with caps, not small letters&lt;/li&gt;
+&lt;li&gt;I wrote github, projectstatus, travis, rmd etc which should have been:&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;Github&amp;rsquo;, Projectstatus, &amp;lsquo;Travis-CI&amp;rsquo; etc.&lt;/li&gt;
+&lt;li&gt;linked to a URL that didn&amp;rsquo;t exist yet&lt;/li&gt;
+&lt;li&gt;used a link with http, should have been https&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That was it, it took me 2 rounds but then it was finished, I received an email with: &amp;ldquo;on CRAN now.  Best (name of the reviewer)&amp;rdquo;. that&amp;rsquo;s it.&lt;/p&gt;
+
+&lt;p&gt;And it&amp;rsquo;s on CRAN now: &lt;a href=&#34;https://cran.r-project.org/web/packages/badgecreatr/index.html&#34;&gt;https://cran.r-project.org/web/packages/badgecreatr/index.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;general-remarks&#34;&gt;General remarks&lt;/h2&gt;
+
+&lt;p&gt;CRAN submission used to be really hard, you had to manually write all the documentation in a seperate file, had to hand check everything, you had to search for computers to test your package on, etc. But with devtools and the excellent manuals online, starting and building a package is really easy. The final step of submission takes almost no work if you followed best practices beforehand.&lt;/p&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References:&lt;/h2&gt;
+
+&lt;p&gt;I had a lot of help from the following sources about writing r packages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a very short but extremely useful example of writing packages by Hillary Parker &lt;a href=&#34;https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/&#34;&gt;https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hadley Wickham&amp;rsquo;s book about writing packages &lt;a href=&#34;http://r-pkgs.had.co.nz/&#34;&gt;http://r-pkgs.had.co.nz/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Karl Broman about writing packages &lt;a href=&#34;http://kbroman.org/pkg_primer/&#34;&gt;http://kbroman.org/pkg_primer/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;You actually have to search for things in the policies, which is a bit dense, but quite ok. &lt;a href=&#34;https://cran.r-project.org/web/packages/policies.html&#34;&gt;https://cran.r-project.org/web/packages/policies.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;the ropensci organisation has some excellent advise on writing packages &lt;a href=&#34;https://github.com/ropensci/packaging_guide&#34;&gt;https://github.com/ropensci/packaging_guide&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;This I outright copied from Karl Broman found here &lt;a href=&#34;http://kbroman.org/pkg_primer/pages/cran.html&#34;&gt;http://kbroman.org/pkg_primer/pages/cran.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introducing Badgecreatr, a package that places badges in your readme</title>
+      <link>/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/</link>
+      <pubDate>Fri, 08 Jul 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/</guid>
+      <description>
+
+&lt;p&gt;Introducing &lt;strong&gt;Badgecreatr&lt;/strong&gt;, a package to create and place badges in your readme.Rmd file on Github.&lt;/p&gt;
+
+&lt;p&gt;Badgecreatr will create the following badges (aka shields):&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.repostatus.org/#active&#34;&gt;&lt;img src=&#34;http://www.repostatus.org/badges/latest/active.svg&#34; alt=&#34;Project Status: Active ? The project has reached a stable, usable state and is being actively developed.&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://www.gnu.org/licenses/gpl-3.0.en.html&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/licence-GPL--3-blue.svg&#34; alt=&#34;Licence&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://travis-ci.org/RMHogervorst/badgecreatr&#34;&gt;&lt;img src=&#34;https://travis-ci.org/RMHogervorst/badgecreatr.svg?branch=master&#34; alt=&#34;Build Status&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://codecov.io/gh/RMHogervorst/badgecreatr&#34;&gt;&lt;img src=&#34;https://codecov.io/gh/RMHogervorst/badgecreatr/branch/master/graph/badge.svg&#34; alt=&#34;codecov&#34; /&gt;&lt;/a&gt;
+&lt;a href=&#34;https://cran.r-project.org/&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/R%3E%3D-3.2.4-6666ff.svg&#34; alt=&#34;minimal R version&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://cran.r-project.org/package=badgecreatr&#34;&gt;&lt;img src=&#34;http://www.r-pkg.org/badges/version/badgecreatr&#34; alt=&#34;CRAN\_Status\_Badge&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;commits/master&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square&#34; alt=&#34;packageversion&#34; /&gt;&lt;/a&gt;
+&lt;a href=&#34;/commits/master&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/last%20change-2016--07--08-yellowgreen.svg&#34; alt=&#34;Last-changedate&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;Install the package with &lt;code&gt;install.packages(&amp;quot;badgecreatr&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;how-do-you-use-badgecreatr&#34;&gt;How do you use badgecreatr?&lt;/h3&gt;
+
+&lt;p&gt;Badgecreatr has one main function: &lt;code&gt;badgeplacer()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The most simple command is:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;badgecreatr&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;badgeplacer&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; githubaccount &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;yourgithubname&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;githubrepo &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;yourpackagename&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; branch &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;master&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If your project is in its infancy and you don&amp;rsquo;t want people to use it yet:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;badgecreatr::badgeplacer(status = &amp;quot;wip&amp;quot; , githubaccount = &amp;quot;yourgithubname&amp;quot;,githubrepo = &amp;quot;yourpackagename&amp;quot;)&lt;/code&gt; which will give it the status &amp;lsquo;Work in Progress&amp;rsquo;.&lt;/p&gt;
+
+&lt;p&gt;Repostatus gives you seven &lt;a href=&#34;www.repostatus.org&#34;&gt;project statuses&lt;/a&gt;; Concept, WIP, Suspended, Abandoned, Active, Inactive, and Unsupported.&lt;/p&gt;
+
+&lt;h3 id=&#34;why-would-you-use-this-package&#34;&gt;Why would you use this package?&lt;/h3&gt;
+
+&lt;p&gt;When you have started yet another Github based r-package, copied the travis file and created a readme.Rmd file and you want to add these badges.
+Frankly I was a bit annoyed to copy almost identical markdown to new projects, it seemed right for automation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why would I not use this package?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;you don&amp;rsquo;t create a r-package&lt;/li&gt;
+&lt;li&gt;you don&amp;rsquo;t want to create badges&lt;/li&gt;
+&lt;li&gt;you don&amp;rsquo;t use Github&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-does-badgecreatr-do&#34;&gt;What does badgecreatr do?&lt;/h2&gt;
+
+&lt;p&gt;Badgecreatr reads your &lt;code&gt;readme.Rmd&lt;/code&gt; file, reads your &lt;code&gt;DESCRIPTION&lt;/code&gt; file and searches for a &lt;code&gt;.travis.yml&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Within the &lt;code&gt;DESCRIPTION&lt;/code&gt; file badgecreatr will find:
+- package name
+- the version number of your package
+- the license : GPL-3, GPL-2, MIT, or CC0
+- Minimal R version&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Badgecreatr will create&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;www.repostatus.org&#34;&gt;repostatus&lt;/a&gt; badge (by default it will give you an active status)&lt;/li&gt;
+&lt;li&gt;a licence badge&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;If it finds a .travis.yml file&lt;/em&gt;:a Travis-CI Build-Status Badge&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;If it finds a codecov reference in the .travis.yml file,&lt;/em&gt; a Codecov Coverage Status Badge&lt;/li&gt;
+&lt;li&gt;a badge to indicate the version of R you are using&lt;/li&gt;
+&lt;li&gt;a CRAN status badge (will say &amp;lsquo;not published&amp;rsquo; if your package is not on CRAN)&lt;/li&gt;
+&lt;li&gt;a package version badge&lt;/li&gt;
+&lt;li&gt;a last change badge&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you created badges in your readme before, badgecreatr will skip that badge.&lt;/p&gt;
+
+&lt;p&gt;Enjoy. - Roel&lt;/p&gt;
+
+&lt;h3 id=&#34;notes&#34;&gt;Notes:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The badges for R version, package version and last change are my invention.&lt;/li&gt;
+&lt;li&gt;The last change badge will update every time you re-knit your readme.md file&lt;/li&gt;
+&lt;li&gt;If you have suggestions or improvement open an &lt;a href=&#34;https://github.com/RMHogervorst/badgecreatr/issues&#34;&gt;issue&lt;/a&gt; or submit a &lt;a href=&#34;https://github.com/RMHogervorst/badgecreatr/compare&#34;&gt;pull request&lt;/a&gt;.
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;further-reading&#34;&gt;Further reading&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The package on CRAN: &lt;a href=&#34;https://cran.r-project.org/web/packages/badgecreatr/index.html&#34;&gt;https://cran.r-project.org/web/packages/badgecreatr/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The package on Github : &lt;a href=&#34;https://github.com/RMHogervorst/badgecreatr&#34;&gt;https://github.com/RMHogervorst/badgecreatr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;My inspiration: &lt;a href=&#34;https://github.com/badges/badgerbadgerbadger&#34;&gt;https://github.com/badges/badgerbadgerbadger&lt;/a&gt; &amp;amp; &lt;a href=&#34;http://shields.io/&#34;&gt;http://shields.io/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating a package for your data set</title>
+      <link>/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</link>
+      <pubDate>Mon, 07 Mar 2016 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2016/03/07/content/post/2016-03-07-create-package-for-dataset/</guid>
+      <description>
+
+&lt;p&gt;Turning your dataset into a package is very useful for reproducable research. This tutorial is for you, even if you&amp;rsquo;ve never created a package in r.&lt;/p&gt;
+
+&lt;p&gt;Why would you turn your dataset into a package?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;very easy to share&lt;/li&gt;
+&lt;li&gt;easy to load (library(name) is easier then &lt;code&gt;load(&amp;quot;path/to/file&amp;quot;)&lt;/code&gt; or &lt;code&gt;data&amp;lt;-read.csv(&amp;quot;path/to/file&amp;quot;)&lt;/code&gt; etc.)&lt;/li&gt;
+&lt;li&gt;documentation is part of the package and will never separate from data&lt;/li&gt;
+&lt;li&gt;attributes of file remain&lt;/li&gt;
+&lt;li&gt;nice and easy introduction to package building&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What do you need to do to create a dataset package:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Step 0: locate your dataset, both raw and clean&lt;/li&gt;
+&lt;li&gt;step 1: create a new project with Rstudio&lt;/li&gt;
+&lt;li&gt;step 2: save the clean file&lt;/li&gt;
+&lt;li&gt;step 3: create a description file&lt;/li&gt;
+&lt;li&gt;step 4: describe the package with a vignette.*&lt;/li&gt;
+&lt;li&gt;step 5: test and build*&lt;/li&gt;
+&lt;li&gt;step 6: maintain your dataset if it changes. *&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;*: Steps 4-6 are optional, but will help you in practicing for other packages.&lt;/p&gt;
+
+&lt;p&gt;What you need:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Rstudio&lt;/li&gt;
+&lt;li&gt;devtools installed&lt;/li&gt;
+&lt;li&gt;a dataset that you want to turn into a package&lt;/li&gt;
+&lt;li&gt;You need to know how to load a file&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this example I will make a package from my all the times I drank coffee.
+I started keeping score because I realized I drank more coffee since working full time.
+This is just a file which contains time stamps whenever I drank coffee. I have some missing values, because I sometimes forget, but mostly it&amp;rsquo;s correct.&lt;/p&gt;
+
+&lt;p&gt;This file is not really useful to anybody except maybe me, but a package is quite useful for a variety of analyses. Let&amp;rsquo;s walk through the steps, follow along with your dataset.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-0-locating-your-datasets&#34;&gt;Step 0: locating your datasets&lt;/h1&gt;
+
+&lt;p&gt;You need a dataset on your harddisk&lt;/p&gt;
+
+&lt;h1 id=&#34;step-1-create-a-new-project&#34;&gt;Step 1: Create a new project&lt;/h1&gt;
+
+&lt;p&gt;Create a new project in Rstudio, choose new directory, R package:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/rstudio-project-package-new.PNG&#34; alt=&#34;image of starting a new project&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;naming-the-package&#34;&gt;Naming the package&lt;/h2&gt;
+
+&lt;p&gt;Think about a simple descriptive name with the following tips:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;no spaces     Good: Coffeedata Bad: Coffee data&lt;/li&gt;
+&lt;li&gt;no points     good: Coffeeproject Bad: Coffee.Project&lt;/li&gt;
+&lt;li&gt;no dashes     Good: datasetCoffee. Bad:  dataset-Coffee&lt;/li&gt;
+&lt;li&gt;use lowercase, CoffeeDataSet gets confusing.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Naming packages is really hard, it needs to be descriptive and unique. But this is less important if you only share the package with yourself and friends.
+think about the name, dataset21really is not descriptive nor helpful for you in the future.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-2-save-the-clean-file&#34;&gt;Step 2: save the clean file&lt;/h1&gt;
+
+&lt;p&gt;Ideally you will want to save both the raw file and the cleaned dataset, with a script (or rmarkdown document) that describes the actions you took to clean the raw file.&lt;/p&gt;
+
+&lt;p&gt;I assume that you are now in the rproject you have just started.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/rstudio-coffeedata-project-empty.PNG&#34; alt=&#34;images of empty project&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Locate the file you want to put in the package. And load it so that it&amp;rsquo;s active in the environment:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/rstudio-loaded-coffeedata.PNG&#34; alt=&#34;image of loaded coffeedata&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then do one of the following (replace coffeedata with your data set&amp;rsquo;s name).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;devtools&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+use_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;coffeedata&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or use devtools directly&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;devtools&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;use_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;coffeedata&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command will create a data folder and put the file in there with the rda extension.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-3-create-a-description-file&#34;&gt;Step 3: create a description file&lt;/h1&gt;
+
+&lt;p&gt;When you started the project a description file and an example function was created:
+&lt;img src=&#34;/img/rstudio-project-package-prepopulate.PNG&#34; alt=&#34;image of standard rstudio project&#34; /&gt;
+Open the description file.&lt;/p&gt;
+
+&lt;p&gt;I just copied this from the excellent package building book &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, please read his website:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Every package must have a DESCRIPTION. In fact, it’s the defining feature of a package (RStudio and devtools consider any directory containing DESCRIPTION to be a package). To get you started, devtools::create(&amp;ldquo;mypackage&amp;rdquo;) automatically adds a bare-bones description file. This will allow you to start writing the package without having to worry about the metadata until you need to.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The minimal description will vary a bit depending on your settings, but should look something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/package-description.PNG&#34; alt=&#34;image of package description&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Fill in the meta-data of your package.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Package: name of package
+Title: Use Title Case in One Line.
+Version: 0.1.0 
+Author: who you are
+Maintainer: Who to bother when it breaks
+Description: What the package does (one paragraph)
+Licence: see below
+LazyData: TRUE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;a-license&#34;&gt;a license?&lt;/h3&gt;
+
+&lt;p&gt;You might think that the license is a bit too much for a package you build. But it it&amp;rsquo;s really hard. If you don&amp;rsquo;t give a licence your data is under your copyright and no one can use it.
+For datasets a &lt;a href=&#34;https://creativecommons.org/about/cc0/&#34;&gt;CC0 licence&lt;/a&gt; puts the data in the public domain and makes it free to  build upon, enhance and reuse the works for any purposes without restriction under copyright or database law.&lt;/p&gt;
+
+&lt;p&gt;For packages that contain code (most of the packages) other licenses are better: &lt;a href=&#34;http://choosealicense.com/&#34;&gt;http://choosealicense.com/&lt;/a&gt; .&lt;/p&gt;
+
+&lt;h2 id=&#34;a-description-of-the-file&#34;&gt;A description of the file&lt;/h2&gt;
+
+&lt;p&gt;If you look at &lt;code&gt;?mtcars&lt;/code&gt; there is a description of the file. You want to avoid this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/failure-to-describe-package.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The help file is created with&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;devtools::use_package_doc()&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;this creates a file in the folder &lt;code&gt;R/&lt;/code&gt; . Click on the file and add stuff.
+&lt;img src=&#34;/img/coffeedata-package-r.PNG&#34; alt=&#34;image of r can&#39;t find help file&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;See also this example in &lt;a href=&#34;https://github.com/hadley/babynames/blob/master/R/data.R&#34;&gt;hadley&amp;rsquo;s babyname package&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;step-4-describe-the-package-with-a-vignette&#34;&gt;Step 4: describe the package with a vignette.&lt;/h1&gt;
+
+&lt;p&gt;Use the template from rstudio:
+&lt;img src=&#34;/img/rstudio-document-dataset.PNG&#34; alt=&#34;rstudio rdocument window&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Give it the name of your dataset&lt;/p&gt;
+
+&lt;p&gt;This is the endresult&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/rstudio-document-dataset2.PNG&#34; alt=&#34;example rstudio rdocument with coffee filled in&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;after you changed the files use &lt;code&gt;devtools::document()&lt;/code&gt; to create documents.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-5-test-and-build&#34;&gt;step 5: test and build&lt;/h1&gt;
+
+&lt;p&gt;Then check your package with the check button or &lt;code&gt;devtools::check()&lt;/code&gt;. You will probably need to change some stuff based on the check. The check tries to build your package and checks for common problems. The endresult is in: /packagename.Rcheck/&lt;/p&gt;
+
+&lt;p&gt;If your package is very simple, consisting of only documentation and a datafile, your build will be completed and works.&lt;/p&gt;
+
+&lt;p&gt;Click on build &amp;amp; Reload and try out your new package.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-do-i-share-this-package&#34;&gt;How do I share this package?&lt;/h3&gt;
+
+&lt;p&gt;Once installed you can use the package anytime you like with &lt;code&gt;library(package)&lt;/code&gt; But you might want to share your package with colleagues.&lt;/p&gt;
+
+&lt;p&gt;Build a source or binary version:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://www.rstudio.com/images/docs/build_pane_build.png&#34; alt=&#34;rstudiowebsite image of sharing &#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After you build the source package, a file is created, in my case:
+&amp;ldquo;coffeedata_0.1.0.tar&amp;rdquo;. That file is shareble and can be installed on someones computer. They will need to build from source.&lt;/p&gt;
+
+&lt;p&gt;Online: upload your project using git to either Github &lt;a href=&#34;https://github.com/&#34;&gt;https://github.com/&lt;/a&gt; (many people use it, but can&amp;rsquo;t restrict access in free version) or Bitbucket &lt;a href=&#34;https://bitbucket.org/&#34;&gt;https://bitbucket.org/&lt;/a&gt; (close off your project). Or any other sharing service.&lt;/p&gt;
+
+&lt;p&gt;If it&amp;rsquo;s on github everyone can install the file using devtools, in my case:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;devtools&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;install_github&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;rmhogervorst/coffeedata&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This also works on bitbucket :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;devtools&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;install_bitbucket&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;rmhogervorst/coffeedata&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or you download the &lt;a href=&#34;https://github.com/RMHogervorst/cleancode/raw/gh-pages/datasets/coffeedata_0.1.0.tar.gz&#34;&gt;source&lt;/a&gt; file from the website and install it manually&lt;/p&gt;
+
+&lt;p&gt;Yes I have created the file for you. Now you all know how many coffee I drank. Even worse, you can do what you like with that information, because it&amp;rsquo;s in the public domain.&lt;/p&gt;
+
+&lt;p&gt;See Further reading to find out more about other ways to share your package.&lt;/p&gt;
+
+&lt;h1 id=&#34;step-6-maintain-your-dataset-if-it-changes&#34;&gt;step 6: maintain your dataset if it changes&lt;/h1&gt;
+
+&lt;p&gt;If your dataset changes, you should update the package.&lt;/p&gt;
+
+&lt;h3 id=&#34;problems&#34;&gt;Problems&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;I don&amp;rsquo;t have a description file or any of the other folders&amp;hellip; or devtools gives me errors.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Check if your project has forbidden characters: dots, dashes or spaces.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Rcheck fails!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Check the log. The log is in the folder next to your package &lt;code&gt;/packagename.Rcheck/00check.txt&lt;/code&gt;
+in my case my project is in: &lt;code&gt;Projecten\coffeedata&lt;/code&gt; and the logs are in:
+ &lt;code&gt;Projecten\coffeedata.Rcheck\00check.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;the folder disappears! I cant check the log.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is a good thing, it means your settings are so that non failing builds are removed. Change this in Rstudio Global Options, go to packages, and uncheck the option: &lt;em&gt;clean up output after succesful R CMD check&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;further-reading&#34;&gt;Further Reading&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://r-pkgs.had.co.nz/package.html&#34;&gt;Hadley Wickham about naming and starting with a package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://r-pkgs.had.co.nz/description.html&#34;&gt;R packages book: What to put in your description file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.rstudio.com/hc/en-us/articles/200486508-Building-Testing-and-Distributing-Packages&#34;&gt;Rstudio: Building checking and distributing packages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Wickham, Hadley. R Packages. First edition. Sebastopol, CA: O’Reilly Media, 2015. &lt;a href=&#34;http://r-pkgs.had.co.nz/&#34;&gt;http://r-pkgs.had.co.nz/&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

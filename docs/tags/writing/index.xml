@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Writing on Clean Code (and R-fun)</title>
+    <link>/tags/writing/</link>
+    <description>Recent content in Writing on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Tue, 14 Mar 2017 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/writing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Writing manuscripts in Rstudio, easy citations</title>
+      <link>/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</link>
+      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/</guid>
+      <description>
+
+&lt;h2 id=&#34;intro-and-setup&#34;&gt;Intro and setup&lt;/h2&gt;
+
+&lt;p&gt;This is a simple explanation of how to write a manuscript in RStudio. Writing a manuscript in RStudio is not ideal, but it has gotten better over time. It is now relatively easy to add citations to documents in RStudio.&lt;/p&gt;
+
+&lt;p&gt;**The goal is not think about formatting, and citations, but to write the manuscript and add citations on the fly with a nice visual help. **&lt;/p&gt;
+
+&lt;p&gt;This tutorial explains how to link Zotero (a reference manager) to your project folder and how to easily add citations.
+In this tutorial I assume you have &lt;a href=&#34;www.zotero.org&#34;&gt;Zotero&lt;/a&gt; installed.
+You will need to have the zotero extension &lt;a href=&#34;https://github.com/retorquere/zotero-better-bibtex/wiki&#34;&gt;betterBibtex&lt;/a&gt; installed and I will
+use RStudio, with the packages knitr, shiny and other basic tooling in place.
+To search and insert citations in a file you will need to install the package
+&lt;code&gt;citr&lt;/code&gt;  install the latest &lt;a href=&#34;https://github.com/crsh/citr&#34;&gt;&lt;em&gt;dev-version from github&lt;/em&gt;&lt;/a&gt; or the stable version from &lt;a href=&#34;https://CRAN.R-project.org/package=citr&#34;&gt;cran&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-would-i-write-my-manuscript-in-rstudio&#34;&gt;Why would I write my manuscript in RStudio?&lt;/h2&gt;
+
+&lt;p&gt;The main reasons to write in RStudio ( and not in f.i. Word ) are reproducibity, and version control. Writing in plain text as you do in RStudio makes it very easy to keep track of your work with version control and the plain files are easily shared. Working from RStudio also allows you to combine the code and text in one document. This is called &lt;a href=&#34;https://en.wikipedia.org/wiki/Literate_programming&#34; title=&#34;wikipedia link&#34;&gt;literate programming&lt;/a&gt;. Literate programming makes it incredibly easy to share your code (it&amp;rsquo;s in the document) and compiling the document runs the code again, ensuring reproducibility.&lt;/p&gt;
+
+&lt;p&gt;I use RStudio projects so everything
+important to a project is in the same folder and the working directory is  automatically correct. I create a new RMarkdown document &lt;img src=&#34;{{ site.url }}/images/example_rstudio_manuscript.PNG&#34; alt=&#34;rmarkdown doc&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;earlier-workflows&#34;&gt;Earlier workflows&lt;/h4&gt;
+
+&lt;p&gt;It was always possible to intersperse code and text in R, previously people used the &lt;code&gt;Sweave&lt;/code&gt; package to combine code and text. You had to write the text in Latex and markup the code. Latex prints very pretty, but in raw form it is horrible to read, as you can see in the example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;\documentclass[12pt]{article}
+\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\begin{document}
+
+\section*{Notes for My Paper}
+
+Don&#39;t forget to include examples of topicalization.
+They look like this:
+
+{\small
+\enumsentence{Topicalization from sentential subject:\\ 
+\shortex{7}{a John$_i$ [a &amp;amp; kltukl &amp;amp; [el &amp;amp; 
+  {\bf l-}oltoir &amp;amp; er &amp;amp; ngii$_i$ &amp;amp; a Mary]]}
+{ &amp;amp; {\bf R-}clear &amp;amp; {\sc comp} &amp;amp; 
+  {\bf IR}.{\sc 3s}-love   &amp;amp; P &amp;amp; him &amp;amp; }
+{John, (it&#39;s) clear that Mary loves (him).}}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;I copied this from a example page.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:http-mally-stanf&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:http-mally-stanf&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The output looks beautiful, but it&amp;rsquo;s damn near unworkable in plain text. And even worse, mistakes are easily made and very hard to find (since you don&amp;rsquo;t know where the trouble started, and the error messages are quite cryptic).&lt;/p&gt;
+
+&lt;h4 id=&#34;from-latex-sweave-to-rmarkdown&#34;&gt;From latex / Sweave to RMarkdown&lt;/h4&gt;
+
+&lt;p&gt;Markdown is a very simple markup language that is readable for humans and can be translated into html / latex / word / etc by computers. In stead of \section{name fo the section} we can just use a pound symbol (a.k.a. hashtag: #) to mark a heading. One pound for a heading 1, 2 for heading 2 etc. The difference between markdown and RMarkdown is R-code in the text. There are plenty good tutorials out there so I will only give you one&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:http-rmarkdown-r&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:http-rmarkdown-r&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; and a search online will give you more.&lt;/p&gt;
+
+&lt;h4 id=&#34;citations&#34;&gt;Citations&lt;/h4&gt;
+
+&lt;p&gt;Citations connect your paper to the past, linking your research to earlier research. It is essential that people can find the correct paper or book you are referring to. For that reason (and vanity I think) there are many styles of citations. I&amp;rsquo;ve used the APA and Chicago style in the past and there are probably about 500. Every single one has different rules; cite inline by author name and year, or by number, etc.&lt;/p&gt;
+
+&lt;p&gt;If you resubmit your paper to a journal with a different citation style you have to rewrite every citation in the manuscript. Because we have better things to do, there are reference managers that automatically use the correct styling. And that change all the references in the text. I have used this in Word and LibreOffice in the past. But changing styles works a bit different in plain text formats such as markdown and latex. In general you cite research by a &lt;strong&gt;key&lt;/strong&gt; that refers to a &lt;strong&gt;bibliography&lt;/strong&gt;. In the build process the keys are replaced with the citations in the style that you want, so that the endproduct has the correct citations.
+This is also implemented in Latex and RStudio. In general the workflow is as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;add the citations in the correct &amp;lsquo;language&amp;rsquo; (bibtex) to your document or to a different document and provide a link to.&lt;/li&gt;
+&lt;li&gt;Use &lt;strong&gt;keys&lt;/strong&gt; that refer to the correct entry in the bibtex.&lt;/li&gt;
+&lt;li&gt;The citation manager inserts the correctly styled reference in the correct location while it writes the final version.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You write and cite like this:&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;The ggplot2 package is used to plot images in layers [@wickham_ggplot2_2009].&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;The key (a at-sign and name) refers to a bibtex entry. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@book{wickham_ggplot2_2009,
+  address = {New York, NY},
+  title = {Ggplot2},
+  isbn = {978-0-387-98140-6 978-0-387-98141-3},
+  language = {en},
+  timestamp = {2017-02-19T10:19:27Z},
+  urldate = {2015-11-09},
+  url = {http://ggplot2.org},
+  publisher = {{Springer New York}},
+  author = {Wickham, Hadley},
+  year = {2009},
+  note = {04749},
+  file = {ggplot2 - hadley wickham.pdf:C\:\\Users\\roel\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\aw40nx7l.default\\zotero\\storage\\AADU9XVP\\ggplot2 - hadley wickham.pdf:application/pdf}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which will resolve to (if you use APA formatting):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The ggplot2 package is used to plot images in layers (Wickham, 2009).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;bibtex-files-creation&#34;&gt;Bibtex files creation&lt;/h3&gt;
+
+&lt;p&gt;Now, making your own bibtex files is a serious pain in the backside. So we don&amp;rsquo;t do that. We also don&amp;rsquo;t try to remember all the keys, but first about the creation of the bibtex file.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t want to keep track of the correct way to cite sources, that is just a waste of time. We have excellent reference managers for this goal. I use Zotero. I just throw the pdfs in the correct folder and Zotero finds the correct metadata using the pdfs DOI (digital object identifier).
+This is how it looks on my computer
+&lt;img src=&#34;{{ site.url }}/images/example_zotero_look.PNG&#34; alt=&#34;a snapshot of zotero on my pc&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I use the extension &lt;a href=&#34;link&#34;&gt;betterbibtex&lt;/a&gt;, that adds extra functionality to Zotero. In this case it also takes care of synchronizing the bibtext file that you export to the folder you&amp;rsquo;re working in and the corresponding collection in Zotero. (see further on).&lt;/p&gt;
+
+&lt;p&gt;I export the collection from zotero into the rstudio folder. &lt;img src=&#34;{{ site.url }}/images/example_zotero_keep_updated.PNG&#34; alt=&#34;zotero keep updated image&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;the-rmarkdown-document&#34;&gt;The RMarkdown document&lt;/h4&gt;
+
+&lt;p&gt;If you open a new rmarkdown document from the RStudio console a basic document with metadata is already opened.
+The top of your manuscript should contain metadata such as the title output and in this case we also need to append it to show where to find the bibliography.:
+For example we make a html document called sample_Document with a bibliography based on a document bibliography.bib found in the same folder.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+title: &amp;quot;Sample Document&amp;quot;
+output: html_document
+bibliography: bibliography.bib
+---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While writing the manuscript we cite like so &lt;img src=&#34;{{ site.url }}/images/example_adding_citations_rmarkdown.PNG&#34; alt=&#34;image of citing&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For more information about citations and bibliographies look at the RStudio website&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:http-rmarkdown-r&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:http-rmarkdown-r&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;choosing-a-citation-style-in-the-manuscript&#34;&gt;Choosing a citation style in the manuscript&lt;/h4&gt;
+
+&lt;p&gt;&lt;em&gt;update 2017-03-15&lt;/em&gt; Michael Koontz &lt;a href=&#34;https://twitter.com/_mikoontz/status/838859261572591623&#34;&gt;explains how to add a citation style to your document&lt;/a&gt; in short:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;search for a citation style &lt;a href=&#34;https://github.com/citation-style-language/styles/find/master&#34;&gt;https://github.com/citation-style-language/styles/find/master&lt;/a&gt; (f.i. APA)&lt;/li&gt;
+&lt;li&gt;find the correct file and click on raw&lt;/li&gt;
+&lt;li&gt;copy the link to the citation style file in the yaml
+&lt;code&gt;
+---
+title: &amp;quot;Sample Document&amp;quot;
+output: html_document
+bibliography: bibliography.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+---
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&#34;making-citing-easier-with-the-help-of-citr&#34;&gt;Making citing easier with the help of CITR&lt;/h4&gt;
+
+&lt;p&gt;Then use the citr package &lt;a href=&#34;https://github.com/crsh/citr&#34;&gt;https://github.com/crsh/citr&lt;/a&gt;.
+&lt;em&gt;Citr works quite nicely, but unfortunately it has recently acquired default behavior that is frankly annoying. If Zotero is active (open in a window on your computer), citr will ignore the bibliography you mentioned in the top of the document and just try to read in the entire zotero library. (which will fail on my computer) I had to change a setting to change this.&lt;/em&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:you-have-to-chan&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:you-have-to-chan&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Loading citations:
+&lt;img src=&#34;{{ site.url }}/images/example_loading_citr.PNG&#34; alt=&#34;image of loading citr&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Adding a citation to a document:
+&lt;img src=&#34;{{ site.url }}/images/example_adding_citation_with_citr.PNG&#34; alt=&#34;image of adding a citation&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This adds the correct citation as you can see&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;{{ site.url }}/images/example_citation_side_by_side.PNG&#34; alt=&#34;side by side comparison&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This piece became a bit longer then anticipated but I discovered new behavior of &lt;code&gt;citr&lt;/code&gt;, so there&amp;rsquo;s that.
+All in all RStudio / R and related tools can become the complete workbench for reading in data, cleaning and analyzing, and also writing the manuscript.&lt;/p&gt;
+
+&lt;p&gt;For practical examples of reproducible work see this book&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:https-www-practi&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:https-www-practi&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:http-mally-stanf&#34;&gt;&lt;a href=&#34;http://mally.stanford.edu/~sr/computing/latex-example.html&#34;&gt;http://mally.stanford.edu/~sr/computing/latex-example.html&lt;/a&gt; &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:http-mally-stanf&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:http-rmarkdown-r&#34;&gt;&lt;a href=&#34;http://rmarkdown.rstudio.com/lesson-1.html&#34;&gt;http://rmarkdown.rstudio.com/lesson-1.html&lt;/a&gt; &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:http-rmarkdown-r&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:http-rmarkdown-r&#34;&gt;&lt;a href=&#34;http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html&#34;&gt;http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html&lt;/a&gt; &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:http-rmarkdown-r&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:you-have-to-chan&#34;&gt; you have to change &lt;code&gt;options(citr.use_betterbiblatex = FALSE)&lt;/code&gt; adding this to .Renviron works &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:you-have-to-chan&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:https-www-practi&#34;&gt;&lt;a href=&#34;https://www.practicereproducibleresearch.org/&#34;&gt;https://www.practicereproducibleresearch.org/&lt;/a&gt; &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:https-www-practi&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

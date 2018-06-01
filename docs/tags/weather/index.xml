@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Weather on Clean Code (and R-fun)</title>
+    <link>/tags/weather/</link>
+    <description>Recent content in Weather on Clean Code (and R-fun)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>hogervorst.rm@gmail.com (Roel M. Hogervorst)</managingEditor>
+    <webMaster>hogervorst.rm@gmail.com (Roel M. Hogervorst)</webMaster>
+    <lastBuildDate>Mon, 20 Nov 2017 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/weather/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Where to live in the Netherlands based on temperature XKCD style</title>
+      <link>/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      <author>hogervorst.rm@gmail.com (Roel M. Hogervorst)</author>
+      <guid>/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/</guid>
+      <description>
+
+&lt;p&gt;After seeing a plot of best places to live in Spain and the USA based on the weather, I had to
+chime in and do the same thing for the Netherlands. The idea is simple, determine where you want to live based on your temperature preferences.&lt;/p&gt;
+
+&lt;p&gt;First the end result:
+&lt;img src=&#34;/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;How to read this plot?&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://xkcd.com/1916/&#34;&gt;this&lt;/a&gt; xkcd comic we see that the topleft of the the graph represents &amp;ldquo;if you hate cold and hate heat&amp;rdquo;, if you go down from the topleft to the bottom left the winters get colder and ending in &amp;ldquo;if you love cold and hate heat&amp;rdquo;. Going to the right the heat (and humidity) go up ending in &amp;ldquo;if you love cold and love heat&amp;rdquo;. Going up to the top right: &amp;ldquo;if you hate cold and love heat&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;This post explains how to make the plot, to see  where I got the data and what procedures I took look at &lt;a href=&#34;https://github.com/RMHogervorst/xkcd_weather_cities_nl&#34;&gt;https://github.com/RMHogervorst/xkcd_weather_cities_nl&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;inspiration&#34;&gt;Inspiration&lt;/h3&gt;
+
+&lt;p&gt;According to this &lt;a href=&#34;http://www.masalmon.eu/2017/11/16/wheretoliveus/&#34;&gt;post by Maële Salmon&lt;/a&gt; inspired by xkcd, we can determine our ideal city by looking at wintertemperature and humidex (combination of humidity and summer heat).&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve seen major cities in the USA (post by Maelle) and where to live in Spain &lt;a href=&#34;https://twitter.com/claudiaguirao/status/931615734521909248&#34;&gt;by Claudia Guirao&lt;/a&gt;. There is even one on France &lt;a href=&#34;https://twitter.com/matamix/status/932283897018273792&#34;&gt;in French, of course&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So I had to make one for the Netherlands too. There is just a small detail,
+The Netherlands is tiny, the United States is approximately 237 times larger then The Netherlands. From The Hague to the German border directly east is 164 km (101 miles) and from Leeuwarden to Maastricht in the south is 262 km (162 miles). Essentially my home country has a moderate sea climate with warm summers and relatively mild winters.&lt;/p&gt;
+
+&lt;p&gt;I expect there to be no real big differences between the cities. I use the average temperature over december, january and february for winter temperature and calculate the humidex using the &lt;a href=&#34;https://cran.r-project.org/web/packages/comf/index.html&#34;&gt;comf package&lt;/a&gt;. This humidex is a combination of humidity and temperature.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;20 to 29: Little to no discomfort&lt;/li&gt;
+&lt;li&gt;30 to 39: Some discomfort&lt;/li&gt;
+&lt;li&gt;40 to 45: Great discomfort; avoid exertion&lt;/li&gt;
+&lt;li&gt;Above 45: Dangerous; heat stroke quite possible&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For cities I went the extremely lazy way and took all of the available weatherstations provided by the Dutch weather service (KNMI, &amp;mdash; Royal Netherlands, Metereological Institute). There are 46 stations in the Netherlands. These are not always in the cities but sort of broadly describe the entire country.&lt;/p&gt;
+
+&lt;h3 id=&#34;plot-like-xkcd&#34;&gt;Plot like XKCD&lt;/h3&gt;
+
+&lt;p&gt;The XKCD package has wonderful plotting abilities and a cool font that you have to install. I copied and modified the code from the post of Mäelle, because it is really good!&lt;/p&gt;
+
+&lt;p&gt;If you want to see how I did the data cleaning go to the &lt;a href=&#34;https://github.com/RMHogervorst/xkcd_weather_cities_nl&#34;&gt;github page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;First we plot all of the stations in the Netherlands &lt;em&gt;most of these places will probably not be familiar to non-Dutch people&lt;/em&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;ggplot2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;extrafont&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;ggrepel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+xrange &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+yrange &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;wintertemp&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;kp&#34;&gt;set.seed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+       aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  geom_point&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  geom_text_repel&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;label &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; 
+                   max.iter &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  ggtitle&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Where to live in The Netherlands \nbased on your temperature preferences&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+          subtitle &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Data from KNMI, 2016-2017&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  xlab&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Summer heat and humidity via Humidex&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  ylab&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Winter temperature in Celsius degrees&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  xkcdaxis&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;xrange &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; xrange&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+           yrange &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; yrange&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/img/temperatureranges-in-the-netherlands-1.png&#34; alt=&#34;temperature ranges in the Netherlands alone&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;But what does that mean, in the grand scheme of things? As you might notice the range is very small. It would be interesting to add some US cities and perhaps some Spanisch cities to compare against. For fun I also added the Dutch Caribean islands.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;xrange2 &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# modified these by hand to increase the margins&lt;/span&gt;
+yrange2 &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+USA &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; tribble&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+      &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;NAME&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;wintertemp&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;DETROIT, MI&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;27&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;NASHVILLE, TN&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;33&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;FORT MEYERS, FL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;37&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+SPAIN &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; tribble&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+      &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;NAME&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;wintertemp&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;MADRID, SPAIN&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;27&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;TENERIFE, SPAIN&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;BARCELONA, SPAIN&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+D_CARI &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; tribble&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+      &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;NAME&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;wintertemp&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;Bonaire, Caribbean Netherlands&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;27&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; calcHumx&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;29&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;76&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;Sint Eustatius, Caribbean Netherlands&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; calcHumx&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;77&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;   
+      &lt;span class=&#34;s&#34;&gt;&amp;#34;Saba, Caribbean Netherlands&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; calcHumx&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;76&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;kp&#34;&gt;set.seed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+       aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;alpha &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;.7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  geom_text_repel&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;label &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+                   family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; 
+                   max.iter &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  geom_text_repel&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; USA&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; label &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; 
+                   max.iter &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;blue&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; USA&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;blue&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_text_repel&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; SPAIN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; label &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; 
+                   max.iter &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;red&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; SPAIN&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;red&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_text_repel&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; D_CARI&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; label &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; 
+                   max.iter &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;orange&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; D_CARI&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;humidex_avg&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;orange&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    labs&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;title &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Where to live in The Netherlands based on \nyour temperature preferences \nCompared with some places in Spain, Caribbean NL and USA&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+          subtitle &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Data from KNMI, 2016-2017, added Spain and US cities&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+         x &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Summer heat and humidity via Humidex&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+         y &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Winter temperature in Celsius degrees&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+         caption &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;includes Caribbean Netherlands&amp;#34;&lt;/span&gt;
+             &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  xkcdaxis&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;xrange &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; xrange2&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+           yrange &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; yrange2&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+  theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/img/xkcd_NL_US_ESP.png&#34; alt=&#34;Netherlands, weatherplot XKCD style&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally we can compare the wintertemperature and summer humidex in The Netherlands by placing the points on a map using the coordinates of the measure stations.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;NL &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; map_data&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;map &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;world&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;region &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Netherlands&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+result &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+    rename&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;LON &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`LON(east)`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; LAT &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`LAT(north)`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+    ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;LON&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; LAT&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; wintertemp&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_text_repel&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;label &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+                   family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+                   max.iter &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_polygon&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;long&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; lat&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; group &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; group&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; fill &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;NA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;black&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    coord_map&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    labs&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;title &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Wintertemperature in NL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+         subtitle &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;data from KNMI (2016,2017&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+         x &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;result &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+    rename&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;LON &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`LON(east)`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; LAT &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`LAT(north)`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&amp;gt;%&lt;/span&gt; 
+    ggplot&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;LON&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; LAT&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; humidex_avg&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_text_repel&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;label &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NAME&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+                   family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+                   max.iter &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    geom_polygon&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;data &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; NL&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; aes&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;long&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; lat&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; group &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; group&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; fill &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;NA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; color &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;black&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    coord_map&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    labs&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;title &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Humidex in NL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+         subtitle &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;data from KNMI (2016,2017&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+         x &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; y &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    theme_xkcd&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    theme&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;text &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; element_text&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;size &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; family &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xkcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+    scale_color_continuous&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;low &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;white&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; high &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;red&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/img/humidex_NL.png&#34; alt=&#34;Netherlands, humidex, gps&#34; /&gt;
+&lt;img src=&#34;/img/wintertemp_NL.png&#34; alt=&#34;Netherlands, wintertemp, gps&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now show us what your country looks like!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

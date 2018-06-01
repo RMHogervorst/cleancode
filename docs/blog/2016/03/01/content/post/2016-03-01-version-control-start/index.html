@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" /> 
+
+  <title>Version control with Git</title>
+  <meta property="og:title" content="Version control with Git" />
+  <meta name="twitter:title" content="Version control with Git" />
+  <meta name="description" content="Keeping track of versions You work on a project and would like to keep track of what you did. That is why keep old versions of your files. That way you can go back if you messed up beyond recognition.
+ Usually that looks like this:   Or you use dropbox or something like it:   Other people use email. Emailing to themselves or to collaborators when they finished something.">
+  <meta property="og:description" content="Keeping track of versions You work on a project and would like to keep track of what you did. That is why keep old versions of your files. That way you can go back if you messed up beyond recognition.
+ Usually that looks like this:   Or you use dropbox or something like it:   Other people use email. Emailing to themselves or to collaborators when they finished something.">
+  <meta name="twitter:description" content="Keeping track of versions You work on a project and would like to keep track of what you did. That is why keep old versions of your files. That way you can go back if you messed up beyond recognition. …">
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/blog/2016/03/01/content/post/2016-03-01-version-control-start/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code (and R-fun)" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/blog/2016/03/01/content/post/2016-03-01-version-control-start/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Clean Code (and R-fun)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/css/syntax.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Clean Code (and R-fun)</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code (and R-fun)" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Clean Code (and R-fun)" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Version control with Git</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 1, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 8 minutes (1627 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h2 id="keeping-track-of-versions">Keeping track of versions</h2>
+
+<p>You work on a project and would like to keep track of what you did.
+That is why keep old versions of your files. That way you can go back if you messed up beyond recognition.</p>
+
+<ul>
+<li>Usually that looks like this:</li>
+</ul>
+
+<p><img src="/img/versioncontrol2.png" alt="filesystem without version control" /></p>
+
+<ul>
+<li>Or you use dropbox or something like it:</li>
+</ul>
+
+<p><img src="/img/dropboxversion.png" alt="dropbox versions" /></p>
+
+<ul>
+<li>Other people use email. Emailing to themselves or to collaborators when they finished something.</li>
+</ul>
+
+<p>And that is fine. If it works, it works.
+However in some cases you might want to go back to a previous version and work from there, or start with a variant your colleague made. That could become very difficult with these ways of versioning. Also you never know what changed in these versions untill you open the file and manually compare things. That gets tedious.</p>
+
+<h2 id="version-control-software">Version control software</h2>
+
+<p>With version control software you can create snapshots of the points where you fixed bugs, where you finished features and even better, you can  tell exactly  where versions of the file are different.</p>
+
+<p>The most widely used software are Mercurial, SVN and GIT. We will work with GIT, first of all because it can be used with <a href="https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN" title="Version control with git - Rstudio">Rstudio</a>, though svn works too, and second because it works nicely with Github.</p>
+
+<p>So how does Git work? Every time you reach a point in you project that you think is critical, you make a commit. You save a current state of all the files in the directory. And when you make this snapshot of your files, you can (and should) write down what you solved and what you changed since last time. In the future when you look back at your commit history you can read in what state your project was.</p>
+
+<p>In the next example you can see what changed in the files, without even looking at the files themselves.
+<img src="/img/commits_example.png" alt="commits from test_dat, from github" /></p>
+
+<h3 id="branching">Branching</h3>
+
+<p>Even better, you can start from any saved point in time and create a new version. And when you like that version better, merge it back into an other version.
+<img src="/img/branching.png" alt="branches" />
+In the example above, at the second commit I branched (purple line). the third row from below is a commit in the purple branch. Then I changed something in the normal branch and finally I merged the blue and purple line in the second line from the top.</p>
+
+<p>You don&rsquo;t have to use branching, just saving important points along the way is a great start (It would be the point where you email yourself a version, or save a new version of the file).</p>
+
+<h2 id="starting-with-git">Starting with Git</h2>
+
+<p>Git was developed by people at Linux because their other version control software was hard to work with [^1]. Git is designed to work with a distributed nonlinear workflow&hellip; Which means that everyone can work at any time at their version of software and you can merge those versions together. What you need to know is that it works, it&rsquo;s free, works on all systems, and that many people use it. You can use it for your projects, even if you work alone. It helps keeping your files under control and makes it easy to go back to previous versions of your files. It is not a backup solution (please make backups!) and it is not a unicorn [^2]. But how do you work with git?</p>
+
+<h3 id="graphical-user-interfaces-gui-for-git">graphical user interfaces (gui) for git</h3>
+
+<p>Git lives in the command line, you need to navigate to the right folder on your computer within the command line, and type the right commands. Unfortunately I always forget what the commands are. But for people like me there is a GUI for windows that takes care of many things. But I would actually recommend Sourcetree for windows (mac also). It&rsquo;s a graphical user interface where you keep track of all your repositories. It&rsquo;s a great tool, see <a href="https://www.youtube.com/watch?v=1lBdlh3AGSc">this</a> youtube video for a short [14 mins] tutorial into sourcetree.</p>
+
+<p><em>Do I need to install all this new sofware? I&rsquo;m just coding for fun!</em></p>
+
+<p>No, you don&rsquo;t have to. All I would recommend is to <a href="https://git-scm.com/downloads">download Git</a> and install it. Rstudio has gitsupport build in, you only need to install git on your system and tell rstudio where to find it. After that you can click icons.</p>
+
+<h3 id="rstudio-and-git">Rstudio and Git</h3>
+
+<p>According to <a href="https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN">Rstudio</a>, you will have to activate git support after you have downloaded and installed it to your computer.</p>
+
+<ol>
+<li>Go to Global Options (from the Tools menu)</li>
+<li>Click Git/SVN</li>
+<li>Click &lsquo;Enable version control interface for RStudio projects&rsquo;</li>
+<li>If necessary, enter the path for your Git or SVN executable where provided.</li>
+</ol>
+
+<p><img src="/img/enabling-git-rstudio.PNG" alt="enabling git in rstudio example" /></p>
+
+<p>So, how do you use version control within Rstudio?</p>
+
+<h1 id="rstudio-project-and-git">Rstudio project and git.</h1>
+
+<p>Start a new project
+<img src="/img/rstudio-create-new-project.PNG" alt="" /></p>
+
+<p>I chose an empty project in a new directory</p>
+
+<p>and then click &lsquo;Create a git repository&rsquo;
+<img src="/img/rstudio-new-project-enablegit.PNG" alt="" /></p>
+
+<p>The repo and real folder on windows 8.1 look like this.
+<figure class="half">
+    <img src="/img/rstudio-empty-git.PNG" alt="image">
+    <img src="/img/folderview-new-git-project.PNG" alt="image">
+    <figcaption>rstudio and the real folder with hidden folders showing</figcaption>
+</figure></p>
+
+<p>When you start a new project a Rproject file is placed in the folder that contains all the project settings you have. But when you enable git, a .gitignore file is also placed in your folder. That file tells git which files not to track for changes. Rproject makes sure that the the temporary r files are not tracked, because temporary files will be recreated every time and tracking them is useless. In my case I have turned on the &lsquo;show hidden files&rsquo; option in windows. If you don&rsquo;t have that on (and you don&rsquo;t have to) you will only see the gitignore file (with no name) and the rstudioproject file.</p>
+
+<p>Now let&rsquo;s look back at rstudio git tab.</p>
+
+<h2 id="git-version-control-within-rstudio-your-first-commit">Git version control within Rstudio: your first commit</h2>
+
+<p><img src="/img/rstudio-git-first-commit.PNG" alt="" />
+I have added the second file, the icon changes to a green A (short for: add to repository), the first one shows two yellow questionmarks (short for: not tracked, not changed, I think).</p>
+
+<ul>
+<li>add the two files of your project and click &lsquo;commit&rsquo;</li>
+</ul>
+
+<p>A new window will open:</p>
+
+<p><img src="/img/rstudio-git-commit-window.PNG" alt="" /></p>
+
+<p>The left part of the screen shows what files are in the commit, the bottom part displays the changes since last commit. Green means added, red means subtracted.</p>
+
+<ul>
+<li>Click on the second file in your commit, the bottom part displays what has changed.</li>
+<li>Write a commit message, never commit without a message, if you don&rsquo;t have a description, it probably wasn&rsquo;t worth committing. The message does not have to be long, short is better. in this case I used: &ldquo;init commit&rdquo; That just tells me it was the first commit before I did anything.</li>
+<li>Click &lsquo;commit&rsquo; when you typed your description.</li>
+</ul>
+
+<p>a window will open with a description of what happened.</p>
+
+<p><img src="/img/rstudio-git-commit-message.PNG" alt="" /></p>
+
+<p>When you return to the main view of rstudio you will see that the git tab has changed a bit, there are no files (because nothing has changed yet since your commit 2 seconds ago) and next to the gear wheel it says: &lsquo;master&rsquo; . This is the branch you are on right now. By default the first branch is master.</p>
+
+<p>Let&rsquo;s create a new file</p>
+
+<h2 id="git-version-control-within-rstudio-your-first-new-file">Git version control within Rstudio: your first new file.</h2>
+
+<ul>
+<li>Create a new file and fill it with some code or:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-r" data-lang="r"><span class="c1"># This is a awesome function</span>
+<span class="c1"># It takes a number and gives you </span>
+<span class="c1"># the corresponding letter in the</span>
+<span class="c1"># alphabet.</span>
+<span class="c1"># 2016-02-27</span>
+<span class="c1"># YOUR name </span></code></pre></div>
+<ul>
+<li>Then save it in scripts/  (yes, you must create that folder as well, or don&rsquo;t I&rsquo;m not the police&hellip;)</li>
+<li>add it to the repo (clicking it will tell git to track that file from now on)</li>
+</ul>
+
+<p>It will look like this
+<figure class="half">
+    <img src="/img/rstudio-commit1.PNG" alt="before tracking">
+    <img src="/img/rstudio-commit2.PNG" alt="after tracking">
+    <figcaption>rstudio adding files to commit before and after</figcaption>
+</figure></p>
+
+<p>Let&rsquo;s look at the history of your commits, click on the clock in the git tab.
+Mine looks like this:
+<img src="/img/rstudio-commit-history.PNG" alt="rstudio commit history" /></p>
+
+<p>Note the commit message, it says what the commit adds to the repo. Try to write your messages as if you fulfull a order and discribe the contents. For example: &ldquo;adds count_messages function that counts messages send to the user&rdquo;
+or, &ldquo;fix issue #2 can&rsquo;t work with arrays&rdquo;.</p>
+
+<p>That way you can scan through your commits and see what changed where. When you click on a commit you can see what changed since the commit before.</p>
+
+<h2 id="some-questions">some questions</h2>
+
+<ul>
+<li>Will version control eat up all my hard disk space?</li>
+</ul>
+
+<p>No, first of all all r scripts are essentially plain text files and take up little space and second, git only saves what changed since the last time. So the total file size should not go up that much. And third, space is cheap, you will not easily run out of space on modern computers.</p>
+
+<ul>
+<li>Nice! Can I add my data files to a git repo as well?</li>
+</ul>
+
+<p>It is not recommended to add datafiles to a repo. I think it can work with plain text files such as .txt, .csv, .tdv . But many other files can&rsquo;t be read by git, so it treats them as binary files. Git can only see that the file has changed, but doesn&rsquo;t know WHAT changed. So it saves the new version as a whole. If you have some large binary files that change often, they will eat up a lot of space. There is a git large file system but I don&rsquo;t know how it works yet.
+Do add example csv files or smaller files if you&rsquo;d like to.</p>
+
+<h3 id="further-reading">Further Reading</h3>
+
+<ul>
+<li><a href="https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN">Git in Rstudio</a></li>
+<li><a href="https://git-scm.com/">git website</a></li>
+<li><a href="http://www.r-bloggers.com/?s=git">r-blogger.com all articles about git</a></li>
+<li><a href="https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow">Atlassian company of Sourcetree, has a long read about branching models</a></li>
+<li><a href="https://r-bio.github.io/intro-git-rstudio/">r-bio example of git and rstudio</a></li>
+</ul>
+
+<p>The <strong>best resource</strong> is <a href="https://stat545-ubc.github.io/git00_index.html" title="pages about git">https://stat545-ubc.github.io/</a></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+<li>[^1]: Linus Torvald (the main man behind linux) actually said he wouldn&rsquo;t touch subversion with a ten-foot pole. <a href="https://git.wiki.kernel.org/index.php/LinusTalk200705Transcript">https://git.wiki.kernel.org/index.php/LinusTalk200705Transcript</a></li>
+<li>[^2]: <em>Chasing unicorns, the pursuit of something that’s, for all intents and purposes, unobtainable as unicorns don&rsquo;t exist.</em> Meaning it doesn&rsquo;t magically solve all the problems other version control software has.</li>
+</ul>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="//tags/beginner/">beginner</a>&nbsp;
+            
+              <a href="//tags/git/">git</a>&nbsp;
+            
+              <a href="//tags/version-control/">version control</a>&nbsp;
+            
+          </div>
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/blog/2016/02/24/content/post/2016-02-24-creating-tidy-data/" data-toggle="tooltip" data-placement="top" title="Tidying your data">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/blog/2016/03/02/content/post/2016-03-02-from-spss-to-r-part3/" data-toggle="tooltip" data-placement="top" title="From spss to R, part 3">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="find me on GitHub (main stuff)">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="I have some stale stuff on GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="I probably have something on Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Yes! I am active on Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="My LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="There is some stuff on StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Clean Code (and R-fun)</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a> <br>
+            
+
+
+
+
+  
+
+
+
+<a href='https://github.com/RMHogervorst/cleancode/tree/testvar/content/post/2016-03-01-version-control-start.md'>or edit this page on github.</a>
+
+
+
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

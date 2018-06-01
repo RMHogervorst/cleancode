@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" /> 
+
+  <title>Posts</title>
+  <meta property="og:title" content="Posts" />
+  <meta name="twitter:title" content="Posts" />
+  <meta name="author" content="Roel M. Hogervorst"/>
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RMHoge" />
+  <meta name="twitter:creator" content="@RMHoge" />
+  <meta property="og:url" content="/post/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clean Code (and R-fun)" />
+
+  <meta name="generator" content="Hugo 0.35" />
+  <link rel="canonical" href="/post/" />
+  <link rel="alternate" href="/post/index.xml" type="application/rss+xml" title="Clean Code (and R-fun)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="/css/syntax.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Clean Code (and R-fun)</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Clean Code (and R-fun)" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Clean Code (and R-fun)" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  <header class="header-section ">
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>Posts</h1>
+              <hr class="small">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/">
+                <h2 class="post-title">Where to live in the Netherlands based on temperature XKCD style</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on November 20, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 5 minutes (1037 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  After seeing a plot of best places to live in Spain and the USA based on the weather, I had to chime in and do the same thing for the Netherlands. The idea is simple, determine where you want to live based on your temperature preferences.
+First the end result: How to read this plot?
+In this xkcd comic we see that the topleft of the the graph represents &ldquo;if you hate cold and hate heat&rdquo;, if you go down from the topleft to the bottom left the winters get colder and ending in &ldquo;if you love cold and hate heat&rdquo;.
+                  <a href="/blog/2017/11/20/content/post/2017-11-20-xkcd-the-netherlands-weather/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/xkcd/">XKCD</a>&nbsp;
+                  
+                    <a href="//tags/weather/">weather</a>&nbsp;
+                  
+                    <a href="//tags/humidex/">humidex</a>&nbsp;
+                  
+                    <a href="//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="//tags/ggplot2/">ggplot2</a>&nbsp;
+                  
+                    <a href="//tags/readr/">readr</a>&nbsp;
+                  
+                    <a href="//tags/netherlands/">Netherlands</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/07/27/content/post/2017-07-27-use-r-2017-roundup/">
+                <h2 class="post-title">UseR Brussels 2017 </h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on July 27, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 1 minutes (212 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  I went to UseR-2017 in Brussels. It was my first time at an UseR (I have been to the first satRday), AND I LOVED IT! There were many interesting talks, I am so going to use Fast Frugal Trees in the future for instance and I saw a lot of shiny applications and R professional.
+But best of all. I talked to a lot of people, people I only spoke to online.
+                  <a href="/blog/2017/07/27/content/post/2017-07-27-use-r-2017-roundup/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/r6/">R6</a>&nbsp;
+                  
+                    <a href="//tags/user2017/">UseR2017</a>&nbsp;
+                  
+                    <a href="//tags/brussels/">Brussels</a>&nbsp;
+                  
+                    <a href="//tags/quickthoughts/">quickthoughts</a>&nbsp;
+                  
+                    <a href="//tags/r-eoke/">R-eoke</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/">
+                <h2 class="post-title">Turning kindle notes into a tidy data</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on May 8, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 12 minutes (2380 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  It is my dream to do everything with R. And we aRe almost there. We can write blogs in blogdown or bookdown, write reports in RMarkdown (thank you Yihui Xie!) create interactive webpages with Shiny (thank you Winston Chang). Control our lifx lights with lifxr (great work Carl!) and use emoticons everywhere with the emo package.
+There is even a novel of my vision! I recently found chapter 40 of A Dr.
+                  <a href="/blog/2017/05/08/content/post/2017-05-08-making-kindle-highlights-tidy/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/tutorial/">tutorial</a>&nbsp;
+                  
+                    <a href="//tags/beginner/">beginner</a>&nbsp;
+                  
+                    <a href="//tags/kindle/">kindle</a>&nbsp;
+                  
+                    <a href="//tags/tidyverse/">tidyverse</a>&nbsp;
+                  
+                    <a href="//tags/stringr/">stringr</a>&nbsp;
+                  
+                    <a href="//tags/do-one-thing-well/">do-one-thing-well</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/">
+                <h2 class="post-title">Writing manuscripts in Rstudio, easy citations</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 14, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 7 minutes (1387 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Intro and setup This is a simple explanation of how to write a manuscript in RStudio. Writing a manuscript in RStudio is not ideal, but it has gotten better over time. It is now relatively easy to add citations to documents in RStudio.
+**The goal is not think about formatting, and citations, but to write the manuscript and add citations on the fly with a nice visual help. **
+                  <a href="/blog/2017/03/14/content/post/2017-03-14-writing-manuscripts-in-rstudio/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/citations/">citations</a>&nbsp;
+                  
+                    <a href="//tags/intermediate/">intermediate</a>&nbsp;
+                  
+                    <a href="//tags/tutorial/">tutorial</a>&nbsp;
+                  
+                    <a href="//tags/writing/">writing</a>&nbsp;
+                  
+                    <a href="//tags/reproducible/">reproducible</a>&nbsp;
+                  
+                    <a href="//tags/bibtex/">bibtex</a>&nbsp;
+                  
+                    <a href="//tags/workflow/">workflow</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/01/21/content/post/2017-01-21-markov-chain/">
+                <h2 class="post-title">Generate text using Markov Chains (sort of)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 21, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 6 minutes (1256 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Inspired by the hilarious podcast The Greatest Generation, I have worked again with all the lines from all the episode scripts of TNG. Today I will make a clunky bot (although it does nothing and is absolutely not useful) that talks like Captain Picard. I actually wanted to use a Markov Chain to generate text. A Markov Chain has a specific property. It doesn&rsquo;t care what happened before, it only looks at probabilities from the current state to a next state.
+                  <a href="/blog/2017/01/21/content/post/2017-01-21-markov-chain/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/markov/">Markov</a>&nbsp;
+                  
+                    <a href="//tags/tng/">TNG</a>&nbsp;
+                  
+                    <a href="//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="//tags/tidytext/">tidytext</a>&nbsp;
+                  
+                    <a href="//tags/bot/">bot</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/">
+                <h2 class="post-title">Plotting a map with ggplot2, color by tile</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 6, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 11 minutes (2274 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Introduction Last week I was playing with creating maps using R and GGPLOT2. As I was learning I realized information about creating maps in ggplot is scattered over the internet. So here I combine all that knowledge. So if something is absolutely wrong/ ridiculous / stupid / slightly off or not clear, contact me or open an issue on the github page.
+When you search for plotting examples you will often encounter the packages maps and mapdata.
+                  <a href="/blog/2017/01/06/content/post/2017-01-07-plotting-a-map-with-ggplot2/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/ggplot2/">ggplot2</a>&nbsp;
+                  
+                    <a href="//tags/intermediate/">intermediate</a>&nbsp;
+                  
+                    <a href="//tags/tutorial/">tutorial</a>&nbsp;
+                  
+                    <a href="//tags/maps/">maps</a>&nbsp;
+                  
+                    <a href="//tags/sp/">sp</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/">
+                <h2 class="post-title">Submitting your first package to CRAN, my experience</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on July 9, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 5 minutes (1034 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  I recently published my first R package to The Comprehensive R Archive Network (CRAN). It was very exciting and also quite easy. Let me walk you through my process.
+First a description of my brand new package: badgecreatr, then a description of steps to take for submission.
+Package description When you go around github looking at projects you often see these interesting images in the readme  
+The ones you see above are from ggplot2.
+                  <a href="/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/intermediate/">intermediate</a>&nbsp;
+                  
+                    <a href="//tags/package/">package</a>&nbsp;
+                  
+                    <a href="//tags/badgecreatr/">badgecreatr</a>&nbsp;
+                  
+                    <a href="//tags/reminder/">reminder</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/">
+                <h2 class="post-title">Introducing Badgecreatr, a package that places badges in your readme</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on July 8, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 2 minutes (373 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Introducing Badgecreatr, a package to create and place badges in your readme.Rmd file on Github.
+Badgecreatr will create the following badges (aka shields):
+       
+Installation Install the package with install.packages(&quot;badgecreatr&quot;)
+How do you use badgecreatr? Badgecreatr has one main function: badgeplacer().
+The most simple command is:
+badgecreatr::badgeplacer( githubaccount = &#34;yourgithubname&#34;,githubrepo = &#34;yourpackagename&#34;, branch = &#34;master&#34;) If your project is in its infancy and you don&rsquo;t want people to use it yet:
+                  <a href="/blog/2016/07/08/content/post/2016-07-08-introducing-badgecreatr-create-and-place-badges-in-readme-rmd/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/badgecreatr/">badgecreatr</a>&nbsp;
+                  
+                    <a href="//tags/package/">package</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/">
+                <h2 class="post-title">Non-standard-evaluation and standard evaluation in dplyr</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on June 13, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 5 minutes (1060 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  THIS POST IS NO LONGER ENTIRELY RELEVANT. DPLYR 0.7 HAS A SLIGHTLY DIFFERENT (AND SLIGHTLY MORE INTUITIVE) WAY OF WORKING WITH NON-STANDARD EVALUATION.
+I love the dplyr package with all of its functions, however if you use normal dplyr in functions in your package r-cmd-check will give you a warning: R CMD check NOTE: No visible binding for global variable NAME OF YOUR VARIABLE 1. The functions do work, and everything is normal, however if you submit your package to CRAN, such a NOTE is not acceptable.
+                  <a href="/blog/2016/06/13/content/post/2016-06-13-nse_standard_evaluation_dplyr/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/advanced/">advanced</a>&nbsp;
+                  
+                    <a href="//tags/dplyr/">dplyr</a>&nbsp;
+                  
+                    <a href="//tags/nse/">NSE</a>&nbsp;
+                  
+                    <a href="//tags/optimize-your-code/">optimize-your-code</a>&nbsp;
+                  
+                    <a href="//tags/duo2015/">duo2015</a>&nbsp;
+                  
+                    <a href="//tags/lazyeval/">lazyeval</a>&nbsp;
+                  
+                    <a href="//tags/reminder/">reminder</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/">
+                <h2 class="post-title">Your most valuable collaborator, future-you</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on May 26, 2016
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 9 minutes (1826 words)
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  I was recently at a R users meetup where Hadley Wickham talked about data wrangling. He showed some interesting stuff! Did you know that you can put a data frame into a data frame? You can make a list of data frames and add that list to your data frame. Very cool, and more useful then I thought, but that is not what I wanted to talk about.
+I would like to give you some tips about working with someone you will probably work with in the future.
+                  <a href="/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="//tags/advanced/">advanced</a>&nbsp;
+                  
+                    <a href="//tags/intermediate/">intermediate</a>&nbsp;
+                  
+                    <a href="//tags/version-control/">version control</a>&nbsp;
+                  
+                    <a href="//tags/tdd/">TDD</a>&nbsp;
+                  
+                    <a href="//tags/readme/">readme</a>&nbsp;
+                  
+                    <a href="//tags/functional-programming/">functional programming</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+        </div>
+        
+          <ul class="pager main-pager">
+            
+              <li class="previous">
+                <a href="/post/page/1/">&larr; Newer Posts</a>
+              </li>
+            
+            
+              <li class="next">
+                <a href="/post/page/3/">Older Posts &rarr;</a>
+              </li>
+            
+          </ul>
+        
+      </div>
+    </div>
+  </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:hogervorst.rm@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://keybase.io/rmhogervorst" title="Find me on keybase">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/RMHogervorst" title="find me on GitHub (main stuff)">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/rmhogervorst" title="I have some stale stuff on GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/RMHogervorst" title="I probably have something on Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/RMHoge" title="Yes! I am active on Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/rmhogervorst" title="My LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5573955/roel-hogervorst" title="There is some stuff on StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/post/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="rmhogervorst.nl">Roel M. Hogervorst</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Clean Code (and R-fun)</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.35</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+<br> See anything wrong? Click to add them to <a href="https://github.com/RMHogervorst/cleancode/issues" >the issue tracker</a> <br>
+            
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
