@@ -18,7 +18,7 @@ I created a small script that takes an image and adds a dancing banana to the bo
 With the excellent explanation in [Mark Sellors' guide](http://blog.sellorm.com/2017/12/18/learn-to-write-command-line-utilities-in-r/ ) I have now created a cmdline thingy in very few steps.
 
 
-![](/img/r-pkg.gif)
+![](/cleancode/img/r-pkg.gif)
 
 I can now add bananas from the commandline with:
 

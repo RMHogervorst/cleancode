@@ -85,7 +85,7 @@ Version control can help you stay sane. It saves your work if you try something 
  
 Version control lets you record snapshots of previous code, but also lets you comment on what you solved or changed. When you save a new version of the code to version control you will have to be a bit explicit. Otherwise you will find yourself in this situation:
 
-![an example of a less helpful commit message](/img/wrong_commit.PNG)
+![an example of a less helpful commit message](/cleancode/img/wrong_commit.PNG)
 
 Version control, if you use meaningful descriptions, can help you find out where you did some actions and what you were trying to do. Describe intent in the commit messages. A quote I really like is:   
 > "You mostly collaborate with yourself, and me-from-two-months-ago never responds to email."[^3]

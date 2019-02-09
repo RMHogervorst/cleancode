@@ -213,7 +213,7 @@ duo2015_tidy %>% filter(OPLEIDINGSVORM == "voltijd onderwijs" & OPLEIDINGSFASE.A
 Let's address both color (going stereotype blue and pink) and program.
 After my first plot, I found the lines a bit thin, so I set the size. I also used a manual color scale. 
 
-![plot with different colors only psychology](/img/plot-psypinkblue.png)
+![plot with different colors only psychology](/cleancode/img/plot-psypinkblue.png)
 
 One of the odd things about rstudio is that if you click on the zoom button the plot looks good, but if you use ggsave it takes the uglier version in the side viewer. I guess I could change the settings in  the ggsave command[^9].
 

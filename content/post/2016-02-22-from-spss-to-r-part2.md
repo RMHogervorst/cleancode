@@ -40,7 +40,7 @@ Fire up your trusty rstudio.
  
 You will need the following packages:
 haven, dplyr. Click on install:
-![](/img/installing-packages-rstudio.PNG)
+![](/cleancode/img/installing-packages-rstudio.PNG)
 
 and fill in the names, or type `install.packages("haven", "dplyr"). 
 

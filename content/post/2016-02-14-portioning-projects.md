@@ -35,7 +35,7 @@ Small modules are much easier to test. Make a test that inputs the right sort of
 
 Modular programming also makes it easier to add new functions. You can reuse modules (refactoring) or simply add a new module that extends your program. 
 
-![distinction one script approach and modular approach](cleancode/img/project_philosophy.png)
+![distinction one script approach and modular approach](/cleancode/img/project_philosophy.png)
 
 # Planning your project
 

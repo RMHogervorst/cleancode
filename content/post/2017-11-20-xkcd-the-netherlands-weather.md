@@ -18,7 +18,7 @@ After seeing a plot of best places to live in Spain and the USA based on the wea
 chime in and do the same thing for the Netherlands. The idea is simple, determine where you want to live based on your temperature preferences.
 
 First the end result:
-![Netherlands, weatherplot XKCD style](/img/xkcd_NL_US_ESP.png)
+![Netherlands, weatherplot XKCD style](/cleancode/img/xkcd_NL_US_ESP.png)
  
 How to read this plot?
 

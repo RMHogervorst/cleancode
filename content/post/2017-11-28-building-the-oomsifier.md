@@ -18,7 +18,7 @@ on how to add a dancing banana to any picture.
 Now, you might be thinking... Really, why would you add a dancing banana to
 a picture, but I don't have time for that kind of negativity in my life.
 
-![](/img/r-pkg.gif)
+![](/cleancode/img/r-pkg.gif)
 
 ## Why oomsifier?
 Jeroen Ooms is one of those crazy productive people in the R world. The way he

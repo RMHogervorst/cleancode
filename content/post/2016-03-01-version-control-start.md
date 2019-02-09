@@ -17,7 +17,7 @@ That is why keep old versions of your files. That way you can go back if you mes
 
 * Usually that looks like this:
 
-![filesystem without version control](/img/versioncontrol2.png)
+![filesystem without version control](/cleancode/img/versioncontrol2.png)
 
 * Or you use dropbox or something like it:
 

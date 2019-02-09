@@ -21,7 +21,7 @@ This post shows you where I went wrong
 
 Also here is a [picture](https://www.flickr.com/photos/32123311@N00/502155430 "source: flickr, cc-by 2.0 jbloom") I found of scraping. 
 
-![Scraping a plate ](/img/scraping_a_plate.jpg)
+![Scraping a plate ](/cleancode/img/scraping_a_plate.jpg)
 
 
 ### Webscraping general 

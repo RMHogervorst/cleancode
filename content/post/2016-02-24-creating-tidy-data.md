@@ -27,7 +27,7 @@ Tidy data means [^1]:
 Today we will work with the DUO dataset about the number of students per program in the past 5 years [^2] which was used in lesson 2 of [from-spps-to-r]({{ site.github.url }}/blog/2016/02/22/from-spss-to-r-part2.html).
 
 The raw datafile in r looks like this:
-![messy data duo](/img/tidy-duo-before.PNG)
+![messy data duo](/cleancode/img/tidy-duo-before.PNG)
 
 Which is efficient in space, but not useful for analyses. For many analyses you will need to refer to multiple columns. For example:
 

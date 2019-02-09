@@ -13,7 +13,7 @@ slug: content/post/2016-02-22-from-spss-to-r-part1
 
 ## Introduction
 This whole blog is devoted to R and clean coding in R. But what if you want to start with R? There are millions of websites devoted to learning R. just look at the number of hits on a certain search machine. 
-![google search results](/img/google_search_spss_r.PNG)
+![google search results](/cleancode/img/google_search_spss_r.PNG)
 Most of these hits start with the basics and slowly work your way up to more advanced examples.
 
 > There is often one reason to start with R: you want to achieve something that doesn't work in other programs.

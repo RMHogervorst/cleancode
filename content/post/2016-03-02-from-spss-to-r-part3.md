@@ -41,7 +41,7 @@ R has three plotting systems, each based on different ideas. The base plot syste
 
 To make the most of ggplot, *and not go insane*, you will need to understand the underlying principles. the gg in ggplot stand for the grammar of graphics. A concept based on the work of Wilkinson and Wills [^2], and put into a graphics package by Hadley Wickham [^3] (this is quite a good read).
 The most important thing to realize is this:
-![ogres have layers image](/img/graphs-have-layers.png)
+![ogres have layers image](/cleancode/img/graphs-have-layers.png)
 
 Every graph consists of the basic data, some transformations to axes, title information and the representation of the data. In ggplot you have to specify the data, and the aesthetics (some mapping of the position of x, and y, colours and shapes). Furthermore you have to tell ggplot what type of chart you want. Bars, lines, and points are all examples of geometric objects or geoms for short. 
 

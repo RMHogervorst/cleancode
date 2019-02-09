@@ -54,7 +54,7 @@ You need a dataset on your harddisk
 
 Create a new project in Rstudio, choose new directory, R package:
 
-![image of starting a new project](/img/rstudio-project-package-new.PNG)
+![image of starting a new project](/cleancode/img/rstudio-project-package-new.PNG)
 
 ## Naming the package
 

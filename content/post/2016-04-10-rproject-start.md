@@ -16,7 +16,7 @@ When you start a different project the files of that project work independently 
 
 In my case, for example, I have several projects and the last 10 or so are displayed in the dropdown menu:
 
-![Roel's last projects image](/img/rstudio-project-dropdown.PNG)
+![Roel's last projects image](/cleancode/img/rstudio-project-dropdown.PNG)
 
 
 Opening a new project presents you with a screen .
